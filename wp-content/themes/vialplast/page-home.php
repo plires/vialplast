@@ -82,115 +82,12 @@
 	</section>
 	<!-- Constructoras y Municipios end -->
 
-	<!-- Caracteristicas -->
-	<section class="caracteristicas container">
-		<div class="row">
+	<!-- Faja Caracterisitcas -->
+	<?php include('inc/faja-caracterisitcas.inc.php'); ?>
 
-			<div class="col-12 col-sm-3 text-center">
-				<h4>La mayor variedad de productos viales del mercado.</h4>
-			</div>
-
-			<div class="col-sm-3 text-center">
-				<img 
-					class="img-fluid" 
-					src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/calidad-garantizada.gif'; ?>" 
-					alt="calidad garantizada">
-					<h4>Calidad <br>Garantizada</h4>
-			</div>
-
-			<div class="col-sm-3 text-center">
-				<img 
-					class="img-fluid" 
-					src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/stock-permanente.gif'; ?>" 
-					alt="stock permanente">
-					<h4>Stock <br>Permanente</h4>
-			</div>
-
-			<div class="col-sm-3 text-center">
-				<img 
-					class="img-fluid" 
-					src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/atencion-personalizada.gif'; ?>" 
-					alt="calidad atencion personalizada">
-					<h4>Atención <br>Personalizada</h4>
-			</div>			
-
-		</div>
-	</section>
-	<!-- Caracteristicas end -->
-
-	<!-- Distribuidores -->
-	<section class="distribuidores container-fluid bg_secondary">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 offset-md-2 text-center">
-					<h3>¿Querés ser distribuidor de nuestros productos?</h3>
-					<a href="#" class="btn btn-primary btn-out-black transition">Consultar <i class="fas fa-chevron-right"></i></a>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Distribuidores end -->
-
-	<!-- Nuestras Marcas -->
-	<section class="nuestras_marcas container-fluid bg_secondary text-center">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 text-center">
-					<h3>Nuestras Marcas</h3>
-
-					<div class="content">
-						<div class="content_marcas">
-							<a href="#">
-								<img 
-									class="marca img-fluid" 
-									src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/depisos.png'; ?>" 
-									alt="logo depisos">
-							</a>
-						</div>
-
-						<div class="content_marcas">
-							<a href="#">
-								<img 
-									class="marca img-fluid" 
-									src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/cantofil.png'; ?>" 
-									alt="logo cantofil">
-							</a>
-						</div>
-
-						<div class="content_marcas">
-							<a href="#">
-								<img 
-									class="marca img-fluid" 
-									src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/superfil.png'; ?>" 
-									alt="logo superfil">
-							</a>
-						</div>
-
-						<div class="content_marcas">
-							<a href="#">
-								<img 
-									class="marca img-fluid" 
-									src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/summit.png'; ?>" 
-									alt="logo summit">
-							</a>
-						</div>
-
-						<div class="content_marcas">
-							<a href="#">
-								<img 
-									class="marca img-fluid" 
-									src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/nordeco.png'; ?>" 
-									alt="logo nordeco">
-							</a>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Nuestras Marcas end -->
-
+	<!-- Faja Caracterisitcas -->
+	<?php include('inc/faja-distribuidores-marca.inc.php'); ?>
+	
 </section>
 <!-- Home end -->
 

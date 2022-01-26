@@ -10,7 +10,7 @@
 		wp_enqueue_style( 'styles-child' );
 
 		// Jquery Easing
-		wp_enqueue_script( 'easing', get_stylesheet_directory_uri() . '/js/jquery.easing.min.js' );
+		wp_enqueue_script( 'easing', get_stylesheet_directory_uri() . '/node_modules/jquery.easing/jquery.easing.min.js' );
 
 		// Js Custom
 		wp_enqueue_script( 'app_js', get_stylesheet_directory_uri() . '/js/app.js' );

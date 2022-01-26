@@ -29,6 +29,28 @@ a {
 	background: white;
 	color: black;
 }
+
+#header .main-menu > li.menu-item.active > a {
+	background: var(--primary-color);
+	color: black;
+}
+
+#header .main-menu > li.menu-item.active:hover > a, #header .main-menu > li.menu-item:hover > a {
+	background: white;
+	color: black;
+}
+
+#header .main-menu > li.menu-item > a {
+	color: white;
+}
+
+#nav-panel .accordion-menu li.menu-item.active > a {
+	background: transparent;
+}
+
+#nav-panel .accordion-menu li.menu-item.active > a, #nav-panel .accordion-menu li.menu-item.active > .arrow {
+	color: var(--primary-color);
+}
 /* Header end */
 
 /* Header Sticky */

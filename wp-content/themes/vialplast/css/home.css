@@ -1,0 +1,544 @@
+/* Header */
+.vialplast_home .content_header {
+	position: relative;
+	background: url('../img/home/slide-vialplast-mobile.jpg');
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	height: 630px;
+	padding: 15px;
+}
+
+.vialplast_home .content_header .row {
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+	text-align: center;
+}
+
+.vialplast_home .content_header .circulo {
+	display: none;
+}
+
+.vialplast_home .content_header .logo_mobile {
+	margin-bottom: 30px;
+}
+
+.vialplast_home .content_header h1 {
+	font-weight: 700;
+}
+
+.vialplast_home .content_header .flecha {
+	max-width: 15%;
+	animation: down_up 2s infinite linear;
+}
+
+.vialplast_home .content_header h3 {
+	font-weight: 700;
+	margin-bottom: 10px;
+}
+
+.vialplast_home .content_header .ver_productos {
+	color: white;
+	font-size: 0.95rem;
+}
+
+.vialplast_home .content_header .ver_productos:hover {
+	color: black;
+}
+/* Header end */
+
+/* Slide Líneas */
+.vialplast_home .slides_lineas {
+	margin-bottom: 30px;
+}
+
+.vialplast_home .slides_lineas .data {
+	padding-left: 30px!important;
+	padding-right: 30px!important;
+}
+
+.vialplast_home .slides_lineas .linea_actual {
+	background: black;
+	color: white;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+	position: relative;
+	min-height: 335px;
+}
+
+.vialplast_home .slides_lineas .linea_actual .content_btns {
+	position: absolute;
+	top: 0;
+	right: 15px;
+	z-index: 999;
+	width: 100px;
+	height: 60px;
+}
+
+.vialplast_home .slides_lineas .linea_actual .content_btns .carousel-control-prev, .carousel-control-next {
+	width: 50%;
+}
+
+.vialplast_home .slides_lineas .linea_actual .circulo {
+	display: none;
+}
+
+.vialplast_home .slides_lineas .linea_actual h3 {
+	color: white;
+	font-weight: 700;
+}
+
+.vialplast_home .slides_lineas .linea_actual p {
+	color: white;
+	font-weight: 300;
+}
+
+.vialplast_home .slides_lineas .linea_actual a {
+	font-weight: 700;
+}
+
+.vialplast_home .slides_lineas .otras_lineas {
+	display: none;
+}
+/* Slide Líneas end */
+
+/* Buscas Otro Producto */
+.vialplast_home .buscar_otro_producto {
+	margin-bottom: 60px;
+	background: black;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.vialplast_home .buscar_otro_producto .row div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.vialplast_home .buscar_otro_producto .row div h5 {
+	font-size: 1.5rem;
+	font-weight: 700;
+	line-height: 1.2;
+	text-align: center;
+	margin-bottom: 20px;
+	color: var(--primary-color);
+}
+/* Buscas Otro Producto end */
+
+/* Constructoras y Municipios */
+.vialplast_home .constructoras_municipios {
+	margin-bottom: 60px;
+}
+
+.vialplast_home .constructoras_municipios h3 {
+	font-weight: 700;
+	font-size: 1.5rem;
+}
+
+.vialplast_home .constructoras_municipios .content {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.vialplast_home .constructoras_municipios .content h4 {
+	margin-bottom: 0;
+	font-weight: 700;
+	text-align: center;
+}
+
+.vialplast_home .constructoras_municipios .content a {
+	min-width: 160px;
+	font-size: 0.85rem;
+}
+/* Constructoras y Municipios end */
+
+/* Caracteristicas */
+.vialplast_home .caracteristicas {
+	margin-bottom: 30px;
+}
+
+.vialplast_home .caracteristicas .col-sm-3 {
+	margin-bottom: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.vialplast_home .caracteristicas .col-sm-3:first-child {
+	margin-bottom: 15px;
+}
+
+.vialplast_home .caracteristicas h4:first-child {
+	margin-bottom: 10px;
+}
+
+.vialplast_home .caracteristicas h4 {
+	margin-bottom: 0;
+	margin-top: 5px;
+	font-weight: 700;
+}
+/* Caracteristicas end */
+
+/* Distribuidores */
+.vialplast_home .distribuidores {
+	padding-top: 20px;
+}
+
+.vialplast_home .distribuidores h3 {
+	font-weight: 700;
+}
+/* Distribuidores end */
+
+/* Nuestras Marcas */
+.vialplast_home .nuestras_marcas {
+	padding-bottom: 20px;
+}
+
+.vialplast_home .nuestras_marcas h3 {
+	font-weight: 700;
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+
+.vialplast_home .nuestras_marcas .content {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.vialplast_home .nuestras_marcas .content_marcas {
+	max-width: 40%;
+	width: 40%;
+	margin-bottom: 15px;
+}
+
+.vialplast_home .nuestras_marcas .content_marcas:last-child {
+	margin-bottom: 0;
+}
+/* Nuestras Marcas end */
+
+
+/* MEDIA QUERIES */
+@media (min-width: 576px) {
+
+	/* Header */
+	.vialplast_home .content_header {
+		background: url('../img/home/slide-vialplast.jpg');
+	}
+	/* Header end */
+
+	/* Slide Líneas */
+	.vialplast_home .slides_lineas .linea_actual {
+		min-height: 290px;
+	}
+	/* Slide Líneas end */
+
+	/* Buscas Otro Producto */
+	.vialplast_home .buscar_otro_producto {
+		padding-top: 30px;
+		padding-bottom: 30px;
+	}
+	/* Buscas Otro Producto end */
+
+	/* Caracteristicas */
+	.vialplast_home .caracteristicas {
+		margin-bottom: 60px;
+	}
+
+	.vialplast_home .caracteristicas h4:first-child {
+		font-size: 1rem;
+		font-weight: 400;
+		margin: 0;
+	}
+
+	.vialplast_home .caracteristicas .col-sm-3 {
+		margin-bottom: 0;
+	}
+
+	.vialplast_home .caracteristicas .col-sm-3:first-child {
+		margin-bottom: 0;
+	}
+
+	.vialplast_home .caracteristicas h4 {
+		margin-bottom: 0;
+	}
+	/* Caracteristicas end */
+
+	/* Distribuidores */
+	.vialplast_home .distribuidores {
+		padding-top: 30px;
+	}
+
+	.vialplast_home .distribuidores a {
+		width: 250px;
+		max-width: 250px;
+		margin: auto;
+	}
+	/* Distribuidores end */
+
+	/* Nuestras Marcas */
+	.vialplast_home .nuestras_marcas {
+		padding-bottom: 30px;
+	}
+
+	.vialplast_home .nuestras_marcas .content_marcas {
+		max-width: 30%;
+		width: 30%;
+	}
+	/* Nuestras Marcas end */
+	
+}
+
+@media (min-width: 768px) {
+	
+}
+
+@media (min-width: 992px) {
+
+	/* Header */
+	.vialplast_home .content_header {
+		height: 700px;
+	}
+
+	.vialplast_home .content_header .circulo {
+		display: inline-block;
+		animation: rotation 2s infinite linear;
+	}
+
+	.vialplast_home .content_header .logo_mobile {
+		display: none;
+	}
+
+	.vialplast_home .content_header h1 {
+		font-size: 3.5rem;
+		line-height: 1.3;
+	}
+
+	.vialplast_home .content_header .row .col-md-6:first-child {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: left;
+	}
+
+	.vialplast_home .content_header .row .col-md-6:last-child {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-end;
+		text-align: right;
+	}
+
+	.vialplast_home .content_header h3 {
+		font-size: 1.75rem;
+	}
+
+	.vialplast_home .content_header .ver_productos {
+		display: inline-block;
+		font-size: 1.25rem;
+		margin-top: 5px;
+	}
+	/* Header end */
+
+	/* Slide Líneas */
+	.vialplast_home .slides_lineas .data {
+		padding-left: 0!important;
+	}
+
+	.vialplast_home .slides_lineas .data .row:first-child {
+		height: 100%;
+	}
+
+	.vialplast_home .slides_lineas .linea_actual {
+		width: 100%;
+		min-height: auto;
+	}
+
+	.vialplast_home .slides_lineas .linea_actual h3 {
+		margin-bottom: 10px;
+	}
+
+	.vialplast_home .slides_lineas .linea_actual p {
+		font-size: 0.85rem;
+		margin-bottom: 10px;
+	}
+
+	.vialplast_home .slides_lineas .br_tag {
+		display: none;
+	}
+	/* Slide Líneas end */
+
+	/* Buscas Otro Producto */
+	.vialplast_home .buscar_otro_producto .row div h5 {
+		font-size: 1.75rem;
+		margin-bottom: 25px;
+	}
+	/* Buscas Otro Producto end */
+
+	/* Constructoras y Municipios */
+	.vialplast_home .constructoras_municipios h3 {
+		font-size: 1.75rem;
+		margin-bottom: 25px;
+	}
+
+	.vialplast_home .constructoras_municipios .content h4 {
+		font-size: 1.5rem;
+	}
+	/* Constructoras y Municipios end */
+
+}
+
+@media (min-width: 1200px) {
+
+	/* Slide Líneas */
+	.vialplast_home .content_header {
+		height: 700px;
+	}
+
+	.vialplast_home .slides_lineas .linea_actual {
+		width: 50%;
+	}
+
+	.vialplast_home .slides_lineas .linea_actual p {
+		font-size: 0.85rem;
+	}
+
+	.vialplast_home .slides_lineas .otras_lineas {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 50%;
+		padding: 0!important;
+	}
+
+	.vialplast_home .slides_lineas .otras_lineas div {
+		padding: 15px;
+		width: 100%;
+		height: 50%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: flex-start;
+	}
+
+	.vialplast_home .slides_lineas .otras_lineas .circulo {
+		max-width: 6%;
+		margin-bottom: 5px;
+	}
+
+	.vialplast_home .slides_lineas .otras_lineas h4 {
+		font-weight: 700;
+		margin-bottom: 5px;
+		line-height: 1.1;
+	}
+
+	.vialplast_home .slides_lineas .otras_lineas .btn-out-black {
+		padding-top: 3px;
+		padding-bottom: 3px;
+	}
+	/* Slide Líneas end */
+
+	/* Caracteristicas */
+	.vialplast_home .caracteristicas h4:first-child {
+		font-size: 1.25rem;
+		font-weight: 700;
+	}
+	/* Caracteristicas end */
+
+	/* Nuestras Marcas */
+	.vialplast_home .nuestras_marcas .content_marcas {
+		max-width: 20%;
+		width: 20%;
+		margin-bottom: 0;
+	}
+	/* Nuestras Marcas end */
+
+}
+
+@media (min-width: 1400px) {
+
+	/* Slide Líneas */
+	.vialplast_home .slides_lineas .linea_actual .circulo {
+		display: inline-block;
+		animation: rotation 2s infinite linear;
+	}
+
+	.vialplast_home .slides_lineas .br_tag {
+		display: inline-block;
+	}
+
+	.vialplast_home .slides_lineas .linea_actual p {
+		font-size: 1rem;
+	}
+	/* Slide Líneas end */
+
+	/* Buscas Otro Producto */
+	.vialplast_home .buscar_otro_producto {
+		padding-top: 60px;
+		padding-bottom: 60px;
+	}
+
+	.vialplast_home .buscar_otro_producto .row div h5 {
+		font-size: 2rem;
+	}
+	/* Buscas Otro Producto end */
+
+	/* Distribuidores */
+	.vialplast_home .distribuidores {
+		padding-top: 60px;
+	}
+	/* Distribuidores end */
+
+	/* Nuestras Marcas */
+	.vialplast_home .nuestras_marcas {
+		padding-bottom: 60px;
+	}
+	/* Nuestras Marcas end */
+
+}
+
+@media (min-width: 1600px) {
+
+	/* Slide Líneas */
+	.vialplast_home .slides_lineas .linea_actual h3 {
+		font-size: 2rem;
+		line-height: 1.1;
+	}
+	/* Slide Líneas end */
+
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes down_up {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+
+
+

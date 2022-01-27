@@ -1,0 +1,1 @@
+/home/vagrant/code/vialplast/wp-content/plugins/query-monitor/wp-content/db.php

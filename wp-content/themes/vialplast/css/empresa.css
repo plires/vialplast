@@ -1,0 +1,127 @@
+/* Informacion */
+.vialplast_empresa .informacion {
+	padding-top: 30px;
+	margin-bottom: 30px;
+}
+
+.vialplast_empresa .informacion .data {
+	padding-left: 30px;
+	padding-right: 30px;
+	margin-bottom: 30px;
+}
+
+.vialplast_empresa .informacion .data p:last-child {
+	margin-bottom: 0;
+}
+
+.vialplast_empresa .informacion .data h2 {
+	font-weight: 700;
+	font-size: 1.563rem;
+	line-height: 1.1;
+}
+
+.vialplast_empresa .informacion .data span {
+	font-weight: 700;
+}
+/* Informacion end */
+
+/* Galeria */
+.vialplast_empresa .galeria .item_galeria {
+	margin-left: 5px!important;
+	margin-right: 5px!important;
+}
+/* Galeria end */
+
+
+
+/* MEDIA QUERIES */
+@media (min-width: 576px) {
+
+	/* Informacion */
+	.vialplast_empresa .informacion {
+		margin-bottom: 60px;
+	}
+	/* Informacion end */
+
+}
+
+@media (min-width: 768px) {
+	
+}
+
+@media (min-width: 992px) {
+
+	/* Informacion */
+	.vialplast_empresa .informacion .data,
+	.vialplast_empresa .informacion .images {
+		max-width: 50%;
+	}
+
+	.vialplast_empresa .informacion .data {
+		padding-right: 15px;
+	}
+
+	.vialplast_empresa .informacion .images {
+		margin-top: 90px;
+	}
+	/* Informacion end */
+
+}
+
+@media (min-width: 1200px) {
+
+	/* Informacion */
+	.vialplast_empresa .informacion .data {
+		padding-right: 15px;
+		margin-left: 10%;
+		max-width: 40%;
+	}
+	/* Informacion end */
+
+}
+
+@media (min-width: 1400px) {
+
+	/* Informacion */
+	.vialplast_empresa .informacion .data {
+		margin-left: 15%;
+		max-width: 25%;
+	}
+
+	.vialplast_empresa .informacion .images {
+		max-width: 60%;
+	}
+	/* Informacion end */
+
+}
+
+@media (min-width: 1600px) {
+
+	/* Informacion */
+	.vialplast_empresa .informacion .data {
+		margin-left: 20%;
+		max-width: 20%;
+	}
+
+	.vialplast_empresa .informacion .images {
+		max-width: 60%;
+	}
+	/* Informacion end */
+
+}
+
+@media (min-width: 1800px) {
+
+	/* Informacion */
+	.vialplast_empresa .informacion .data p {
+		font-size: 1.15rem;
+		line-height: 1.5;
+	}
+	/* Informacion end */
+
+}
+
+
+
+
+

@@ -85,7 +85,7 @@
 	<!-- Faja Caracterisitcas -->
 	<?php include('inc/faja-caracterisitcas.inc.php'); ?>
 
-	<!-- Faja Caracterisitcas -->
+	<!-- Faja Distribuidores -->
 	<?php include('inc/faja-distribuidores-marca.inc.php'); ?>
 	
 </section>

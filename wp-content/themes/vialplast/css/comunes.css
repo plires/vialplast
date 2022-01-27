@@ -82,6 +82,72 @@ a {
 }
 /* Nav Mobile end */
 
+/* Caracteristicas */
+.caracteristicas {
+	margin-bottom: 30px;
+}
+
+.caracteristicas .col-sm-3 {
+	margin-bottom: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.caracteristicas .col-sm-3:first-child {
+	margin-bottom: 15px;
+}
+
+.caracteristicas h4:first-child {
+	margin-bottom: 10px;
+}
+
+.caracteristicas h4 {
+	margin-bottom: 0;
+	margin-top: 5px;
+	font-weight: 700;
+}
+/* Caracteristicas end */
+
+/* Distribuidores */
+.distribuidores {
+	padding-top: 20px;
+}
+
+.distribuidores h3 {
+	font-weight: 700;
+}
+/* Distribuidores end */
+
+/* Nuestras Marcas */
+.nuestras_marcas {
+	padding-bottom: 20px;
+}
+
+.nuestras_marcas h3 {
+	font-weight: 700;
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+
+.nuestras_marcas .content {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.nuestras_marcas .content_marcas {
+	max-width: 40%;
+	width: 40%;
+	margin-bottom: 15px;
+}
+
+.nuestras_marcas .content_marcas:last-child {
+	margin-bottom: 0;
+}
+/* Nuestras Marcas end */
+
 /* Footer */
 #footer {
 	margin-bottom: 0;
@@ -182,3 +248,105 @@ a {
 	font-family: WorkSans!important;
 }
 /* Header end */
+
+
+/* MEDIA QUERIES */
+@media (min-width: 576px) {
+
+	/* Caracteristicas */
+	.caracteristicas {
+		margin-bottom: 60px;
+	}
+
+	.caracteristicas h4:first-child {
+		font-size: 1rem;
+		font-weight: 400;
+		margin: 0;
+	}
+
+	.caracteristicas .col-sm-3 {
+		margin-bottom: 0;
+	}
+
+	.caracteristicas .col-sm-3:first-child {
+		margin-bottom: 0;
+	}
+
+	.caracteristicas h4 {
+		margin-bottom: 0;
+	}
+	/* Caracteristicas end */
+
+	/* Distribuidores */
+	.distribuidores {
+		padding-top: 30px;
+	}
+
+	.distribuidores a {
+		width: 250px;
+		max-width: 250px;
+		margin: auto;
+	}
+	/* Distribuidores end */
+
+	/* Nuestras Marcas */
+	.nuestras_marcas {
+		padding-bottom: 30px;
+	}
+
+	.nuestras_marcas .content_marcas {
+		max-width: 30%;
+		width: 30%;
+	}
+	/* Nuestras Marcas end */
+
+}
+
+@media (min-width: 768px) {
+	
+}
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
+	/* Caracteristicas */
+	.caracteristicas h4:first-child {
+		font-size: 1.25rem;
+		font-weight: 700;
+	}
+	/* Caracteristicas end */
+
+	/* Nuestras Marcas */
+	.nuestras_marcas .content_marcas {
+		max-width: 20%;
+		width: 20%;
+		margin-bottom: 0;
+	}
+	/* Nuestras Marcas end */
+
+}
+
+@media (min-width: 1400px) {
+
+	/* Distribuidores */
+	.distribuidores {
+		padding-top: 60px;
+	}
+	/* Distribuidores end */
+
+	/* Nuestras Marcas */
+	.nuestras_marcas {
+		padding-bottom: 60px;
+	}
+	/* Nuestras Marcas end */
+
+}
+
+@media (min-width: 1600px) {
+
+}
+
+

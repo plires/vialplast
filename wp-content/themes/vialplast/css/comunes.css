@@ -82,6 +82,12 @@ a {
 }
 /* Nav Mobile end */
 
+/* Breadcumbs */
+.page-top .page-title:not(.b-none)::after {
+	border-bottom: 5px solid var(--primary-color); 
+}
+/* Breadcumbs end */
+
 /* Caracteristicas */
 .caracteristicas {
 	margin-bottom: 30px;

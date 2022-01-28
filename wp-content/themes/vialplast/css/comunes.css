@@ -259,6 +259,50 @@ a {
 }
 /* Header end */
 
+/* Spinner */
+#sending_form {
+  display: none!important;
+}
+
+#sending_form.active {
+  z-index: 999999;  
+  display: flex!important;
+  justify-content: center;
+  align-items: center;
+}
+/* Spinner end */
+
+/* Inputs no validados */
+input.invalid,
+textarea.invalid {
+  background-color: #ffdddd;
+  border-color: red;
+}
+/* Inputs no validados end */
+
+/* Placeholders */
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: pink;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: pink;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: pink;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: pink;
+  font-size: 0.75rem;
+  font-style: italic;
+/* Placeholders end */
+}
+
 
 /* MEDIA QUERIES */
 @media (min-width: 576px) {

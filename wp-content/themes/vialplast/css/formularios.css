@@ -1,0 +1,96 @@
+
+/* Informacion y Formulario */
+.vialplast_contacto {
+	margin-top: 30px;
+}
+
+.vialplast_contacto .informacion .datos {
+	order: 1;
+}
+
+.vialplast_contacto .informacion .datos a {
+	display: inline-block;
+	margin-bottom: 10px;
+	line-height: 1.3;
+	color: #777777;
+}
+
+.vialplast_contacto .informacion .datos a:hover {
+	color: var(--primary-color);
+}
+
+.vialplast_contacto .informacion .datos p {
+	line-height: 1.3;
+}
+
+.vialplast_contacto .informacion .btn-out-black {
+	float: right;
+	margin-bottom: 30px!important;
+}
+/* Informacion y Formulario end */
+
+/* Mapa */
+.vialplast_contacto .mapa {
+	margin-bottom: 30px;
+}
+/* Mapa end */
+
+
+/* MEDIA QUERIES */
+@media (min-width: 576px) {
+
+}
+
+@media (min-width: 768px) {
+
+	/* Informacion y Formulario */
+	.vialplast_contacto .informacion .datos {
+		order: 0;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.vialplast_contacto .informacion .datos div {
+		margin-bottom: 30px;
+		margin-top: -90px;
+	}
+
+	.vialplast_contacto .informacion .datos p {
+		line-height: 1.5;
+	}
+	/* Informacion y Formulario end */
+	
+}
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
+}
+
+@media (min-width: 1400px) {
+
+	/* Informacion y Formulario */
+	.vialplast_contacto .informacion .datos p,
+	.vialplast_contacto .informacion .datos a {
+		font-size: 1.125rem;
+	}
+	/* Informacion y Formulario end */
+
+}
+
+@media (min-width: 1600px) {
+
+}
+
+@media (min-width: 1800px) {
+
+}
+
+
+
+
+

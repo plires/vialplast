@@ -47,6 +47,7 @@
 					action="<?= esc_url( get_stylesheet_directory_uri() ) . '/php/validate-form-contacto.php'; ?>">
 
 	        <input type="hidden" name="origin" value="Formulario de Constructoras y Municipios">
+	        <input type="hidden" name="section" value="constructoras-municipios">
 
           <!-- Name -->
 					<div class="mb-3">

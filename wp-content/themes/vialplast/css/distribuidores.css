@@ -1,0 +1,127 @@
+/* Información y formulario */
+.vialplast_distribuidores .informacion .last {
+	font-weight: 700;
+}
+/* Información y formulario end */
+
+/* Imagen */
+.vialplast_distribuidores .imagen {
+	margin-bottom: 15px;
+}
+/* Imagen end */
+
+/* Valores */
+.vialplast_distribuidores .valores {
+	color: black;
+	text-align: center;
+}
+
+.vialplast_distribuidores .valores .titulo {
+	font-weight: 700;
+	font-size: 1.15rem;
+	margin-bottom: 30px;
+}
+
+.vialplast_distribuidores .valores .col-sm-4 {
+	display: flex;
+	justify-content: center;
+}
+
+.vialplast_distribuidores .valores .content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.vialplast_distribuidores .valores .circle {
+	border:  solid 3px var(--primary-color);
+	border-radius: 50%;
+	max-width: 120px;
+	width: 120px;
+	max-height: 120px;
+	height: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+.vialplast_distribuidores .valores .circle p {
+	margin: 0;
+	font-size: 3rem;
+	font-weight: 700;
+}
+
+.vialplast_distribuidores .valores .description {
+	font-size: 1.25rem;
+	font-weight: 700;
+	margin-bottom: 50px;
+}
+/* Valores end */
+
+
+/* MEDIA QUERIES */
+@media (min-width: 576px) {
+	/* Valores*/
+	.vialplast_distribuidores .valores {
+		margin-bottom: 50px;
+	}
+
+	.vialplast_distribuidores .valores .description {
+		margin-bottom: 0;
+	}
+	/* Valores end */
+
+}
+
+@media (min-width: 768px) {
+	
+}
+
+@media (min-width: 992px) {
+
+	/* Imagen */
+	.vialplast_distribuidores .imagen {
+		margin-bottom: 50px;
+	}
+	/* Imagen end */
+
+	/* Valores */
+	.vialplast_distribuidores .valores .col-lg-3 {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.vialplast_distribuidores .valores .circle {
+		border:  solid 5px var(--primary-color);
+	}
+
+	.vialplast_distribuidores .valores .titulo {
+		font-size: 1.25rem;
+		margin-bottom: 0;
+	}
+	/* Valores end */
+
+}
+
+@media (min-width: 1200px) {
+
+}
+
+@media (min-width: 1400px) {
+
+}
+
+@media (min-width: 1600px) {
+
+}
+
+@media (min-width: 1800px) {
+
+}
+
+
+
+
+

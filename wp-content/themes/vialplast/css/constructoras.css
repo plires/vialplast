@@ -1,0 +1,85 @@
+/* Información y formulario */
+	.vialplast_constructoras .informacion {
+		margin-bottom: 30px;
+	}
+	/* Información y formulario end */
+
+/* Galeria */
+.vialplast_constructoras .galeria_encabezado h3 {
+	margin-bottom: 0;
+}
+
+.vialplast_constructoras .galeria {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.vialplast_constructoras .galeria .item_galeria {
+	margin-left: 5px!important;
+	margin-right: 5px!important;
+}
+
+.vialplast_constructoras .slick-track {
+  display: flex !important;
+}
+
+.vialplast_constructoras .slick-slide {
+  height: auto;
+}
+/* Galeria end */
+
+/* MEDIA QUERIES */
+@media (min-width: 576px) {
+
+}
+
+@media (min-width: 768px) {
+
+	/* Información y formulario */
+	.vialplast_constructoras .informacion {
+		margin-bottom: 15px;
+	}
+
+	.vialplast_constructoras .informacion .datos {
+		padding-top: 55px;
+	}
+	/* Información y formulario end */
+	
+}
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
+	/* Información y formulario */
+	.vialplast_constructoras .informacion .datos {
+		padding-top: 20px;
+	}
+	/* Información y formulario end */
+
+}
+
+@media (min-width: 1400px) {
+
+	/* Información y formulario */
+	.vialplast_constructoras .informacion .datos {
+		padding-top: 75px;
+	}
+	/* Información y formulario end */
+
+}
+
+@media (min-width: 1600px) {
+
+}
+
+@media (min-width: 1800px) {
+
+}
+
+
+
+
+

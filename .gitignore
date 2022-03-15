@@ -15,7 +15,7 @@ wp-config.php
 /wp-content/uploads/2025/
 /wp-content/uploads/2026/
 /wp-content/uploads/wc-logs/
-/challenges
+/backup-bdd/
 npm-debug.log
 yarn-error.log
 .swp

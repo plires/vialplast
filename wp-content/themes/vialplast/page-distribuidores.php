@@ -47,7 +47,7 @@
 					method="post" 
 					action="<?= esc_url( get_stylesheet_directory_uri() ) . '/php/validate-form-contacto.php'; ?>">
 
-	        <input type="hidden" name="origin" value="Formulario de Contactos">
+	        <input type="hidden" name="origin" value="Formulario de Distribuidores">
 
           <!-- Name -->
 					<div class="mb-3">

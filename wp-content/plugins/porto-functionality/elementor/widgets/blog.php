@@ -154,7 +154,7 @@ class Porto_Elementor_Blog_Widget extends \Elementor\Widget_Base {
 				'type'      => Controls_Manager::SELECT,
 				'label'     => __( 'Post Meta Type', 'porto-functionality' ),
 				'condition' => array(
-					'post_style' => array( 'list', 'hover_info', 'hover_info2' ),
+					'post_style' => array( 'hover_info', 'hover_info2' ),
 				),
 				'default'   => '',
 				'options'   => array(

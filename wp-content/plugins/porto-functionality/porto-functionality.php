@@ -3,7 +3,7 @@
 Plugin Name: Porto Theme - Functionality
 Plugin URI: http://themeforest.net/user/p-themes
 Description: Adds functionality such as Shortcodes, Post Types and Widgets to Porto Theme
-Version: 2.2.2
+Version: 2.2.3
 Author: P-Themes
 Author URI: http://themeforest.net/user/p-themes
 License: GPL2

@@ -2950,6 +2950,7 @@ jQuery( document ).ready( function ( $ ) {
 					data: {
 						action: yith_wcwl_l10n.actions.remove_from_wishlist_action,
 						remove_from_wishlist: id,
+						nonce: yith_wcwl_l10n.nonce.remove_from_wishlist_nonce,
 						from: 'theme'
 					},
 					method: 'post',

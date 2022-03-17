@@ -1725,3 +1725,7 @@ h2.resp-accordion:first-child {
 	font-size: .75rem;
 	padding: .8em 1.6em;
 }
+
+.mfp-hide {
+	display: none;
+}

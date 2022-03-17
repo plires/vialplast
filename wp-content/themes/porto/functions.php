@@ -468,8 +468,8 @@ function porto_css() {
 
 	// dequeue block css
 	if ( class_exists( 'Woocommerce' ) && isset( $porto_settings_optimize['dequeue_wc_block_css'] ) && $porto_settings_optimize['dequeue_wc_block_css'] ) {
-		wp_dequeue_style( 'wc-block-vendors-style' );
-		wp_dequeue_style( 'wc-block-style' );
+		wp_dequeue_style( 'wc-blocks-vendors-style' );
+		wp_dequeue_style( 'wc-blocks-style' );
 	}
 	if ( isset( $porto_settings_optimize['dequeue_wp_block_css'] ) && $porto_settings_optimize['dequeue_wp_block_css'] ) {
 		wp_dequeue_style( 'wp-block-library' );
@@ -915,6 +915,7 @@ function porto_scripts() {
 		if ( class_exists( 'Woocommerce' ) && is_product() ) {
 			$porto_vars['pre_order'] = ! empty( $porto_settings['woo-pre-order'] );
 		}
+
 		if ( function_exists( 'porto_sales_popup_data' ) && class_exists( 'Woocommerce' ) && isset( $porto_settings['woo-sales-popup'] ) && ( ! wp_is_mobile() || ( isset( $porto_settings['woo-sales-popup-mobile'] ) && $porto_settings['woo-sales-popup-mobile'] ) ) ) {
 			$porto_vars['sales_popup'] = porto_sales_popup_data();
 		}

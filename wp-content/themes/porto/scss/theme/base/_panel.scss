@@ -328,3 +328,8 @@ html.panel-opened {
         margin-bottom: -1px;
     }
 }
+
+// IOS Compatibility
+body.ios .mobile-menu .menu-item-has-children:not(.active) > a {
+    max-width: calc(100% - 35px);
+}

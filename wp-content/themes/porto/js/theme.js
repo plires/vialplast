@@ -243,6 +243,10 @@ window.theme = {};
 			return false;
 		},
 
+		isIOS: function () {
+			return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+		},
+
 		refreshVCContent: function ( $elements ) {
 			if ( $elements || $( document.body ).hasClass( 'elementor-page' ) ) {
 				$( window ).trigger( 'resize' );
@@ -455,6 +459,10 @@ window.theme = {};
 		}
 
 	} );
+
+	if (theme.isIOS()) {
+		$('body').addClass('ios');
+	}
 
 } ).apply( this, [ window.theme, jQuery ] );
 

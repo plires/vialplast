@@ -1483,10 +1483,19 @@ jQuery( function ( $ ) {
 
 	// import demos
 	jQuery( document ).on( 'change', '.pagebuilder-selector input[type="radio"]', function () {
-		var $o = $( this ).closest( '.porto-install-section' ).find( '.message-section' );
+		var $o = $(this).closest('.porto-install-section').find('.message-section'),
+			theme_name = $(this).closest('#porto-install-options').find('.theme-name').html();
 		$o.addClass( 'd-none' ).children( 'div' ).addClass( 'd-none' );
 
 		var should_slide_up = false;
+
+		// Blog Demos
+		if (-1 != theme_name.search('Blog') && $o.children('.dynamic-featured-image').length) {
+			$o.removeClass('d-none').children('.dynamic-featured-image').removeClass('d-none');
+			$(this).closest('.porto-install-section').find('.btn-actions').slideUp();
+			should_slide_up = true;
+		}
+
 		if ( $( this ).parent( '.radio' ).hasClass( 'notinstalled' ) ) {
 			$o.removeClass( 'd-none' ).children( '.' + $( this ).val() ).removeClass( 'd-none' ).siblings( 'div' );
 			$( this ).closest( '.porto-install-section' ).find( '.btn-actions' ).slideUp();
@@ -1530,6 +1539,7 @@ jQuery( function ( $ ) {
 		} else {
 			var $wrap = jQuery( this ).closest( '.porto-install-demos' ),
 				live_urls = jQuery( this ).find( '.theme-name' ).data( 'live-url' ),
+				theme_name = jQuery(this).find('.theme-name').html(),
 				live_url = live_urls.js_composer,
 				$o = jQuery( '#porto-install-options .pagebuilder-selector' ),
 				active_p = $o.data( 'active-p' ),
@@ -1567,6 +1577,11 @@ jQuery( function ( $ ) {
 				if ( 'js_composer' == active_p && $o.find( '.message-section' ).children( '.revslider_j' ).length && $( this ).parent().hasClass( 'revslider_j' ) ) {
 					$o.find( '.message-section' ).removeClass( 'd-none' ).children( '.revslider_j' ).removeClass( 'd-none' );
 					$o.next( '.btn-actions' ).hide();
+				}
+
+				if (-1 != theme_name.search('Blog') && $o.find('.message-section').children('.dynamic-featured-image').length) {
+					$o.find('.message-section').removeClass('d-none').children('.dynamic-featured-image').removeClass('d-none');
+					$o.next('.btn-actions').hide();
 				}
 			} else {
 				jQuery( '#porto-install-options .pagebuilder-selector' ).hide();

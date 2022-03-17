@@ -89,8 +89,9 @@ if ( ! class_exists( 'Porto_Pre_Order_Admin' ) ) :
 				$pre_order      = isset( $_POST['_porto_pre_order'][ $index ] ) ? 'yes' : '';
 				$pre_order_date = $_POST['_porto_pre_order_date'][ $index ];
 			}
+
 			update_post_meta( $post_id, '_porto_pre_order', $pre_order );
-			update_post_meta( $post_id, '_porto_pre_order_date', sanitize_title( $pre_order_date ) );
+			update_post_meta( $post_id, '_porto_pre_order_date', ( empty( $pre_order_date ) ? '' : sanitize_title( $pre_order_date ) ) );
 		}
 
 		public function save_parent_pre_order( $post_id ) {

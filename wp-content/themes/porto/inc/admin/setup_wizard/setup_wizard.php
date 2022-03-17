@@ -1694,6 +1694,12 @@ if ( ! class_exists( 'Porto_Theme_Setup_Wizard' ) ) {
 											<div style="width: 40px; padding-right: 8px; text-align: center;"><img src="<?php echo PORTO_PLUGINS_URI . '/images/elementor.png'; ?>" alt="<?php esc_html_e( 'Elementor', 'porto' ); ?>" /></div>
 											<h5><?php esc_html_e( 'Elementor is required.', 'porto' ); ?></h5>
 										</div>
+									<?php if ( is_plugin_inactive( 'dynamic-featured-image/dynamic-featured-image.php' ) ) : ?>
+										<div class="dynamic-featured-image d-flex">
+											<div style="width: 40px; padding-right: 8px"><img src="<?php echo PORTO_PLUGINS_URI . '/images/plugins.png'; ?>" alt="<?php esc_html_e( 'Dynamic Featured Image', 'porto' ); ?>" /></div>
+											<h5><?php esc_html_e( 'Dynamic Featured Image is required.', 'porto' ); ?></h5>
+										</div>
+									<?php endif; ?>
 									<?php if ( is_plugin_inactive( 'porto-vc-addon/init.php' ) ) : ?>
 										<div class="porto-vc-addon d-flex">
 											<div style="width: 40px; padding-right: 8px"><img src="<?php echo PORTO_PLUGINS_URI . '/images/porto_vc_addon.png'; ?>" alt="<?php esc_html_e( 'Porto Theme - Visual Composer Addon', 'porto' ); ?>" /></div>

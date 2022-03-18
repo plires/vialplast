@@ -49,7 +49,3 @@ define('EMAIL_ENCODING', 'quoted printable');
 // define('PERFIT_APY_KEY', 'xxxxxxxx-yfa7Uv8kEyCYbCG3IWKLA6EHbk7eQNtA');
 
 ?>
-
-<script type="text/javascript">
-	var recaptchaKeySite = "<?php echo RECAPTCHA_KEY_SITE; ?>";
-</script>

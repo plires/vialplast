@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Porto\n"
 "POT-Creation-Date: 2022-01-07 16:20+0800\n"
-"PO-Revision-Date: 2022-03-22 19:06+0000\n"
+"PO-Revision-Date: 2022-03-23 14:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: Español\n"
 "Language: es_ES\n"
@@ -10094,7 +10094,7 @@ msgstr ""
 
 #: woocommerce/loop/orderby.php:15
 msgid "Sort By"
-msgstr ""
+msgstr "Ordenar por"
 
 #: woocommerce/loop/orderby.php:16
 msgid "Shop order"

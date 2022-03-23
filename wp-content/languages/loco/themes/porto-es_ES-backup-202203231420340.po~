@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Porto\n"
 "POT-Creation-Date: 2022-01-07 16:20+0800\n"
-"PO-Revision-Date: 2022-03-22 18:57+0000\n"
+"PO-Revision-Date: 2022-03-22 19:06+0000\n"
 "Last-Translator: \n"
 "Language-Team: Español\n"
 "Language: es_ES\n"
@@ -129,7 +129,7 @@ msgstr ""
 
 #: breadcrumbs.php:22 woocommerce/cart/mini-cart.php:27
 msgid "Shopping Cart"
-msgstr "Carrito de compras"
+msgstr "Carrito de Compras"
 
 #: breadcrumbs.php:26 inc/functions/woocommerce.php:2504
 msgid "Checkout"
@@ -367,7 +367,7 @@ msgstr ""
 #: content-blog-masonry.php:250 content-blog-medium.php:42
 #: content-blog-timeline.php:193 content-blog-woocommerce.php:110
 msgid "Read more..."
-msgstr ""
+msgstr "Leer Más..."
 
 #: content-blog-medium-alt.php:16
 msgid "Posted By "
@@ -399,11 +399,11 @@ msgstr ""
 
 #: content-blog-medium-alt.php:120
 msgid "Read more"
-msgstr ""
+msgstr "Leer más"
 
 #: content-blog-modern.php:144
 msgid "Read more +"
-msgstr ""
+msgstr "Leer más +"
 
 #: content-member.php:178 content-member.php:198 content-member.php:224
 msgid "Follow Me"
@@ -541,7 +541,7 @@ msgstr ""
 #: content-post-item-no-image.php:32 content-post-item.php:72
 #: content-post-item.php:279 inc/functions/post.php:200
 msgid "Read More"
-msgstr ""
+msgstr "Leer Más"
 
 #: content-post-item-no-image.php:189 content-post-item.php:289
 msgid "by"
@@ -569,7 +569,7 @@ msgstr ""
 
 #: footer/sticky-bottom.php:63
 msgid "cart"
-msgstr ""
+msgstr "carrito"
 
 #: functions.php:133 inc/admin/customizer/header-builder.php:39
 #: inc/admin/theme_options/settings.php:1740
@@ -1049,7 +1049,7 @@ msgstr ""
 
 #: inc/admin/admin_pages/welcome.php:21
 msgid "Please enter your Purchase Code to complete registration."
-msgstr ""
+msgstr "Por favor ingrese su Código de Compra para completar el registro."
 
 #: inc/admin/admin_pages/welcome.php:52
 #: inc/admin/setup_wizard/setup_wizard.php:1911
@@ -1143,7 +1143,7 @@ msgstr ""
 #: inc/admin/customizer/header-builder.php:37
 #: inc/admin/theme_options/settings.php:2730
 msgid "Mini Cart"
-msgstr ""
+msgstr "Mini carrito"
 
 #: inc/admin/customizer/header-builder.php:38
 msgid "☰ Mobile Menu Icon"
@@ -5114,7 +5114,7 @@ msgstr ""
 #: inc/admin/theme_options/settings.php:3987 inc/functions/layout.php:2215
 #: inc/functions/woocommerce.php:380
 msgid "Cart"
-msgstr ""
+msgstr "Carrito"
 
 #: inc/admin/theme_options/settings.php:3994
 msgid "Home Icon"
@@ -7804,11 +7804,11 @@ msgstr ""
 #: inc/functions/layout.php:1964 inc/functions/layout.php:2035
 #: inc/lib/porto-studio/blocks.tpl.php:29 searchform.php:6
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #: inc/functions/layout.php:1986
 msgid "Search&hellip;"
-msgstr ""
+msgstr "Buscar..."
 
 #: inc/functions/layout.php:2002
 msgid "All Categories"
@@ -7852,7 +7852,7 @@ msgstr ""
 #: inc/functions/layout/breadcrumbs.php:277
 #, php-format
 msgid "Search - %s"
-msgstr ""
+msgstr "Buscar - %s"
 
 #: inc/functions/layout/page-title.php:173
 #, php-format
@@ -7888,7 +7888,7 @@ msgstr ""
 #: inc/functions/layout/page-title.php:197
 #, php-format
 msgid "Search Results - %s"
-msgstr ""
+msgstr "Resultados de la búsqueda - %s"
 
 #: inc/functions/layout/page-title.php:193
 msgid "404 - Page Not Found"
@@ -7896,7 +7896,7 @@ msgstr ""
 
 #: inc/functions/post.php:202
 msgid "read more"
-msgstr ""
+msgstr "leer más"
 
 #: inc/functions/post.php:281
 #, php-format
@@ -8443,7 +8443,7 @@ msgstr ""
 #: inc/functions/woocommerce.php:1683
 #, php-format
 msgid "Read More About %s"
-msgstr ""
+msgstr "Leer Más acerca de %s"
 
 #: inc/functions/woocommerce.php:1933
 msgid "Filters:"
@@ -8527,20 +8527,20 @@ msgstr ""
 
 #: inc/functions/woocommerce.php:2475
 msgid "Add to cart"
-msgstr ""
+msgstr "Agregar al carrito"
 
 #: inc/functions/woocommerce.php:2490
 msgid "You've just added this product to the cart"
-msgstr ""
+msgstr "Acabas de añadir este producto al carrito"
 
 #: inc/functions/woocommerce.php:2492 inc/functions/woocommerce.php:2503
 msgid "View Cart"
-msgstr ""
+msgstr "Ver Carrito"
 
 #: inc/functions/woocommerce.php:2500
 #, php-format
 msgid "%s has been added to your cart."
-msgstr ""
+msgstr "%s ha sido agregado a su carrito."
 
 #: inc/functions/woocommerce.php:2597
 #, php-format
@@ -8557,7 +8557,11 @@ msgid_plural ""
 "<strong class=\"single-cart-notice\">%s</strong> <span class=\"font-weight-"
 "medium\">have been added to your cart.</span>"
 msgstr[0] ""
+"<strong class=\"single-cart-notice\">%s</strong> <span class=\"font-weight-"
+"medium\">ha sido agregado a su carrito.</span>"
 msgstr[1] ""
+"<strong class=\"single-cart-notice\">%s</strong> <span class=\"font-weight-"
+"medium\">se han agregado a su carrito.</span>"
 
 #: inc/functions/woocommerce.php:2607
 msgid "Continue shopping"
@@ -8566,7 +8570,7 @@ msgstr ""
 #: inc/functions/woocommerce.php:2621 woocommerce/cart/mini-cart.php:24
 #: woocommerce/loop/sale-flash.php:61
 msgid "View cart"
-msgstr ""
+msgstr "Ver carrito"
 
 #: inc/functions/woocommerce.php:2651
 msgid "Already Added"
@@ -9904,12 +9908,16 @@ msgid ""
 "Sorry, but nothing matched your search terms. Please try again with "
 "different keywords."
 msgstr ""
+"Lo sentimos, pero nada coincide con los términos de búsqueda. Vuelva a "
+"intentarlo con otras palabras clave."
 
 #: index.php:148 search.php:94
 msgid ""
 "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
 "searching can help."
 msgstr ""
+"Parece que no podemos encontrar lo que estás buscando. Tal vez la búsqueda "
+"pueda ayudar."
 
 #: js/libs/modernizr.js:4
 msgid "perspective"
@@ -9984,7 +9992,7 @@ msgstr ""
 
 #: woocommerce/cart/cart-empty.php:29
 msgid "No products added to the cart"
-msgstr ""
+msgstr "No hay productos agregados al carrito"
 
 #: woocommerce/cart/cart-empty.php:32
 msgid "Return to shop"
@@ -10003,7 +10011,7 @@ msgstr ""
 
 #: woocommerce/cart/mini-cart.php:95
 msgid "No products in the cart."
-msgstr ""
+msgstr "No hay productos en el carrito."
 
 #: woocommerce/cart/mini-cart.php:116
 msgid "Total"
@@ -10023,7 +10031,7 @@ msgstr ""
 
 #: woocommerce/checkout/form-coupon.php:32
 msgid "Enter your code"
-msgstr ""
+msgstr "Ingrese su código"
 
 #: woocommerce/checkout/form-coupon.php:43
 msgid "If you have a coupon code, please apply it below."

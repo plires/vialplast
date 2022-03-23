@@ -1,0 +1,116 @@
+/* Logo */
+#footer .logo {
+	text-align: center;
+	margin-right: 0;
+}
+/* Logo end */
+
+/* Datos */
+#footer .content {
+	text-align: center;
+}
+
+#footer .content h3 {
+	font-size: 0.95rem;
+	color: var(--primary-color);
+	margin-bottom: 3px;
+}
+
+#footer .content a:hover {
+	color: white!important;
+}
+
+#footer .content_data a {
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
+#footer .content_data a:last-child {
+	margin-bottom: 5px;
+}
+
+#footer .content .content_menu {
+	margin-bottom: 30px;
+}
+
+#footer .footer-right {
+	text-align: center!important;
+}
+/* Datos end */
+
+
+
+/* MEDIA QUERIES */
+@media (min-width: 576px) {
+
+}
+
+@media (min-width: 768px) {
+	
+}
+
+@media (min-width: 992px) {
+
+	/* Logo */
+	#footer .logo {
+		margin-right: 30px;
+	}
+	/* Logo end */
+
+	/* Datos */
+	#footer .footer-left,
+	#footer .content {
+		display: flex;
+	}
+
+	#footer .content .content_menu {
+		margin-right: 30px;
+		margin-bottom: 0;
+	}
+
+	#footer .footer-right {
+		text-align: right!important;
+		align-self:  flex-end;
+	}
+
+	#footer .widget_block {
+		margin-right: 0!important;
+	}
+
+	#footer .content {
+		max-width: 500px;
+		width: 500px;
+		justify-content: space-around;
+	}
+	/* Datos end */
+
+}
+
+@media (min-width: 1200px) {
+
+	/* Datos */
+	#footer .content {
+		max-width: 670px;
+		width: 670px;
+		justify-content: space-around;
+	}
+	/* Datos end */
+
+}
+
+@media (min-width: 1400px) {
+
+}
+
+@media (min-width: 1600px) {
+
+}
+
+@media (min-width: 1800px) {
+
+}
+
+
+
+
+

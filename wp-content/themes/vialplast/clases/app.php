@@ -123,7 +123,7 @@ use PHPMailer\PHPMailer\Exception;
           $post['email'], // Remitente al nombre: 
           EMAIL_CLIENT, // Destinatario 
           NAME_CLIENT, // Nombre del destinatario
-          'Nueva consulta formulario web.', // Asunto 
+          'Nueva consulta desde el ' . $post['origin'], // Asunto 
           $template_client // Template usuario
         );
 

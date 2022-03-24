@@ -302,8 +302,8 @@
       .button-td-primary:hover,
       .button-a-primary:hover {
           background: #fff5e3 !important;
-            border-color: #ffcb66 !important;
-          color: #ffcb66 !important;
+            border-color: #dcc90e !important;
+          color: #dcc90e !important;
       }
 
         .button-td-secondary:hover,
@@ -421,14 +421,14 @@
           <tr>
               <td style="vertical-align: middle;">
                   
-                  <img src="https://librecomunicacion.net/clientes/sitio/img/email/header.jpg" style="margin:0; padding:0; border:none; display:block; width: 100%; height: auto;" border="0" alt="header" />
+                  <img src="https://librecomunicacion.net/clientes/vialplast/email/header.jpg" style="margin:0; padding:0; border:none; display:block; width: 100%; height: auto;" border="0" alt="header" />
 
               </td>
           </tr>
           <!-- Header end-->
 
           <!-- Texto-->
-          <tr style="background-color: #ffcb66;">
+          <tr style="background-color: #dcc90e;">
               <td style="padding: 10px; vertical-align: middle;">
                   
                   <h1 class="fallback-font" style="margin: 0px!important; font-family: 'Montserrat', sans-serif; font-size: 28px; color: #FFFFFF; text-align: center; font-weight: 700;">
@@ -482,8 +482,8 @@
           <!-- Texto end-->
 
           <!-- Boton : BEGIN -->
-          <tr style="background-color: #ffcb66;">
-              <td style="background-color: #ffcb66; text-align: center; padding: 40px;">
+          <tr style="background-color: #dcc90e;">
+              <td style="background-color: #dcc90e; text-align: center; padding: 40px;">
 
                 <p class="fallback-font" style="margin: 0 0 10px; margin-bottom: 20px; font-family: 'Montserrat', sans-serif; font-size: 16px; line-height: 26px; color: #FFFFFF; text-align: center; font-weight: 400;">
                   <strong>¿Necesitas responder a este usuario?</strong>
@@ -492,7 +492,7 @@
                   <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: auto;">
                       <tr>
                           <td class="button-td button-td-primary" style="border-radius: 4px; background: #FFFFFF;">
-                              <a class="fallback-font button-a button-a-primary" target="_blank" rel="noopener" href="mailto:{email}" style="background: #FFFFFF; border: 1px solid #FFFFFF; font-family: 'Montserrat', sans-serif; font-size: 18px; line-height: 28px; font-weight: 700; text-decoration: none; padding: 10px 20px; color: #ffcb66; display: block; border-radius: 4px;">RESPONDER
+                              <a class="fallback-font button-a button-a-primary" target="_blank" rel="noopener" href="mailto:{email}" style="background: #FFFFFF; border: 1px solid #FFFFFF; font-family: 'Montserrat', sans-serif; font-size: 18px; line-height: 28px; font-weight: 700; text-decoration: none; padding: 10px 20px; color: #dcc90e; display: block; border-radius: 4px;">RESPONDER
                               </a>
                           </td>
                       </tr>
@@ -503,19 +503,19 @@
           <!-- Boton : END -->
 
           <!-- Footer : BEGIN -->
-          <tr align="center" style="background-color: #FFFFFF;">
-              <td align="center"  style="background-color: #FFFFFF;padding: 10px;">
+          <tr align="center" style="background-color: #000000;">
+              <td align="center"  style="background-color: #000000;padding: 10px;">
                 
                 <a target="_blank" rel="noopener noreferrer" href="{facebook}">
-                  <img src="https://librecomunicacion.net/clientes/sitio/img/email/facebook.png" style="margin:0; margin-right: 20px; padding:0; border:none; display:inline-block; width: 45px; height: auto;" border="0" alt="facebook" />
+                  <img src="https://librecomunicacion.net/clientes/vialplast/email/facebook.png" style="margin:0; margin-right: 20px; padding:0; border:none; display:inline-block; width: 30px; height: auto;" border="0" alt="facebook" />
                 </a>
 
                 <a target="_blank" rel="noopener noreferrer" href="{instagram}">
-                  <img src="https://librecomunicacion.net/clientes/sitio/img/email/instagram.png" style="margin:0; margin-right: 20px; padding:0; border:none; display:inline-block; width: 45px; height: auto;" border="0" alt="instagram" />
+                  <img src="https://librecomunicacion.net/clientes/vialplast/email/instagram.png" style="margin:0; margin-right: 20px; padding:0; border:none; display:inline-block; width: 30px; height: auto;" border="0" alt="instagram" />
                 </a>
 
                 <a target="_blank" rel="noopener noreferrer" href="{linkedin}">
-                  <img src="https://librecomunicacion.net/clientes/sitio/img/email/linkedin.png" style="margin:0; padding:0; border:none; display:inline-block; width: 45px; height: auto;" border="0" alt="linkedin" />
+                  <img src="https://librecomunicacion.net/clientes/vialplast/email/linkedin.png" style="margin:0; padding:0; border:none; display:inline-block; width: 30px; height: auto;" border="0" alt="linkedin" />
                 </a>
                   
               </td>

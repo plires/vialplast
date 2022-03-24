@@ -1,7 +1,7 @@
 function submitFormContacto(form) {
 
   var sending = document.getElementById('sending_form')
-  let formValidated = validateForm()
+  let formValidated = validateForm(form)
 
   if (formValidated) {
     sending.classList.add('active')
@@ -72,9 +72,9 @@ function verifyRecaptcha(formName = null, key = null, action = null) {
   
 }
 
-function validateForm() {
+function validateForm(formName) {
 
-  const form = document.getElementsByTagName('form')[0]
+  const form = document.getElementById(formName)
   const inputs = form.getElementsByTagName('input')
   const textarea = form.getElementsByTagName('textarea')[0]
 

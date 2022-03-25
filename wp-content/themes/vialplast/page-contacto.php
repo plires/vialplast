@@ -13,7 +13,7 @@
 			<div class="col-md-6 datos">
 				<div>
 					<a class="transition" href="tel:1147527297">Tel. (+54) 11 4752  7297</a><br>
-					<a class="transition" href="mailto:info@superfil.com.ar">info@superfil.com.ar</a>
+					<a class="transition" href="mailto:info@vialplast.com.ar">info@vialplast.com.ar</a>
 					<p>
 						Calle 56 N° 4575 San Martín.</br>
 						Buenos Aires. Argentina.

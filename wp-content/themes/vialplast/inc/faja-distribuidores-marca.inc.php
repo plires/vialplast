@@ -4,7 +4,10 @@
 		<div class="row">
 			<div class="col-md-8 offset-md-2 text-center">
 				<h3>¿Querés ser distribuidor de nuestros productos?</h3>
-				<a href="#" class="btn btn-primary btn-out-black transition">Consultar <i class="fas fa-chevron-right"></i></a>
+				<a 
+					href="<?= esc_url( get_stylesheet_directory_uri() ) . '/distribuidores/'; ?>" 
+					class="btn btn-primary btn-out-black transition">Consultar <i class="fas fa-chevron-right"></i>
+				</a>
 			</div>
 		</div>
 	</div>
@@ -20,7 +23,7 @@
 
 				<div class="content">
 					<div class="content_marcas">
-						<a href="#">
+						<a href="https://depisos.com/" rel="noopener" target="_blank" >
 							<img 
 								class="marca img-fluid" 
 								src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/depisos.png'; ?>" 
@@ -29,7 +32,7 @@
 					</div>
 
 					<div class="content_marcas">
-						<a href="#">
+						<a href="http://cantofil.com.ar/" rel="noopener" target="_blank" >
 							<img 
 								class="marca img-fluid" 
 								src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/cantofil.png'; ?>" 
@@ -38,7 +41,7 @@
 					</div>
 
 					<div class="content_marcas">
-						<a href="#">
+						<a href="http://superfil.com.ar/" rel="noopener" target="_blank" >
 							<img 
 								class="marca img-fluid" 
 								src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/superfil.png'; ?>" 
@@ -47,7 +50,7 @@
 					</div>
 
 					<div class="content_marcas">
-						<a href="#">
+						<a href="http://summit-plastic.net/" rel="noopener" target="_blank" >
 							<img 
 								class="marca img-fluid" 
 								src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/summit.png'; ?>" 
@@ -56,7 +59,7 @@
 					</div>
 
 					<div class="content_marcas">
-						<a href="#">
+						<a href="http://nordeco.com.ar/" rel="noopener" target="_blank" >
 							<img 
 								class="marca img-fluid" 
 								src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/nordeco.png'; ?>" 

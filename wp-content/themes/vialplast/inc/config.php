@@ -17,11 +17,11 @@ define('ENVIRONMENT', 'local');
 define('RECAPTCHA_KEY_SITE', '6Lf_c0IeAAAAAClrROhBS8G_kyr6Tdw3HT1dywdS');
 define('RECAPTCHA_KEY_SECRET', '6Lf_c0IeAAAAAMipeFN4uv0zgZ37z-480slhnRzV');
 
-echo "
-<script>
-	var recaptchaKeySite = '".RECAPTCHA_KEY_SITE."'
-</script>
-";
+// echo "
+// <script>
+// 	var recaptchaKeySite = '".RECAPTCHA_KEY_SITE."'
+// </script>
+// ";
 
 ////////////////////////
 ///Valores de DB Remota
@@ -46,6 +46,21 @@ define('EMAIL_NAME', 'Vialplast');
 define('EMAIL_SUBJECT', 'Gracias por tu contacto');
 define('EMAIL_CHARSET', 'utf-8');
 define('EMAIL_ENCODING', 'quoted printable');
+
+//////////////////////////////
+/// ID CATEGORIAS
+//////////////////////////////
+define('ID_CATEGORY_BARRIERES_GUARDRAIL', 51);
+define('ID_CATEGORY_CONOS', 133);
+define('ID_CATEGORY_DELINEADORES', 39);
+define('ID_CATEGORY_DEMARCACION', 49);
+define('ID_CATEGORY_ESQUINEROS', 131);
+define('ID_CATEGORY_METROBUS', 41);
+define('ID_CATEGORY_OTROS_PRODUCTOS', 203);
+define('ID_CATEGORY_BAJADA_CORDON', 47);
+define('ID_CATEGORY_REDUCTORES_VELOCIDAD', 31);
+define('ID_CATEGORY_TOPES_ESTACIONAMIENTO', 45);
+define('ID_CATEGORY_VALLAS', 43);
 
 //////////////////////////////
 ///PERFIT

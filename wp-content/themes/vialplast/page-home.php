@@ -31,7 +31,10 @@
 
 					<div class="col-md-6 offset-md-3 col-lg-8 offset-lg-2">
 						<h3>Comprá todos nuestros <br>productos ONLINE.</h3>
-						<a class="ver_productos transition" href="#">Ver productos</a>
+						<a 
+							class="ver_productos transition" 
+							href="<?= esc_url( get_stylesheet_directory_uri() ) . '/tienda/'; ?>">Ver productos
+						</a>
 					</div>
 
 				</div>
@@ -52,7 +55,10 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h5>¿Buscás otro <br>producto?</h5>
-					<a href="#" class="btn btn-primary transition">Escribínos <i class="fas fa-chevron-right"></i></a>
+					<a 
+						href="<?= esc_url( get_stylesheet_directory_uri() ) . '/contacto/'; ?>" 
+						class="btn btn-primary transition">Escribínos <i class="fas fa-chevron-right"></i>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -63,12 +69,15 @@
 	<section class="constructoras_municipios container">
 		<div class="row">
 			<div class="col-md-8 offset-md-2 text-center">
-				<h3>Ya son varias empresas constructoras y municipios los que confian en VIALPLAST</h3>
+				<h3>Muchas empresas constructoras y municipios confian en VIALPLAST</h3>
 			</div>
 
 			<div class="col-md-8 offset-md-2 content">
 				<h4>Constructoras y municipos</h4>
-				<a href="#" class="btn btn-primary btn-out-black transition">Contacto directo <i class="fas fa-chevron-right"></i></a>
+				<a 
+					href="<?= esc_url( get_stylesheet_directory_uri() ) . '/constructoras-municipios/'; ?>" 
+					class="btn btn-primary btn-out-black transition">Contacto directo <i class="fas fa-chevron-right"></i>
+				</a>
 			</div>
 		</div>
 	</section>

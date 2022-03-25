@@ -180,8 +180,16 @@
 </section>
 <!-- Distribuidores end -->
 
-<script src="https://www.google.com/recaptcha/api.js?render=<?= RECAPTCHA_KEY_SITE ?>"></script>
 <script src="<?= esc_url( get_stylesheet_directory_uri() ) . '/js/countUp.min.js'; ?>"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=<?= RECAPTCHA_KEY_SITE ?>"></script>
+
+<?php 
+	echo "
+	<script>
+		var recaptchaKeySite = '".RECAPTCHA_KEY_SITE."'
+	</script>
+	";
+?>
 
 <!-- Script para los numeros variables de esta pagina -->
 <script type="text/javascript">

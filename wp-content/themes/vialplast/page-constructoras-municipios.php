@@ -147,5 +147,13 @@
 
 <script src="https://www.google.com/recaptcha/api.js?render=<?= RECAPTCHA_KEY_SITE ?>"></script>
 
+<?php 
+	echo "
+	<script>
+		var recaptchaKeySite = '".RECAPTCHA_KEY_SITE."'
+	</script>
+	";
+?>
+
 
 <?php get_footer(); ?>

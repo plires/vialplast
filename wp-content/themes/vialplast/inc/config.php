@@ -17,12 +17,6 @@ define('ENVIRONMENT', 'local');
 define('RECAPTCHA_KEY_SITE', '6Lf_c0IeAAAAAClrROhBS8G_kyr6Tdw3HT1dywdS');
 define('RECAPTCHA_KEY_SECRET', '6Lf_c0IeAAAAAMipeFN4uv0zgZ37z-480slhnRzV');
 
-// echo "
-// <script>
-// 	var recaptchaKeySite = '".RECAPTCHA_KEY_SITE."'
-// </script>
-// ";
-
 ////////////////////////
 ///Valores de DB Remota
 ////////////////////////

@@ -5,7 +5,7 @@ function submitFormContacto(form) {
 
   if (formValidated) {
     sending.classList.add('active')
-    verifyRecaptcha(form, recaptchaKeySite, 'validarFormularioContacto' )
+    verifyRecaptcha(form, recaptchaKeySite, 'validarFormulario' )
   }
 
 }

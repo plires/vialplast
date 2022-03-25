@@ -218,3 +218,59 @@ h5.system-status.error strong { color: #c50707 }
 	#current-logo img { padding: .625rem }
 	.porto-setup-wizard .btn { min-width: auto }
 }
+
+/* Notification */
+@keyframes shake {
+	10%, 90% {
+		transform: translate3d(calc(-50% - 5px), -50%, 0);
+	}
+
+	20%, 80% {
+		transform: translate3d(calc(-50% + 5px), -50%, 0);
+	}
+
+	30%, 50%, 70% {
+		transform: translate3d(calc(-50% - 5px), -50%, 0);
+	}
+
+	40%, 60% {
+		transform: translate3d(calc(-50% + 5px), -50%, 0);
+	}
+}
+.shake {
+	animation: shake .8s linear both;
+}
+.porto-wizard-notification {
+	position: fixed;
+    top: -9999px;
+    left: 50%;
+    transform: translate(-50%, calc(-50% - 20px));
+    padding: 2rem 1rem;
+    max-width: 500px;
+    background: #fff;
+    box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%);
+    text-align: center;
+	opacity: 0;
+	transition: opacity .3s, transform .3s;
+}
+.show-pm-popup .porto-wizard-notification {
+	top: 50%;
+	opacity: 1;
+	transform: translate(-50%, -50%);
+}
+.porto-wizard-notification p {
+	font-family: Poppins;
+	font-size: 13px;
+}
+.porto-wizard-notification b {
+	display: block;
+	font-size: 16px;
+	font-weight: 800;
+	color: #222;
+}
+.porto-wizard-notification button {
+	padding: 8px 20px;
+}
+.porto-wizard-notification .btn-action {
+	margin-right: 5px;
+}

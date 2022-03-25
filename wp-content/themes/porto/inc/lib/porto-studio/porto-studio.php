@@ -150,6 +150,7 @@ if ( ! class_exists( 'Porto_Studio' ) ) :
 				$url  = add_query_arg( array( 'block_id' => ( (int) $_POST['block_id'] ) ), $url );
 
 				$block = $importer_api->get_response( $url );
+
 				if ( is_wp_error( $block ) || ! $block || ! isset( $block['content'] ) ) {
 					if ( $pure_return ) {
 						return false;

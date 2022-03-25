@@ -16,7 +16,51 @@ var PortoWizard = (function($){
     function window_loaded(){
         // init button clicks:
         $('.button-next').on( 'click', function(e) {
+            if ($('.porto_mini_status.file-permission').length > 0) {
+                var btn = this,
+                    $body = $('body'),
+                    $notification = $('.porto-wizard-notification');
+                e.preventDefault();
+
+                if ($notification.length > 0) {
+                    if ($body.hasClass('show-pm-popup')) {
+                        $notification.addClass('shake');
+                        setTimeout(function () {
+                            $notification.removeClass('shake');
+                        }, 1000);
+
+                        return;
+                    }
+                } else {
+                    var html = '<div class="porto-wizard-notification"><p><b>' + wp.i18n.__('Warning!') + '</b>' + wp.i18n.__('File permissions of the wp-contnet/uploads folder are not writable on your server. If you do not fix this, then you cannot import demos properly on your server.') + '&nbsp;<a href="https://www.wpbeginner.com/beginners-guide/how-to-fix-file-and-folder-permissions-error-in-wordpress/" target="_blank">' + wp.i18n.__('How to fix it?') + '</a></p><button class="btn btn-primary btn-action">' + wp.i18n.__('OK') + '</button><button class="btn btn-cancel">' + wp.i18n.__('CANCEL') + '</button></div>';
+                    $body.append(html)
+                        .on('click', '.porto-wizard-notification .btn-action', function (e) {
+                            $body.removeClass('show-pm-popup');
+
+                            var loading_button = wizard_step_loading_button(btn);
+
+                            if (!loading_button) {
+                                return false;
+                            }
+                            if ($(btn).data('callback') && typeof callbacks[$(btn).data('callback')] != 'undefined') {
+                                // we have to process a callback before continue with form submission
+                                callbacks[$(btn).data('callback')](btn);
+                                return false;
+                            } else {
+                                return true;
+                            }
+                        })
+                        .on('click', '.porto-wizard-notification .btn-cancel', function (e) {
+                            $body.removeClass('show-pm-popup');
+                        })
+                }
+
+                setTimeout(function () {
+                    $body.addClass('show-pm-popup');
+                }, 100);
+            } else {
             var loading_button = wizard_step_loading_button(this);
+
             if(!loading_button){
                 return false;
             }
@@ -26,6 +70,7 @@ var PortoWizard = (function($){
                 return false;
             }else{
                 return true;
+            }
             }
         });
         // init on load

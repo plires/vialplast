@@ -164,4 +164,7 @@ $grid-gutter-space: <?php echo (int) $porto_settings['grid-gutter-width']; ?> !d
 <?php if ( class_exists( 'Woocommerce' ) && class_exists( 'WOOF' ) ) : ?>
 @import "theme/shortcodes/woof";
 <?php endif; ?>
+<?php if ( class_exists( 'Woocommerce' ) && class_exists( 'WooCommerce_Waitlist_Plugin' ) ) : ?>
+@import "theme/shortcodes/wcwl";
+<?php endif; ?>
 .inline-block { display: inline-block; }

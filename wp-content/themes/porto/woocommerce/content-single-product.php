@@ -30,7 +30,7 @@ if ( $skeleton_lazyload && ( ( function_exists( 'vc_is_inline' ) && vc_is_inline
 }
 if ( $skeleton_lazyload ) {
 	$porto_settings['skeleton_lazyload'] = true;
-	if ( apply_filters( 'porto_skeleton_lazyload_product_desc_only', class_exists( 'WeDevs_Dokan' ) || class_exists( 'WCFM' ) || class_exists( 'Uni_Cpo' ) ) ) {
+	if ( apply_filters( 'porto_skeleton_lazyload_product_desc_only', class_exists( 'WeDevs_Dokan' ) || class_exists( 'WCFM' ) || class_exists( 'Uni_Cpo' ) || class_exists( 'WooCommerce_Waitlist_Plugin' ) ) ) {
 		$porto_settings['skeleton_lazyload_product_desc'] = true;
 		$skeleton_lazyload                                = false;
 	}

@@ -32,7 +32,7 @@ if ( empty( $wp_filesystem ) ) {
 
 	?>
 
-<div class="porto_mini_status">
+<div class="porto_mini_status <?php echo ( $status['uploads'] ? '' : 'file-permission'); ?>">
 
 	<ul class="system-status">
 		<li>

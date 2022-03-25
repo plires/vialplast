@@ -1092,6 +1092,7 @@ if ( ! class_exists( 'Porto_Theme_Setup_Wizard' ) ) {
 			wp_register_script( 'isotope', PORTO_JS . '/libs/isotope.pkgd.min.js', array( 'jquery-core', 'imagesloaded' ), '3.0.1', true );
 			wp_register_script( 'jquery-magnific-popup', PORTO_JS . '/libs/jquery.magnific-popup.min.js', array( 'jquery-core' ), '1.1.0', true );
 			wp_register_script( 'porto-setup', PORTO_URI . '/inc/admin/setup_wizard/assets/js/setup-wizard.js', array( 'jquery-core', 'isotope', 'jquery-magnific-popup', 'jquery-blockui', 'porto-admin' ), $this->version, true );
+			wp_set_script_translations( 'porto-setup', 'porto' );
 			wp_localize_script(
 				'porto-setup',
 				'porto_setup_wizard_params',

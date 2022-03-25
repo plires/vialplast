@@ -23,10 +23,7 @@
 	      				<p>
 	      					Ideales para aquellos lugares, donde se requiere la reducción de velocidad de vehículos de gran porte, como camiones, micros, etc. Gracias a sus características técnicas son poco agresivos para los vehículos.
 	      				</p> 
-	      				<a 
-	      					href="<?php echo esc_url( get_category_link( ID_CATEGORY_REDUCTORES_VELOCIDAD ) ); ?>" 
-	      					class="btn btn-primary transition">Ver
-	      				</a> 
+	      				<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_REDUCTORES_VELOCIDAD ) ); ?>" class="btn btn-primary transition">Ver</a> 
 
 	      				<div class="content_btns">
 		      				<button class="carousel-control-prev" type="button" data-bs-target="#carouselSlideLineas" data-bs-slide="prev">
@@ -48,10 +45,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo delineadores rebatibles">
 	      					<h4>Línea <br>DELINEADORES <br class="br_tag">REBATIBLES</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_DELINEADORES ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_DELINEADORES ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				<div class="bg_secondary">
 	      					<img 
@@ -59,10 +53,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo conos viales">
 	      					<h4>Línea <br>CONOS <br class="br_tag">VIALES</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_CONOS ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_CONOS ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				
 	      			</div>
@@ -93,10 +84,7 @@
 	      				<p>
 	      					La mejor solución con mínima inversión para organizar flujos de tránsito vehicular como también el cuidado de usuarios, tanto conductores como peatones. Poseen memoria ante impactos y no se deterioran por el clima.
 	      				</p> 
-	      				<a 
-	      					href="<?php echo esc_url( get_category_link( ID_CATEGORY_DELINEADORES ) ); ?>" 
-	      					class="btn btn-primary transition">Ver
-	      				</a> 
+	      				<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_DELINEADORES ) ); ?>" class="btn btn-primary transition">Ver</a> 
 
 	      				<div class="content_btns">
 		      				<button class="carousel-control-prev" type="button" data-bs-target="#carouselSlideLineas" data-bs-slide="prev">
@@ -118,10 +106,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo conos viales">
 	      					<h4>Línea <br>CONOS <br class="br_tag">VIALES</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_CONOS ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_CONOS ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				<div class="bg_secondary">
 	      					<img 
@@ -129,10 +114,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo metrobus">
 	      					<h4>Línea <br>METROBUS</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_METROBUS ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_METROBUS ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				
 	      			</div>
@@ -164,10 +146,7 @@
 	      				<p>
 	      					Sirven para indicar desvíos, pozos y obras, en caminos, calles, rutas y autopistas. Las láminas reflectivas de los conos viales permiten que los mismos sean más visibles en la oscuridad.
 	      				</p> 
-	      				<a 
-	      					href="<?php echo esc_url( get_category_link( ID_CATEGORY_CONOS ) ); ?>" 
-	      					class="btn btn-primary transition">Ver
-	      				</a> 
+	      				<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_CONOS ) ); ?>" class="btn btn-primary transition">Ver</a> 
 
 	      				<div class="content_btns">
 		      				<button class="carousel-control-prev" type="button" data-bs-target="#carouselSlideLineas" data-bs-slide="prev">
@@ -189,10 +168,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo metrobus 2">
 	      					<h4>Línea <br>METROBUS</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_METROBUS ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_METROBUS ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				<div class="bg_secondary">
 	      					<img 
@@ -200,10 +176,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo vallas de seguridad">
 									<h4>Línea <br>VALLAS DE <br class="br_tag">SEGURIDAD</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_VALLAS ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_VALLAS ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				
 	      			</div>
@@ -234,10 +207,7 @@
 	      				<p>
 	      					Productos diseñados para cubrir las necesidades generadas por el incremento de esta nueva forma de ordenar el transporte público. Realizados con materiales de primera calidad asegurando durabilidad.
 	      				</p> 
-	      				<a 
-	      					href="<?php echo esc_url( get_category_link( ID_CATEGORY_METROBUS ) ); ?>" 
-	      					class="btn btn-primary transition">Ver
-	      				</a> 
+	      				<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_METROBUS ) ); ?>" class="btn btn-primary transition">Ver</a> 
 
 	      				<div class="content_btns">
 		      				<button class="carousel-control-prev" type="button" data-bs-target="#carouselSlideLineas" data-bs-slide="prev">
@@ -259,10 +229,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo vallas de seguridad 2">
 	      					<h4>Línea <br>VALLAS DE <br class="br_tag">SEGURIDAD</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_VALLAS ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_VALLAS ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				<div class="bg_secondary">
 	      					<img 
@@ -270,10 +237,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo demarcacion">
 	      					<h4>Línea <br>DEMARCACIÓN <br class="br_tag">& GRAFISMO</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_DEMARCACION ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_DEMARCACION ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				
 	      			</div>
@@ -304,10 +268,7 @@
 	      				<p>
 	      					Son la mejor opción por su relación costo-beneficio para quienes buscan tranquilidad y apoyo para su obra/evento. Permiten demarcar espacios facilmente brindando orden y seguridad.
 	      				</p> 
-	      				<a 
-	      					href="<?php echo esc_url( get_category_link( ID_CATEGORY_VALLAS ) ); ?>" 
-	      					class="btn btn-primary transition">Ver
-	      				</a> 
+	      				<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_VALLAS ) ); ?>" class="btn btn-primary transition">Ver</a> 
 
 	      				<div class="content_btns">
 		      				<button class="carousel-control-prev" type="button" data-bs-target="#carouselSlideLineas" data-bs-slide="prev">
@@ -329,10 +290,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo demarcacion 2">
 									<h4>Línea <br>DEMARCACIÓN <br class="br_tag">& GRAFISMO</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_DEMARCACION ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_DEMARCACION ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				<div class="bg_secondary">
 	      					<img 
@@ -340,10 +298,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo topes de estacionamiento">
 									<h4>Línea <br>TOPES DE <br class="br_tag">ESTACIONAMIENTO</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_TOPES_ESTACIONAMIENTO ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_TOPES_ESTACIONAMIENTO ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				
 	      			</div>
@@ -374,10 +329,7 @@
 	      				<p>
 	      					Placas para armar líneas de estacionamientos, flechas de sentido, demarcar espacios especiales en playas de estacionamiento, senderos, calles y veredas, entre muchos otros usos.
 	      				</p> 
-	      				<a 
-	      					href="<?php echo esc_url( get_category_link( ID_CATEGORY_DEMARCACION ) ); ?>" 
-	      					class="btn btn-primary transition">Ver
-	      				</a> 
+	      				<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_DEMARCACION ) ); ?>" class="btn btn-primary transition">Ver</a> 
 
 	      				<div class="content_btns">
 		      				<button class="carousel-control-prev" type="button" data-bs-target="#carouselSlideLineas" data-bs-slide="prev">
@@ -399,10 +351,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo topes de estacionamiento 2">
 									<h4>Línea <br>TOPES DE <br class="br_tag">ESTACIONAMIENTO</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_TOPES_ESTACIONAMIENTO ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_TOPES_ESTACIONAMIENTO ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				<div class="bg_secondary">
 	      					<img 
@@ -410,10 +359,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo esquineros">
 									<h4>Línea <br>ESQUINEROS & <br class="br_tag">GUARDAS DE SEGURIDAD</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_ESQUINEROS ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_ESQUINEROS ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				
 	      			</div>
@@ -444,10 +390,7 @@
 	      				<p>
 	      					Ideales para ser utilizados en cocheras de estacionamientos, shoppings, estaciones de servicio, etc. Son un importante elemento de ordenamiento y seguridad. Además tienen una amplia versatilidad de uso.
 	      				</p> 
-	      				<a 
-	      					href="<?php echo esc_url( get_category_link( ID_CATEGORY_TOPES_ESTACIONAMIENTO ) ); ?>" 
-	      					class="btn btn-primary transition">Ver
-	      				</a> 
+	      				<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_TOPES_ESTACIONAMIENTO ) ); ?>" class="btn btn-primary transition">Ver</a> 
 
 	      				<div class="content_btns">
 		      				<button class="carousel-control-prev" type="button" data-bs-target="#carouselSlideLineas" data-bs-slide="prev">
@@ -469,10 +412,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo esquineros 2">
 									<h4>Línea <br>ESQUINEROS & <br class="br_tag">GUARDAS DE SEGURIDAD</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_ESQUINEROS ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_ESQUINEROS ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				<div class="bg_secondary">
 	      					<img 
@@ -480,10 +420,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo barriers">
 									<h4>Línea <br>BARRIERS & <br class="br_tag">GUARDRAIL REFLECTORS</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_BARRIERES_GUARDRAIL ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_BARRIERES_GUARDRAIL ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				
 	      			</div>
@@ -514,10 +451,7 @@
 	      				<p>
 	      					Utilizados frecuentemente en espacios con un alto flujo de personas como supermercados, laboratorios, hospitales, colegios, universidades, etc. Protegen de golpes y rayaduras tanto edificios como vehiculos.
 	      				</p> 
-	      				<a 
-	      					href="<?php echo esc_url( get_category_link( ID_CATEGORY_ESQUINEROS ) ); ?>" 
-	      					class="btn btn-primary transition">Ver
-	      				</a> 
+	      				<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_ESQUINEROS ) ); ?>" class="btn btn-primary transition">Ver</a> 
 
 	      				<div class="content_btns">
 		      				<button class="carousel-control-prev" type="button" data-bs-target="#carouselSlideLineas" data-bs-slide="prev">
@@ -539,10 +473,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo barriers 2">
 									<h4>Línea <br>BARRIERS & <br class="br_tag">GUARDRAIL REFLECTORS</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_BARRIERES_GUARDRAIL ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_BARRIERES_GUARDRAIL ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				<div class="bg_secondary">
 	      					<img 
@@ -550,10 +481,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo otros productos">
 									<h4>Línea <br>OTROS PRODUCTOS</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_OTROS_PRODUCTOS ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_OTROS_PRODUCTOS ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				
 	      			</div>
@@ -584,10 +512,7 @@
 	      				<p>
 	      					Utilizados para marcar curvas o zonas peligrosas, tienen gran eficacia en la noche, gracias a su alto poder reflectivo. Convirtiendose en un elemento de seguridad muy importante para las carreteras. 
 	      				</p> 
-	      				<a 
-	      					href="<?php echo esc_url( get_category_link( ID_CATEGORY_BARRIERES_GUARDRAIL ) ); ?>" 
-	      					class="btn btn-primary transition">Ver
-	      				</a> 
+	      				<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_BARRIERES_GUARDRAIL ) ); ?>" class="btn btn-primary transition">Ver</a> 
 
 	      				<div class="content_btns">
 		      				<button class="carousel-control-prev" type="button" data-bs-target="#carouselSlideLineas" data-bs-slide="prev">
@@ -609,10 +534,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo otros productos 2">
 									<h4>Línea <br>OTROS PRODUCTOS</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_OTROS_PRODUCTOS ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_OTROS_PRODUCTOS ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				<div class="bg_secondary">
 	      					<img 
@@ -620,10 +542,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo reductores de velocidad vial ">
 									<h4>Línea <br>REDUCTORES <br class="br_tag">DE VELOCIDAD</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_REDUCTORES_VELOCIDAD ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_REDUCTORES_VELOCIDAD ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				
 	      			</div>
@@ -654,10 +573,7 @@
 	      				<p>
 	      					Contamos con diferentes líneas de productos que cubren distintas necesidades contribuyendo a la seguridad vial.
 	      				</p> 
-	      				<a 
-	      					href="<?php echo esc_url( get_category_link( ID_CATEGORY_OTROS_PRODUCTOS ) ); ?>" 
-	      					class="btn btn-primary transition">Ver<
-	      					/a> 
+	      				<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_OTROS_PRODUCTOS ) ); ?>" class="btn btn-primary transition">Ver</a> 
 
 	      				<div class="content_btns">
 		      				<button class="carousel-control-prev" type="button" data-bs-target="#carouselSlideLineas" data-bs-slide="prev">
@@ -679,10 +595,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo reductores">
 									<h4>Línea <br>REDUCTORES <br class="br_tag">DE VELOCIDAD</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_REDUCTORES_VELOCIDAD ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_REDUCTORES_VELOCIDAD ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				<div class="bg_secondary">
 	      					<img 
@@ -690,10 +603,7 @@
 										src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/circulo.png'; ?>" 
 										alt="circulo delineadores 2">
 									<h4>Línea <br>DELINEADORES <br class="br_tag">REBATIBLES</h4>
-	      					<a 
-	      						href="<?php echo esc_url( get_category_link( ID_CATEGORY_DELINEADORES ) ); ?>" 
-	      						class="btn btn-primary btn-out-black transition">Ver
-	      					</a>
+	      					<a href="<?php echo esc_url( get_category_link( ID_CATEGORY_DELINEADORES ) ); ?>" class="btn btn-primary btn-out-black transition">Ver</a>
 	      				</div>
 	      				
 	      			</div>

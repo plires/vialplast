@@ -28,6 +28,9 @@
 		// Js Custom
 		wp_enqueue_script( 'app_js', get_stylesheet_directory_uri() . '/js/app.js' );
 
+		// Bootstrap JS
+		wp_enqueue_script( 'bootstrap5', get_stylesheet_directory_uri() . '/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js' );
+
 		if ( is_rtl() ) {
 			wp_deregister_style( 'styles-child-rtl' );
 			wp_register_style( 'styles-child-rtl', esc_url( get_stylesheet_directory_uri() ) . '/style_rtl.css' );

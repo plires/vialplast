@@ -28,7 +28,7 @@
     $product_data = accessProtected($product, 'data');
 
     if ( $product_data['price'] == 0 ) {
-      $price = '<span class="woocommerce-Price-amount amount leyenda_precio"><bdi><span class="woocommerce-Price-currencySymbol"></span>Consultar telefónicamente</bdi></span>';
+      $price = '<span class="woocommerce-Price-amount amount leyenda_precio"><bdi><span class="woocommerce-Price-currencySymbol"></span>Consultar Telefónicamente</bdi></span>';
       return $price;
     } 
 

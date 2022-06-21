@@ -158,6 +158,13 @@ a {
 }
 /* Nuestras Marcas end */
 
+/* Listado de destacados */
+.product-image .labels .onhot, .summary-before .labels .onhot {
+	background: var(--primary-color);
+	color: black;
+}
+/* Listado de destacados end */
+
 /* Footer */
 #footer {
 	margin-bottom: 0;

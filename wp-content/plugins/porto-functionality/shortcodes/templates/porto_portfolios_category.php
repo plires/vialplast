@@ -68,7 +68,7 @@ switch ( $info_view ) {
 	default:
 		$classes_arr[] = 'thumb-info-basic-info';
 }
-if ( $porto_settings['portfolio-archive-thumb-bg'] ) {
+if ( ! empty( $porto_settings['portfolio-archive-thumb-bg'] ) ) {
 	$classes_arr[] = 'thumb-info-' . esc_attr( $porto_settings['portfolio-archive-thumb-bg'] );
 }
 
@@ -169,7 +169,7 @@ switch ( $category_layout ) {
 					$output .= '<span class="thumb-info-inner">' . $cat_title . '</span>';
 				if ( 'show' == $portfolios_counter ) {
 					/* translators: %s: Portfolio count */
-					$output .= '<span class="thumb-info-type">' . esc_html( sprintf( __( '%d %s', 'porto-functionality' ), number_format_i18n( $term_count ), $term_count > 1 ? $plural_name : $singular_name ) ) . '</span>';
+					$output .= '<span class="thumb-info-type">' . esc_html( sprintf( __( '%1$d %2$s', 'porto-functionality' ), number_format_i18n( $term_count ), $term_count > 1 ? $plural_name : $singular_name ) ) . '</span>';
 				}
 					$output .= '</span>';
 			}
@@ -229,7 +229,7 @@ switch ( $category_layout ) {
 					$output .= '<span class="thumb-info-inner">' . $cat_title . '</span>';
 				if ( 'show' == $portfolios_counter ) {
 					/* translators: %s: Portfolio count */
-					$output .= '<span class="thumb-info-type">' . esc_html( sprintf( __( '%d %s', 'porto-functionality' ), number_format_i18n( $term_count ), $term_count > 1 ? $plural_name : $singular_name ) ) . '</span>';
+					$output .= '<span class="thumb-info-type">' . esc_html( sprintf( __( '%1$d %2$s', 'porto-functionality' ), number_format_i18n( $term_count ), $term_count > 1 ? $plural_name : $singular_name ) ) . '</span>';
 				}
 					$output .= '</span>';
 

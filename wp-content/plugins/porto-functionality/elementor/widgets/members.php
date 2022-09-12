@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Porto Elementor widget to display members.
  *
- * @since 5.4.1
+ * @since 1.7.2
  */
 
 use Elementor\Controls_Manager;
@@ -37,13 +37,13 @@ class Porto_Elementor_Members_Widget extends \Elementor\Widget_Base {
 
 	public function get_script_depends() {
 		if ( ( isset( $_REQUEST['action'] ) && 'elementor' == $_REQUEST['action'] ) || isset( $_REQUEST['elementor-preview'] ) ) {
-			return array( 'porto-elementor-widgets-js' );
+			return array( 'porto-jquery-infinite-scroll', 'porto-infinite-scroll', 'porto-elementor-widgets-js' );
 		} else {
 			return array();
 		}
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$this->start_controls_section(
 			'section_members',
@@ -225,6 +225,23 @@ class Porto_Elementor_Members_Widget extends \Elementor\Widget_Base {
 			array(
 				'type'  => Controls_Manager::SWITCHER,
 				'label' => __( 'Show Category Filter', 'porto-functionality' ),
+			)
+		);
+
+		$this->add_control(
+			'filter_style',
+			array(
+				'type'      => Controls_Manager::SELECT,
+				'label'     => __( 'Filter Style', 'porto-functionality' ),
+				'options'   => array(
+					''        => __( 'Style 1', 'porto-functionality' ),
+					'style-2' => __( 'Style 2', 'porto-functionality' ),
+					'style-3' => __( 'Style 3', 'porto-functionality' ),
+				),
+				'default'   => '',
+				'condition' => array(
+					'filter' => 'yes',
+				),
 			)
 		);
 

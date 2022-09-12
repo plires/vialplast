@@ -18,11 +18,12 @@ function porto_custom_css_classes_for_elements( $class_string, $tag ) {
 		}
 	}
 	if ( ! ( function_exists( 'vc_is_inline' ) && vc_is_inline() ) && ( 'vc_column' == $tag || 'vc_column_inner' == $tag ) ) {
-		//$class_string = str_replace( 'vc_column_container', '', $class_string );
+		// $class_string = str_replace( 'vc_column_container', '', $class_string );
 		if ( preg_match_all( '/vc_col-(\w{2})-(\d{1,2})(\/5|)($| )/', $class_string, $matches ) ) {
-			$class_string = str_replace( array( 'vc_col-lg-offset-', 'vc_col-md-offset-', 'vc_col-sm-offset-', 'vc_col-xs-offset-' ), array( 'offset-xl-', 'offset-lg-', 'offset-md-', 'offset-' ), $class_string );
+			$class_string = str_replace( array( 'vc_col-xl-offset-', 'vc_col-lg-offset-', 'vc_col-md-offset-', 'vc_col-sm-offset-', 'vc_col-xs-offset-' ), array( 'offset-xxl-', 'offset-xl-', 'offset-lg-', 'offset-md-', 'offset-' ), $class_string );
 			if ( isset( $matches[1] ) && isset( $matches[2] ) ) {
 				$size_array = array(
+					'-xl' => '-xxl',
 					'-lg' => '-xl',
 					'-md' => '-lg',
 					'-sm' => '-md',
@@ -38,14 +39,15 @@ function porto_custom_css_classes_for_elements( $class_string, $tag ) {
 				}
 			}
 		}
-		/*if ( preg_match( '/col-(\w{2})-(\d{1})\/5/', $class_string ) ) {
+		/*
+		if ( preg_match( '/col-(\w{2})-(\d{1})\/5/', $class_string ) ) {
 			$class_string = str_replace( 'vc_column_container', 'vc_column_container porto-column', $class_string );
 			$class_string = preg_replace( '/ col-(\w{2})-12/', '', $class_string );
 		}*/
 		if ( preg_match( '/vc_hidden-(\w{2})/', $class_string ) ) {
-			$class_string = str_replace( array( 'vc_hidden-lg', 'vc_hidden-md', 'vc_hidden-sm', 'vc_hidden-xs' ), array( 'd-xl-none', 'd-lg-none d-xl-block', 'd-md-none d-lg-block', 'd-none d-md-block' ), $class_string );
-			$screens      = array( '', 'md', 'lg', 'xl' );
-			for ( $i = 0; $i <= 3; $i++ ) {
+			$class_string = str_replace( array( 'vc_hidden-xl', 'vc_hidden-lg', 'vc_hidden-md', 'vc_hidden-sm', 'vc_hidden-xs' ), array( 'd-xxl-none', 'd-xl-none d-xxl-block', 'd-lg-none d-xl-block', 'd-md-none d-lg-block', 'd-none d-md-block' ), $class_string );
+			$screens      = array( '', 'md', 'lg', 'xl', 'xxl' );
+			for ( $i = 0; $i <= 4; $i++ ) {
 				if ( 0 == $i ) {
 					$screen = ' d';
 				} else {
@@ -55,7 +57,7 @@ function porto_custom_css_classes_for_elements( $class_string, $tag ) {
 					$class_string = str_replace( $screen . '-block', '', $class_string );
 				}
 			}
-			for ( $i = 3; $i >= 1; $i-- ) {
+			for ( $i = 4; $i >= 1; $i-- ) {
 				if ( 1 == $i ) {
 					$screen = ' d';
 				} else {
@@ -78,10 +80,11 @@ function porto_load_shortcodes() {
 
 	if ( function_exists( 'vc_map' ) ) {
 		global $porto_settings;
-		$dark = porto_is_dark_skin();
+		$porto_cur_version = get_option( 'porto_version', '1.0' );
+		$dark              = porto_is_dark_skin();
 
 		$section_group      = __( 'Porto Options', 'porto' );
-		$sticky_group       = __( 'Sticky Options', 'porto' );
+		$addon_group        = __( 'Porto Addons', 'porto' );
 		$animation_group    = __( 'Animation', 'porto' );
 		$animation_type     = array(
 			'type'       => 'porto_theme_animation_type',
@@ -169,8 +172,10 @@ function porto_load_shortcodes() {
 			'group'       => $animation_group,
 		);
 
-		/* ---------------------------- */
-		/* Customize Section
+		/*
+		 ---------------------------- */
+		/*
+		 Customize Section
 		/* ---------------------------- */
 		vc_add_params(
 			'vc_section',
@@ -335,8 +340,10 @@ function porto_load_shortcodes() {
 			)
 		);
 
-		/* ---------------------------- */
-		/* Customize Row
+		/*
+		 ---------------------------- */
+		/*
+		 Customize Row
 		/* ---------------------------- */
 		vc_add_param(
 			'vc_row',
@@ -761,194 +768,298 @@ function porto_load_shortcodes() {
 				'group'      => $section_group,
 			)
 		);
-		vc_add_param(
-			'vc_row',
-			array(
-				'type'        => 'checkbox',
-				'heading'     => __( 'Enable Sticky Options?', 'porto' ),
-				'param_name'  => 'is_sticky',
-				'value'       => array( __( 'Yes, please', 'js_composer' ) => 'yes' ),
-				'group'       => $sticky_group,
-				'admin_label' => true,
-			)
-		);
-		vc_add_param(
-			'vc_row',
-			array(
-				'type'       => 'textfield',
-				'heading'    => __( 'Container Selector', 'porto' ),
-				'param_name' => 'sticky_container_selector',
-				'value'      => '.main-content',
-				'dependency' => array(
-					'element'   => 'is_sticky',
-					'not_empty' => true,
-				),
-				'group'      => $sticky_group,
-			)
-		);
-		vc_add_param(
-			'vc_row',
-			array(
-				'type'       => 'textfield',
-				'heading'    => __( 'Min Width (unit: px)', 'porto' ),
-				'param_name' => 'sticky_min_width',
-				''           => __( 'Wll be disabled if window width is smaller than min width', 'porto' ),
-				'value'      => 767,
-				'dependency' => array(
-					'element'   => 'is_sticky',
-					'not_empty' => true,
-				),
-				'group'      => $sticky_group,
-			)
-		);
-		vc_add_param(
-			'vc_row',
-			array(
-				'type'       => 'textfield',
-				'heading'    => __( 'Top (unit: px)', 'porto' ),
-				'param_name' => 'sticky_top',
-				''           => __( 'Top position when active', 'porto' ),
-				'value'      => 110,
-				'dependency' => array(
-					'element'   => 'is_sticky',
-					'not_empty' => true,
-				),
-				'group'      => $sticky_group,
-			)
-		);
-		vc_add_param(
-			'vc_row',
-			array(
-				'type'       => 'textfield',
-				'heading'    => __( 'Bottom (unit: px)', 'porto' ),
-				'param_name' => 'sticky_bottom',
-				''           => __( 'Bottom position when active', 'porto' ),
-				'value'      => 0,
-				'dependency' => array(
-					'element'   => 'is_sticky',
-					'not_empty' => true,
-				),
-				'group'      => $sticky_group,
-			)
-		);
-		vc_add_param(
-			'vc_row',
-			array(
-				'type'       => 'textfield',
-				'heading'    => __( 'Active Class', 'porto' ),
-				'param_name' => 'sticky_active_class',
-				'value'      => 'sticky-active',
-				'dependency' => array(
-					'element'   => 'is_sticky',
-					'not_empty' => true,
-				),
-				'group'      => $sticky_group,
-			)
-		);
-		vc_add_param( 'vc_row', $animation_type );
-		vc_add_param( 'vc_row', $animation_duration );
-		vc_add_param( 'vc_row', $animation_delay );
 
-		vc_add_param(
-			'vc_row_inner',
+		// add sticky options
+		vc_add_params(
+			'vc_row',
 			array(
-				'type'        => 'checkbox',
-				'heading'     => __( 'Wrap as Container', 'porto' ),
-				'param_name'  => 'wrap_container',
-				'value'       => array( __( 'Yes, please', 'js_composer' ) => 'yes' ),
-				'admin_label' => true,
-			)
-		);
-		vc_add_param(
-			'vc_row_inner',
-			array(
-				'type'        => 'checkbox',
-				'heading'     => __( 'Enable Sticky Options?', 'porto' ),
-				'param_name'  => 'is_sticky',
-				'value'       => array( __( 'Yes, please', 'js_composer' ) => 'yes' ),
-				'group'       => $sticky_group,
-				'admin_label' => true,
-			)
-		);
-		vc_add_param(
-			'vc_row_inner',
-			array(
-				'type'       => 'textfield',
-				'heading'    => __( 'Container Selector', 'porto' ),
-				'param_name' => 'sticky_container_selector',
-				'value'      => '.vc_row',
-				'dependency' => array(
-					'element'   => 'is_sticky',
-					'not_empty' => true,
+				array(
+					'type'        => 'checkbox',
+					'heading'     => __( 'Enable Sticky Options?', 'porto' ),
+					'param_name'  => 'is_sticky',
+					'value'       => array( __( 'Yes, please', 'js_composer' ) => 'yes' ),
+					'group'       => $addon_group,
+					'admin_label' => true,
 				),
-				'group'      => $sticky_group,
-			)
-		);
-		vc_add_param(
-			'vc_row_inner',
-			array(
-				'type'       => 'textfield',
-				'heading'    => __( 'Min Width (unit: px)', 'porto' ),
-				'param_name' => 'sticky_min_width',
-				''           => __( 'Wll be disabled if window width is smaller than min width', 'porto' ),
-				'value'      => 767,
-				'dependency' => array(
-					'element'   => 'is_sticky',
-					'not_empty' => true,
+				array(
+					'type'       => 'textfield',
+					'heading'    => __( 'Container Selector', 'porto' ),
+					'param_name' => 'sticky_container_selector',
+					'value'      => '.main-content',
+					'dependency' => array(
+						'element'   => 'is_sticky',
+						'not_empty' => true,
+					),
+					'group'      => $addon_group,
 				),
-				'group'      => $sticky_group,
-			)
-		);
-		vc_add_param(
-			'vc_row_inner',
-			array(
-				'type'       => 'textfield',
-				'heading'    => __( 'Top (unit: px)', 'porto' ),
-				'param_name' => 'sticky_top',
-				''           => __( 'Top position when active', 'porto' ),
-				'value'      => 110,
-				'dependency' => array(
-					'element'   => 'is_sticky',
-					'not_empty' => true,
+				array(
+					'type'       => 'textfield',
+					'heading'    => __( 'Min Width (unit: px)', 'porto' ),
+					'param_name' => 'sticky_min_width',
+					''           => __( 'Wll be disabled if window width is smaller than min width', 'porto' ),
+					'value'      => 767,
+					'dependency' => array(
+						'element'   => 'is_sticky',
+						'not_empty' => true,
+					),
+					'group'      => $addon_group,
 				),
-				'group'      => $sticky_group,
-			)
-		);
-		vc_add_param(
-			'vc_row_inner',
-			array(
-				'type'       => 'textfield',
-				'heading'    => __( 'Bottom (unit: px)', 'porto' ),
-				'param_name' => 'sticky_bottom',
-				''           => __( 'Bottom position when active', 'porto' ),
-				'value'      => 0,
-				'dependency' => array(
-					'element'   => 'is_sticky',
-					'not_empty' => true,
+				array(
+					'type'       => 'textfield',
+					'heading'    => __( 'Top (unit: px)', 'porto' ),
+					'param_name' => 'sticky_top',
+					''           => __( 'Top position when active', 'porto' ),
+					'value'      => 110,
+					'dependency' => array(
+						'element'   => 'is_sticky',
+						'not_empty' => true,
+					),
+					'group'      => $addon_group,
 				),
-				'group'      => $sticky_group,
-			)
-		);
-		vc_add_param(
-			'vc_row_inner',
-			array(
-				'type'       => 'textfield',
-				'heading'    => __( 'Active Class', 'porto' ),
-				'param_name' => 'sticky_active_class',
-				'value'      => 'sticky-active',
-				'dependency' => array(
-					'element'   => 'is_sticky',
-					'not_empty' => true,
+				array(
+					'type'       => 'textfield',
+					'heading'    => __( 'Bottom (unit: px)', 'porto' ),
+					'param_name' => 'sticky_bottom',
+					''           => __( 'Bottom position when active', 'porto' ),
+					'value'      => 0,
+					'dependency' => array(
+						'element'   => 'is_sticky',
+						'not_empty' => true,
+					),
+					'group'      => $addon_group,
 				),
-				'group'      => $sticky_group,
+				array(
+					'type'       => 'textfield',
+					'heading'    => __( 'Active Class', 'porto' ),
+					'param_name' => 'sticky_active_class',
+					'value'      => 'sticky-active',
+					'dependency' => array(
+						'element'   => 'is_sticky',
+						'not_empty' => true,
+					),
+					'group'      => $addon_group,
+				),
 			)
 		);
-		vc_add_param( 'vc_row_inner', $animation_type );
-		vc_add_param( 'vc_row_inner', $animation_duration );
-		vc_add_param( 'vc_row_inner', $animation_delay );
 
+		// add animation options
+		vc_add_params(
+			'vc_row',
+			array(
+				$animation_type,
+				$animation_duration,
+				$animation_delay,
+			)
+		);
+
+		// add scroll parallax effect
+		vc_add_params(
+			'vc_row',
+			array(
+				array(
+					'type'        => 'checkbox',
+					'heading'     => __( 'Scroll Parallax?', 'porto' ),
+					'description' => __( 'Section\'s width changes when scrolling page.', 'porto' ),
+					'param_name'  => 'scroll_parallax',
+					'value'       => array( __( 'Yes, please', 'js_composer' ) => 'yes' ),
+					'group'       => $addon_group,
+				),
+				array(
+					'type'       => 'porto_button_group',
+					'heading'    => __( 'CSS Unit', 'porto' ),
+					'param_name' => 'scroll_unit',
+					'std'        => 'vw',
+					'value'      => array(
+						'vw' => array(
+							'title' => 'vw',
+						),
+						'%'  => array(
+							'title' => '%',
+						),
+					),
+					'dependency' => array(
+						'element'   => 'scroll_parallax',
+						'not_empty' => true,
+					),
+					'group'      => $addon_group,
+				),
+				array(
+					'type'       => 'number',
+					'heading'    => __( 'Start Width', 'porto' ),
+					'param_name' => 'scroll_parallax_width',
+					'std'        => 40,
+					'min'        => 10,
+					'max'        => 90,
+					'step'       => 1,
+					'dependency' => array(
+						'element'   => 'scroll_parallax',
+						'not_empty' => true,
+					),
+					'group'      => $addon_group,
+				),
+			)
+		);
+
+		// add particles effect
+		vc_add_params(
+			'vc_row',
+			array(
+				array(
+					'type'       => 'checkbox',
+					'heading'    => __( 'Particles Effect?', 'porto' ),
+					'param_name' => 'particles_effect',
+					'value'      => array( __( 'Yes, please', 'js_composer' ) => 'yes' ),
+					'group'      => $addon_group,
+				),
+				array(
+					'type'       => 'attach_image',
+					'heading'    => __( 'Particles Image', 'porto-functionality' ),
+					'param_name' => 'particles_img',
+					'dependency' => array(
+						'element'   => 'particles_effect',
+						'not_empty' => true,
+					),
+					'group'      => $addon_group,
+				),
+				array(
+					'type'       => 'dropdown',
+					'heading'    => __( 'Particles Hover Effect', 'porto' ),
+					'param_name' => 'particles_hover_effect',
+					'value'      => array(
+						__( 'None', 'porto' )    => '',
+						__( 'Grab', 'porto' )    => 'grab',
+						__( 'Bubble', 'porto' )  => 'bubble',
+						__( 'Repulse', 'porto' ) => 'repulse',
+					),
+					'std'        => '',
+					'dependency' => array(
+						'element'   => 'particles_img',
+						'not_empty' => true,
+					),
+					'group'      => $addon_group,
+				),
+				array(
+					'type'       => 'dropdown',
+					'heading'    => __( 'Particles Click Effect', 'porto' ),
+					'param_name' => 'particles_click_effect',
+					'value'      => array(
+						__( 'None', 'porto' )    => '',
+						__( 'Grab', 'porto' )    => 'grab',
+						__( 'Bubble', 'porto' )  => 'bubble',
+						__( 'Repulse', 'porto' ) => 'repulse',
+						__( 'Push', 'porto' )    => 'push',
+						__( 'Remove', 'porto' )  => 'remove',
+					),
+					'std'        => '',
+					'dependency' => array(
+						'element'   => 'particles_img',
+						'not_empty' => true,
+					),
+					'group'      => $addon_group,
+				),
+			)
+		);
+
+		/*
+		 ---------------------------- */
+		/*
+		 Customize Inner Row
 		/* ---------------------------- */
-		/* Customize Column
+
+		// add sticky options
+		vc_add_params(
+			'vc_row_inner',
+			array(
+				array(
+					'type'        => 'checkbox',
+					'heading'     => __( 'Wrap as Container', 'porto' ),
+					'param_name'  => 'wrap_container',
+					'value'       => array( __( 'Yes, please', 'js_composer' ) => 'yes' ),
+					'admin_label' => true,
+				),
+				array(
+					'type'        => 'checkbox',
+					'heading'     => __( 'Enable Sticky Options?', 'porto' ),
+					'param_name'  => 'is_sticky',
+					'value'       => array( __( 'Yes, please', 'js_composer' ) => 'yes' ),
+					'group'       => $addon_group,
+					'admin_label' => true,
+				),
+				array(
+					'type'       => 'textfield',
+					'heading'    => __( 'Container Selector', 'porto' ),
+					'param_name' => 'sticky_container_selector',
+					'value'      => '.vc_row',
+					'dependency' => array(
+						'element'   => 'is_sticky',
+						'not_empty' => true,
+					),
+					'group'      => $addon_group,
+				),
+				array(
+					'type'       => 'textfield',
+					'heading'    => __( 'Min Width (unit: px)', 'porto' ),
+					'param_name' => 'sticky_min_width',
+					''           => __( 'Wll be disabled if window width is smaller than min width', 'porto' ),
+					'value'      => 767,
+					'dependency' => array(
+						'element'   => 'is_sticky',
+						'not_empty' => true,
+					),
+					'group'      => $addon_group,
+				),
+				array(
+					'type'       => 'textfield',
+					'heading'    => __( 'Top (unit: px)', 'porto' ),
+					'param_name' => 'sticky_top',
+					''           => __( 'Top position when active', 'porto' ),
+					'value'      => 110,
+					'dependency' => array(
+						'element'   => 'is_sticky',
+						'not_empty' => true,
+					),
+					'group'      => $addon_group,
+				),
+				array(
+					'type'       => 'textfield',
+					'heading'    => __( 'Bottom (unit: px)', 'porto' ),
+					'param_name' => 'sticky_bottom',
+					''           => __( 'Bottom position when active', 'porto' ),
+					'value'      => 0,
+					'dependency' => array(
+						'element'   => 'is_sticky',
+						'not_empty' => true,
+					),
+					'group'      => $addon_group,
+				),
+				array(
+					'type'       => 'textfield',
+					'heading'    => __( 'Active Class', 'porto' ),
+					'param_name' => 'sticky_active_class',
+					'value'      => 'sticky-active',
+					'dependency' => array(
+						'element'   => 'is_sticky',
+						'not_empty' => true,
+					),
+					'group'      => $addon_group,
+				),
+			)
+		);
+
+		// add animation options
+		vc_add_params(
+			'vc_row_inner',
+			array(
+				$animation_type,
+				$animation_duration,
+				$animation_delay,
+			)
+		);
+
+		/*
+		 ---------------------------- */
+		/*
+		 Customize Column
 		/* ---------------------------- */
 		vc_add_param(
 			'vc_column',
@@ -1342,11 +1453,11 @@ function porto_load_shortcodes() {
 		vc_add_param(
 			'vc_column',
 			array(
-				'type'        => 'textfield',
-				'heading'     => __( 'Custom CSS Class for Half container', 'porto' ),
-				'param_name'  => 'half_css',
-				'group'       => $section_group,
-				'dependency'  => array(
+				'type'       => 'textfield',
+				'heading'    => __( 'Custom CSS Class for Half container', 'porto' ),
+				'param_name' => 'half_css',
+				'group'      => $section_group,
+				'dependency' => array(
 					'element'   => 'is_half',
 					'not_empty' => true,
 				),
@@ -1359,7 +1470,7 @@ function porto_load_shortcodes() {
 				'heading'     => __( 'Enable Sticky Options?', 'porto' ),
 				'param_name'  => 'is_sticky',
 				'value'       => array( __( 'Yes, please', 'js_composer' ) => 'yes' ),
-				'group'       => $sticky_group,
+				'group'       => $addon_group,
 				'admin_label' => true,
 			)
 		);
@@ -1374,7 +1485,7 @@ function porto_load_shortcodes() {
 					'element'   => 'is_sticky',
 					'not_empty' => true,
 				),
-				'group'      => $sticky_group,
+				'group'      => $addon_group,
 			)
 		);
 		vc_add_param(
@@ -1389,7 +1500,7 @@ function porto_load_shortcodes() {
 					'element'   => 'is_sticky',
 					'not_empty' => true,
 				),
-				'group'      => $sticky_group,
+				'group'      => $addon_group,
 			)
 		);
 		vc_add_param(
@@ -1404,7 +1515,7 @@ function porto_load_shortcodes() {
 					'element'   => 'is_sticky',
 					'not_empty' => true,
 				),
-				'group'      => $sticky_group,
+				'group'      => $addon_group,
 			)
 		);
 		vc_add_param(
@@ -1419,7 +1530,7 @@ function porto_load_shortcodes() {
 					'element'   => 'is_sticky',
 					'not_empty' => true,
 				),
-				'group'      => $sticky_group,
+				'group'      => $addon_group,
 			)
 		);
 		vc_add_param(
@@ -1433,7 +1544,7 @@ function porto_load_shortcodes() {
 					'element'   => 'is_sticky',
 					'not_empty' => true,
 				),
-				'group'      => $sticky_group,
+				'group'      => $addon_group,
 			)
 		);
 		vc_add_param( 'vc_column', $animation_type );
@@ -1447,7 +1558,7 @@ function porto_load_shortcodes() {
 				'heading'     => __( 'Enable Sticky Options?', 'porto' ),
 				'param_name'  => 'is_sticky',
 				'value'       => array( __( 'Yes, please', 'js_composer' ) => 'yes' ),
-				'group'       => $sticky_group,
+				'group'       => $addon_group,
 				'admin_label' => true,
 			)
 		);
@@ -1462,7 +1573,7 @@ function porto_load_shortcodes() {
 					'element'   => 'is_sticky',
 					'not_empty' => true,
 				),
-				'group'      => $sticky_group,
+				'group'      => $addon_group,
 			)
 		);
 		vc_add_param(
@@ -1477,7 +1588,7 @@ function porto_load_shortcodes() {
 					'element'   => 'is_sticky',
 					'not_empty' => true,
 				),
-				'group'      => $sticky_group,
+				'group'      => $addon_group,
 			)
 		);
 		vc_add_param(
@@ -1492,7 +1603,7 @@ function porto_load_shortcodes() {
 					'element'   => 'is_sticky',
 					'not_empty' => true,
 				),
-				'group'      => $sticky_group,
+				'group'      => $addon_group,
 			)
 		);
 		vc_add_param(
@@ -1507,7 +1618,7 @@ function porto_load_shortcodes() {
 					'element'   => 'is_sticky',
 					'not_empty' => true,
 				),
-				'group'      => $sticky_group,
+				'group'      => $addon_group,
 			)
 		);
 		vc_add_param(
@@ -1521,16 +1632,36 @@ function porto_load_shortcodes() {
 					'element'   => 'is_sticky',
 					'not_empty' => true,
 				),
-				'group'      => $sticky_group,
+				'group'      => $addon_group,
 			)
 		);
 		vc_add_param( 'vc_column_inner', $animation_type );
 		vc_add_param( 'vc_column_inner', $animation_duration );
 		vc_add_param( 'vc_column_inner', $animation_delay );
 
+		/*
+		 ---------------------------- */
+		/*
+		 Customize Custom Heading
 		/* ---------------------------- */
-		/* Customize Custom Heading
-		/* ---------------------------- */
+		if ( version_compare( $porto_cur_version, '6.3.0', '>=' ) ) {
+			vc_remove_param( 'vc_custom_heading', 'source' );
+			$param               = WPBMap::getParam( 'vc_custom_heading', 'text' );
+			$param['dependency'] = array(
+				'element'  => 'enable_field_dynamic',
+				'is_empty' => true,
+			);
+			$param['weight']     = 2;
+			vc_update_shortcode_param( 'vc_custom_heading', $param );
+			porto_dynamic_vc_param( 'vc_custom_heading', 'field', 3 );
+			porto_dynamic_vc_param( 'vc_custom_heading', 'link', 1 );
+			$param               = WPBMap::getParam( 'vc_custom_heading', 'link' );
+			$param['dependency'] = array(
+				'element'  => 'enable_link_dynamic',
+				'is_empty' => true,
+			);
+			vc_update_shortcode_param( 'vc_custom_heading', $param );
+		}
 		vc_add_param(
 			'vc_custom_heading',
 			array(
@@ -1594,7 +1725,7 @@ function porto_load_shortcodes() {
 			'vc_custom_heading',
 			array(
 				'type'       => 'checkbox',
-				'heading'    => __( 'Enable typewriter effect', 'porto' ),
+				'heading'    => __( 'Enable Typewriter Effect', 'porto' ),
 				'param_name' => 'enable_typewriter',
 				'value'      => array( __( 'Yes, please', 'js_composer' ) => 'yes' ),
 				'group'      => $section_group,
@@ -1719,8 +1850,10 @@ function porto_load_shortcodes() {
 		vc_add_param( 'vc_custom_heading', $floating_horizontal );
 		vc_add_param( 'vc_custom_heading', $floating_duration );
 
-		/* ---------------------------- */
-		/* Customize Tabs, Tab
+		/*
+		 ---------------------------- */
+		/*
+		 Customize Tabs, Tab
 		/* ---------------------------- */
 		vc_remove_param( 'vc_tabs', 'interval' );
 		vc_add_param(
@@ -2028,8 +2161,10 @@ function porto_load_shortcodes() {
 			)
 		);
 
-		/* ---------------------------- */
-		/* Customize Tour
+		/*
+		 ---------------------------- */
+		/*
+		 Customize Tour
 		/* ---------------------------- */
 		vc_remove_param( 'vc_tour', 'interval' );
 		vc_add_param(
@@ -2081,8 +2216,10 @@ function porto_load_shortcodes() {
 			)
 		);
 
-		/* ---------------------------- */
-		/* Customize Separator
+		/*
+		 ---------------------------- */
+		/*
+		 Customize Separator
 		/* ---------------------------- */
 		vc_remove_param( 'vc_separator', 'style' );
 		vc_add_param(
@@ -2356,8 +2493,10 @@ function porto_load_shortcodes() {
 			)
 		);
 
-		/* ---------------------------- */
-		/* Customize Text Separator
+		/*
+		 ---------------------------- */
+		/*
+		 Customize Text Separator
 		/* ---------------------------- */
 		vc_remove_param( 'vc_text_separator', 'style' );
 		vc_add_param(
@@ -2395,8 +2534,10 @@ function porto_load_shortcodes() {
 			)
 		);
 
-		/* ---------------------------- */
-		/* Customize Accordion, Accordion Tab
+		/*
+		 ---------------------------- */
+		/*
+		 Customize Accordion, Accordion Tab
 		/* ---------------------------- */
 		vc_remove_param( 'vc_accordion', 'disable_keyboard' );
 		vc_add_param(
@@ -2543,8 +2684,10 @@ function porto_load_shortcodes() {
 			)
 		);
 
-		/* ---------------------------- */
-		/* Customize Toggle
+		/*
+		 ---------------------------- */
+		/*
+		 Customize Toggle
 		/* ---------------------------- */
 		vc_remove_param( 'vc_toggle', 'style' );
 		vc_remove_param( 'vc_toggle', 'color' );
@@ -2622,8 +2765,10 @@ function porto_load_shortcodes() {
 			)
 		);
 
-		/* ---------------------------- */
-		/* Customize Buttons
+		/*
+		 ---------------------------- */
+		/*
+		 Customize Buttons
 		/* ---------------------------- */
 		vc_add_param(
 			'vc_button',
@@ -2645,6 +2790,30 @@ function porto_load_shortcodes() {
 				'group'      => $section_group,
 			)
 		);
+		/*
+		 ---------------------------- */
+		/*
+		 Customize Button
+		/* ---------------------------- */
+		if ( version_compare( $porto_cur_version, '6.3.0', '>=' ) ) {
+			// Dynamic Field
+			porto_dynamic_vc_param( 'vc_btn', 'field', 3 );
+			$param               = WPBMap::getParam( 'vc_btn', 'title' );
+			$param['dependency'] = array(
+				'element'  => 'enable_field_dynamic',
+				'is_empty' => true,
+			);
+			$param['weight']     = 2;
+			vc_update_shortcode_param( 'vc_btn', $param );
+			// Dynamic Link
+			porto_dynamic_vc_param( 'vc_btn', 'link', 1 );
+			$param               = WPBMap::getParam( 'vc_btn', 'link' );
+			$param['dependency'] = array(
+				'element'  => 'enable_link_dynamic',
+				'is_empty' => true,
+			);
+			vc_update_shortcode_param( 'vc_btn', $param );
+		}
 		vc_add_param(
 			'vc_btn',
 			array(
@@ -2657,20 +2826,6 @@ function porto_load_shortcodes() {
 					array(
 						__( 'Default', 'porto' ) => 'default',
 					)
-				),
-				'group'      => $section_group,
-			)
-		);
-		vc_add_param(
-			'vc_btn',
-			array(
-				'type'       => 'dropdown',
-				'heading'    => __( 'Color Scale', 'porto' ),
-				'param_name' => 'scale',
-				'std'        => '',
-				'value'      => array(
-					__( 'Default', 'porto' ) => '',
-					__( 'Scale 2', 'porto' ) => 'scale-2',
 				),
 				'group'      => $section_group,
 			)
@@ -2731,7 +2886,7 @@ function porto_load_shortcodes() {
 			'vc_btn',
 			array(
 				'type'       => 'textfield',
-				'heading'    => __( 'Button Left / Right Padding', 'porto-functionality' ),
+				'heading'    => __( 'Button Left / Right Padding', 'porto' ),
 				'param_name' => 'btn_px',
 				'group'      => $section_group,
 			)
@@ -2740,7 +2895,7 @@ function porto_load_shortcodes() {
 			'vc_btn',
 			array(
 				'type'       => 'textfield',
-				'heading'    => __( 'Button Top / Bottom Padding', 'porto-functionality' ),
+				'heading'    => __( 'Button Top / Bottom Padding', 'porto' ),
 				'param_name' => 'btn_py',
 				'group'      => $section_group,
 			)
@@ -2749,7 +2904,7 @@ function porto_load_shortcodes() {
 			'vc_btn',
 			array(
 				'type'       => 'porto_number',
-				'heading'    => __( 'Icon Size', 'porto-functionality' ),
+				'heading'    => __( 'Icon Size', 'porto' ),
 				'param_name' => 'btn_icon_size',
 				'units'      => array( 'px', 'rem', 'em' ),
 				'group'      => $section_group,
@@ -2764,13 +2919,13 @@ function porto_load_shortcodes() {
 			'vc_btn',
 			array(
 				'type'       => 'porto_number',
-				'heading'    => __( 'Spacing between Icon and Text', 'porto-functionality' ),
+				'heading'    => __( 'Spacing between Icon and Text', 'porto' ),
 				'param_name' => 'btn_icon_spacing',
 				'units'      => array( 'px', 'rem', 'em' ),
 				'group'      => $section_group,
 				'selectors'  => array(
-					'{{WRAPPER}}.vc_btn3-icon-right:not(.vc_btn3-o-empty) .vc_btn3-icon' => 'padding-' . $left . ': {{VALUE}}{{UNIT}};',
-					'{{WRAPPER}}.vc_btn3-icon-left:not(.vc_btn3-o-empty) .vc_btn3-icon' => 'padding-' . $right . ': {{VALUE}}{{UNIT}};',
+					'{{WRAPPER}}.btn.vc_btn3-icon-right:not(.vc_btn3-o-empty) .vc_btn3-icon' => 'padding-' . $left . ': {{VALUE}}{{UNIT}};',
+					'{{WRAPPER}}.btn.vc_btn3-icon-left:not(.vc_btn3-o-empty) .vc_btn3-icon' => 'padding-' . $right . ': {{VALUE}}{{UNIT}};',
 				),
 			)
 		);
@@ -2845,7 +3000,7 @@ function porto_load_shortcodes() {
 			'vc_btn',
 			array(
 				'type'       => 'iconpicker',
-				'heading'    => __( 'Icon', 'porto-functionality' ),
+				'heading'    => __( 'Icon', 'porto' ),
 				'param_name' => 'i_icon_porto',
 				'settings'   => array(
 					'type'         => 'porto',
@@ -2862,7 +3017,7 @@ function porto_load_shortcodes() {
 			array(
 				'type'        => 'dropdown',
 				'class'       => '',
-				'heading'     => __( 'Select Hover Effect type', 'porto-functionality' ),
+				'heading'     => __( 'Select Hover Icon Effect', 'porto-functionality' ),
 				'param_name'  => 'hover_effect',
 				'value'       => array(
 					__( 'No Effect', 'porto-functionality' ) => '',
@@ -2870,6 +3025,8 @@ function porto_load_shortcodes() {
 					__( 'Icon Slide Up', 'porto-functionality' ) => 'hover-icon-up',
 					__( 'Icon Slide Left', 'porto-functionality' ) => 'hover-icon-left',
 					__( 'Icon Slide Right', 'porto-functionality' ) => 'hover-icon-right',
+					__( 'Icon Slide Right & Left', 'porto-functionality' ) => 'hover-icon-pulse-left-right',
+					__( 'Icon Slide Infinite', 'porto-functionality' ) => 'hover-icon-pulse-infnite',
 				),
 				'dependency'  => array(
 					'element' => 'add_icon',
@@ -2878,6 +3035,29 @@ function porto_load_shortcodes() {
 				'description' => __( 'Select the type of effct you want on hover', 'porto-functionality' ),
 			)
 		);
+		vc_add_param(
+			'vc_btn',
+			array(
+				'type'        => 'dropdown',
+				'class'       => '',
+				'heading'     => __( 'Select Hover Text Effect', 'porto-functionality' ),
+				'param_name'  => 'hover_text_effect',
+				'value'       => array(
+					__( 'No Effect', 'porto-functionality' ) => '',
+					__( 'Switch Left', 'porto-functionality' ) => 'hover-text-switch-left',
+					__( 'Switch Up', 'porto-functionality' ) => 'hover-text-switch-up',
+					__( 'Marquee Left', 'porto-functionality' ) => 'hover-text-marquee-left',
+					__( 'Marquee Up', 'porto-functionality' ) => 'hover-text-marquee-up',
+					__( 'Marquee Down', 'porto-functionality' ) => 'hover-text-marquee-down',
+				),
+				'dependency'  => array(
+					'element'   => 'title',
+					'not_empty' => true,
+				),
+				'description' => __( 'Select the type of effct you want on hover', 'porto-functionality' ),
+			)
+		);
+
 		$update_params = array( 'el_id', 'el_class', 'custom_onclick', 'custom_onclick_code' );
 		foreach ( $update_params as $p_name ) {
 			$param = WPBMap::getParam( 'vc_btn', $p_name );
@@ -2887,9 +3067,32 @@ function porto_load_shortcodes() {
 			}
 		}
 
+		/*
+		 ---------------------------- */
+		/*
+		 Add Single Image Parameters
 		/* ---------------------------- */
-		/* Add Single Image Parameters
-		/* ---------------------------- */
+		if ( version_compare( $porto_cur_version, '6.3.0', '>=' ) ) {
+			// Dynamic Image
+			// Title
+			$param           = WPBMap::getParam( 'vc_single_image', 'title' );
+			$param['weight'] = 3;
+			vc_update_shortcode_param( 'vc_single_image', $param );
+			// Image source
+			$param           = WPBMap::getParam( 'vc_single_image', 'source' );
+			$param['weight'] = 3;
+			vc_update_shortcode_param( 'vc_single_image', $param );
+
+			// Dynamic Switcher
+			porto_dynamic_vc_param( 'vc_single_image', 'image', 2, 'source', 'media_library' );
+
+			$param               = WPBMap::getParam( 'vc_single_image', 'image' );
+			$param['dependency'] = array(
+				'element'  => 'enable_image_dynamic',
+				'is_empty' => true,
+			);
+			vc_update_shortcode_param( 'vc_single_image', $param );
+		}
 		vc_add_param(
 			'vc_single_image',
 			array(
@@ -2966,8 +3169,10 @@ function porto_load_shortcodes() {
 		vc_add_param( 'vc_single_image', $floating_horizontal );
 		vc_add_param( 'vc_single_image', $floating_duration );
 
-		/* ---------------------------- */
-		/* Customize Progress Bar
+		/*
+		 ---------------------------- */
+		/*
+		 Customize Progress Bar
 		/* ---------------------------- */
 		vc_add_param(
 			'vc_progress_bar',
@@ -3033,8 +3238,10 @@ function porto_load_shortcodes() {
 			)
 		);
 
-		/* ---------------------------- */
-		/* Customize Pie Chart
+		/*
+		 ---------------------------- */
+		/*
+		 Customize Pie Chart
 		/* ---------------------------- */
 		vc_remove_param( 'vc_pie', 'color' );
 
@@ -3071,7 +3278,7 @@ function porto_load_shortcodes() {
 				'type'               => 'dropdown',
 				'heading'            => __( 'Bar color', 'porto' ),
 				'param_name'         => 'color',
-				'value'              => $colors_arr, //$pie_colors,
+				'value'              => $colors_arr, // $pie_colors,
 				'description'        => __( 'Select pie chart color.', 'js_composer' ),
 				'dependency'         => array(
 					'element' => 'type',
@@ -3244,7 +3451,8 @@ function porto_load_shortcodes() {
 		);
 
 		// remove unwanted shortcodes
-		/*vc_remove_element('vc_posts_grid');
+		/*
+		vc_remove_element('vc_posts_grid');
 		vc_remove_element('vc_carousel');
 		vc_remove_element('vc_message');
 		vc_remove_element('vc_hoverbox');
@@ -3257,7 +3465,22 @@ function porto_load_shortcodes() {
 
 	}
 }
-
+function porto_dynamic_vc_param( $widget, $dynamic_type, $weight, $dependency = '', $flag = '' ) {
+	if ( ! class_exists( 'Porto_Wpb_Dynamic_Tags' ) ) {
+		return;
+	}
+	$params = Porto_Wpb_Dynamic_Tags::get_instance()->dynamic_wpb_tags( $dynamic_type );
+	foreach ( $params as $key => $value ) {
+		$value['weight'] = $weight;
+		if ( 0 == $key && 'image' == $dynamic_type ) {
+			$value['dependency'] = array(
+				'element' => $dependency,
+				'value'   => array( $flag ),
+			);
+		}
+		vc_add_param( $widget, $value );
+	}
+}
 add_action( 'vc_after_init', 'porto_vc_enable_deprecated_shortcodes' );
 
 function porto_vc_enable_deprecated_shortcodes() {
@@ -3279,7 +3502,8 @@ function porto_vc_enable_deprecated_shortcodes() {
 		WPBMap::modify( 'vc_accordion', 'description', __( 'Collapsible content panels', 'js_composer' ) . $desc );
 		WPBMap::modify( 'vc_accordion_tab', 'name', __( 'Accordion Section', 'porto' ) );
 
-		/*$all_shortcodes = WPBMap::getAllShortCodes();
+		/*
+		$all_shortcodes = WPBMap::getAllShortCodes();
 		foreach( $all_shortcodes as $key => $s ) {
 			echo '\''.$key .'\' => \'' . $s['name'] . '\',<br />';
 		}*/
@@ -3351,4 +3575,19 @@ if ( is_admin() ) :
 			}
 		}
 	endif;
+endif;
+
+/**
+ * Update column offset template path to add xxl settings (> 1400px) to column
+ *
+ * @since 6.3.0
+ */
+add_filter( 'vc_path_filter', 'porto_vc_path_filter' );
+if ( ! function_exists( 'porto_vc_path_filter' ) ) :
+	function porto_vc_path_filter( $path ) {
+		if ( false !== strpos( $path, 'params/column_offset/template.tpl.php' ) ) {
+			$path = PORTO_DIR . '/vc_templates/params/column_offset/template.tpl.php';
+		}
+		return $path;
+	}
 endif;

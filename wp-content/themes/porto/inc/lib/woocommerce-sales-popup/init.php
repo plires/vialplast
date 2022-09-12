@@ -125,7 +125,21 @@ if ( class_exists( 'WC_Shortcode_Products' ) && ! class_exists( 'Porto_Woocommer
 					continue;
 				}
 				$number_of_units = floor( $time / $unit );
-				return esc_html__( sprintf( '%s ago', $number_of_units . ' ' . $text . ( ( $number_of_units > 1 ) ? 's' : '' ) ), 'porto' );
+				if ( 'year' == $text ) {
+					return sprintf( _n( '%d year ago', '%d years ago', $number_of_units, 'porto' ), $number_of_units );
+				} elseif ( 'month' == $text ) {
+					return sprintf( _n( '%d month ago', '%d months ago', $number_of_units, 'porto' ), $number_of_units );
+				} elseif ( 'week' == $text ) {
+					return sprintf( _n( '%d week ago', '%d weeks ago', $number_of_units, 'porto' ), $number_of_units );
+				} elseif ( 'day' == $text ) {
+					return sprintf( _n( '%d day ago', '%d days ago', $number_of_units, 'porto' ), $number_of_units );
+				} elseif ( 'hour' == $text ) {
+					return sprintf( _n( '%d hour ago', '%d hours ago', $number_of_units, 'porto' ), $number_of_units );
+				} elseif ( 'minute' == $text ) {
+					return sprintf( _n( '%d minute ago', '%d minutes ago', $number_of_units, 'porto' ), $number_of_units );
+				} elseif ( 'second' == $text ) {
+					return sprintf( _n( '%d second ago', '%d seconds ago', $number_of_units, 'porto' ), $number_of_units );
+				}
 			}
 		}
 	}

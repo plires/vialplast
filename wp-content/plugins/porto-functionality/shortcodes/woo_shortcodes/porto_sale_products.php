@@ -1,20 +1,7 @@
 <?php
 
 // Porto Sale Products
-add_shortcode( 'porto_sale_products', 'porto_shortcode_sale_products' );
 add_action( 'vc_after_init', 'porto_load_sale_products_shortcode' );
-
-function porto_shortcode_sale_products( $atts, $content = null ) {
-	ob_start();
-	if ( $template = porto_shortcode_woo_template( 'porto_products' ) ) {
-		if ( ! is_array( $atts ) ) {
-			$atts = array();
-		}
-		$atts['shortcode'] = 'sale_products';
-		include $template;
-	}
-	return ob_get_clean();
-}
 
 function porto_load_sale_products_shortcode() {
 	$animation_type     = porto_vc_animation_type();
@@ -105,6 +92,9 @@ function porto_load_sale_products_shortcode() {
 						),
 						'suffix'      => 'px',
 						'std'         => '',
+						'selectors'   => array(
+							'{{WRAPPER}}' => '--porto-el-spacing: {{VALUE}}px;',
+						),
 					),
 					array(
 						'type'        => 'number',

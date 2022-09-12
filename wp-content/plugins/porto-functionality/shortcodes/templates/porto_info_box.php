@@ -1,5 +1,5 @@
 <?php
-if ( empty( $atts['icon_color_bg'] ) && ! isset( $atts['title_google_font_style_font_size'] ) ) {
+if ( is_array( $atts ) && empty( $atts['icon_color_bg'] ) && ! isset( $atts['title_google_font_style_font_size'] ) ) {
 	$atts['icon_color_bg'] = 'transparent';
 }
 

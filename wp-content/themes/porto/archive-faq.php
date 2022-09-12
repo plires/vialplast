@@ -1,27 +1,31 @@
 <?php get_header(); ?>
 
 <?php
-global $porto_settings, $porto_layout;
-$faq_infinite = $porto_settings['faq-infinite'];
+$builder_id = porto_check_builder_condition( 'archive' );
+if ( $builder_id && 'publish' == get_post_status( $builder_id ) ) {
+	echo do_shortcode( '[porto_block id="' . esc_attr( $builder_id ) . '"]' );
+} else {
+	global $porto_settings, $porto_layout;
+	$faq_infinite = $porto_settings['faq-infinite'];
 
-if ( ( ( 'hide' !== $porto_settings['faq-cat-sort-pos'] && ! empty( $porto_settings['faq-cat-ft'] ) ) || 'ajax' == $faq_infinite ) && ! wp_script_is( 'porto-infinite-scroll' ) ) {
-	wp_enqueue_script( 'porto-infinite-scroll' );
-}
+	if ( ( ( 'hide' !== $porto_settings['faq-cat-sort-pos'] && ! empty( $porto_settings['faq-cat-ft'] ) ) || 'ajax' == $faq_infinite ) && ! wp_script_is( 'porto-infinite-scroll' ) ) {
+		wp_enqueue_script( 'porto-infinite-scroll' );
+	}
 
-$args = array(
-	'post_type'   => 'faq',
-	'post_status' => 'publish',
-);
-if ( isset( $porto_settings['faq-orderby'] ) && $porto_settings['faq-orderby'] ) {
-	$args['orderby'] = $porto_settings['faq-orderby'];
-}
-if ( isset( $porto_settings['faq-order'] ) && $porto_settings['faq-order'] ) {
-	$args['order'] = $porto_settings['faq-order'];
-}
-$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : ( ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1 );
-$args['paged'] = $paged;
-$query = new WP_Query( $args );
-?>
+	$args = array(
+		'post_type'   => 'faq',
+		'post_status' => 'publish',
+	);
+	if ( isset( $porto_settings['faq-orderby'] ) && $porto_settings['faq-orderby'] ) {
+		$args['orderby'] = $porto_settings['faq-orderby'];
+	}
+	if ( isset( $porto_settings['faq-order'] ) && $porto_settings['faq-order'] ) {
+		$args['order'] = $porto_settings['faq-order'];
+	}
+	$paged         = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : ( ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1 );
+	$args['paged'] = $paged;
+	$query         = new WP_Query( $args );
+	?>
 
 <div id="content" role="main">
 
@@ -42,7 +46,8 @@ $query = new WP_Query( $args );
 			</div><?php endif; ?>
 	<?php endif; ?>
 
-	<?php if ( have_posts() ) :
+	<?php
+	if ( have_posts() ) :
 		$wrap_cls   = 'page-faqs clearfix';
 		$wrap_attrs = '';
 		if ( $faq_infinite ) {
@@ -78,7 +83,7 @@ $query = new WP_Query( $args );
 						$faq_taxs[ urldecode( $tax->slug ) ] = $tax->name;
 					}
 
-					if ( 'infinite' != $faq_infinite && 'load_more' != $faq_infinite ) {
+					if ( empty( $porto_settings['faq-cat-ft'] ) && 'infinite' != $faq_infinite && 'load_more' != $faq_infinite && '1' !== $faq_infinite ) {
 						global $wp_query;
 						$posts_faq_taxs = array();
 						if ( is_array( $wp_query->posts ) && ! empty( $wp_query->posts ) ) {
@@ -106,7 +111,7 @@ $query = new WP_Query( $args );
 						<ul class="faq-filter nav nav-pills sort-source<?php echo empty( $porto_settings['faq-cat-ft'] ) || empty( $faq_infinite ) ? '' : ' porto-ajax-filter'; ?>">
 							<li class="active" data-filter="*"><a href="#"><?php esc_html_e( 'Show All', 'porto' ); ?></a></li>
 							<?php foreach ( $faq_taxs as $faq_tax_slug => $faq_tax_name ) : ?>
-								<li data-filter="<?php echo esc_attr( $faq_tax_slug ); ?>"><a href="#"><?php echo esc_html( $faq_tax_name ); ?></a></li>
+								<li data-filter="<?php echo esc_attr( $faq_tax_slug ); ?>"><a href="<?php echo esc_url( get_term_link( $faq_tax_slug, 'faq_cat' ) ); ?>"><?php echo esc_html( $faq_tax_name ); ?></a></li>
 							<?php endforeach; ?>
 						</ul>
 						<hr>
@@ -144,5 +149,5 @@ $query = new WP_Query( $args );
 	<?php endif; ?>
 
 </div>
-
+	<?php } ?>
 <?php get_footer(); ?>

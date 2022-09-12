@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Porto Elementor widget to display a countdown timer.
  *
- * @since 5.2.0
+ * @since 1.5.2
  */
 
 use Elementor\Controls_Manager;
@@ -43,7 +43,7 @@ class Porto_Elementor_Countdown_Widget extends \Elementor\Widget_Base {
 		}
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$floating_options = porto_update_vc_options_to_elementor( porto_shortcode_floating_fields() );
 
@@ -68,6 +68,28 @@ class Porto_Elementor_Countdown_Widget extends \Elementor\Widget_Base {
 		);
 
 		$this->add_control(
+			'enable_dynamic_date',
+			array(
+				'type'  => Controls_Manager::SWITCHER,
+				'label' => __( 'Enable Dynamic Date Time.', 'porto-functionality' ),
+			)
+		);
+
+		$this->add_control(
+			'dynamic_datetime',
+			array(
+				'type'      => Controls_Manager::TEXT,
+				'label'     => __( 'Target Time For Countdown', 'porto-functionality' ),
+				'dynamic'   => array(
+					'active' => true,
+				),
+				'condition' => array(
+					'enable_dynamic_date' => 'yes',
+				),
+			)
+		);
+
+		$this->add_control(
 			'datetime',
 			array(
 				'type'           => Controls_Manager::DATE_TIME,
@@ -76,6 +98,9 @@ class Porto_Elementor_Countdown_Widget extends \Elementor\Widget_Base {
 				'picker_options' => array(
 					'enableSeconds' => true,
 					'dateFormat'    => 'Y/m/d H:i:S',
+				),
+				'condition'      => array(
+					'enable_dynamic_date!' => 'yes',
 				),
 			)
 		);
@@ -303,7 +328,6 @@ class Porto_Elementor_Countdown_Widget extends \Elementor\Widget_Base {
 		?>
 		<#
 			view.addRenderAttribute( 'countdown', 'class', 'porto_countdown-div porto_countdown-dateAndTime ' + settings.porto_tz );
-
 			let count_frmt = '', content_html = '';
 			settings.countdown_opts && settings.countdown_opts.forEach(function(opt, index) {
 				if ( 'syear' == opt ) {
@@ -330,6 +354,13 @@ class Porto_Elementor_Countdown_Widget extends \Elementor\Widget_Base {
 			});
 			let times = { years: '', months: '', weeks: '', days: '', hours: '', minutes: '', seconds: '' };
 
+			if ( 'yes' == settings.enable_dynamic_date ) {
+				settings.datetime = settings.dynamic_datetime.replace(/-/gi,'/');
+			}
+			let time = new Date( settings.datetime );
+			if( Number.isNaN( time.getTime() ) ){
+				return;
+			}
 			if ( settings.datetime ) {
 				view.addRenderAttribute( 'countdown', 'data-labels', ( settings.string_years2 ? settings.string_years2 : 'Years' ) + ',' + ( settings.string_months2 ? settings.string_months2 : 'Months' ) + ',' + ( settings.string_weeks2 ? settings.string_weeks2 : 'Weeks' ) + ',' + ( settings.string_days2 ? settings.string_days2 : 'Days' ) + ',' + ( settings.string_hours2 ? settings.string_hours2 : 'Hours' ) + ',' + ( settings.string_minutes2 ? settings.string_minutes2 : 'Minutes' ) + ',' + ( settings.string_seconds2 ? settings.string_seconds2 : 'Seconds' ) );
 				view.addRenderAttribute( 'countdown', 'data-labels2', ( settings.string_years ? settings.string_years : 'Year' ) + ',' + ( settings.string_months ? settings.string_months : 'Month' ) + ',' + ( settings.string_weeks ? settings.string_weeks : 'Week' ) + ',' + ( settings.string_days ? settings.string_days : 'Day' ) + ',' + ( settings.string_hours ? settings.string_hours : 'Hour' ) + ',' + ( settings.string_minutes ? settings.string_minutes : 'Minute' ) + ',' + ( settings.string_seconds ? settings.string_seconds : 'Second' ) );

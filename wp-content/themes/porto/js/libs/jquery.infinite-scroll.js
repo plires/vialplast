@@ -318,6 +318,19 @@
                     }
                     break;
                 case 'append':
+                    // start porto related code
+                    if ( this.element.closest( '.archive-products' ).length ) {
+                        var $count = $( '.woocommerce-result-count' );
+                        if ( $count.length ) {
+                            data = '<div>' + data + '</div>';
+                            var $newCount = $( data ).find( '.woocommerce-result-count' ).eq( 0 );
+                            if ( $newCount.length ) {
+                                $count.replaceWith( $newCount );
+                            }
+                        }
+                    }
+                    // end porto related code
+
                     var children = box.children();
                     // if it didn't return anything
                     if (children.length === 0) {

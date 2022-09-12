@@ -68,10 +68,10 @@ const PortoDynamicContentControl = function({
 	let post_info_fields = [], tax_fields = [];
 
 	if ( 'image' === options.field_type ) {
-		post_info_fields = [ { label: __( 'Please select...', 'porto-functionality' ), value: '' }, { label: __( 'Featured Image', 'porto-functionality' ), value: 'thumbnail' } ];
+		post_info_fields = [ { label: __( 'Please select...', 'porto-functionality' ), value: '' }, { label: __( 'Featured Image', 'porto-functionality' ), value: 'thumbnail' }, { label: __( 'Author Picture on Gravatar', 'porto-functionality' ), value: 'author_img' } ];
 		tax_fields = [];
 	} else if ( 'link' === options.field_type ) {
-		post_info_fields = [ { label: __( 'Please select...', 'porto-functionality' ), value: '' }, { label: __( 'Permalink', 'porto-functionality' ), value: 'permalink' } ];
+		post_info_fields = [ { label: __( 'Please select...', 'porto-functionality' ), value: '' }, { label: __( 'Permalink', 'porto-functionality' ), value: 'permalink' }, { label: __( 'Author Posts Url', 'porto-functionality' ), value: 'author_posts_url' } ];
 		tax_fields = [ { label: __( 'Please select...', 'porto-functionality' ), value: '' }, { label: __( 'Term Link', 'porto-functionality' ), value: 'term_link' } ];
 	} else if ( 'field' === options.field_type ) {
 		post_info_fields = [ { label: __( 'Please select...', 'porto-functionality' ), value: '' }, { label: __( 'ID', 'porto-functionality' ), value: 'id' }, { label: __( 'Title', 'porto-functionality' ), value: 'title' }, { label: __( 'Content', 'porto-functionality' ), value: 'content' }, { label: __( 'Excerpt', 'porto-functionality' ), value: 'excerpt' }, { label: __( 'Date', 'porto-functionality' ), value: 'date' }, { label: __( 'Post Status', 'porto-functionality' ), value: 'status' }, { label: __( 'Like Count', 'porto-functionality' ), value: 'like_count' } ];
@@ -88,6 +88,7 @@ const PortoDynamicContentControl = function({
 		),
 		el( SelectControl, {
 			label: __( 'Source', 'porto-functionality' ),
+			help: __( 'Page or Post Info is used in posts list and Taxonomy is used in terms list.', 'porto-functionality' ),
 			value: value.source,
 			options: [ { label: __( 'Please select...', 'porto-functionality' ), value: '' }, { label: __( 'Page or Post Info', 'porto-functionality' ), value: 'post' }, { label: __( 'Porto Meta Box Field', 'porto-functionality' ), value: 'metabox' }, { label: __( 'Advanced Custom Field', 'porto-functionality' ), value: 'acf' }, { label: __( 'Meta Field', 'porto-functionality' ), value: 'meta' }, { label: __( 'Taxonomy', 'porto-functionality' ), value: 'tax' } ],
 			onChange: ( val ) => { value.source = val; onChange( value ); },

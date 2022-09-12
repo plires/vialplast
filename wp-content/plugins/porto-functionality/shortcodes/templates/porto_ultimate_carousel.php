@@ -262,25 +262,35 @@ echo '</div>';
 echo '</div>';
 ?>
 <script>
-	jQuery(document).ready(function ($) {
-		if ($.fn.slick) {
-			$('.porto-carousel-<?php echo $uid_escaped; ?>').slick({<?php echo $settings_escaped; ?>});
+	(function(){
+		var porto_inc_slick_js = function() {
+			( function( $ ) {
+				if ($.fn.slick) {
+					$('.porto-carousel-<?php echo $uid_escaped; ?>').slick({<?php echo $settings_escaped; ?>});
+				} else {
+					var c = document.createElement("script");
+					c.src = "<?php echo wp_scripts()->registered['jquery-slick']->src; ?>";
+					if (!$('script[src="' + c.src + '"]').length) {
+						document.getElementsByTagName("body")[0].appendChild(c);
+					}
+					c = document.createElement("script");
+					c.src = "<?php echo wp_scripts()->registered['porto_shortcodes_ultimate_carousel_loader_js']->src; ?>";
+					if (!$('script[src="' + c.src + '"]').length) {
+						document.getElementsByTagName("body")[0].appendChild(c);
+					}
+					setTimeout(function() {
+						if ($.fn.slick) { $('.porto-carousel-<?php echo $uid_escaped; ?>').slick({<?php echo $settings_escaped; ?>}); }
+					}, 300);
+				}
+			} )( jQuery );
+		};
+
+		if ( window.theme && theme.isLoaded ) {
+			porto_inc_slick_js();
 		} else {
-			var c = document.createElement("script");
-			c.src = "<?php echo wp_scripts()->registered['jquery-slick']->src; ?>";
-			if (!$('script[src="' + c.src + '"]').length) {
-				document.getElementsByTagName("body")[0].appendChild(c);
-			}
-			c = document.createElement("script");
-			c.src = "<?php echo wp_scripts()->registered['porto_shortcodes_ultimate_carousel_loader_js']->src; ?>";
-			if (!$('script[src="' + c.src + '"]').length) {
-				document.getElementsByTagName("body")[0].appendChild(c);
-			}
-			setTimeout(function() {
-				if ($.fn.slick) { $('.porto-carousel-<?php echo $uid_escaped; ?>').slick({<?php echo $settings_escaped; ?>}); }
-			}, 300);
+			window.addEventListener( 'load', porto_inc_slick_js );
 		}
-	});
+	})();
 </script>
 <?php
 echo ob_get_clean();

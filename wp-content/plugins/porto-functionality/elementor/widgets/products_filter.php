@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Porto Elementor widget to display a list of select boxes to filter products by category, price or attributes.
  *
- * @since 5.4.0
+ * @since 1.7.1
  */
 
 use Elementor\Controls_Manager;
@@ -35,7 +35,7 @@ class Porto_Elementor_Products_Filter_Widget extends \Elementor\Widget_Base {
 		return 'eicon-filter';
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$filter_areas         = array();
 		$attribute_taxonomies = wc_get_attribute_taxonomies();

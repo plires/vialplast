@@ -28,12 +28,12 @@ if ( ! empty( $porto_settings['product-sale'] ) || ( ! empty( $porto_settings['p
 		$percentage = 0;
 		$reg_p      = floatval( $product->get_regular_price() );
 		if ( $reg_p ) {
-			$percentage = - round( ( ( $reg_p - $product->get_sale_price() ) / $reg_p ) * 100 );
+			$percentage = - round( ( ( $reg_p - empty( $product->get_sale_price() ) ? 0 : $product->get_sale_price() ) / $reg_p ) * 100 );
 		} elseif ( 'variable' == $product->get_type() && $product->get_variation_regular_price() ) {
 			$percentage = - round( ( ( $product->get_variation_regular_price() - $product->get_variation_sale_price() ) / $product->get_variation_regular_price() ) * 100 );
 		}
 		if ( $porto_settings['product-sale-percent'] && $percentage ) {
-			$sales_html = '<div class="onsale">' . $percentage . '%</div>';
+			$sales_html = apply_filters( 'woocommerce_sale_flash', '<div class="onsale">' . $percentage . '%</div>', $post, $product );
 		} else {
 			$sales_html = apply_filters( 'woocommerce_sale_flash', '<div class="onsale">' . ( ( isset( $porto_settings['product-sale-label'] ) && $porto_settings['product-sale-label'] ) ? esc_html( $porto_settings['product-sale-label'] ) : esc_html__( 'Sale', 'porto' ) ) . '</div>', $post, $product );
 		}

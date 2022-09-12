@@ -18,6 +18,10 @@ if ( ! class_exists( 'Porto_Live_Search' ) ) :
 		public function __construct() {
 			global $porto_settings;
 
+			if ( porto_is_amp_endpoint() ) {
+				return;
+			}
+
 			if ( ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) || ! isset( $porto_settings['search-live'] ) || ! $porto_settings['search-live'] ) {
 				return;
 			}
@@ -28,7 +32,7 @@ if ( ! class_exists( 'Porto_Live_Search' ) ) :
 		}
 
 		public function add_script() {
-			wp_enqueue_script( 'porto-live-search', PORTO_LIB_URI . '/live-search/live-search.js', false, PORTO_VERSION, true );
+			wp_enqueue_script( 'porto-live-search', PORTO_LIB_URI . '/live-search/live-search.min.js', array( 'jquery-core' ), PORTO_VERSION, true );
 			wp_localize_script(
 				'porto-live-search',
 				'porto_live_search',

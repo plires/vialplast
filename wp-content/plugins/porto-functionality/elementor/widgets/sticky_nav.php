@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Porto Elementor widget to display sticky navigation
  *
- * @since 6.3.0
+ * @since 2.3.0
  */
 
 use Elementor\Controls_Manager;
@@ -35,7 +35,7 @@ class Porto_Elementor_Sticky_Nav_Widget extends \Elementor\Widget_Base {
 		return 'eicon-navigation-horizontal';
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$this->start_controls_section(
 			'section_sticky_nav',

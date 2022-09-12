@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Porto Elementor widget to display steps, history or timeline
  *
- * @since 6.3.0
+ * @since 2.3.0
  */
 
 use Elementor\Controls_Manager;
@@ -35,7 +35,7 @@ class Porto_Elementor_Steps_Widget extends \Elementor\Widget_Base {
 		return 'eicon-history';
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$this->start_controls_section(
 			'section_steps',

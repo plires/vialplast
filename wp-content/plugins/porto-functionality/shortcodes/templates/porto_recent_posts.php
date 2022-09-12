@@ -135,7 +135,9 @@ if ( $posts->have_posts() ) {
 	$porto_post_excerpt_length = $excerpt_length;
 
 	if ( isset( $porto_settings ) ) {
-		$prev_post_metas = $porto_settings['post-metas'];
+		if ( isset( $porto_settings['post-metas'] ) ) {
+			$prev_post_metas = $porto_settings['post-metas'];
+		}
 
 		if ( ! $show_metas ) {
 			$porto_settings['post-metas'] = array();
@@ -147,7 +149,7 @@ if ( $posts->have_posts() ) {
 	<div class="row">
 		<div class="post-carousel porto-carousel owl-carousel<?php echo esc_attr( $carousel_class ); ?>" data-plugin-options="<?php echo esc_attr( $options ); ?>">
 			<?php
-			$i = 0;
+			$i          = 0;
 			$tag_closed = true;
 			while ( $posts->have_posts() ) {
 				$posts->the_post();
@@ -182,7 +184,7 @@ if ( $posts->have_posts() ) {
 
 	$porto_post_view = $porto_post_author = $porto_post_btn_style = $porto_post_btn_size = $porto_post_btn_color = $porto_post_image_size = $porto_post_excerpt_length = '';
 
-	if ( isset( $porto_settings ) ) {
+	if ( isset( $prev_post_metas ) ) {
 		$porto_settings['post-metas'] = $prev_post_metas;
 	}
 

@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Porto Social Icons widget
  *
- * @since 6.2.0
+ * @since 2.2.0
  */
 
 use Elementor\Controls_Manager;
@@ -33,7 +33,7 @@ class Porto_Elementor_Social_Icons_Widget extends \Elementor\Widget_Base {
 		return 'Simple-Line-Icons-social-facebook';
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$this->start_controls_section(
 			'section_social_icons',
@@ -72,7 +72,7 @@ class Porto_Elementor_Social_Icons_Widget extends \Elementor\Widget_Base {
 					'em',
 				),
 				'selectors'  => array(
-					'.elementor-element-{{ID}} a' => 'font-size: {{SIZE}}{{UNIT}};',
+					'.elementor-element-{{ID}} .share-links a' => 'font-size: {{SIZE}}{{UNIT}};',
 				),
 			)
 		);
@@ -84,7 +84,7 @@ class Porto_Elementor_Social_Icons_Widget extends \Elementor\Widget_Base {
 				'label'     => __( 'Color', 'porto-functionality' ),
 				'default'   => '',
 				'selectors' => array(
-					'.elementor-element-{{ID}} a:not(:hover)' => 'color: {{VALUE}};',
+					'.elementor-element-{{ID}} .share-links a:not(:hover)' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -96,7 +96,7 @@ class Porto_Elementor_Social_Icons_Widget extends \Elementor\Widget_Base {
 				'label'     => __( 'Hover Color', 'porto-functionality' ),
 				'default'   => '',
 				'selectors' => array(
-					'.elementor-element-{{ID}} a:hover' => 'color: {{VALUE}};',
+					'{{WRAPPER}} a:hover' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -108,7 +108,7 @@ class Porto_Elementor_Social_Icons_Widget extends \Elementor\Widget_Base {
 				'label'     => __( 'Icon Background Color', 'porto-functionality' ),
 				'default'   => '',
 				'selectors' => array(
-					'.elementor-element-{{ID}} a:not(:hover)' => 'background: {{VALUE}};',
+					'.elementor-element-{{ID}} .share-links a:not(:hover)' => 'background: {{VALUE}};',
 				),
 			)
 		);
@@ -238,12 +238,12 @@ class Porto_Elementor_Social_Icons_Widget extends \Elementor\Widget_Base {
 				'type'       => Controls_Manager::SLIDER,
 				'label'      => __( 'Spacing between icons', 'porto-functionality' ),
 				'range'      => array(
-					'px' => array(
+					'px'  => array(
 						'step' => 1,
 						'min'  => 0,
 						'max'  => 100,
 					),
-					'em' => array(
+					'em'  => array(
 						'step' => 0.1,
 						'min'  => 0.1,
 						'max'  => 10,

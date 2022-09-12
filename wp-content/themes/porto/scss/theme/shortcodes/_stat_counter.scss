@@ -93,6 +93,7 @@ div.stats-desc > div.counter_suffix {
         }
     }
     &.counter-with-border {
+        border: 1px solid var(--porto-gray-2);
         box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.04);
         padding: 25px;
     }
@@ -111,5 +112,19 @@ div.stats-desc > div.counter_suffix {
         div.counter_suffix {
             font-weight: $font-weight-normal;
         }
+    }
+
+    &.counter-alternative .stats-number {
+        font-family: var(--porto-alt-ff),sans-serif;
+    }
+}
+
+/* theme colors */
+/* primary, econdary, tertiary, quaternary, dark, light */
+@each $state in $color_states {
+    .stats-block.counter-#{nth($state,1)} .stats-number,
+    .stats-block.counter-#{nth($state,1)} div.counter_prefix,
+    .stats-block.counter-#{nth($state,1)} div.counter_suffix {
+        color: var(--porto-#{nth($state,1)}-color);
     }
 }

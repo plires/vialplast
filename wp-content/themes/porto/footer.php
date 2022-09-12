@@ -12,7 +12,7 @@ $wrapper        = porto_get_wrapper_type();
 
 			$cols = 0;
 			for ( $i = 1; $i <= 4; $i++ ) {
-				if ( is_active_sidebar( 'content-bottom-' . $i ) ) {
+				if ( is_registered_sidebar( 'content-bottom-' . $i ) && is_active_sidebar( 'content-bottom-' . $i ) ) {
 					$cols++;
 				}
 			}
@@ -65,7 +65,7 @@ $wrapper        = porto_get_wrapper_type();
 						<?php
 						$cols = 1;
 						for ( $i = 1; $i <= 4; $i++ ) {
-							if ( is_active_sidebar( 'content-bottom-' . $i ) ) {
+							if ( is_registered_sidebar( 'content-bottom-' . $i ) && is_active_sidebar( 'content-bottom-' . $i ) ) {
 								?>
 								<div class="<?php echo esc_attr( $col_class[ $cols++ ] ); ?>">
 									<?php dynamic_sidebar( 'content-bottom-' . $i ); ?>
@@ -96,7 +96,7 @@ $wrapper        = porto_get_wrapper_type();
 					<?php if ( isset( $porto_footer_escaped ) ) : ?>
 						<?php echo porto_filter_output( $porto_footer_escaped ); ?>
 					<?php else : ?>
-						<?php if ( is_active_sidebar( 'footer-top' ) && ! $footer_view ) : ?>
+						<?php if ( is_registered_sidebar( 'footer-top' ) && is_active_sidebar( 'footer-top' ) && ! $footer_view ) : ?>
 							<div class="footer-top">
 								<div class="container">
 									<?php dynamic_sidebar( 'footer-top' ); ?>
@@ -110,8 +110,8 @@ $wrapper        = porto_get_wrapper_type();
 					<?php endif; ?>
 					<?php
 				else :
-					echo '<footer id="footer" class="footer-builder">';
-					if ( ( $porto_settings['show-footer-tooltip'] && $porto_settings['footer-tooltip'] ) || $porto_settings['footer-ribbon'] ) {
+					echo '<footer id="footer" class="footer footer-builder">';
+					if ( ( ! empty( $porto_settings['show-footer-tooltip'] ) && $porto_settings['footer-tooltip'] ) || $porto_settings['footer-ribbon'] ) {
 						echo '<div class="container z-index-1">';
 						if ( $porto_settings['footer-ribbon'] ) :
 							?>

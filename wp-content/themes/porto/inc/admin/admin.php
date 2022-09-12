@@ -23,7 +23,6 @@ class Porto_Admin {
 			add_filter( 'pre_set_site_transient_update_themes', array( $this, 'pre_set_site_transient_update_themes' ) );
 			add_filter( 'upgrader_pre_download', array( $this, 'upgrader_pre_download' ), 10, 3 );
 			add_action( 'wp_ajax_porto_switch_theme_options_panel', array( $this, 'switch_options_panel' ) );
-			add_action( 'wp_ajax_nopriv_porto_switch_theme_options_panel', array( $this, 'switch_options_panel' ) );
 		}
 	}
 
@@ -52,6 +51,9 @@ class Porto_Admin {
 			// add wizard menus
 			$this->add_wp_toolbar_menu_item( __( 'Setup Wizard', 'porto' ), 'porto', admin_url( 'admin.php?page=porto-setup-wizard' ) );
 			$this->add_wp_toolbar_menu_item( __( 'Speed Optimize Wizard', 'porto' ), 'porto', admin_url( 'admin.php?page=porto-speed-optimize-wizard' ) );
+			if ( $this->is_registered() ) {
+				$this->add_wp_toolbar_menu_item( __( 'Version Control', 'porto' ), 'porto', admin_url( 'admin.php?page=porto-version-control' ) );
+			}
 			$this->add_wp_toolbar_menu_item( __( 'Tools', 'porto' ), 'porto', admin_url( 'admin.php?page=porto-tools' ) );
 
 			if ( post_type_exists( 'porto_builder' ) ) {
@@ -324,7 +326,9 @@ function Porto() {
 if ( is_customize_preview() ) {
 	require PORTO_ADMIN . '/customizer/customizer.php';
 
-	require PORTO_ADMIN . '/customizer/header-builder.php';
+	if ( apply_filters( 'porto_legacy_mode', true ) ) {
+		require PORTO_ADMIN . '/customizer/header-builder.php';
+	}
 
 	if ( get_theme_mod( 'theme_options_use_new_style', false ) ) {
 		require PORTO_ADMIN . '/customizer/selective-refresh.php';
@@ -377,8 +381,8 @@ if ( is_admin() && ( ! function_exists( 'vc_is_inline' ) || ! vc_is_inline() ) &
 					'admin_notices',
 					function() { ?>
 				<div class="notice notice-error" style="position: relative;">
-					<p>Please <a href="admin.php?page=porto">register</a> Porto theme to get access to pre-built demo websites and auto updates.</p>
-					<p><strong>Important!</strong> One <a target="_blank" href="https://themeforest.net/licenses/standard" rel="noopener noreferrer">standard license</a> is valid for only <strong>1 website</strong>. Running multiple websites on a single license is a copyright violation.</p>
+					<p><?php echo sprintf( esc_html__( 'Please %1$sregister%2$s Porto theme to get access to pre-built demo websites and auto updates.', 'porto' ), '<a href="admin.php?page=porto">', '</a>' ); ?></p>
+					<p><?php echo sprintf( esc_html__( '%1$sImportant!%2$s One %3$sstandard license%4$s is valid for only %1$s1 website%2$s. Running multiple websites on a single license is a copyright violation.', 'porto' ), '<strong>', '</strong>', '<a target="_blank" href="https://themeforest.net/licenses/standard" rel="noopener noreferrer">', '</a>' ); ?></p>
 					<button type="button" class="notice-dismiss porto-notice-dismiss"><span class="screen-reader-text"><?php esc_html__( 'Dismiss this notice.', 'porto' ); ?></span></button>
 				</div>
 				<script>
@@ -433,5 +437,6 @@ if ( is_admin() && ( ! function_exists( 'vc_is_inline' ) || ! vc_is_inline() ) &
 		require PORTO_ADMIN . '/setup_wizard/setup_wizard.php';
 		require PORTO_ADMIN . '/setup_wizard/speed_optimize_wizard.php';
 		require_once PORTO_ADMIN . '/admin_pages/class-tools.php';
+		require_once PORTO_ADMIN . '/admin_pages/class-version-control.php';
 	}
 }

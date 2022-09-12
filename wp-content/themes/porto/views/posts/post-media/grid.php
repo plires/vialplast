@@ -8,7 +8,9 @@ if ( ! $image_count ) {
 }
 ?>
 	<div class="post-image mb-4<?php echo 1 == $image_count ? ' single' : ''; ?>">
-		<div class="row mx-0 lightbox" data-plugin-options='<?php
+		<div class="row mx-0 lightbox" 
+		data-plugin-options='
+		<?php
 		echo json_encode(
 			array(
 				'delegate'  => 'a',
@@ -21,7 +23,8 @@ if ( ! $image_count ) {
 				),
 			)
 		);
-		?>'>
+		?>
+		'>
 			<?php
 			foreach ( $featured_images as $featured_image ) :
 				$attachment_medium = porto_get_attachment( $featured_image['attachment_id'], isset( $porto_settings['enable-portfolio'] ) && $porto_settings['enable-portfolio'] ? 'portfolio-grid' : 'blog-medium' );
@@ -47,12 +50,12 @@ if ( ! $image_count ) {
 			<?php echo porto_filter_output( $extra_html ); ?>
 		<?php endif; ?>
 
-		<?php if ( is_single() && 'advance' === $porto_settings['post-share-position'] ) : ?>
+		<?php if ( is_single() && isset( $porto_settings['post-share-position'] ) && 'advance' === $porto_settings['post-share-position'] ) : ?>
 			<?php get_template_part( 'views/posts/single/share' ); ?>
-		<?php elseif ( ! is_single() && 'advance' === $porto_settings['blog-post-share-position'] ) : ?>
+		<?php elseif ( ! is_single() && isset( $porto_settings['blog-post-share-position'] ) && 'advance' === $porto_settings['blog-post-share-position'] ) : ?>
 			<div class="post-block post-share post-share-advance">
 				<div class="post-share-advance-bg">
-					<?php get_template_part('share') ?>
+					<?php get_template_part( 'share' ); ?>
 					<i class="fa fa-share-alt"></i>
 				</div>
 			</div>

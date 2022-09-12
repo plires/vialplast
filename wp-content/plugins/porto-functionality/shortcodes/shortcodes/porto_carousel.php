@@ -38,10 +38,19 @@ function porto_load_carousel_shortcode() {
 					),
 				),
 				array(
+					'type'        => 'checkbox',
+					'heading'     => __( 'Disable Mouse Drag', 'porto-functionality' ),
+					'description' => __( 'This option will disapprove Mouse Drag.', 'porto-functionality' ),
+					'param_name'  => 'disable_mouse_drag',
+				),
+				array(
 					'type'       => 'textfield',
-					'heading'    => __( 'Item Margin', 'porto-functionality' ),
+					'heading'    => __( 'Item Margin (px)', 'porto-functionality' ),
 					'param_name' => 'margin',
 					'value'      => 10,
+					'selectors'  => array(
+						'{{WRAPPER}}' => '--porto-el-spacing: {{VALUE}}px;',
+					),
 				),
 				array(
 					'type'       => 'checkbox',

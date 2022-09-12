@@ -182,10 +182,10 @@ if ( 'custom' == $icon_type ) {
 		if ( $icon_align_style ) {
 			$style .= $icon_align_style;
 		}
-
-		$output .= $internal_style . $link_prefix . '<div id="porto-icon-' . esc_attr( $uniqid ) . '" class="porto-just-icon-wrapper porto-sicon-img' . ( ( $el_class . $elx_class ) ? ' ' . esc_attr( $el_class . $elx_class ) : '' ) . ( $css_porto_icon ? ' ' . esc_attr( $css_porto_icon ) : '' ) . '" style="' . esc_attr( $style ) . '"' . $css_trans . '>';
-		$output .= '<img class="img-icon" alt="' . esc_attr( $alt ) . '" src="' . esc_url( $img ) . '" width="' . esc_attr( $attachment[1] ) . '" height="' . esc_attr( $attachment[2] ) . '" />';
-		$output .= '</div>' . $link_sufix;
+		$internal_style = porto_filter_inline_css( $internal_style, false );
+		$output        .= $internal_style . $link_prefix . '<div id="porto-icon-' . esc_attr( $uniqid ) . '" class="porto-just-icon-wrapper porto-sicon-img' . ( ( $el_class . $elx_class ) ? ' ' . esc_attr( $el_class . $elx_class ) : '' ) . ( $css_porto_icon ? ' ' . esc_attr( $css_porto_icon ) : '' ) . '" style="' . esc_attr( $style ) . '"' . $css_trans . '>';
+		$output        .= '<img class="img-icon" alt="' . esc_attr( $alt ) . '" src="' . esc_url( $img ) . '" width="' . esc_attr( $attachment[1] ) . '" height="' . esc_attr( $attachment[2] ) . '" />';
+		$output        .= '</div>' . $link_sufix;
 	}
 } else {
 	if ( $icon_color ) {

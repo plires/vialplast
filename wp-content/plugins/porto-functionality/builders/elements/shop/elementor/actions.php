@@ -37,7 +37,7 @@ class Porto_Elementor_SB_Actions_Widget extends \Elementor\Widget_Base {
 		return array();
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		$this->start_controls_section(
 			'section_actions_layout',
 			array(
@@ -68,8 +68,9 @@ class Porto_Elementor_SB_Actions_Widget extends \Elementor\Widget_Base {
 			array(
 				'label'   => __( 'action', 'porto-functionality' ),
 				'type'    => Controls_Manager::SELECT,
-				'default' => 'grid',
+				'default' => '',
 				'options' => array(
+					''                             => '',
 					'woocommerce_before_shop_loop' => 'woocommerce_before_shop_loop',
 					'woocommerce_after_shop_loop'  => 'woocommerce_after_shop_loop',
 				),

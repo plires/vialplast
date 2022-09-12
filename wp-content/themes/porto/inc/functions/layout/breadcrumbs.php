@@ -39,7 +39,7 @@ function porto_breadcrumbs() {
 	if ( ! is_front_page() ) {
 		$output .= porto_breadcrumbs_link( __( 'Home', 'porto' ), apply_filters( 'woocommerce_breadcrumb_home_url', home_url() ) );
 	} elseif ( is_home() ) {
-		$output .= porto_breadcrumbs_link( $porto_settings['blog-title'] );
+		$output .= porto_breadcrumbs_link( isset( $porto_settings['blog-title'] ) ? $porto_settings['blog-title'] : esc_html__( 'Blog', 'porto' ) );
 	}
 
 	// add woocommerce shop page link
@@ -155,7 +155,7 @@ function porto_breadcrumbs() {
 				if ( get_option( 'show_on_front' ) == 'page' ) {
 					$output .= porto_breadcrumbs_link( get_the_title( get_option( 'page_for_posts', true ) ) );
 				} else {
-					$output .= porto_breadcrumbs_link( $porto_settings['blog-title'] );
+					$output .= porto_breadcrumbs_link( isset( $porto_settings['blog-title'] ) ? $porto_settings['blog-title'] : esc_html__( 'Blog', 'porto' ) );
 				}
 			}
 		}

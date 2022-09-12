@@ -55,25 +55,35 @@ if ( ! is_array( $float_path ) && ! empty( $float_path ) ) {
 if ( ! empty( $float_path ) && count( $float_path ) > 0 ) :
 	?>
 <script>
-	jQuery(document).ready(function($) {
-		if (typeof KUTE != 'undefined') {
-			<?php foreach ( $float_path as $path ) : ?>
-				<?php $path = trim( $path ); ?>
-				if( $('<?php echo porto_filter_output( $path ); ?>').get(0) ) {
-					var shape1 = KUTE.fromTo('<?php echo porto_filter_output( $path ); ?>', {
-						path: '<?php echo porto_filter_output( $path ); ?>' 
-					}, { 
-						path: '<?php echo porto_filter_output( str_replace( 'start', 'end', $path ) ); ?>' 
-					}, {
-						duration: <?php echo porto_filter_output( $float_duration ); ?>,
-						easing	: '<?php echo porto_filter_output( $float_easing ); ?>',
-						repeat: <?php echo porto_filter_output( $float_repeat ); ?>,
-						repeatDelay: <?php echo porto_filter_output( $float_repeat_delay ); ?>,
-						yoyo: <?php echo empty( $float_yoyo ) ? esc_js( 'false' ) : esc_js( 'true' ); ?>
-					}).start();
+	( function() {
+		var porto_init_svg_floating = function() {
+			( function( $ ) {
+				if (typeof KUTE != 'undefined') {
+					<?php foreach ( $float_path as $path ) : ?>
+						<?php $path = trim( $path ); ?>
+						if( $('<?php echo porto_filter_output( $path ); ?>').get(0) ) {
+							var shape1 = KUTE.fromTo('<?php echo porto_filter_output( $path ); ?>', {
+								path: '<?php echo porto_filter_output( $path ); ?>' 
+							}, { 
+								path: '<?php echo porto_filter_output( str_replace( 'start', 'end', $path ) ); ?>' 
+							}, {
+								duration: <?php echo porto_filter_output( $float_duration ); ?>,
+								easing	: '<?php echo porto_filter_output( $float_easing ); ?>',
+								repeat: <?php echo porto_filter_output( $float_repeat ); ?>,
+								repeatDelay: <?php echo porto_filter_output( $float_repeat_delay ); ?>,
+								yoyo: <?php echo empty( $float_yoyo ) ? esc_js( 'false' ) : esc_js( 'true' ); ?>
+							}).start();
+						}
+					<?php endforeach; ?>
 				}
-			<?php endforeach; ?>
+			} )( window.jQuery );
+		};
+
+		if ( window.theme && theme.isLoaded ) {
+			porto_init_svg_floating();
+		} else {
+			window.addEventListener( 'load', porto_init_svg_floating );
 		}
-	});
+	} )();
 </script>
 <?php endif; ?>

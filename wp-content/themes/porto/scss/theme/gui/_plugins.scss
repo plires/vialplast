@@ -1,6 +1,6 @@
 .menu-item {
     &[class*="col-"] {
-        -ms-flex: none; flex: none;
+        flex: none;
         width: auto;
         max-width: none;
         min-height: 0;
@@ -11,6 +11,7 @@
 
 .wpcf7 .wpcf7-validation-errors,
 .wpcf7 .ajax-loader { display: none !important; background: none !important; }
+.wpcf7-spinner { position: absolute }
 
 rs-module i[class^="fa-"], rs-module i[class*=" fa-"] { font-family: 'Font Awesome 5 Free'; font-weight: 900; }
 rs-module [class^="fa-"]:before, rs-module [class*=" fa-"]:before { font-family: inherit; font-weight: inherit; }
@@ -62,24 +63,26 @@ ul[class^="wsp-"] li a:before,
 }
 .porto-tooltip-wrap .tooltip-inner a {
     color: #fff;
-    text-decoration: none;
     font-weight: 600;
     font-size: 12px
+}
+.porto-tooltip-wrap .tooltip-arrow:before {
+    opacity: .7;
+    transition: opacity .2s
 }
 .porto-tooltip-wrap.bs-tooltip-top .tooltip-arrow:before {
     top: 0;
     border-top-color: #0071a1;
-    opacity: .7;
-    transition: opacity .2s
 }
 .porto-tooltip-wrap.bs-tooltip-bottom .tooltip-arrow::before {
     bottom: 0;
     border-bottom-color: #0071a1;
-    opacity: .7;
-    transition:opacity .2s
 }
-.porto-tooltip-wrap.bs-tooltip-top:hover .tooltip-arrow::before,
-.porto-tooltip-wrap.bs-tooltip-bottom:hover .tooltip-arrow::before {
+.porto-tooltip-wrap.bs-tooltip-end .tooltip-arrow::before {
+    right: 0;
+    border-right-color: #0071a1;
+}
+.porto-tooltip-wrap:hover .tooltip-arrow::before{
     opacity: 1
 }
 /* fix Bootstrap tooltip on magnific popup */
@@ -119,4 +122,21 @@ ul[class^="wsp-"] li a:before,
     .wpforms-field:not(:last-child) {
         margin-bottom: .875rem
     }
+}
+
+.page-wrapper .fdm-item-image {
+    background-color: var(--porto-normal-bg);
+    border: 1px solid var(--porto-gray-5);
+    padding: 0;
+}
+
+.fdm-item-panel .fdm-item-title {
+    color: var(--porto-h4-color, var(--porto-heading-color));
+}
+
+.porto-lazyload:not(img):not(.lazy-load-loaded) {
+    background-color: var(--porto-gray-1);
+}
+.porto-lazyload:not(.lazy-load-loaded)[data-oi$=".png"] {
+    opacity: 0
 }

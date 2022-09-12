@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Porto Elementor widget to display a button.
  *
- * @since 5.2.0
+ * @since 1.5.2
  */
 
 use Elementor\Controls_Manager;
@@ -35,7 +35,7 @@ class Porto_Elementor_Button_Widget extends \Elementor\Widget_Base {
 		return 'eicon-button';
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$floating_options = porto_update_vc_options_to_elementor( porto_shortcode_floating_fields() );
 
@@ -62,8 +62,11 @@ class Porto_Elementor_Button_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'link',
 			array(
-				'label' => __( 'Link', 'porto-functionality' ),
-				'type'  => Controls_Manager::URL,
+				'label'   => __( 'Link', 'porto-functionality' ),
+				'type'    => Controls_Manager::URL,
+				'dynamic' => array(
+					'active' => true,
+				),
 			)
 		);
 
@@ -135,6 +138,25 @@ class Porto_Elementor_Button_Widget extends \Elementor\Widget_Base {
 				)
 			);
 		endif;
+		$this->add_control(
+			'hover_text_effect',
+			array(
+				'type'        => Controls_Manager::SELECT,
+				'label'       => __( 'Select Hover Text Effect', 'porto-functionality' ),
+				'description' => __( 'Select the type of effct you want on hover', 'porto-functionality' ),
+				'options'     => array(
+					''                        => __( 'No Effect', 'porto-functionality' ),
+					'hover-text-switch-left'  => __( 'Switch Left', 'porto-functionality' ),
+					'hover-text-switch-up'    => __( 'Switch Up', 'porto-functionality' ),
+					'hover-text-marquee-left' => __( 'Marquee Left', 'porto-functionality' ),
+					'hover-text-marquee-up'   => __( 'Marquee Up', 'porto-functionality' ),
+					'hover-text-marquee-down' => __( 'Marquee Down', 'porto-functionality' ),
+				),
+				'condition'   => array(
+					'title!' => '',
+				),
+			)
+		);
 
 		$this->add_control(
 			'icon_cls',
@@ -165,14 +187,16 @@ class Porto_Elementor_Button_Widget extends \Elementor\Widget_Base {
 			'hover_effect',
 			array(
 				'type'        => Controls_Manager::SELECT,
-				'label'       => __( 'Select Hover Effect type', 'porto-functionality' ),
+				'label'       => __( 'Select Hover Icon Effect', 'porto-functionality' ),
 				'description' => __( 'Select the type of effct you want on hover', 'porto-functionality' ),
 				'options'     => array(
-					''                 => __( 'No Effect', 'porto-functionality' ),
-					'hover-icon-zoom'  => __( 'Icon Zoom', 'porto-functionality' ),
-					'hover-icon-up'    => __( 'Icon Slide Up', 'porto-functionality' ),
-					'hover-icon-left'  => __( 'Icon Slide Left', 'porto-functionality' ),
-					'hover-icon-right' => __( 'Icon Slide Right', 'porto-functionality' ),
+					''                            => __( 'No Effect', 'porto-functionality' ),
+					'hover-icon-zoom'             => __( 'Icon Zoom', 'porto-functionality' ),
+					'hover-icon-up'               => __( 'Icon Slide Up', 'porto-functionality' ),
+					'hover-icon-left'             => __( 'Icon Slide Left', 'porto-functionality' ),
+					'hover-icon-right'            => __( 'Icon Slide Right', 'porto-functionality' ),
+					'hover-icon-pulse-left-right' => __( 'Icon Slide Right & Left', 'porto-functionality' ),
+					'hover-icon-pulse-infnite'    => __( 'Icon Slide Infinite', 'porto-functionality' ),
 				),
 				'default'     => '',
 				'condition'   => array(
@@ -235,7 +259,7 @@ class Porto_Elementor_Button_Widget extends \Elementor\Widget_Base {
 			array(
 				'name'     => 'btn_typograhy',
 				'scheme'   => Elementor\Core\Schemes\Typography::TYPOGRAPHY_1,
-				'label'    => __( 'Typograhy', 'porto-functionality' ),
+				'label'    => __( 'Typography', 'porto-functionality' ),
 				'selector' => '{{WRAPPER}} .btn',
 			)
 		);
@@ -386,7 +410,7 @@ class Porto_Elementor_Button_Widget extends \Elementor\Widget_Base {
 				),
 				'selectors'  => array(
 					'{{WRAPPER}} .btn-icon-right i' => 'margin-' . $left . ': {{SIZE}}{{UNIT}};',
-					'{{WRAPPER}} .btn-icon-left i' => 'margin-' . $right . ': {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .btn-icon-left i'  => 'margin-' . $right . ': {{SIZE}}{{UNIT}};',
 				),
 				'condition'  => array(
 					'icon_cls[value]!' => '',
@@ -453,6 +477,12 @@ class Porto_Elementor_Button_Widget extends \Elementor\Widget_Base {
 			}
 
 			view.addInlineEditingAttributes( 'title' );
+
+			if ( settings.hover_text_effect && settings.title ) {
+				btn_classes += ' btn-hover-text-effect ' + settings.hover_text_effect;
+				view.addRenderAttribute( 'title', 'class', 'btn-text' );
+				view.addRenderAttribute( 'title', 'data-text', settings.title );
+			}
 
 			let extra_attr = porto_elementor_add_floating_options( settings );
 		#>

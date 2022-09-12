@@ -14,7 +14,7 @@ if ( ! defined( 'YITH_WCAS' ) ) {
 global $porto_settings;
 
 $container_class = 'yith-ajaxsearchform-container' . rand();
-$show_cats = isset( $porto_settings['search-cats'] ) && $porto_settings['search-cats'];
+$show_cats       = isset( $porto_settings['search-cats'] ) && $porto_settings['search-cats'];
 if ( $show_cats && wp_is_mobile() ) {
 	$show_cats = ( ! isset( $porto_settings['search-cats-mobile'] ) || $porto_settings['search-cats-mobile'] );
 }
@@ -51,90 +51,100 @@ if ( $show_cats && wp_is_mobile() ) {
 </form>
 
 <script type="text/javascript">
-jQuery(function($){
-	var search_loader_url = '<?php echo esc_url( PORTO_URI . '/images/ajax-loader@2x.gif' ); ?>';
-	<?php
-	$admin_ajax = admin_url( 'admin-ajax.php', 'relative' );
-	if ( strpos( $admin_ajax, '?' ) === false ) {
-		$admin_ajax .= '?';
-	} else {
-		$admin_ajax .= '&';
-	}
-	?>
-	var ajax_url = '<?php echo esc_url( $admin_ajax ); ?>';
-
-	var yith_search = $('.<?php echo esc_js( $container_class ); ?> .yith-s').<?php echo version_compare( YITH_WCAS_VERSION, '1.3.1', '>=' ) ? 'yithautocomplete' : 'autocomplete'; ?>({
-		minChars: <?php echo get_option( 'yith_wcas_min_chars' ) * 1; ?>,
-		appendTo: '.<?php echo esc_js( $container_class ); ?>',
-		serviceUrl: function() {
-			<?php if ( $show_cats ) : ?>
-			var val = $('.<?php echo esc_js( $container_class ); ?> .cat').val();
-			<?php else : ?>
-			var val = '0';
-			<?php endif; ?>
-			if (val != '0') {
-				return ajax_url + 'action=yith_ajax_search_products'<?php echo ! $show_cats ? '' : " + '&product_cat=' + val"; ?>;
+( function() {
+	var porto_init_yith_search = function() {
+		( function( $ ) {
+			var search_loader_url = '<?php echo esc_url( PORTO_URI . '/images/ajax-loader@2x.gif' ); ?>';
+			<?php
+			$admin_ajax = admin_url( 'admin-ajax.php', 'relative' );
+			if ( strpos( $admin_ajax, '?' ) === false ) {
+				$admin_ajax .= '?';
 			} else {
-				return ajax_url + 'action=yith_ajax_search_products';
+				$admin_ajax .= '&';
 			}
-		},
-		onSearchStart: function(){
-			$(this).css('background', 'url('+search_loader_url+') no-repeat 97% center');
-			$(this).css('background-size', '16px 16px');
-		},
-		onSearchComplete: function(){
-			$(this).css('background', 'transparent');
-		},
+			?>
+			var ajax_url = '<?php echo esc_url( $admin_ajax ); ?>';
 
-		onSelect: function (suggestion) {
-			if( suggestion.id != -1 ) {
-				window.location.href = suggestion.url;
-			}
-		},
-		formatResult: function (suggestion, currentValue) {
-			var pattern = '(' + $.<?php echo version_compare( YITH_WCAS_VERSION, '1.3.1', '>=' ) ? 'YithAutocomplete' : 'Autocomplete'; ?>.utils.escapeRegExChars(currentValue) + ')';
-			var html = '';
+			var yith_search = $('.<?php echo esc_js( $container_class ); ?> .yith-s').<?php echo version_compare( YITH_WCAS_VERSION, '1.3.1', '>=' ) ? 'yithautocomplete' : 'autocomplete'; ?>({
+				minChars: <?php echo get_option( 'yith_wcas_min_chars' ) * 1; ?>,
+				appendTo: '.<?php echo esc_js( $container_class ); ?>',
+				serviceUrl: function() {
+					<?php if ( $show_cats ) : ?>
+					var val = $('.<?php echo esc_js( $container_class ); ?> .cat').val();
+					<?php else : ?>
+					var val = '0';
+					<?php endif; ?>
+					if (val != '0') {
+						return ajax_url + 'action=yith_ajax_search_products'<?php echo ! $show_cats ? '' : " + '&product_cat=' + val"; ?>;
+					} else {
+						return ajax_url + 'action=yith_ajax_search_products';
+					}
+				},
+				onSearchStart: function(){
+					$(this).css('background', 'url('+search_loader_url+') no-repeat 97% center');
+					$(this).css('background-size', '16px 16px');
+				},
+				onSearchComplete: function(){
+					$(this).css('background', 'transparent');
+				},
 
-			if ( typeof suggestion.img !== 'undefined' ) {
-				html += suggestion.img;
-			}
+				onSelect: function (suggestion) {
+					if( suggestion.id != -1 ) {
+						window.location.href = suggestion.url;
+					}
+				},
+				formatResult: function (suggestion, currentValue) {
+					var pattern = '(' + $.<?php echo version_compare( YITH_WCAS_VERSION, '1.3.1', '>=' ) ? 'YithAutocomplete' : 'Autocomplete'; ?>.utils.escapeRegExChars(currentValue) + ')';
+					var html = '';
 
-			html += '<div class="yith_wcas_result_content"><div class="title">';
-			html += suggestion.value.replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>');
-			html += '</div>';
+					if ( typeof suggestion.img !== 'undefined' ) {
+						html += suggestion.img;
+					}
 
-			if ( typeof suggestion.div_badge_open !== 'undefined' ) {
-				html += suggestion.div_badge_open;
-			}
+					html += '<div class="yith_wcas_result_content"><div class="title">';
+					html += suggestion.value.replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>');
+					html += '</div>';
 
-			if ( typeof suggestion.on_sale !== 'undefined' ) {
-				html += suggestion.on_sale;
-			}
+					if ( typeof suggestion.div_badge_open !== 'undefined' ) {
+						html += suggestion.div_badge_open;
+					}
 
-			if ( typeof suggestion.featured !== 'undefined' ) {
-				html += suggestion.featured;
-			}
+					if ( typeof suggestion.on_sale !== 'undefined' ) {
+						html += suggestion.on_sale;
+					}
 
-			if ( typeof suggestion.div_badge_close !== 'undefined' ) {
-				html += suggestion.div_badge_close;
-			}
+					if ( typeof suggestion.featured !== 'undefined' ) {
+						html += suggestion.featured;
+					}
 
-			if ( typeof suggestion.price !== 'undefined' && suggestion.price != '' ) {
-				html += ' ' + suggestion.price;
-			}
+					if ( typeof suggestion.div_badge_close !== 'undefined' ) {
+						html += suggestion.div_badge_close;
+					}
 
-			if ( typeof suggestion.excerpt !== 'undefined' ) {
-				html += ' ' +  suggestion.excerpt.replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>');
-			}
+					if ( typeof suggestion.price !== 'undefined' && suggestion.price != '' ) {
+						html += ' ' + suggestion.price;
+					}
 
-			html += '</div>';
+					if ( typeof suggestion.excerpt !== 'undefined' ) {
+						html += ' ' +  suggestion.excerpt.replace(new RegExp(pattern, 'gi'), '<strong>$1<\/strong>');
+					}
 
-			return html;
-		}
-	});
+					html += '</div>';
 
-	$('.<?php echo esc_js( $container_class ); ?> .cat').on('change', function() {
-		$('.<?php echo esc_js( $container_class ); ?> .yith-s').focus();
-	});
-});
+					return html;
+				}
+			});
+
+			$('.<?php echo esc_js( $container_class ); ?> .cat').on('change', function() {
+				$('.<?php echo esc_js( $container_class ); ?> .yith-s').focus();
+			});
+		} )( window.jQuery );
+	};
+
+	if ( window.theme && theme.isLoaded ) {
+		porto_init_yith_search();
+	} else {
+		window.addEventListener( 'load', porto_init_yith_search );
+	}
+} )();
 </script>

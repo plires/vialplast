@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Carousel, Creative Grid and Banner
  *
- * @since 5.2.2
+ * @since 1.5.4
  */
 use Elementor\Controls_Manager;
 
@@ -41,6 +41,10 @@ class Porto_Elementor_Section extends Elementor\Element_Section {
 				}
 			}
 
+			if ( $settings['item_margin'] ) {
+				$extra_class[] = 'has-ccols-spacing';
+			}
+
 			if ( 'yes' == $settings['show_dots'] ) {
 				if ( $settings['dots_style'] ) {
 					$extra_class[] = esc_attr( $settings['dots_style'] );
@@ -62,13 +66,34 @@ class Porto_Elementor_Section extends Elementor\Element_Section {
 				$extra_class[] = 'ccols-1';
 			}
 
-			$extra_options                = array();
-			$extra_options['margin']      = '' !== $settings['item_margin'] ? (int) $settings['item_margin'] : 0;
-			$extra_options['items']       = $items;
-			$extra_options['nav']         = 'yes' == $settings['show_nav'];
-			$extra_options['dots']        = 'yes' == $settings['show_dots'];
+			$extra_options           = array();
+			$extra_options['margin'] = '' !== $settings['item_margin'] ? (int) $settings['item_margin'] : 0;
+			$extra_options['items']  = (int) $items;
+			$extra_options['nav']    = 'yes' == $settings['show_nav'];
+			$extra_options['dots']   = 'yes' == $settings['show_dots'];
+			if ( isset( $settings['set_loop'] ) ) {
+				if('yes' == $settings['set_loop']){
+					$extra_options['loop'] = true;
+				}else{
+					$extra_options['loop'] = false;
+				}
+			}
+			if ( isset( $settings['disable_mouse_drag'] ) && 'yes' == $settings['disable_mouse_drag'] ) {
+				$extra_options['mouseDrag'] = false;
+				$extra_options['touchDrag'] = false;
+			} else {
+				$extra_options['mouseDrag'] = true;
+				$extra_options['touchDrag'] = true;
+			}
+
 			$extra_options['themeConfig'] = true;
 
+			if ( ! empty( $settings['animate_out'] ) ) {
+				$extra_options['animateOut'] = $settings['animate_out'];
+			}
+			if ( ! empty( $settings['animate_in'] ) ) {
+				$extra_options['animateIn'] = $settings['animate_in'];
+			}
 			$breakpoints = Elementor\Core\Responsive\Responsive::get_breakpoints();
 			if ( 1 !== intval( $items ) ) {
 				$extra_options['responsive'] = array( $breakpoints['xs'] => (int) $items_mobile );
@@ -268,6 +293,7 @@ class Porto_Elementor_Section extends Elementor\Element_Section {
 					}
 				}
 			} elseif ( 'creative' == $settings['as_param'] ) {
+				ob_start();
 				if ( 'yes' == $settings['use_preset'] ) {
 					$extra_class .= ' grid-creative porto-preset-layout';
 
@@ -295,6 +321,28 @@ class Porto_Elementor_Section extends Elementor\Element_Section {
 						echo '</style>';
 					}
 				}
+				porto_filter_inline_css( ob_get_clean() );
+			}
+
+			// particles effect options
+			if ( isset( $settings['particles_img'] ) && ! empty( $settings['particles_img']['url'] ) ) {
+				$particles_opts = array(
+					'src' => esc_url( $settings['particles_img']['url'] ),
+					'he'  => esc_attr( $settings['particles_hover_effect'] ),
+					'ce'  => esc_attr( $settings['particles_click_effect'] ),
+				);
+
+				if ( ! empty( $settings['particles_img']['id'] ) ) {
+					$img_data = wp_get_attachment_image_src( $settings['particles_img']['id'], 'full' );
+					if ( ! empty( $img_data[1] ) && ! empty( $img_data[2] ) ) {
+						$particles_opts['w'] = (int) $img_data[1];
+						$particles_opts['h'] = (int) $img_data[2];
+					}
+				}
+				echo '<div id="particles-' . porto_generate_rand( 4 ) . '" class="particles-wrapper fill" data-plugin-options="' . esc_attr( json_encode( $particles_opts ) ) . '"></div>';
+
+				wp_enqueue_script( 'particles', PORTO_SHORTCODES_URL . 'assets/js/particles.min.js', array(), PORTO_SHORTCODES_VERSION, true );
+				wp_enqueue_script( 'porto-particles-loader', PORTO_SHORTCODES_URL . 'assets/js/porto-particles-loader.min.js', array( 'particles' ), PORTO_SHORTCODES_VERSION, true );
 			}
 			?>
 			<?php if ( $legacy_enabled ) : ?>
@@ -537,7 +585,7 @@ function porto_elementor_shape_divider( $self, $args ) {
 	foreach ( Elementor\Shapes::get_shapes() as $shape_name => $shape_props ) {
 		$shapes_options[ $shape_name ] = $shape_props['title'];
 	}
-	$shapes_options['custom'] = esc_html__( 'Custom', 'porto' );
+	$shapes_options['custom'] = esc_html__( 'Custom', 'porto-functionality' );
 	$self->update_control(
 		'shape_divider_top',
 		array(
@@ -603,7 +651,7 @@ function porto_elementor_shape_divider( $self, $args ) {
 	$self->add_control(
 		'shape_divider_top_custom',
 		array(
-			'label'                  => esc_html__( 'Custom SVG', 'porto' ),
+			'label'                  => esc_html__( 'Custom SVG', 'porto-functionality' ),
 			'type'                   => Controls_Manager::ICONS,
 			'label_block'            => false,
 			'skin'                   => 'inline',
@@ -623,7 +671,7 @@ function porto_elementor_shape_divider( $self, $args ) {
 	$self->add_control(
 		'shape_divider_bottom_custom',
 		array(
-			'label'                  => esc_html__( 'Custom SVG', 'porto' ),
+			'label'                  => esc_html__( 'Custom SVG', 'porto-functionality' ),
 			'type'                   => Controls_Manager::ICONS,
 			'label_block'            => false,
 			'skin'                   => 'inline',
@@ -716,6 +764,18 @@ function porto_elementor_section_custom_control( $self, $args ) {
 		)
 	);
 
+	$self->add_control(
+		'disable_mouse_drag',
+		array(
+			'type'        => Controls_Manager::SWITCHER,
+			'label'       => esc_html__( 'Disable Mouse Drag', 'porto-functionality' ),
+			'description' => esc_html__( 'This option will disapprove Mouse Drag.', 'porto-functionality' ),
+			'condition'   => array(
+				'as_param' => 'carousel',
+			),
+		)
+	);
+
 	$self->add_responsive_control(
 		'items',
 		array(
@@ -725,7 +785,7 @@ function porto_elementor_section_custom_control( $self, $args ) {
 				'px' => array(
 					'step' => 1,
 					'min'  => 1,
-					'max'  => 6,
+					'max'  => 7,
 				),
 			),
 			'condition' => array(
@@ -737,14 +797,19 @@ function porto_elementor_section_custom_control( $self, $args ) {
 	$self->add_control(
 		'item_margin',
 		array(
-			'label'       => esc_html__( 'Item Margin(px)', 'porto-functionality' ),
-			'type'        => Controls_Manager::NUMBER,
-			'default'     => 0,
-			'min'         => '0',
-			'max'         => '100',
-			'step'        => '1',
-			'placeholder' => '0',
-			'condition'   => array(
+			'label'              => esc_html__( 'Item Margin(px)', 'porto-functionality' ),
+			'type'               => Controls_Manager::NUMBER,
+			'default'            => 0,
+			'min'                => '0',
+			'max'                => '100',
+			'step'               => '1',
+			'placeholder'        => '0',
+			'render_type'        => 'template',
+			'frontend_available' => true,
+			'selectors'          => array(
+				'.elementor-element-{{ID}} > .elementor-container > .porto-carousel, .elementor-element-{{ID}} > .porto-carousel' => '--porto-el-spacing: {{VALUE}}px;',
+			),
+			'condition'          => array(
 				'as_param' => 'carousel',
 			),
 		)
@@ -801,6 +866,17 @@ function porto_elementor_section_custom_control( $self, $args ) {
 			'condition' => array(
 				'as_param' => 'carousel',
 				'show_nav' => 'yes',
+			),
+		)
+	);
+
+	$self->add_control(
+		'set_loop',
+		array(
+			'type'      => Controls_Manager::SWITCHER,
+			'label'     => esc_html__( 'Infinite loop', 'porto-functionality' ),
+			'condition' => array(
+				'as_param' => 'carousel',
 			),
 		)
 	);
@@ -923,6 +999,9 @@ function porto_elementor_section_custom_control( $self, $args ) {
 			'condition'   => array(
 				'as_param' => 'banner',
 			),
+			'dynamic'     => array(
+				'active' => true,
+			),
 		)
 	);
 
@@ -960,6 +1039,9 @@ function porto_elementor_section_custom_control( $self, $args ) {
 			'description' => esc_html__( 'Add link / select existing page to link to this banner', 'porto-functionality' ),
 			'condition'   => array(
 				'as_param' => 'banner',
+			),
+			'dynamic'     => array(
+				'active' => true,
 			),
 		)
 	);
@@ -1213,6 +1295,28 @@ function porto_elementor_section_custom_control( $self, $args ) {
 	);
 
 	$self->add_control(
+		'animate_in',
+		array(
+			'label'     => esc_html__( 'Item Animation In', 'porto-functionality' ),
+			'type'      => Controls_Manager::TEXT,
+			'condition' => array(
+				'as_param' => 'carousel',
+			),
+		)
+	);
+
+	$self->add_control(
+		'animate_out',
+		array(
+			'label'     => esc_html__( 'Item Animation Out', 'porto-functionality' ),
+			'type'      => Controls_Manager::TEXT,
+			'condition' => array(
+				'as_param' => 'carousel',
+			),
+		)
+	);
+
+	$self->add_control(
 		'porto_el_cls',
 		array(
 			'label'     => esc_html__( 'Extra Class', 'porto-functionality' ),
@@ -1243,6 +1347,17 @@ function porto_elementor_element_add_parallax( $self, $args ) {
 			'condition'   => array(
 				'background_background'  => array( 'classic' ),
 				'background_image[url]!' => '',
+			),
+		)
+	);
+	$self->add_control(
+		'parallax_horizontal',
+		array(
+			'type'        => Controls_Manager::SWITCHER,
+			'label'       => esc_html__( 'Work as horizontal parallax?', 'porto-functionality' ),
+			'description' => esc_html__( 'This works as horizontal parallax. If false, works as vertical parallax.', 'porto-functionality' ),
+			'condition'   => array(
+				'parallax_speed[size]!' => '',
 			),
 		)
 	);
@@ -1284,6 +1399,10 @@ function porto_elementor_print_section_template( $content, $self ) {
 					}
 				}
 
+				if ( settings.item_margin ) {
+					extra_class += ' has-ccols-spacing';
+				}
+
 				if ( Number( settings.items.size ) > 1 ) {
 					extra_class += ' ccols-xl-' + Number( settings.items.size );
 				}
@@ -1305,6 +1424,27 @@ function porto_elementor_print_section_template( $content, $self ) {
 				extra_options["responsive"][elementorFrontend.config.breakpoints['xs']] = Math.max(Number( settings.items_mobile.size ), 1);
 				extra_options["responsive"][elementorFrontend.config.breakpoints['sm']] = Math.max(Number( settings.items_tablet.size ) - 1, Number( settings.items_mobile.size ), 1);
 				extra_options["responsive"][elementorFrontend.config.breakpoints['md']] = Math.max(Number( settings.items_tablet.size ), 1);
+				if( settings.set_loop ){
+					if('yes' == settings.set_loop){
+						extra_options["loop"] = true;
+					} else {
+						extra_options["loop"] = false;
+					}
+				}
+
+				if( settings.disable_mouse_drag && 'yes' == settings.disable_mouse_drag){
+					extra_options["mouseDrag"] = false;
+					extra_options["touchDrag"] = false;
+				} else {
+					extra_options["mouseDrag"] = true;
+					extra_options["touchDrag"] = true;
+				}
+				if( settings.animate_out ){
+					extra_options["animateOut"] = settings.animate_out;
+				}
+				if( settings.animate_in ){
+					extra_options["animateIn"] = settings.animate_in;
+				}
 				if (Math.max(Number( settings.items.size ), 1) > Math.max(Number( settings.items_tablet.size ), 1) + 1) {
 					extra_options["responsive"][elementorFrontend.config.breakpoints['lg']] = Math.max(Number( settings.items.size ) - 1, 1);
 					extra_options["responsive"][elementorFrontend.config.breakpoints['xl']] = Math.max(Number( settings.items.size ), 1);
@@ -1407,6 +1547,11 @@ function porto_elementor_print_section_template( $content, $self ) {
 		if (settings.parallax_speed.size) {
 			extra_class += ' porto-parallax';
 			extra_attr += ' data-parallax-speed=' + parseFloat(settings.parallax_speed.size);
+
+			if (settings.parallax_horizontal) {
+				extra_attr += ' data-parallax-type=' + 'horizontal';
+			}
+
 		}
 
 		if (settings.porto_el_cls) {
@@ -1414,10 +1559,31 @@ function porto_elementor_print_section_template( $content, $self ) {
 		}
 
 		if (settings.is_toolbox) {
-			extra_container_cls += ' shop-loop-before';
+			extra_container_cls += ' shop-loop-before shop-builder';
+		}
+
+		// particles effect options
+		if ( settings.particles_img && settings.particles_img.url ) {
+			var particles_opts = { src: settings.particles_img.url, he: settings.particles_hover_effect, ce:settings.particles_click_effect },
+				particles_id = 'particles-' + Math.ceil( Math.random() * 10000 );
+
+			var particlesImg = new Image();
+			particlesImg.onload = function() {
+				particles_opts.w = particlesImg.width;
+				particles_opts.h = particlesImg.height;
+
+				const iframeWindow = elementorFrontend.elements.$window.get(0);
+				iframeWindow.jQuery( '#' + particles_id ).attr( 'data-plugin-options', JSON.stringify( particles_opts ) );
+				return;
+			};
+			particlesImg.src = settings.particles_img.url;
+	#>
+		<div id="{{ particles_id }}" class="particles-wrapper fill" data-plugin-options="{{ JSON.stringify( particles_opts ) }}"></div>
+	<#
 		}
 	#>
 	<?php
+
 		$legacy_enabled = ! porto_elementor_if_dom_optimization();
 	if ( $legacy_enabled ) {
 		$content = str_replace( '<div class="elementor-container', '<div class="elementor-container{{ extra_container_cls }}', $content );
@@ -1450,12 +1616,15 @@ function porto_elementor_section_add_custom_attrs( $self ) {
 	if ( ! empty( $settings['is_main_header'] ) ) {
 		$self->add_render_attribute( '_wrapper', 'class', 'header-main' );
 	} elseif ( ! empty( $settings['is_toolbox'] ) ) {
-		$self->add_render_attribute( '_wrapper', 'class', 'shop-loop-before' );
+		$self->add_render_attribute( '_wrapper', 'class', 'shop-loop-' . ( apply_filters( 'porto_sb_products_rendered', false ) ? 'after' : 'before' ) . ' shop-builder' );
 	}
 	if ( ! empty( $settings['parallax_speed']['size'] ) ) {
 		$self->add_render_attribute( '_wrapper', 'data-plugin-parallax', '' );
 		$self->add_render_attribute( '_wrapper', 'data-plugin-options', '{"speed": ' . floatval( $settings['parallax_speed']['size'] ) . '}' );
 
+		if ( ! empty( $settings['parallax_horizontal'] ) ) {
+			$self->add_render_attribute( '_wrapper', 'data-parallax-type', 'horizontal' );
+		}
 		wp_enqueue_script( 'skrollr' );
 	}
 
@@ -1464,5 +1633,18 @@ function porto_elementor_section_add_custom_attrs( $self ) {
 		foreach ( $mpx_attrs as $key => $val ) {
 			$self->add_render_attribute( '_wrapper', $key, $val );
 		}
+	}
+
+	// scroll progress options
+	if ( isset( $settings['scroll_parallax'] ) && 'yes' == $settings['scroll_parallax'] ) {
+		$self->add_render_attribute( '_wrapper', 'data-plugin', 'scroll-parallax' );
+
+		$sp_options = array( 'cssValueStart' => empty( $settings['scroll_parallax_width']['size'] ) ? 40 : absint( $settings['scroll_parallax_width']['size'] ) );
+		if ( ! empty( $settings['scroll_unit'] ) ) {
+			$sp_options['cssValueUnit'] = esc_attr( $settings['scroll_unit'] );
+		}
+		$self->add_render_attribute( '_wrapper', 'data-sp-options', json_encode( $sp_options ) );
+
+		wp_enqueue_script( 'porto-scroll-parallax', PORTO_SHORTCODES_URL . 'assets/js/porto-scroll-parallax.min.js', array( 'jquery-core' ), PORTO_SHORTCODES_VERSION, true );
 	}
 }

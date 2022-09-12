@@ -20,9 +20,13 @@ if ( ! class_exists( 'porto_sidebar_navwalker' ) ) {
 	return;
 }
 
+if ( ! empty( $shortcode_class ) ) {
+	$el_class .= ' ' . $shortcode_class;
+}
+
 global $porto_settings;
 
-$output .= '<div class="widget_sidebar_menu main-sidebar-menu' . ( $el_class ? ' ' . esc_attr( $el_class ) : '' ) . '">';
+$output .= '<div class="widget_sidebar_menu main-sidebar-menu' . ( $el_class ? ' ' . esc_attr( trim( $el_class ) ) : '' ) . '">';
 if ( $title ) {
 	$output .= '<div class="widget-title">';
 

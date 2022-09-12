@@ -117,6 +117,9 @@ if ( ! class_exists( 'Porto_LazyLoad_Images' ) ) :
 			/*if ( false !== strpos( $content, 'data-oi' ) ) {
 				return $content;
 			}*/
+			if ( class_exists( 'Porto_Critical' ) ) {
+				$preloads = Porto_Critical::get_instance()->get_preloads();
+			}
 
 			$matches = array();
 			preg_match_all( '/<img[\s\r\n]+.*?>/is', $content, $matches );
@@ -127,6 +130,19 @@ if ( ! class_exists( 'Porto_LazyLoad_Images' ) ) :
 			global $porto_settings;
 
 			foreach ( $matches[0] as $img_html ) {
+				if ( ! empty( $preloads ) ) {
+					$skip = false;
+					foreach ( $preloads as $preload ) {
+						if ( false !== strpos( $img_html, $preload ) ) {
+							$skip = true;
+							break;
+						}
+					}
+					if ( $skip ) {
+						continue;
+					}
+				}
+
 				if ( false !== strpos( $img_html, 'data-oi' ) || false !== strpos( $img_html, 'data-original' ) || false !== strpos( $img_html, 'data-src' ) || preg_match( "/src=['\"]data:image/is", $img_html ) || false !== strpos( $img_html, 'rev-slidebg' ) || false !== strpos( $img_html, 'porto-skip-lz' ) ) {
 					continue;
 				}

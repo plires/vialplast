@@ -121,20 +121,20 @@ p { margin: 0 0 1.25rem; line-height: 1.8 }
 
 /* Remove demo contents */
 .porto-remove-demo {
-	font-size: .8125rem;
-	background: #fff;
-	padding: 1.5rem 1.25rem 1rem;
-	max-width: 20rem;
-	margin: 0 auto;
+    font-size: .8125rem;
+    background: #fff;
+    padding: 1.5rem 1.25rem 1rem;
+    max-width: 20rem;
+    margin: 0 auto;
 }
 .porto-remove-demo label {
-	display: inline-block;
-	width: 49%;
-	margin-bottom: .625rem;
+    display: inline-block;
+    width: 49%;
+    margin-bottom: .625rem;
 }
 .porto-remove-demo .btn {
-	width: 100%;
-	margin-top: .5rem
+    width: 100%;
+    margin-top: .5rem
 }
 
 /* Others */
@@ -147,101 +147,101 @@ h5.system-status.error strong { color: #c50707 }
 .porto-setup-wizard .porto-setup-next-steps .status { color: #32373c }
 .porto-notice { border: 1px solid #ccd0d4; border-left-width: 4px; border-left-color: #ffb900; box-shadow: 0 1px 1px rgba(0,0,0,.04); padding: 1px 12px }
 .porto-table {
-	width: 100%;
-	text-align: left;
-	border-spacing: 0
+    width: 100%;
+    text-align: left;
+    border-spacing: 0
 }
 .porto-table th, .porto-table td {
-	padding: 15px 20px;
-	vertical-align: middle;
+    padding: 15px 20px;
+    vertical-align: middle;
 }
 .porto-table th {
-	color: #222529;
-	border-bottom: 1px solid #e8e8e8
+    color: #222529;
+    border-bottom: 1px solid #e8e8e8
 }
 .porto-table p {
-	margin-bottom: 0
+    margin-bottom: 0
 }
 .porto-table tr:nth-child(2n) td {
-	background-color: #f6f7f9; 
+    background-color: #f6f7f9; 
 }
 
 .porto-table .btn {
-	margin-bottom: 0
+    margin-bottom: 0
 }
 
 .has-badge .theme-screenshot {
-	position: relative;
+    position: relative;
 }
 .has-badge .theme-screenshot:after {
-	content: 'New';
-	position: absolute;
-	right: 10px;
-	top: 10px;
-	border-radius: 2px;
-	line-height: 22px;
-	font-size:  9px;
-	font-weight: 600;
-	text-transform: uppercase;
-	padding: 0 .5rem;
-	background: linear-gradient(135deg, #0088cc 0%, #0169fe 80%);
-	color: #fff;
+    content: 'New';
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border-radius: 2px;
+    line-height: 22px;
+    font-size:  9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 0 .5rem;
+    background: linear-gradient(135deg, #0088cc 0%, #0169fe 80%);
+    color: #fff;
 }
 .badge-updated .theme-screenshot:after {
-	content: 'Updated';
-	background: #36c57a;
+    content: 'Updated';
+    background: #36c57a;
 }
 .badge-e-added .theme-screenshot:after {
-	content: 'Elementor Added';
-	background: #2baab1;
+    content: 'Elementor Added';
+    background: #2baab1;
 }
 
 /* Responsive */
 @media (max-width: 1199px) {
-	#theme-install-demos .theme { width: calc(33.3333% - 6.6666px); }
-	.porto-setup-steps a { padding-left: 1.5rem; padding-right: 1.5rem }
+    #theme-install-demos .theme { width: calc(33.3333% - 6.6666px); }
+    .porto-setup-steps a { padding-left: 1.5rem; padding-right: 1.5rem }
 }
 @media (max-width: 991px) {
-	.porto-setup-wizard section { padding: 2rem 1.5rem 1.5rem }
-	#theme-install-demos .theme { width: calc(50% - 10px) }
-	.porto-setup-steps a:before, .porto-setup-steps a:after { content: none }
-	.porto-setup-steps { padding: .5rem 0 }
-	.porto-setup-steps a { padding: .5rem 1rem }
-	.porto-setup-wizard .w-50 { width: 100% !important; }
+    .porto-setup-wizard section { padding: 2rem 1.5rem 1.5rem }
+    #theme-install-demos .theme { width: calc(50% - 10px) }
+    .porto-setup-steps a:before, .porto-setup-steps a:after { content: none }
+    .porto-setup-steps { padding: .5rem 0 }
+    .porto-setup-steps a { padding: .5rem 1rem }
+    .porto-setup-wizard .w-50 { width: 100% !important; }
 }
 @media (max-width: 575px) {
-	html { font-size: 14px }
-	.porto-setup-wizard aside { min-height: 300px }
-	.porto-setup-wizard section,
-	.porto-setup-wizard aside { flex: 0 0 100%; max-width: 100% }
-	.porto-setup-wizard aside:before { background-size: auto 60% }
-	#current-logo img { padding: .625rem }
-	.porto-setup-wizard .btn { min-width: auto }
+    html { font-size: 14px }
+    .porto-setup-wizard aside { min-height: 300px }
+    .porto-setup-wizard section,
+    .porto-setup-wizard aside { flex: 0 0 100%; max-width: 100% }
+    .porto-setup-wizard aside:before { background-size: auto 60% }
+    #current-logo img { padding: .625rem }
+    .porto-setup-wizard .btn { min-width: auto }
 }
 
 /* Notification */
 @keyframes shake {
-	10%, 90% {
-		transform: translate3d(calc(-50% - 5px), -50%, 0);
-	}
+    10%, 90% {
+        transform: translate3d(calc(-50% - 5px), -50%, 0);
+    }
 
-	20%, 80% {
-		transform: translate3d(calc(-50% + 5px), -50%, 0);
-	}
+    20%, 80% {
+        transform: translate3d(calc(-50% + 5px), -50%, 0);
+    }
 
-	30%, 50%, 70% {
-		transform: translate3d(calc(-50% - 5px), -50%, 0);
-	}
+    30%, 50%, 70% {
+        transform: translate3d(calc(-50% - 5px), -50%, 0);
+    }
 
-	40%, 60% {
-		transform: translate3d(calc(-50% + 5px), -50%, 0);
-	}
+    40%, 60% {
+        transform: translate3d(calc(-50% + 5px), -50%, 0);
+    }
 }
 .shake {
-	animation: shake .8s linear both;
+    animation: shake .8s linear both;
 }
 .porto-wizard-notification {
-	position: fixed;
+    position: fixed;
     top: -9999px;
     left: 50%;
     transform: translate(-50%, calc(-50% - 20px));
@@ -250,27 +250,32 @@ h5.system-status.error strong { color: #c50707 }
     background: #fff;
     box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%);
     text-align: center;
-	opacity: 0;
-	transition: opacity .3s, transform .3s;
+    opacity: 0;
+    transition: opacity .3s, transform .3s;
 }
 .show-pm-popup .porto-wizard-notification {
-	top: 50%;
-	opacity: 1;
-	transform: translate(-50%, -50%);
+    top: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%);
 }
 .porto-wizard-notification p {
-	font-family: Poppins;
-	font-size: 13px;
+    font-family: Poppins;
+    font-size: 13px;
 }
 .porto-wizard-notification b {
-	display: block;
-	font-size: 16px;
-	font-weight: 800;
-	color: #222;
+    display: block;
+    font-size: 16px;
+    font-weight: 800;
+    color: #222;
 }
 .porto-wizard-notification button {
-	padding: 8px 20px;
+    padding: 8px 20px;
 }
 .porto-wizard-notification .btn-action {
-	margin-right: 5px;
+    margin-right: 5px;
+}
+
+#porto-install-options .plugins-used .thumb > img,
+#porto-install-options .plugins-used .thumb + div {
+    vertical-align: middle;
 }

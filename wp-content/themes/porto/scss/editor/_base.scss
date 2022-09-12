@@ -3,19 +3,25 @@
 	overflow-x: hidden;
 	box-sizing: border-box;
 	ul, ol {
-		box-sizing: inherit
+		box-sizing: inherit;
+		margin-top: 0;
+		margin-bottom: 1rem;
+	}
+
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+	    -webkit-appearance: none;
 	}
 }
 body .editor-styles-wrapper {
-	font: var(--porto-body-fs, 14px)/var(--porto-body-lh, 1.7142) var(--porto-body-ff), sans-serif;
-	font-weight: var(--porto-body-fw, 400);
+	font: var(--porto-body-fst, normal) var(--porto-body-fw, 400) var(--porto-body-fs, 14px)/var(--porto-body-lh, 1.7142) var(--porto-body-ff), sans-serif;
 	letter-spacing: var(--porto-body-ls, normal);
 	color: var(--porto-body-color, #777);
 	padding-left: 20px;
 	padding-right: 20px;
 }
 
-body .editor-styles-wrapper h1, body .editor-styles-wrapper h2, body .editor-styles-wrapper h3, body .editor-styles-wrapper h4, body .editor-styles-wrapper h5, body .editor-styles-wrapper h6 {
+.editor-styles-wrapper h1, .editor-styles-wrapper h2, .editor-styles-wrapper h3, .editor-styles-wrapper h4, .editor-styles-wrapper h5, .editor-styles-wrapper h6 {
 	margin-top: 0;
 	margin-bottom: 1rem
 }
@@ -50,9 +56,9 @@ body .editor-styles-wrapper h6 {
 	font-weight: var(--porto-h6-fw, 700);
 	color: var(--porto-h6-color, #222529);
 }
-body .editor-styles-wrapper p {
+.editor-styles-wrapper p {
 	margin-top: 0;
-	margin-bottom: 1em;
+	margin-bottom: 1em
 }
 
 .porto-column, .pricing-table-classic.spaced [class*="col-lg-"], ul.products .product-col, .grid-creative > .post, .vc_section {
@@ -60,21 +66,27 @@ body .editor-styles-wrapper p {
 	padding-right: var(--porto-column-spacing, 10px);
 }
 
+/* elementor compatibility */
+.elementor-editor-inactive.svg svg {
+	width: auto;
+	height: auto;
+}
+
 /* colors */
-.background-color-primary { background-color: var(--porto-skin-color) !important }
+.background-color-primary { background-color: var(--porto-primary-color) !important }
 .background-color-secondary { background-color: var(--porto-secondary-color) !important }
 .background-color-tertiary { background-color: var(--porto-tertiary-color) !important }
 .background-color-quaternary { background-color: var(--porto-quaternary-color) !important }
 .background-color-dark { background-color: var(--porto-dark-color) !important }
 .background-color-light { background-color: var(--porto-light-color) !important }
 
-.text-color-primary, .heading-primary { color: var(--porto-skin-color) !important }
+.text-color-primary, .heading-primary { color: var(--porto-primary-color) !important }
 .text-color-secondary, .heading-secondary { color: var(--porto-secondary-color) !important }
 .text-color-tertiary, .heading-tertiary { color: var(--porto-tertiary-color) !important }
 .text-color-quaternary { color: var(--porto-quaternary-color) !important }
 .text-color-dark, .heading-dark { color: var(--porto-dark-color) !important }
 .text-color-light, .heading-light { color: var(--porto-light-color) !important }
 
-.editor-styles-wrapper a { color: var(--porto-skin-color); text-decoration: none; pointer-events: none; }
+.editor-styles-wrapper a { color: var(--porto-primary-color); text-decoration: none; pointer-events: none; }
 .editor-styles-wrapper .iris-palette { pointer-events: auto }
 

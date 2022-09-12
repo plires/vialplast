@@ -98,7 +98,7 @@ if ( $inline_style ) {
 	<i class="porto-hotspot-icon <?php echo esc_attr( $icon ); ?>"<?php echo porto_filter_output( $icon_inline_style ); ?>></i>
 	<div class="popup-wrap">
 	<?php
-	if ( 'html' == $type && $content ) {
+	if ( 'html' == $type && ! empty( $content ) ) {
 		echo do_shortcode( $content );
 	} elseif ( 'product' == $type && $id ) {
 		echo do_shortcode( '[porto_product id="' . intval( $id ) . '" addlinks_pos="' . esc_attr( $addlinks_pos ) . '"]' );

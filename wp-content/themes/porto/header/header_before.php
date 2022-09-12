@@ -30,7 +30,6 @@ if ( is_front_page() ) {
 ?>
 
 	<div class="page-wrapper<?php echo ! $header_is_side ? '' : ' side-nav', isset( $porto_settings['header-side-position'] ) && $porto_settings['header-side-position'] ? ' side-nav-right' : ''; ?>"><!-- page wrapper -->
-
 		<?php
 			do_action( 'porto_wrapper_start' );
 		if ( 'before_header' == $porto_banner_pos ) {
@@ -50,7 +49,7 @@ if ( is_front_page() ) {
 			}
 			if ( ! ( $header_is_side && 'boxed' == $wrapper ) && ( 'below_header' == $porto_banner_pos || 'fixed' == $porto_banner_pos || porto_get_meta_value( 'header_view' ) == 'fixed' ) || 'fixed' == $porto_settings['header-view'] ) {
 				$header_wrapper_class_escaped .= ' fixed-header';
-				if ( $porto_settings['header-fixed-show-bottom'] ) {
+				if ( ! empty( $porto_settings['header-fixed-show-bottom'] ) ) {
 					$header_wrapper_class_escaped .= ' header-transparent-bottom-border';
 				}
 			}
@@ -64,11 +63,11 @@ if ( is_front_page() ) {
 				<div id="header-boxed">
 				<?php endif; ?>
 				<?php
-					if ( isset( $porto_header_escaped ) ) {
-						echo porto_filter_output( $porto_header_escaped );
-					} else {
-						get_template_part( 'header/header' );
-					}
+				if ( isset( $porto_header_escaped ) ) {
+					echo porto_filter_output( $porto_header_escaped );
+				} else {
+					get_template_part( 'header/header' );
+				}
 				?>
 
 				<?php if ( porto_get_wrapper_type() != 'boxed' && 'boxed' == $porto_settings['header-wrapper'] ) : ?>

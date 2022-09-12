@@ -33,7 +33,7 @@ class Porto_Elementor_HB_Logo_Widget extends \Elementor\Widget_Base {
 		return 'porto-icon-circle-thin';
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$this->start_controls_section(
 			'section_hb_logo',
@@ -41,7 +41,14 @@ class Porto_Elementor_HB_Logo_Widget extends \Elementor\Widget_Base {
 				'label' => __( 'Logo', 'porto-functionality' ),
 			)
 		);
-
+			$this->add_control(
+				'description_logo',
+				array(
+					'type'            => Controls_Manager::RAW_HTML,
+					'raw'             => sprintf( esc_html__( 'Please see %1$sTheme Options -> General -> Logo, Icons%2$s panel.', 'porto-functionality' ), '<b>', '</b>' ),
+					'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+				)
+			);
 		$this->end_controls_section();
 	}
 

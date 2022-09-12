@@ -31,11 +31,26 @@ jQuery( document ).ready( function ( $ ) {
 	} );
 
 	elementor.on( 'frontend:init', function () {
+		if ( typeof $e != 'undefined' ) {
+			$e.commands.on( 'run:before', function( component, command, args ) {
+				if ( 'document/elements/delete' == command && args && args.containers && args.containers.length ) {
+					args.containers.forEach( function( cnt ) {
+						elementorFrontend.hooks.doAction( 'porto_elementor_element_before_delete', cnt.model );
+					} );
+				}
+			} );
+			$e.commands.on( 'run:after', function( component, command, args ) {
+				if ( 'document/elements/create' == command && args && args.model && args.model.id ) {
+					elementorFrontend.hooks.doAction( 'porto_elementor_element_after_add', args.model );
+				}
+			} );
+		}
+
 		var custom_css = elementor.settings.page.model.get( 'porto_custom_css' );
 		if ( typeof custom_css != 'undefined' ) {
-			setTimeout( function () {
+			elementorFrontend.on( 'components:init', function() {
 				elementorFrontend.hooks.doAction( 'refresh_dynamic_css', custom_css );
-			}, 1000 );
+			} );
 		}
 
 		var header_type = elementor.settings.page.model.get( 'porto_header_type' );
@@ -56,59 +71,80 @@ jQuery( document ).ready( function ( $ ) {
 			} )
 			.on( 'input', 'input[data-setting="popup_pos_horizontal"], input[data-setting="popup_pos_vertical"]', function ( e ) {
 				elementorFrontend.hooks.doAction( 'refresh_popup_options', $( this ).data( 'settings' ), $ );
+			} )
+			.on( 'click', '.elementor-control-archive_preview_apply .elementor-button', function ( e ) {
+				$.post( porto_elementor_vars.ajax_url, {
+					action: 'porto_archive_builder_preview_apply',
+					nonce: porto_elementor_vars.nonce,
+					post_id: ElementorConfig.document.id,
+					mode: $( '.elementor-control-archive_preview_type select' ).val(),
+				}, function () {
+					elementor.reloadPreview();
+				} );
+			} )
+			.on( 'click', '.elementor-control-single_preview_apply .elementor-button', function ( e ) {
+				$.post( porto_elementor_vars.ajax_url, {
+					action: 'porto_single_builder_preview_apply',
+					nonce: porto_elementor_vars.nonce,
+					post_id: ElementorConfig.document.id,
+					mode: $( '.elementor-control-single_preview_type select' ).val(),
+				}, function () {
+					elementor.reloadPreview();
+				} );
 			} );
 
-        // edit area width
-        var edit_area_width = elementor.settings.page.model.get( 'porto_edit_area_width' );
-        if( edit_area_width ) {
-        	var getValUnit = function ( $arr, $default ) {
-	            if ( $arr ) {
-	                if ( $arr['size'] ) {
-	                    return $arr[ 'size' ] + ( $arr[ 'unit' ] ? $arr[ 'unit' ] : 'px' );
-	                } else {
-	                    return '';
-	                }
-	            }
-	            return typeof $default == 'undefined' ? '' : $default;
-	        }
 
-            var triggerAction = function(e) {
-                var $selector = $(this);
+		// edit area width
+		var edit_area_width = elementor.settings.page.model.get( 'porto_edit_area_width' );
+		if ( edit_area_width ) {
+			var getValUnit = function ( $arr, $default ) {
+				if ( $arr ) {
+					if ( $arr[ 'size' ] ) {
+						return $arr[ 'size' ] + ( $arr[ 'unit' ] ? $arr[ 'unit' ] : 'px' );
+					} else {
+						return '';
+					}
+				}
+				return typeof $default == 'undefined' ? '' : $default;
+			}
 
-                if ( e.type=='mousemove' || e.type=='click' ) {
-                    $selector = $selector.closest('.elementor-control-input-wrapper').find('.elementor-slider-input input');
-                }
+			var triggerAction = function ( e ) {
+				var $selector = $( this );
 
-                var value = { 
-                        size: $selector.val(),
-                        unit: $selector.closest( '.elementor-control-input-wrapper' ).siblings( '.elementor-units-choices' ).find( 'input:checked' ).val()
-                    };
+				if ( e.type == 'mousemove' || e.type == 'click' ) {
+					$selector = $selector.closest( '.elementor-control-input-wrapper' ).find( '.elementor-slider-input input' );
+				}
 
-                elementorFrontend.hooks.doAction( 'refresh_edit_area', getValUnit(value) );
-            }
+				var value = {
+					size: $selector.val(),
+					unit: $selector.closest( '.elementor-control-input-wrapper' ).siblings( '.elementor-units-choices' ).find( 'input:checked' ).val()
+				};
 
-            setTimeout( function () {
-                typeof edit_area_width != 'undefined' && elementorFrontend.hooks.doAction( 'refresh_edit_area', getValUnit( edit_area_width ) );
-            }, 1000 );
+				elementorFrontend.hooks.doAction( 'refresh_edit_area', getValUnit( value ) );
+			}
 
-            $( document.body ).on('input', '.elementor-control-porto_edit_area_width input[data-setting="size"]', triggerAction )
-                              .on('mousemove', '.elementor-control-porto_edit_area_width .noUi-active', triggerAction)
-                              .on('click', '.elementor-control-porto_edit_area_width .noUi-target', triggerAction);
+			setTimeout( function () {
+				typeof edit_area_width != 'undefined' && elementorFrontend.hooks.doAction( 'refresh_edit_area', getValUnit( edit_area_width ) );
+			}, 1000 );
+
+			$( document.body ).on( 'input', '.elementor-control-porto_edit_area_width input[data-setting="size"]', triggerAction )
+				.on( 'mousemove', '.elementor-control-porto_edit_area_width .noUi-active', triggerAction )
+				.on( 'click', '.elementor-control-porto_edit_area_width .noUi-target', triggerAction );
 		}
 
 	} );
 
 	var portoMasonryTimer = null;
-	$( document.body ).on( 'input', '.elementor-control-width1 input[data-setting="size"]', function ( e ) {
-		if ( portoMasonryTimer ) {
-			clearTimeout( portoMasonryTimer );
-		}
-		var $this = $( this );
-		portoMasonryTimer = setTimeout( function () {
-			elementorFrontend.hooks.doAction( 'masonry_refresh', false, $this.val() );
-		}, 300 );
-	} );
-
+	$( document.body )
+		.on( 'input', '.elementor-control-width1 input[data-setting="size"]', function ( e ) {
+			if ( portoMasonryTimer ) {
+				clearTimeout( portoMasonryTimer );
+			}
+			var $this = $( this );
+			portoMasonryTimer = setTimeout( function () {
+				elementorFrontend.hooks.doAction( 'masonry_refresh', false, $this.val() );
+			}, 300 );
+		} );
 	$( document.body ).on( 'input', 'textarea[data-setting="porto_custom_css"]', function ( e ) {
 		elementorFrontend.hooks.doAction( 'refresh_dynamic_css', $( this ).val() );
 	} ).on( 'click', '.porto-elementor-btn-reload', function ( e ) {
@@ -138,5 +174,4 @@ jQuery( document ).ready( function ( $ ) {
 			$( '#elementor-preview-responsive-wrapper' ).removeClass( 'mobile-width' );
 		}
 	} );
-
 } );

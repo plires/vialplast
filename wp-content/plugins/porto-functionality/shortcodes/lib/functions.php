@@ -291,7 +291,7 @@ function porto_vc_custom_class() {
 	);
 }
 
-function porto_vc_product_slider_fields() {
+function porto_vc_product_slider_fields( $condition_val = 'products-slider' ) {
 	return array(
 		array(
 			'type'       => 'checkbox',
@@ -300,7 +300,7 @@ function porto_vc_product_slider_fields() {
 			'std'        => 'yes',
 			'dependency' => array(
 				'element' => 'view',
-				'value'   => array( 'products-slider' ),
+				'value'   => array( $condition_val ),
 			),
 			'value'      => array( __( 'Yes', 'js_composer' ) => 'yes' ),
 			'group'      => __( 'Slider Options', 'porto-functionality' ),
@@ -365,7 +365,7 @@ function porto_vc_product_slider_fields() {
 			'std'        => '',
 			'dependency' => array(
 				'element' => 'view',
-				'value'   => array( 'products-slider' ),
+				'value'   => array( $condition_val ),
 			),
 			'value'      => array( __( 'Yes', 'js_composer' ) => 'yes' ),
 			'group'      => __( 'Slider Options', 'porto-functionality' ),
@@ -377,7 +377,10 @@ function porto_vc_product_slider_fields() {
 			'std'        => '',
 			'value'      => array(
 				__( 'Bottom', 'porto-functionality' )    => '',
-				__( 'Top right', 'porto-functionality' ) => 'show-dots-title-right',
+				__( 'Top Right', 'porto-functionality' ) => 'show-dots-title-right',
+				__( 'Inside Right', 'porto-functionality' ) => 'nav-inside',
+				__( 'Inside Center', 'porto-functionality' ) => 'nav-inside nav-inside-center',
+				__( 'Inside Left', 'porto-functionality' ) => 'nav-inside nav-inside-left',
 			),
 			'dependency' => array(
 				'element'   => 'pagination',
@@ -412,7 +415,7 @@ function porto_vc_product_slider_fields() {
 			'std'        => '',
 			'dependency' => array(
 				'element' => 'view',
-				'value'   => array( 'products-slider' ),
+				'value'   => array( $condition_val ),
 			),
 			'group'      => __( 'Slider Options', 'porto-functionality' ),
 		),
@@ -546,7 +549,7 @@ function porto_vc_woo_order_by() {
 		esc_html__( 'Price', 'porto-functionality' )      => 'price',
 		esc_html__( 'Popularity', 'porto-functionality' ) => 'popularity',
 	);
-	if ( wc_review_ratings_enabled() ) {
+	if ( class_exists( 'Woocommerce' ) && wc_review_ratings_enabled() ) {
 		$result[ esc_html__( 'Rating', 'porto-functionality' ) ] = 'rating';
 	}
 	return $result;
@@ -559,7 +562,7 @@ function porto_woo_sort_by() {
 		__( 'Date', 'porto-functionality' )    => 'date',
 		__( 'On Sale', 'porto-functionality' ) => 'onsale',
 	);
-	if ( wc_review_ratings_enabled() ) {
+	if ( class_exists( 'Woocommerce' ) && wc_review_ratings_enabled() ) {
 		$result[ __( 'Rating', 'porto-functionality' ) ] = 'rating';
 	}
 	return $result;
@@ -1739,6 +1742,9 @@ if ( ! function_exists( 'vc_iconpicker_type_porto' ) ) {
 			array( 'porto-icon-tablet' => 'Tablet' ),
 			array( 'porto-icon-callin' => 'Phone, Call in' ),
 			array( 'porto-icon-atmark' => 'Email, Address, At' ),
+			array( 'porto-icon-paypal' => 'Paypal, Payment' ),
+			array( 'porto-icon-verisign' => 'Verisign, Payment' ),
+			array( 'porto-icon-visa' => 'Visa, Payment' ),
 		);
 
 		return array_merge( $icons, $porto_icons );
@@ -4583,7 +4589,7 @@ if ( function_exists( 'vc_add_shortcode_param' ) ) {
  *          esc_html__( 'Price', 'porto-functionality' )    => 'price',
  *          esc_html__( 'Rating', 'porto-functionality' )   => 'rating',
  *          esc_html__( 'Attribute', 'porto-functionality' ) => 'attribute',
- *          esc_html__( 'Add To Cart', 'porto-functionality' ) => 'addtocart',
+ *          esc_html__( 'Add to cart', 'porto-functionality' ) => 'addtocart',
  *          esc_html__( 'Compare', 'porto-functionality' )  => 'compare',
  *          esc_html__( 'Quickview', 'porto-functionality' ) => 'quickview',
  *          esc_html__( 'Wishlist', 'porto-functionality' ) => 'wishlist',
@@ -5016,7 +5022,7 @@ function porto_button_group_callback( $settings, $value ) {
  *      'type'       => 'porto_typography',
  *      'heading'    => __( 'Button Typography', 'porto-functionality' ),
  *      'param_name' => 'btn_font',
- *      'group'      => 'Style',
+ *      'group'      => __( 'Style', 'porto-functionality' ),
  *      'selectors'  => array(
  *          '{{WRAPPER}}.btn'
  *      )
@@ -5091,6 +5097,7 @@ function porto_typography_callback( $settings, $value ) {
 	}
 
 	$text_transform = array(
+		''           => esc_html__( 'Default', 'porto-functionality' ),
 		'none'       => esc_html__( 'None', 'porto-functionality' ),
 		'lowercase'  => esc_html__( 'Lowercase', 'porto-functionality' ),
 		'uppercase'  => esc_html__( 'Uppercase', 'porto-functionality' ),
@@ -5098,7 +5105,17 @@ function porto_typography_callback( $settings, $value ) {
 		'inherit'    => esc_html__( 'Inherit', 'porto-functionality' ),
 	);
 	if ( function_exists( 'porto_include_google_font' ) ) {
-		$fonts         = array_merge( porto_include_google_font(), array( 'Inherit', 'Default' ) );
+		$fonts        = array_merge( porto_include_google_font(), array( 'Inherit', 'Default' ) );
+		$custom_fonts = get_option( 'porto_custom_fonts', array() );
+		if ( ! empty( $custom_fonts ) ) {
+			foreach ( $custom_fonts as $c_fonts ) {
+				if ( ! empty( $c_fonts ) ) {
+					foreach ( $c_fonts as $c_font_name => $font_fields ) {
+						$fonts[] = str_replace( '+', ' ', $c_font_name );
+					}
+				}
+			}
+		}
 		$font_variants = array(
 			'100',
 			'100italic',
@@ -5150,7 +5167,7 @@ function porto_typography_callback( $settings, $value ) {
 					?>
 				</select>
 			</div>
-			<p style="padding: 0 .5em;">If you want to use other Google font, please add it in Theme Options -> Skin -> Typography -> Custom Font.</p>
+			<p style="padding: 0 .5em;">If you want to use other font, please add it in Theme Options -> Skin -> Typography -> Custom Font.</p>
 		</div>
 		<div class="porto-wpb-typoraphy-form">
 			<div class="wpb_element_label"><?php esc_html_e( 'Font Variants', 'porto-functionality' ); ?></div>
@@ -5169,13 +5186,13 @@ function porto_typography_callback( $settings, $value ) {
 				</select>
 			</div>
 		</div>
-		<div class="porto-wpb-typoraphy-form cols-2">
+		<div class="porto-wpb-typoraphy-form<?php echo isset( $settings['line_height'] ) && ! $settings['line_height'] ? '' : ' cols-2'; ?>">
 			<div class="wpb_element_label"><?php esc_html_e( 'Font Size', 'porto-functionality' ); ?></div>
 			<div class="porto-vc-font-size-container">
 				<input type="string" name="font-size" class="porto-vc-font-size" value="<?php echo esc_attr( $typography['font_size'] ); ?>" />
 			</div>
 		</div>
-		<div class="porto-wpb-typoraphy-form cols-2">
+		<div class="porto-wpb-typoraphy-form cols-2<?php echo isset( $settings['line_height'] ) && ! $settings['line_height'] ? ' d-none' : ''; ?>">
 			<div class="wpb_element_label"><?php esc_html_e( 'Line Height', 'porto-functionality' ); ?></div>
 			<div class="porto-vc-line-height-container">
 				<input type="string" name="line-height" class="porto-vc-line-height" value="<?php echo esc_attr( $typography['line_height'] ); ?>"  />
@@ -6535,5 +6552,52 @@ if ( ! function_exists( 'porto_get_mpx_options' ) ) :
 		}
 
 		return $mpx_opts;
+	}
+endif;
+
+if ( ! function_exists( 'porto_generate_rand' ) ) :
+	function porto_generate_rand( $length = 31 ) {
+
+		$valid_characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+		$rand             = '';
+		for ( $n = 0; $n < $length; $n++ ) {
+
+			$which_character = rand( 0, strlen( $valid_characters ) - 1 );
+			$rand           .= substr( $valid_characters, $which_character, 1 );
+		}
+
+		return $rand;
+	}
+endif;
+
+/**
+ * Echo or Return inline css.
+ * This function only uses for composed by style tag.
+ *
+ * @since 2.3.0
+ */
+if ( ! function_exists( 'porto_filter_inline_css' ) ) :
+	function porto_filter_inline_css( $inline_css, $is_echo = true ) {
+		if ( ! class_exists( 'Porto_Performance' ) ) {
+			return;
+		}
+		if ( empty( Porto_Performance::$defer_style ) ) { // not defer loading, only return and echo
+			if ( $is_echo ) {
+				echo porto_filter_output( $inline_css );
+			} else {
+				return $inline_css;
+			}
+		} else {
+			if ( 'no' == Porto_Performance::has_merged_css() ) {
+				global $porto_body_merged_css;
+				if ( isset( $porto_body_merged_css ) ) {
+					$inline_css             = str_replace( PHP_EOL, '', $inline_css );
+					$inline_css             = preg_replace( '/<style.*?>/s', '', $inline_css ) ? : $inline_css;
+					$inline_css             = preg_replace( '/<\/style.*?>/s', '', $inline_css ) ? : $inline_css;
+					$porto_body_merged_css .= $inline_css;
+				}
+			}
+			return '';
+		}
 	}
 endif;

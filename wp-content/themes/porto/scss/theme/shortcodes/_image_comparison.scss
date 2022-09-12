@@ -18,6 +18,34 @@
 		-ms-user-select: none;
 		user-select: none;
 	}
+
+	.porto-compare-icon {
+		width: 1em;
+		position: relative;
+		&:before, &:after {
+			content: '';
+			border: 6px inset transparent;
+			position: absolute;
+			width: 0;
+			height: 0;
+			top: 50%;
+			margin-top: -6px;
+		}
+		&:before {
+			border-right: 6px solid;
+			border-left: none;
+			left: -.05em;
+		}
+		&:after {
+			border-left: 6px solid;
+			border-right: none;
+			right: -.05em;
+		}
+	}
+}
+
+.porto-image-comparison-vertical .porto-compare-icon {
+	transform: rotate(90deg);
 }
 
 .porto-image-comparison-before {

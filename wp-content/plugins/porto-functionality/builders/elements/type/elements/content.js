@@ -1,8 +1,13 @@
 /**
  * Post Type Builder - Content
  * 
- * @since 6.3.0
+ * @since 2.3.0
  */
+
+import PortoStyleOptionsControl, {portoGenerateStyleOptionsCSS} from '../../../../shortcodes/assets/blocks/controls/style-options';
+import PortoTypographyControl, {portoGenerateTypographyCSS} from '../../../../shortcodes/assets/blocks/controls/typography';
+import {portoAddHelperClasses} from '../../../../shortcodes/assets/blocks/controls/editor-extra-classes';
+
 ( function ( wpI18n, wpBlocks, wpBlockEditor, wpComponents ) {
     "use strict";
 
@@ -16,70 +21,58 @@
         Disabled = wpComponents.Disabled,
         PanelBody = wpComponents.PanelBody,
         ServerSideRender = wp.serverSideRender,
-        PortoTypographyControl = window.portoTypographyControl;
+        useEffect = wp.element.useEffect;
 
-    const PortoTBContent = function ( { attributes, setAttributes, name } ) {
+    const PortoTBContent = function ( { attributes, setAttributes, name, clientId } ) {
 
-        const content_type = document.getElementById( 'content_type' ).value;
-        let content_type_value,
-            attrs = { content_display: attributes.content_display, excerpt_length: attributes.excerpt_length, strip_html: attributes.strip_html };
-        if ( content_type ) {
-            attrs.content_type = content_type;
-            content_type_value = document.getElementById( 'content_type_' + content_type );
-            if ( content_type_value ) {
-                content_type_value = content_type_value.value;
-                attrs.content_type_value = content_type_value;
+        let selectorCls = 'tb-content';
+        useEffect(
+            () => {
+                if ( ! attributes.el_class || -1 !== porto_tb_ids.indexOf( attributes.el_class ) ) { // new or just cloned
+                    const new_cls = 'porto-tb-content-' + Math.ceil( Math.random() * 10000 );
+                    attributes.el_class = new_cls;
+                    setAttributes( { el_class: new_cls } );
+                }
+                porto_tb_ids.push( attributes.el_class );
+
+                return () => {
+                    const arr_index = porto_tb_ids.indexOf( attributes.el_class );
+                    if ( -1 !== arr_index ) {
+                        porto_tb_ids.splice( arr_index, 1 );
+                    }
+                }
+            },
+            [],
+        );
+
+        if ( attributes.el_class ) {
+            selectorCls = attributes.el_class;
+        }
+
+        let attrs = { content_display: attributes.content_display, excerpt_length: attributes.excerpt_length, strip_html: attributes.strip_html, el_class: attributes.el_class, className: attributes.className };
+        if ( porto_content_type ) {
+            attrs.content_type = porto_content_type;
+            if ( porto_content_type_value ) {
+                attrs.content_type_value = porto_content_type_value;
             }
         }
 
-        let internalStyle = '',
-            font_settings = Object.assign( {}, attributes.font_settings );
+        let internalStyle = '';
+        const font_settings = Object.assign( {}, attributes.font_settings ),
+            style_options = Object.assign( {}, attributes.style_options );
 
         if ( attributes.alignment || attributes.font_settings ) {
-            const fontAtts = attributes.font_settings;
-            if ( attributes.alignment || fontAtts.fontFamily || fontAtts.fontSize || fontAtts.fontWeight || fontAtts.textTransform || fontAtts.lineHeight || fontAtts.letterSpacing || fontAtts.color ) {
-                internalStyle += '.tb-content {';
-                if ( attributes.alignment ) {
-                    internalStyle += 'text-align:' + attributes.alignment + ';';
-                }
-                if ( fontAtts.fontFamily ) {
-                    internalStyle += 'font-family:' + fontAtts.fontFamily + ';';
-                }
-                if ( fontAtts.fontSize ) {
-                    let unitVal = fontAtts.fontSize;
-                    const unit = unitVal.trim().replace( /[0-9.]/g, '' );
-                    if ( ! unit ) {
-                        unitVal += 'px';
-                    }
-                    internalStyle += 'font-size:' + unitVal + ';';
-                }
-                if ( fontAtts.fontWeight ) {
-                    internalStyle += 'font-weight:' + fontAtts.fontWeight + ';';
-                }
-                if ( fontAtts.textTransform ) {
-                    internalStyle += 'text-transform:' + fontAtts.textTransform + ';';
-                }
-                if ( fontAtts.lineHeight ) {
-                    let unitVal = fontAtts.lineHeight;
-                    const unit = unitVal.trim().replace( /[0-9.]/g, '' );
-                    if ( ! unit && Number( unitVal ) > 3 ) {
-                        unitVal += 'px';
-                    }
-                    internalStyle += 'line-height:' + unitVal + ';';
-                }
-                if ( fontAtts.letterSpacing ) {
-                    let unitVal = fontAtts.letterSpacing;
-                    const unit = unitVal.trim().replace( /[0-9.-]/g, '' );
-                    if ( ! unit ) {
-                        unitVal += 'px';
-                    }
-                    internalStyle += 'letter-spacing:' + unitVal + ';';
-                }
-                if ( fontAtts.color ) {
-                    internalStyle += 'color:' + fontAtts.color;
-                }
-                internalStyle += '}';
-            }
+            let fontAtts = attributes.font_settings;
+            fontAtts.alignment = attributes.alignment;
+            internalStyle += portoGenerateTypographyCSS( fontAtts, selectorCls );
+        }
+        if ( style_options ) {
+            internalStyle += portoGenerateStyleOptionsCSS( style_options, selectorCls );
+        }
+
+        // add helper classes to parent block element
+        if ( attributes.className ) {
+            portoAddHelperClasses( attributes.className, clientId );
         }
 
         return (
@@ -92,7 +85,7 @@
                             options={ [ { 'label': __( 'Excerpt', 'porto-functionality' ), 'value': 'excerpt' }, { 'label': __( 'Content', 'porto-functionality' ), 'value': 'content' } ] }
                             onChange={ ( value ) => { setAttributes( { content_display: value } ); } }
                         />
-                        { 'excerpt' === attributes.content_display && (
+                        { 'content' !== attributes.content_display && (
                             <RangeControl
                                 label={ __( 'Excerpt Length', 'porto-functionality' ) }
                                 value={ attributes.excerpt_length }
@@ -102,7 +95,7 @@
                             />
                         ) }
                     </PanelBody>
-                    <PanelBody title={ __( 'Style', 'porto-functionality' ) } initialOpen={ false }>
+                    <PanelBody title={ __( 'Font Settings', 'porto-functionality' ) } initialOpen={ false }>
                         <SelectControl
                             label={ __( 'Alignment', 'porto-functionality' ) }
                             value={ attributes.alignment }
@@ -118,6 +111,12 @@
                             } }
                         />
                     </PanelBody>
+                    <PortoStyleOptionsControl
+                        label={ __( 'Style Options', 'porto-functionality' ) }
+                        value={ style_options }
+                        options={ {} }
+                        onChange={ ( value ) => { setAttributes( { style_options: value } ); } }
+                    />
                 </InspectorControls>
                 <Disabled>
                     { internalStyle && (
@@ -137,14 +136,13 @@
         title: __( 'Content', 'porto-functionality' ),
         icon: 'porto',
         category: 'porto-tb',
+        keywords: [ 'type builder', 'mini', 'card', 'post', 'text', 'excerpt', 'description', 'short' ],
         attributes: {
             content_display: {
                 type: 'string',
-                default: 'excerpt',
             },
             excerpt_length: {
                 type: 'int',
-                default: 50,
             },
             content_type: {
                 type: 'string',
@@ -157,7 +155,14 @@
             },
             font_settings: {
                 type: 'object',
+                default: {},
             },
+            style_options: {
+                type: 'object',
+            },
+            el_class: {
+                type: 'string',
+            }
         },
         edit: PortoTBContent,
         save: function () {

@@ -127,6 +127,12 @@ if ( ! class_exists( 'Porto_Speed_Optimize_Wizard' ) ) {
 				'handler' => array( $this, 'porto_speed_optimize_wizard_general_save' ),
 			);
 
+			$this->steps['advanced'] = array(
+				'name'    => esc_html__( 'Advanced', 'porto' ),
+				'view'    => array( $this, 'porto_speed_optimize_wizard_advanced' ),
+				'handler' => array( $this, 'porto_speed_optimize_wizard_advanced_save' ),
+			);
+
 			$this->steps['next_steps'] = array(
 				'name'    => esc_html__( 'Final Optimize', 'porto' ),
 				'view'    => array( $this, 'porto_speed_optimize_wizard_ready' ),
@@ -368,7 +374,7 @@ if ( ! class_exists( 'Porto_Speed_Optimize_Wizard' ) ) {
 			global $porto_settings_optimize, $porto_settings;
 			$rev_pages         = $this->get_used_shortcode_list( array( 'rev_slider', 'rev_slider_vc' ), true );
 			$portfolio_use_rev = false;
-			if ( 'carousel' == $porto_settings['portfolio-content-layout'] ) {
+			if ( isset( $porto_settings['portfolio-content-layout'] ) && 'carousel' == $porto_settings['portfolio-content-layout'] ) {
 				$portfolio_use_rev = true;
 			} else {
 				$args  = array(
@@ -497,6 +503,23 @@ if ( ! class_exists( 'Porto_Speed_Optimize_Wizard' ) ) {
 						</label>
 						<p><?php esc_html_e( 'By using this option, you can use fontawesome icons only what Porto theme used. This will reduce around 40KB of page size.', 'porto' ); ?></p>
 					</li>
+					<?php if ( defined( 'ELEMENTOR_VERSION' ) ) : ?>
+						<li>
+							<label class="checkbox checkbox-inline">
+								<input type="checkbox" value="true" name="enqueue_elementor_rc" <?php echo isset( $porto_settings_optimize['enqueue_elementor_rc'] ) ? checked( $porto_settings_optimize['enqueue_elementor_rc'], true, false ) : ''; ?>> <?php esc_html_e( 'Enqueue Elementor FontAwesome', 'porto' ); ?>
+							</label>
+							<p><?php esc_html_e( 'This will enqueue elementor fontawesome resources.', 'porto' ); ?></p>
+						</li>
+					<?php endif; ?>
+					<?php if ( defined( 'DOKAN_PLUGIN_VERSION' ) ) : ?>
+						<li>
+							<label class="checkbox checkbox-inline">
+								<input type="checkbox" value="true" name="enqueue_dokan_rc" <?php echo isset( $porto_settings_optimize['enqueue_dokan_rc'] ) ? checked( $porto_settings_optimize['enqueue_dokan_rc'], true, false ) : ''; ?>> <?php esc_html_e( 'Enqueue Dokan FontAwesome', 'porto' ); ?>
+							</label>
+							<p><?php esc_html_e( 'This will enqueue dokan fontawesome resources.', 'porto' ); ?></p>
+						</li>
+					<?php endif; ?>
+
 					<li>
 						<label class="checkbox checkbox-inline">
 							<input type="checkbox" value="true" name="optimize_gutenberg" <?php echo isset( $porto_settings_optimize['optimize_gutenberg'] ) ? checked( $porto_settings_optimize['optimize_gutenberg'], true, false ) : ''; ?>> <?php esc_html_e( 'Dequeue Gutenberg block syle', 'porto' ); ?>
@@ -515,6 +538,12 @@ if ( ! class_exists( 'Porto_Speed_Optimize_Wizard' ) ) {
 						</label>
 						<p><?php esc_html_e( 'By using this option, you can disable jQuery migrate script. Please use this option if you are not using any deprecated jQuery code.', 'porto' ); ?></p>
 					</li>
+					<li>
+						<label class="checkbox checkbox-inline">
+							<input type="checkbox" value="true" name="optimize_jquery_footer" <?php echo isset( $porto_settings_optimize['optimize_jquery_footer'] ) ? checked( $porto_settings_optimize['optimize_jquery_footer'], true, false ) : ''; ?>> <?php esc_html_e( 'Load jQuery in Footer', 'porto' ); ?>
+						</label>
+						<p><?php esc_html_e( 'Defer loading of jQuery to the footer of the page.', 'porto' ); ?></p>
+					</li> 
 					<li>
 						<h4><?php esc_html_e( 'Disable Unused Content Types', 'porto' ); ?></h4>
 						<?php
@@ -543,6 +572,9 @@ if ( ! class_exists( 'Porto_Speed_Optimize_Wizard' ) ) {
 								'footer'  => __( 'Footer', 'porto' ),
 								'product' => __( 'Single Product', 'porto' ),
 								'shop'    => __( 'Product Archive', 'porto' ),
+								'archive' => __( 'Archive', 'porto' ),
+								'single'  => __( 'Single', 'porto' ),
+								'type'    => __( 'Post Type', 'porto' ),
 							);
 						foreach ( $builder_types as $builder_type => $title ) {
 							?>
@@ -565,6 +597,13 @@ if ( ! class_exists( 'Porto_Speed_Optimize_Wizard' ) ) {
 
 		public function porto_speed_optimize_wizard_general_save() {
 			check_admin_referer( 'porto-speed-optimize' );
+
+			if ( ! class_exists( 'ReduxFrameworkInstances' ) ) {
+				// include redux framework core functions
+				require_once( PORTO_ADMIN . '/ReduxCore/framework.php' );
+				global $reduxPortoSettings;
+				$reduxPortoSettings = new Redux_Framework_porto_settings();
+			}
 
 			global $porto_settings_optimize, $porto_settings;
 			$need_compile = false;
@@ -653,6 +692,16 @@ if ( ! class_exists( 'Porto_Speed_Optimize_Wizard' ) ) {
 			} else {
 				$porto_settings_optimize['optimize_fontawesome'] = false;
 			}
+			if ( ! empty( $_POST['enqueue_elementor_rc'] ) ) {
+				$porto_settings_optimize['enqueue_elementor_rc'] = true;
+			} else {
+				$porto_settings_optimize['enqueue_elementor_rc'] = false;
+			}
+			if ( ! empty( $_POST['enqueue_dokan_rc'] ) ) {
+				$porto_settings_optimize['enqueue_dokan_rc'] = true;
+			} else {
+				$porto_settings_optimize['enqueue_dokan_rc'] = false;
+			}
 
 			// check Gutenberg block is used
 			$porto_settings_optimize['dequeue_wc_block_css'] = false;
@@ -679,6 +728,156 @@ if ( ! class_exists( 'Porto_Speed_Optimize_Wizard' ) ) {
 				$porto_settings_optimize['optimize_migrate'] = true;
 			} else {
 				$porto_settings_optimize['optimize_migrate'] = false;
+			}
+			if ( isset( $_POST['optimize_jquery_footer'] ) && 'true' == $_POST['optimize_jquery_footer'] ) {
+				$porto_settings_optimize['optimize_jquery_footer'] = true;
+			} else {
+				$porto_settings_optimize['optimize_jquery_footer'] = false;
+			}
+
+			update_option( 'porto_settings_optimize', $porto_settings_optimize );
+
+			wp_redirect( esc_url_raw( $this->get_next_step_link() ) );
+			exit;
+		}
+
+		/**
+		 * Render the advanced wizard.
+		 *
+		 * @since 6.3.0
+		 */
+		public function porto_speed_optimize_wizard_advanced() {
+			global $porto_settings_optimize;
+			?>
+			<h2><?php esc_html_e( 'Advanced Optimize', 'porto' ); ?></h2>
+			<p class="lead"><?php esc_html_e( 'Porto will help you to increase the speed of your site and it offers a poweful yet simple mode of builders only, which means we eliminated all unnecessary and duplicated options.', 'porto' ); ?></p>
+			<form action="" method="post">
+				<ul>
+					<li>
+						<label class="checkbox checkbox-inline">
+							<input type="checkbox" value="true" name="mobile_disable_slider" <?php echo isset( $porto_settings_optimize['mobile_disable_slider'] ) ? checked( $porto_settings_optimize['mobile_disable_slider'], true, false ) : ''; ?>/> <?php esc_html_e( 'Disable Mobile Sliders', 'porto' ); ?>
+						</label>
+						<p><?php esc_html_e( 'Disable slider feature for elements in mobile.', 'porto' ); ?></p>
+					</li>
+					<li>
+						<label class="checkbox checkbox-inline">
+							<input type="checkbox" value="true" name="merge_stylesheets" <?php echo isset( $porto_settings_optimize['merge_stylesheets'] ) ? checked( $porto_settings_optimize['merge_stylesheets'], true, false ) : ''; ?>/> <?php esc_html_e( 'Merge javascripts and stylesheets', 'porto' ); ?>
+						</label>
+						<p><?php esc_html_e( 'Compile the dynamic CSS to files (a separate file will be created for each page inside of the uploads folder)', 'porto' ); ?></p>
+					</li>
+					<li>
+						<label class="checkbox checkbox-inline">
+							<input type="checkbox" value="true" name="critical_css" <?php echo isset( $porto_settings_optimize['critical_css'] ) ? checked( $porto_settings_optimize['critical_css'], true, false ) : ''; ?>/> <?php esc_html_e( 'Enable Critical CSS', 'porto' ); ?>
+						</label>
+						<p><?php echo sprintf( esc_html__( 'Please use with above function: %1$smerge css & js%2$s!!! If you check this option, you can see it in the admin menu. It helps your site to reduce the rendering time and increase the google page speed.', 'porto' ), '<b>', '</b>' ); ?></p>
+					</li>
+					<?php if ( class_exists( 'Porto_Soft_Mode' ) ) : ?>
+					<li>
+						<h3><?php esc_html_e( 'Ongoing Feature', 'porto' ); ?></h3>
+						<li>
+							<label class="checkbox checkbox-inline">
+								<input type="checkbox" value="true" name="soft_mode" <?php echo isset( $porto_settings_optimize['legacy_mode'] ) ? checked( $porto_settings_optimize['legacy_mode'], false, false ) : ''; ?>/> <?php esc_html_e( 'Activate Soft Mode (Full Site Editing)', 'porto' ); ?>
+							</label>
+							<p><?php esc_html_e( 'If you develop a new site, you\'d better activate the soft mode or import a soft mode demo. In this mode, you can use only template builders to full-site edit. Theme options and metaboxes that are unnecessary and overridden are removed. You will be no longer disturbed from complicated relationships of options. If you update the existing site into soft mode, you should backup your site db. Because most options you have set will be lost.', 'porto' ); ?></p>
+						</li>
+					</li>
+					<?php endif; ?>
+				</ul>
+				<p class="porto-setup-actions step">
+					<a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="btn btn-dark button-next"><?php esc_html_e( 'Skip this step', 'porto' ); ?></a>
+					<button type="submit" name="save_step" class="btn btn-primary button-next" value="<?php esc_attr_e( 'Save & Continue', 'porto' ); ?>"><?php esc_html_e( 'Save & Continue', 'porto' ); ?><i class="fas fa-chevron-right ms-2"></i></button>
+					<?php wp_nonce_field( 'porto-speed-optimize' ); ?>
+				</p>
+			</form>
+			<?php
+
+		}
+
+		/**
+		 * Save advanced tab in optimize wizard.
+		 *
+		 * @since 6.3.0
+		 */
+		public function porto_speed_optimize_wizard_advanced_save() {
+			check_admin_referer( 'porto-speed-optimize' );
+
+			global $porto_settings_optimize;
+
+			if ( ! empty( $_POST['mobile_disable_slider'] ) ) {
+				$porto_settings_optimize['mobile_disable_slider'] = true;
+			} else {
+				$porto_settings_optimize['mobile_disable_slider'] = false;
+			}
+
+			if ( ! empty( $_POST['merge_stylesheets'] ) ) {
+				$porto_settings_optimize['merge_stylesheets'] = true;
+			} else {
+				$porto_settings_optimize['merge_stylesheets'] = false;
+			}
+
+			if ( ! empty( $_POST['critical_css'] ) ) {
+				$porto_settings_optimize['critical_css'] = true;
+			} else {
+				$porto_settings_optimize['critical_css'] = false;
+			}
+
+			if ( class_exists( 'Porto_Soft_Mode' ) ) {
+				if ( isset( $porto_settings_optimize['legacy_mode'] ) ) {
+					$old_legacy_mode = $porto_settings_optimize['legacy_mode'];
+				}
+				if ( ! empty( $_POST['soft_mode'] ) ) {
+					$porto_settings_optimize['legacy_mode'] = false;
+				} else {
+					$porto_settings_optimize['legacy_mode'] = true;
+				}
+				if ( ( ! isset( $old_legacy_mode ) && false == $porto_settings_optimize['legacy_mode'] ) || ( isset( $old_legacy_mode ) && $old_legacy_mode != $porto_settings_optimize['legacy_mode'] ) ) {
+					global $porto_settings;
+					if ( false == $porto_settings_optimize['legacy_mode'] ) {
+						update_option( 'porto_settings_backup', $porto_settings );
+						update_option( 'porto_backup_header_setting', $porto_settings['header-type-select'] );
+					}
+					add_filter(
+						'porto_legacy_mode',
+						function() {
+							global $porto_settings_optimize;
+							return $porto_settings_optimize['legacy_mode'];
+						},
+						20
+					);
+					if ( ! class_exists( 'ReduxFrameworkInstances' ) ) {
+						// include redux framework core functions
+						require_once( PORTO_ADMIN . '/ReduxCore/framework.php' );
+						global $reduxPortoSettings;
+						$reduxPortoSettings = new Redux_Framework_porto_settings();
+					}
+
+					if ( false == $porto_settings_optimize['legacy_mode'] ) {
+						// Header Theme Option
+						$porto_settings['header-type-select'] = 'header_builder_p';
+						set_theme_mod( 'theme_options_use_new_style', false );
+						$should_remove = Porto_Soft_Mode::$should_remove;
+						foreach ( $should_remove as $value ) {
+							if ( isset( $porto_settings[ $value ] ) ) {
+								unset( $porto_settings[ $value ] );
+							}
+						}
+					} else {
+						$backup_settings = get_option( 'porto_settings_backup' );
+						if ( ! empty( $backup_settings ) ) {
+							$porto_settings = array_merge( $backup_settings, $porto_settings );
+						}
+						$backup_header_setting = get_option( 'porto_backup_header_setting', -1 );
+						if ( -1 !== $backup_header_setting ) {
+							$porto_settings['header-type-select'] = $backup_header_setting;
+						}
+					}
+
+					ob_start();
+					$redux = ReduxFrameworkInstances::get_instance( 'porto_settings' );
+					$redux->set_options( $porto_settings );
+					ob_end_clean();
+					do_action( 'porto_admin_save_theme_settings' );
+				}
 			}
 
 			update_option( 'porto_settings_optimize', $porto_settings_optimize );
@@ -724,7 +923,7 @@ if ( ! class_exists( 'Porto_Speed_Optimize_Wizard' ) ) {
 						<input type="radio" name="lazyload_menu" value="firsthover" <?php echo checked( isset( $porto_settings_optimize['lazyload_menu'] ) && 'firsthover' == $porto_settings_optimize['lazyload_menu'], true, false ); ?>><?php esc_html_e( 'On First Hover', 'porto' ); ?>
 					</label>
 				</p>
-				<label><?php esc_html_e( 'Preload Icon Fonts', 'porto' ); ?></label>
+				<label><?php esc_html_e( 'Preload Icon Fonts and Images', 'porto' ); ?></label>
 				<p style="margin-bottom: .5rem">
 					<?php /* translators: Google Page Speed url */ ?>
 					<?php printf( esc_html__( 'This improves page load time as the browser caches preloaded resources so they are available immediately when needed. By using this option, you can increase page speed about 1 ~ 4 percent in %1$sGoogle PageSpeed Insights%2$s for both of mobile and desktop.', 'porto' ), '<a href="https://developers.google.com/speed/pagespeed/insights/" target="_blank" rel="noopener noreferrer">', '</a>' ); ?>
@@ -1121,7 +1320,7 @@ if ( ! class_exists( 'Porto_Speed_Optimize_Wizard' ) ) {
 							if ( false === strpos( $content, '[' ) && false === strpos( $content, 'wp:porto/porto-' ) ) {
 								continue;
 							}
-							if ( empty( $attrs ) && ! in_array( $post_content->ID, $used ) && ( stripos( $content, '[' . $shortcode . ' ' ) !== false || stripos( $content, 'wp:porto/' . str_replace( '_', '-', $shortcode ) ) !== false ) ) {
+							if ( empty( $attrs ) && ! in_array( $post_content->ID, $used ) && ( false !== stripos( $content, '[' . $shortcode . ' ' ) || false !== stripos( $content, '[' . $shortcode . ']' ) || stripos( $content, 'wp:porto/' . str_replace( '_', '-', $shortcode ) ) !== false ) ) {
 								$used[] = $post_content->ID;
 							} elseif ( ! empty( $attrs ) && ! in_array( $post_content->ID, $used ) ) {
 								$attr_text  = '';
@@ -1180,7 +1379,7 @@ if ( ! class_exists( 'Porto_Speed_Optimize_Wizard' ) ) {
 							if ( false === strpos( $content, '[' ) && false === strpos( $content, 'wp:porto/porto-' ) ) {
 								continue;
 							}
-							if ( ! in_array( $shortcode, $used ) && ( stripos( $content, '[' . $shortcode . ' ' ) !== false || stripos( $content, 'wp:porto/' . str_replace( '_', '-', $shortcode ) ) !== false ) ) {
+							if ( ! in_array( $shortcode, $used ) && ( false !== stripos( $content, '[' . $shortcode . ' ' ) || false !== stripos( $content, '[' . $shortcode . ']' ) || stripos( $content, 'wp:porto/' . str_replace( '_', '-', $shortcode ) ) !== false ) ) {
 								$used[] = $shortcode;
 
 								// check half container
@@ -1221,6 +1420,10 @@ if ( ! class_exists( 'Porto_Speed_Optimize_Wizard' ) ) {
 						'porto_hotspot',
 						'porto_steps',
 						'porto_image_gallery',
+						'porto_image_comparison',
+						'porto_scroll_progress',
+						'porto_360_degree_image_viewer',
+						'porto_cursor_effect',
 					);
 					$widgets = array_diff( $widgets, $used );
 					foreach ( $widgets as $widget ) {
@@ -1228,6 +1431,8 @@ if ( ! class_exists( 'Porto_Speed_Optimize_Wizard' ) ) {
 						if ( ! empty( $post_ids ) ) {
 							if ( 'porto_steps' == $widget ) {
 								$used[] = 'porto_schedule_timeline_item';
+							} elseif ( 'porto_360_degree_image_viewer' == $widget ) {
+								$used[] = 'porto_360degree_image_viewer';
 							} else {
 								$used[] = $widget;
 							}

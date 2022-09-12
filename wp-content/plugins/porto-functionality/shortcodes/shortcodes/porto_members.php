@@ -219,6 +219,21 @@ function porto_load_members_shortcode() {
 				),
 				array(
 					'type'       => 'dropdown',
+					'heading'    => __( 'Filter Style', 'porto-functionality' ),
+					'param_name' => 'filter_style',
+					'std'        => '',
+					'value'      => array(
+						__( 'Style 1', 'porto-functionality' ) => '',
+						__( 'Style 2', 'porto-functionality' ) => 'style-2',
+						__( 'Style 3', 'porto-functionality' ) => 'style-3',
+					),
+					'dependency' => array(
+						'element'   => 'filter',
+						'not_empty' => true,
+					),
+				),
+				array(
+					'type'       => 'dropdown',
 					'heading'    => __( 'Filter Type', 'porto-functionality' ),
 					'param_name' => 'filter_type',
 					'std'        => '',

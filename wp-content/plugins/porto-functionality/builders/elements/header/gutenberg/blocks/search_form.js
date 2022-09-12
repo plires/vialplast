@@ -38,10 +38,10 @@
             if ( attributes.toggle_size ) {
                 let unitVal = attributes.toggle_size;
                 const unit = unitVal.trim().replace( /[0-9.]/g, '' );
-                if ( ! unit ) {
+                if ( !unit ) {
                     unitVal += 'px';
                 }
-                internalStyle += 'font-size:'+ unitVal + ';';
+                internalStyle += 'font-size:' + unitVal + ';';
             }
             if ( attributes.toggle_color ) {
                 internalStyle += 'color:' + attributes.toggle_color;
@@ -52,7 +52,7 @@
         if ( attributes.input_size ) {
             let unitVal = attributes.input_size;
             const unit = unitVal.trim().replace( /[0-9.]/g, '' );
-            if ( ! unit ) {
+            if ( !unit ) {
                 unitVal += 'px';
             }
             internalStyle += '#header .searchform input, #header .searchform.searchform-cats input{width:' + unitVal + '}';
@@ -61,7 +61,7 @@
         if ( attributes.height ) {
             let unitVal = attributes.height;
             const unit = unitVal.trim().replace( /[0-9.]/g, '' );
-            if ( ! unit ) {
+            if ( !unit ) {
                 unitVal += 'px';
             }
             internalStyle += '#header .searchform input, #header .searchform select, #header .searchform .selectric .label, #header .searchform button{height:' + unitVal + '; line-height:' + unitVal + '}';
@@ -84,7 +84,7 @@
         if ( typeof attributes.border_radius != 'undefined' && attributes.border_radius.length ) {
             let unitVal = attributes.border_radius;
             const unit = unitVal.trim().replace( /[0-9.]/g, '' );
-            if ( ! unit ) {
+            if ( !unit ) {
                 unitVal += 'px';
             }
             let border_radius_selectors = '#header .searchform { border-radius: %s }';

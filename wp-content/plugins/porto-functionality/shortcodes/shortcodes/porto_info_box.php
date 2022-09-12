@@ -207,7 +207,7 @@ function porto_load_info_box_shortcode() {
 					'min'        => 1,
 					'max'        => 500,
 					'suffix'     => 'px',
-					'dependency'  => array(
+					'dependency' => array(
 						'element' => 'icon_style',
 						'value'   => array( 'none', 'circle', 'circle_img', 'advanced' ),
 					),
@@ -349,7 +349,7 @@ function porto_load_info_box_shortcode() {
 					'type'       => 'porto_param_heading',
 					'param_name' => 'title_text_typography',
 					'text'       => __( 'Title settings', 'porto-functionality' ),
-					'group'      => 'Style',
+					'group'      => __( 'Style', 'porto-functionality' ),
 				),
 				array(
 					'type'        => 'dropdown',
@@ -370,7 +370,7 @@ function porto_load_info_box_shortcode() {
 					'type'       => 'porto_typography',
 					'heading'    => __( 'Typography', 'porto-functionality' ),
 					'param_name' => 'title_font_porto_typography',
-					'group'      => 'Style',
+					'group'      => __( 'Style', 'porto-functionality' ),
 					'selectors'  => array(
 						'{{WRAPPER}} .porto-sicon-title',
 					),
@@ -379,7 +379,7 @@ function porto_load_info_box_shortcode() {
 					'type'       => 'colorpicker',
 					'param_name' => 'title_font_color',
 					'heading'    => __( 'Color', 'porto-functionality' ),
-					'group'      => 'Style',
+					'group'      => __( 'Style', 'porto-functionality' ),
 				),
 				array(
 					'type'             => 'porto_param_heading',
@@ -393,7 +393,7 @@ function porto_load_info_box_shortcode() {
 					'type'       => 'porto_typography',
 					'heading'    => __( 'Typography', 'porto-functionality' ),
 					'param_name' => 'subtitle_font_porto_typography',
-					'group'      => 'Style',
+					'group'      => __( 'Style', 'porto-functionality' ),
 					'selectors'  => array(
 						'{{WRAPPER}} .porto-sicon-header p',
 					),
@@ -402,19 +402,19 @@ function porto_load_info_box_shortcode() {
 					'type'       => 'colorpicker',
 					'param_name' => 'subtitle_font_color',
 					'heading'    => __( 'Color', 'porto-functionality' ),
-					'group'      => 'Style',
+					'group'      => __( 'Style', 'porto-functionality' ),
 				),
 				array(
 					'type'       => 'porto_param_heading',
 					'param_name' => 'desc_text_typography',
 					'text'       => __( 'Description settings', 'porto-functionality' ),
-					'group'      => 'Style',
+					'group'      => __( 'Style', 'porto-functionality' ),
 				),
 				array(
 					'type'       => 'porto_typography',
 					'heading'    => __( 'Typography', 'porto-functionality' ),
 					'param_name' => 'desc_font_porto_typography',
-					'group'      => 'Style',
+					'group'      => __( 'Style', 'porto-functionality' ),
 					'selectors'  => array(
 						'{{WRAPPER}} .porto-sicon-description',
 					),
@@ -423,31 +423,31 @@ function porto_load_info_box_shortcode() {
 					'type'       => 'colorpicker',
 					'param_name' => 'desc_font_color',
 					'heading'    => __( 'Color', 'porto-functionality' ),
-					'group'      => 'Style',
+					'group'      => __( 'Style', 'porto-functionality' ),
 				),
 				array(
 					'type'       => 'textfield',
 					'heading'    => __( 'Icon Margin Bottom', 'porto-functionality' ),
 					'param_name' => 'icon_margin_bottom',
-					'group'      => 'Style',
+					'group'      => __( 'Style', 'porto-functionality' ),
 				),
 				array(
 					'type'       => 'textfield',
 					'heading'    => __( 'Spacing between Icon and Title', 'porto-functionality' ),
 					'param_name' => 'icon_margin_right',
-					'group'      => 'Style',
+					'group'      => __( 'Style', 'porto-functionality' ),
 				),
 				array(
 					'type'       => 'textfield',
 					'heading'    => __( 'Title Margin Bottom', 'porto-functionality' ),
 					'param_name' => 'title_margin_bottom',
-					'group'      => 'Style',
+					'group'      => __( 'Style', 'porto-functionality' ),
 				),
 				array(
 					'type'       => 'textfield',
 					'heading'    => __( 'Header Margin Bottom', 'porto-functionality' ),
 					'param_name' => 'sub_title_margin_bottom',
-					'group'      => 'Style',
+					'group'      => __( 'Style', 'porto-functionality' ),
 				),
 				array(
 					'type'             => 'css_editor',

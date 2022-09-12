@@ -8,11 +8,11 @@ if ( ! function_exists( 'porto_get_related_posts' ) ) :
 		$args = wp_parse_args(
 			$args,
 			array(
-				'showposts'           => $porto_settings['post-related-count'],
+				'showposts'           => isset( $porto_settings['post-related-count'] ) ? $porto_settings['post-related-count'] : '10',
 				'post__not_in'        => array( $post_id ),
 				'ignore_sticky_posts' => 0,
 				'category__in'        => wp_get_post_categories( $post_id ),
-				'orderby'             => $porto_settings['post-related-orderby'],
+				'orderby'             => isset( $porto_settings['post-related-orderby'] ) ? $porto_settings['post-related-orderby'] : 'rand',
 			)
 		);
 
@@ -39,7 +39,7 @@ if ( ! function_exists( 'porto_get_related_portfolios' ) ) :
 		$args = wp_parse_args(
 			$args,
 			array(
-				'showposts'           => $porto_settings['portfolio-related-count'],
+				'showposts'           => isset( $porto_settings['portfolio-related-count'] ) ? $porto_settings['portfolio-related-count'] : 10,
 				'post__not_in'        => array( $post_id ),
 				'ignore_sticky_posts' => 0,
 				'post_type'           => 'portfolio',
@@ -50,7 +50,7 @@ if ( ! function_exists( 'porto_get_related_portfolios' ) ) :
 						'terms'    => $item_array,
 					),
 				),
-				'orderby'             => $porto_settings['portfolio-related-orderby'],
+				'orderby'             => isset( $porto_settings['portfolio-related-orderby'] ) ? $porto_settings['portfolio-related-orderby'] : 'rand',
 			)
 		);
 
@@ -83,7 +83,7 @@ if ( ! function_exists( 'porto_get_related_members' ) ) :
 		$args = wp_parse_args(
 			$args,
 			array(
-				'showposts'           => $porto_settings['member-related-count'],
+				'showposts'           => isset( $porto_settings['member-related-count'] ) ? $porto_settings['member-related-count'] : 10,
 				'post__not_in'        => array( $post_id ),
 				'ignore_sticky_posts' => 0,
 				'post_type'           => 'member',
@@ -94,7 +94,7 @@ if ( ! function_exists( 'porto_get_related_members' ) ) :
 						'terms'    => $item_array,
 					),
 				),
-				'orderby'             => $porto_settings['member-related-orderby'],
+				'orderby'             => isset( $porto_settings['member-related-orderby'] ) ? $porto_settings['member-related-orderby'] : 'rand',
 			)
 		);
 
@@ -174,9 +174,9 @@ if ( ! function_exists( 'porto_get_excerpt' ) ) :
 				$content = mb_substr( $content, 0, $limit ) . '...';
 			}
 		} else {
-			$content = explode( ' ', $content, $limit );
+			$content = explode( ' ', $content, $limit + 1 );
 
-			if ( count( $content ) >= $limit ) {
+			if ( count( $content ) >= $limit + 1 ) {
 				array_pop( $content );
 				if ( $more_link ) {
 					$content = implode( ' ', $content ) . '... ';
@@ -188,7 +188,7 @@ if ( ! function_exists( 'porto_get_excerpt' ) ) :
 			}
 		}
 
-		if ( 'html' == $porto_settings['blog-excerpt-type'] ) {
+		if ( isset( $porto_settings['blog-excerpt-type'] ) && 'html' == $porto_settings['blog-excerpt-type'] ) {
 			$content = porto_the_content( $content, false, $render_block );
 		}
 
@@ -203,7 +203,7 @@ if ( ! function_exists( 'porto_get_excerpt' ) ) :
 			}
 		}
 
-		if ( 'html' != $porto_settings['blog-excerpt-type'] ) {
+		if ( isset( $porto_settings['blog-excerpt-type'] ) && 'html' != $porto_settings['blog-excerpt-type'] ) {
 			$content = '<p class="post-excerpt">' . $content . '</p>';
 		}
 
@@ -341,7 +341,7 @@ if ( ! function_exists( 'porto_post_format' ) ) :
 
 		$post        = get_post();
 		$post_format = get_post_format();
-		if ( $porto_settings['post-format'] && $post_format ) {
+		if ( ! empty( $porto_settings['post-format'] ) && $post_format ) {
 			$ext_link = '';
 			if ( 'link' == $post_format ) {
 				$ext_link = get_post_meta( $post->ID, 'external_url', true );
@@ -418,15 +418,15 @@ if ( ! function_exists( 'porto_pagination' ) ) :
 		if ( $current_page ) {
 			$paged = $current_page;
 		} else {
-		$paged         = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : ( ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1 );
+			$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : ( ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1 );
 		}
 		if ( $current_link ) {
 			$page_num_link = html_entity_decode( esc_url( $current_link ) );
 		} else {
 			$page_num_link = html_entity_decode( get_pagenum_link() );
 		}
-		$query_args    = array();
-		$url_parts     = explode( '?', $page_num_link );
+		$query_args = array();
+		$url_parts  = explode( '?', $page_num_link );
 
 		if ( isset( $url_parts[1] ) ) {
 			wp_parse_str( $url_parts[1], $query_args );
@@ -487,7 +487,7 @@ add_filter( 'comment_form_defaults', 'porto_comment_form_defaults' );
 function porto_comment_form_defaults( $defaults ) {
 	global $porto_settings;
 
-	if ( 'without-icon' == $porto_settings['post-title-style'] ) {
+	if ( isset( $porto_settings['post-title-style'] ) && 'without-icon' == $porto_settings['post-title-style'] ) {
 		$defaults['title_reply_before'] = '<h3 id="reply-title" class="comment-reply-title">';
 		$defaults['title_reply_after']  = '</h3>';
 	}
@@ -524,7 +524,7 @@ if ( ! function_exists( 'porto_comment_form_before_fields' ) ) :
 		if ( is_singular( 'post' ) ) {
 			global $porto_settings;
 			$post_layout = get_post_meta( get_the_ID(), 'post_layout', true );
-			$post_layout = ( 'default' == $post_layout || ! $post_layout ) ? $porto_settings['post-content-layout'] : $post_layout;
+			$post_layout = ( 'default' == $post_layout || ! $post_layout ) ? ( isset( $porto_settings['post-content-layout'] ) ? $porto_settings['post-content-layout'] : 'large' ) : $post_layout;
 			if ( 'woocommerce' === $post_layout ) {
 				echo '<div class="row">';
 			}
@@ -536,7 +536,7 @@ if ( ! function_exists( 'porto_comment_form_after_fields' ) ) :
 		if ( is_singular( 'post' ) ) {
 			global $porto_settings;
 			$post_layout = get_post_meta( get_the_ID(), 'post_layout', true );
-			$post_layout = ( 'default' == $post_layout || ! $post_layout ) ? $porto_settings['post-content-layout'] : $post_layout;
+			$post_layout = ( 'default' == $post_layout || ! $post_layout ) ? ( isset( $porto_settings['post-content-layout'] ) ? $porto_settings['post-content-layout'] : 'large' ) : $post_layout;
 			if ( 'woocommerce' === $post_layout ) {
 				echo '</div>';
 			}
@@ -560,14 +560,32 @@ if ( ! function_exists( 'porto_ajax_posts' ) ) :
 		if ( empty( $_REQUEST['post_type'] ) ) {
 			die();
 		}
-		$post_type = $_REQUEST['post_type'];
+		$post_type    = $_REQUEST['post_type'];
+		$is_shortcode = empty( $_REQUEST['extra'] ) ? false : true;
 
-		$allowed_post_types = array( 'member', 'portfolio', 'faq', 'post' );
+		$post_type_all = get_post_types(
+			array(
+				'public'            => true,
+				'show_in_nav_menus' => true,
+			),
+			'objects',
+			'and'
+		);
+
+		$disabled_post_types = array( 'attachment', 'porto_builder', 'page', 'e-landing-page', 'product' );
+		foreach ( $disabled_post_types as $disabled ) {
+			unset( $post_type_all[ $disabled ] );
+		}
+		foreach ( $post_type_all as $key => $p_type ) {
+			$allowed_post_types[] = esc_html( $key );
+		}
+
+		if ( $is_shortcode ) {
+			$allowed_post_types[] = 'product';
+		}
 		if ( ! in_array( $post_type, $allowed_post_types ) ) {
 			die();
 		}
-
-		$is_shortcode = empty( $_REQUEST['extra'] ) ? false : true;
 
 		if ( $is_shortcode ) {
 			if ( isset( $_GET['extra'] ) ) {
@@ -589,7 +607,11 @@ if ( ! function_exists( 'porto_ajax_posts' ) ) :
 			}
 
 			echo '<div>';
-			if ( 'portfolio' == $post_type ) {
+			if ( isset( $atts['shortcode'] ) && 'porto_posts_grid' == $atts['shortcode'] ) {
+				if ( $template = porto_shortcode_template( 'porto_posts_grid' ) ) {
+					include $template;
+				}
+			} elseif ( 'portfolio' == $post_type ) {
 				if ( $template = porto_shortcode_template( 'porto_portfolios' ) ) {
 					include $template;
 				}
@@ -655,25 +677,25 @@ if ( ! function_exists( 'porto_ajax_posts' ) ) :
 			if ( $posts->have_posts() ) {
 				echo '<div>';
 				global $porto_settings;
-				if ( 'post' != $post_type && 'content' === $porto_settings[ $post_type . '-cat-sort-pos'] ) {
+				if ( 'post' != $post_type && isset( $porto_settings[ $post_type . '-cat-sort-pos' ] ) && 'content' === $porto_settings[ $post_type . '-cat-sort-pos' ] ) {
 
 					$terms = array();
 					$taxs  = get_terms(
 						array(
-							'taxonomy'   =>  $post_type . '_cat',
+							'taxonomy'   => $post_type . '_cat',
 							'hide_empty' => true,
-							'orderby'    => isset( $porto_settings[ $post_type . '-cat-orderby'] ) ? $porto_settings[ $post_type . '-cat-orderby'] : 'name',
-							'order'      => isset( $porto_settings[ $post_type . '-cat-order'] ) ? $porto_settings[ $post_type . '-cat-order'] : 'asc',
+							'orderby'    => isset( $porto_settings[ $post_type . '-cat-orderby' ] ) ? $porto_settings[ $post_type . '-cat-orderby' ] : 'name',
+							'order'      => isset( $porto_settings[ $post_type . '-cat-order' ] ) ? $porto_settings[ $post_type . '-cat-order' ] : 'asc',
 						)
 					);
 
 					foreach ( $taxs as $tax ) {
 						$terms[ urldecode( $tax->slug ) ] = $tax->name;
 					}
-					if ( 'infinite' != $porto_settings[ $post_type . '-infinite'] && 'load_more' != $porto_settings[ $post_type . '-infinite'] ) {
+					if ( isset( $porto_settings[ $post_type . '-infinite' ] ) && 'infinite' != $porto_settings[ $post_type . '-infinite' ] && 'load_more' != $porto_settings[ $post_type . '-infinite' ] ) {
 						$posts_terms = array();
 						foreach ( $posts->posts as $post ) {
-							$post_taxs = wp_get_post_terms( $post->ID, 'portfolio_cat', array( 'fields' => 'slugs' ) );
+							$post_taxs = wp_get_post_terms( $post->ID, $post_type . '_cat', array( 'fields' => 'slugs' ) );
 							if ( is_array( $post_taxs ) && ! empty( $post_taxs ) ) {
 								$posts_terms = array_unique( array_merge( $posts_terms, $post_taxs ) );
 							}
@@ -685,7 +707,7 @@ if ( ! function_exists( 'porto_ajax_posts' ) ) :
 						}
 					}
 					?>
-					<ul class="portfolio-filter nav sort-source <?php echo isset( $porto_settings[ $post_type . '-cat-sort-style'] ) && $porto_settings[ $post_type . '-cat-sort-style'] ? 'sort-source-' . esc_attr( $porto_settings[ $post_type . '-cat-sort-style'] ) : 'nav-pills', empty( $porto_settings[ $post_type . '-cat-ft'] ) || empty( $porto_settings[ $post_type . '-infinite'] ) ? '' : ' porto-ajax-filter'; ?>">
+					<ul class="<?php echo esc_attr( $post_type ); ?>-filter nav sort-source <?php echo isset( $porto_settings[ $post_type . '-cat-sort-style' ] ) && $porto_settings[ $post_type . '-cat-sort-style' ] ? 'sort-source-' . esc_attr( $porto_settings[ $post_type . '-cat-sort-style' ] ) : 'nav-pills', empty( $porto_settings[ $post_type . '-cat-ft' ] ) || empty( $porto_settings[ $post_type . '-infinite' ] ) ? '' : ' porto-ajax-filter'; ?>">
 						<li class="active" data-filter="*"><a href="#"><?php esc_html_e( 'Show All', 'porto' ); ?></a></li>
 						<?php foreach ( $terms as $tax_slug => $tax_name ) : ?>
 							<li data-filter="<?php echo esc_attr( $tax_slug ); ?>"><a href="#"><?php echo esc_html( $tax_name ); ?></a></li>
@@ -695,7 +717,7 @@ if ( ! function_exists( 'porto_ajax_posts' ) ) :
 					<?php
 				}
 
-				echo '<div class="posts-wrap ' . esc_attr( $post_type )  . 's-container" data-cur_page="' . ( isset( $_REQUEST['page'] ) ? (int) $_REQUEST['page'] : 1 ) . '" data-max_page="' . intval( $posts->max_num_pages ) . '">';
+				echo '<div class="posts-wrap ' . esc_attr( $post_type ) . 's-container" data-cur_page="' . ( isset( $_REQUEST['page'] ) ? (int) $_REQUEST['page'] : 1 ) . '" data-max_page="' . intval( $posts->max_num_pages ) . '">';
 				$post_layout = isset( $_REQUEST['post_layout'] ) ? $_REQUEST['post_layout'] : null;
 
 				$template_args = array();
@@ -703,10 +725,19 @@ if ( ! function_exists( 'porto_ajax_posts' ) ) :
 					$template_args['image_size'] = $_REQUEST['image_size'];
 				}
 
-				while ( $posts-> have_posts() ) {
+				if ( 'member' == $post_type && $post_layout && 'advanced' != $post_layout ) {
+					$GLOBALS['porto_member_view'] = $post_layout;
+				}
+
+				$post_counter = 0;
+				while ( $posts->have_posts() ) {
 					$posts->the_post();
 					if ( 'post' == $post_type ) {
 						get_template_part( 'content-blog', $post_layout );
+					} elseif ( 'member' == $post_type && 'advanced' == $post_layout ) {
+						$template_args['member_counter'] = $post_counter;
+						porto_get_template_part( 'content', 'member', $template_args );
+						$post_counter++;
 					} else {
 						porto_get_template_part( 'content-archive-' . $post_type, $post_layout, $template_args );
 					}

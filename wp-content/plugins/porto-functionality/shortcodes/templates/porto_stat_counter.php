@@ -281,19 +281,29 @@ if ( wp_script_is( 'countup', 'registered' ) && ( ! isset( $porto_shortcode_coun
 	$porto_shortcode_counter_use = true;
 	?>
 <script>
-	jQuery(document).ready(function($) {
-		if (typeof countUp == "undefined") {
-			var c = document.createElement("script");
-			c.src = "<?php echo wp_scripts()->registered['countup']->src; ?>";
-			if (!$('script[src="' + c.src + '"]').length) {
-				document.getElementsByTagName("body")[0].appendChild(c);
-			}
-			c = document.createElement("script");
-			c.src = "<?php echo wp_scripts()->registered['porto_shortcodes_countup_loader_js']->src; ?>";
-			if (!$('script[src="' + c.src + '"]').length) {
-				document.getElementsByTagName("body")[0].appendChild(c);
-			}
+	( function() {
+		var porto_inc_counter_js = function() {
+			( function( $ ) {
+				if (typeof countUp == "undefined") {
+					var c = document.createElement("script");
+					c.src = "<?php echo wp_scripts()->registered['countup']->src; ?>";
+					if (!$('script[src="' + c.src + '"]').length) {
+						document.getElementsByTagName("body")[0].appendChild(c);
+					}
+					c = document.createElement("script");
+					c.src = "<?php echo wp_scripts()->registered['porto_shortcodes_countup_loader_js']->src; ?>";
+					if (!$('script[src="' + c.src + '"]').length) {
+						document.getElementsByTagName("body")[0].appendChild(c);
+					}
+				}
+			} )( jQuery );
+		};
+
+		if ( window.theme && theme.isLoaded ) {
+			porto_inc_counter_js();
+		} else {
+			window.addEventListener( 'load', porto_inc_counter_js );
 		}
-	});
+	} )();
 </script>
 <?php endif; ?>

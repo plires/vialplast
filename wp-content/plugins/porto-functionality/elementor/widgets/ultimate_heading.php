@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Porto Elementor widget to display headings.
  *
- * @since 5.1.0
+ * @since 1.5.0
  */
 
 use Elementor\Controls_Manager;
@@ -35,7 +35,7 @@ class Porto_Elementor_Ultimate_Heading_Widget extends \Elementor\Widget_Base {
 		return 'eicon-heading';
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$this->start_controls_section(
 			'section_ultimate_heading',
@@ -60,7 +60,7 @@ class Porto_Elementor_Ultimate_Heading_Widget extends \Elementor\Widget_Base {
 			'enable_typewriter',
 			array(
 				'type'  => Controls_Manager::SWITCHER,
-				'label' => __( 'Enable typewriter effect', 'porto-functionality' ),
+				'label' => __( 'Enable Typewriter Effect', 'porto-functionality' ),
 			)
 		);
 		$this->add_control(

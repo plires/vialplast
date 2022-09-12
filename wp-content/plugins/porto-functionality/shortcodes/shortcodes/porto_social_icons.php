@@ -36,7 +36,7 @@ function porto_load_social_icons_element() {
 					'param_name' => 'icon_color',
 					'value'      => '',
 					'selectors'  => array(
-						'{{WRAPPER}} a:not(:hover)' => 'color: {{VALUE}};',
+						'{{WRAPPER}}.share-links a:not(:hover)' => 'color: {{VALUE}};',
 					),
 				),
 				array(
@@ -54,7 +54,7 @@ function porto_load_social_icons_element() {
 					'param_name' => 'icon_color_bg',
 					'value'      => '',
 					'selectors'  => array(
-						'{{WRAPPER}} a:not(:hover)' => 'background-color: {{VALUE}};',
+						'{{WRAPPER}}.share-links a:not(:hover)' => 'background-color: {{VALUE}};',
 					),
 				),
 				array(

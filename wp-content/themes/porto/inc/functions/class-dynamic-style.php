@@ -32,7 +32,8 @@ if ( ! class_exists( 'Porto_Dynamic_Style' ) ) :
 					'admin_init',
 					function() {
 						if ( current_user_can( 'manage_options' ) && get_transient( 'porto_need_compile_dynamic_css', false ) ) {
-							$this->compile_dynamic_css();
+							$this->compile_dynamic_css(); // dynamic style
+							porto_compile_css( 'shortcodes' ); // shortcodes
 							delete_transient( 'porto_need_compile_dynamic_css' );
 						}
 					}
@@ -50,7 +51,7 @@ if ( ! class_exists( 'Porto_Dynamic_Style' ) ) :
 
 			add_action( 'wp_enqueue_scripts', array( $this, 'output_internal_styles' ), 1005 );
 			add_action( 'wp_head', array( $this, 'output_internal_js' ), 153 );
-			add_action( 'wp_footer', array( $this, 'output_custom_js_body' ) );
+			add_action( 'wp_footer', array( $this, 'output_custom_js_body' ), 99 );
 		}
 
 		public function get_mode() {
@@ -220,12 +221,27 @@ if ( ! class_exists( 'Porto_Dynamic_Style' ) ) :
 			if ( $css ) {
 				global $porto_settings_optimize;
 				if ( is_singular() && isset( $porto_settings_optimize['lazyload'] ) && $porto_settings_optimize['lazyload'] && ! vc_is_inline() ) {
+					$preloads = array();
+					if ( class_exists( 'Porto_Critical' ) ) {
+						$preloads = Porto_Critical::get_instance()->get_preloads();
+					}
+
 					global $post;
 					preg_match_all( '/\.vc_custom_([^{]*)[^}]*((background-image):[^}]*|(background):[^}]*url\([^}]*)}/', $css, $matches );
 					if ( isset( $matches[0] ) && ! empty( $matches[0] ) ) {
 						foreach ( $matches[0] as $key => $value ) {
 							if ( ! isset( $matches[1][ $key ] ) || empty( $matches[1][ $key ] ) ) {
 								continue;
+							}
+							if ( ! empty( $preloads ) ) {
+								foreach ( $preloads as $preload_url ) {
+									if ( ! empty( $matches[2] ) && ! empty( $matches[2][ $key ] ) && false !== strpos( $matches[2][ $key ], $preload_url ) ) {
+										continue 2;
+									}
+									if ( ! empty( $matches[3] ) && ! empty( $matches[3][ $key ] ) && false !== strpos( $matches[3][ $key ], $preload_url ) ) {
+										continue 2;
+									}
+								}
 							}
 							if ( preg_match( '/\[(porto_interactive_banner|vc_row|vc_column|vc_row_inner|vc_column_inner)\s[^]]*.vc_custom_' . trim( $matches[1][ $key ] ) . '[^]]*\]/', $post->post_content ) ) {
 								if ( ! empty( $matches[3][ $key ] ) ) {

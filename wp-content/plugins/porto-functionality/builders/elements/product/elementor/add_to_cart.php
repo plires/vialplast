@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Porto Elementor widget to display "add to cart" button on the single product page when using custom product layout
  *
- * @since 5.4.0
+ * @since 1.7.1
  */
 
 use Elementor\Controls_Manager;
@@ -31,7 +31,11 @@ class Porto_Elementor_CP_Add_to_cart_Widget extends \Elementor\Widget_Base {
 		return array( 'product', 'cart', 'add_to_cart' );
 	}
 
-	protected function _register_controls() {
+	public function get_icon() {
+		return 'eicon-product-add-to-cart';
+	}
+
+	protected function register_controls() {
 
 		$this->start_controls_section(
 			'section_cp_add_to_cart',

@@ -12,7 +12,6 @@
         display: inline-block;
         margin: side-values(.2857em .5714em .2857em 0);
         position: relative;
-        text-decoration: none;
         vertical-align: middle;
         @include transition($transition);
         @include transform(translate3d(0,0,0));
@@ -30,9 +29,6 @@
 
         &:hover, &:focus {
             opacity: 0.9;
-            color: #fff;
-        }
-        #footer &:hover {
             color: #fff;
         }
     }
@@ -217,8 +213,7 @@
     }
 }
 
-.widget.follow-us,
-/*#footer .widget.follow-us,*/
+.follow-us,
 .header-wrapper.header-side-nav,
 .header-corporate {
     .share-links {

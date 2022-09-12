@@ -53,7 +53,7 @@ $localized_table_text = apply_filters( 'wpml_translate_single_string', $table_te
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width" />
-	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	<link rel="profile" href="https://gmpg.org/xfn/11" />
 
 	<?php wp_head(); ?>
 

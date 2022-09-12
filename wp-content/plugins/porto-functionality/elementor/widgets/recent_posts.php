@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Porto Elementor widget to display posts slider.
  *
- * @since 5.1.0
+ * @since 1.5.0
  */
 
 use Elementor\Controls_Manager;
@@ -43,7 +43,7 @@ class Porto_Elementor_Recent_Posts_Widget extends \Elementor\Widget_Base {
 		}
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		$slider_options = porto_vc_product_slider_fields();
 		unset( $slider_options[8] );
 		unset( $slider_options[9] );

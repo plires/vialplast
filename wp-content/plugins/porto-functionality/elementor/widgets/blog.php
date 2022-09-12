@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Porto Elementor widget to display posts.
  *
- * @since 5.1.0
+ * @since 1.5.0
  */
 
 use Elementor\Controls_Manager;
@@ -43,7 +43,7 @@ class Porto_Elementor_Blog_Widget extends \Elementor\Widget_Base {
 		}
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		$order_by_values  = array_slice( porto_vc_order_by(), 1 );
 		$order_way_values = array_slice( porto_vc_woo_order_way(), 1 );
 		$slider_options   = porto_vc_product_slider_fields();

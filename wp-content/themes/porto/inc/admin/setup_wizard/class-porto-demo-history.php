@@ -257,6 +257,13 @@ class Porto_Demo_History {
 
 		} elseif ( 'options' == $type ) {
 			if ( ! empty( $this->demo_history['options'] ) ) {
+				if ( ! class_exists( 'ReduxFrameworkInstances' ) ) {
+					// include redux framework core functions
+					require_once( PORTO_ADMIN . '/ReduxCore/framework.php' );
+					global $reduxPortoSettings;
+					$reduxPortoSettings = new Redux_Framework_porto_settings();
+				}
+				
 				$redux = ReduxFrameworkInstances::get_instance( 'porto_settings' );
 				$redux->set_options( $this->demo_history['options'] );
 			}

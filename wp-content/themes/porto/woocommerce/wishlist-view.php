@@ -42,14 +42,19 @@
 if ( ! defined( 'YITH_WCWL' ) ) {
 	exit;
 } // Exit if accessed directly
+
+$has_quantity_type = has_filter( 'woocommerce_loop_add_to_cart_link', 'porto_woocommerce_display_quantity_input_on_shop_page' );
+if ( $has_quantity_type ) {
+	remove_filter( 'woocommerce_loop_add_to_cart_link', 'porto_woocommerce_display_quantity_input_on_shop_page', 10, 2 );
+}
 ?>
 
 <!-- WISHLIST TABLE -->
-<table class="shop_table cart wishlist_table wishlist_view traditional responsive" data-pagination="<?php echo esc_attr( $pagination ); ?>" data-per-page="<?php echo esc_attr( $per_page ); ?>" data-page="<?php echo esc_attr( $current_page ); ?>" data-id="<?php echo $wishlist_id; ?>" data-token="<?php echo $wishlist_token; ?>">
+<table class="shop_table cart wishlist_table wishlist_view traditional responsive" data-pagination="<?php echo esc_attr( $pagination ); ?>" data-per-page="<?php echo esc_attr( $per_page ); ?>" data-page="<?php echo esc_attr( $current_page ); ?>" data-id="<?php echo esc_attr( $wishlist_id ); ?>" data-token="<?php echo esc_attr( $wishlist_token ); ?>">
 
 	<?php $column_count = 2; ?>
 
-	<thead class="<?php echo $wishlist && $wishlist->has_items() ? '' : 'd-none'; ?>">
+	<thead class="<?php echo ! $wishlist || ! $wishlist->has_items() ? 'd-none' : ''; ?>">
 	<tr>
 		<?php
 		if ( $show_cb ) :
@@ -161,7 +166,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 					<td class="product-thumbnail">
 						<div class="position-relative">
 							<a href="<?php echo esc_url( get_permalink( apply_filters( 'woocommerce_in_cart_product', $item->get_product_id() ) ) ); ?>">
-								<?php echo $product->get_image(); ?>
+								<?php echo wp_kses_post( $product->get_image() ); ?>
 							</a>
 							<a href="<?php echo esc_url( add_query_arg( 'remove_from_wishlist', $item->get_product_id() ) ); ?>" class="remove remove_from_wishlist" title="<?php echo apply_filters( 'yith_wcwl_remove_product_wishlist_message_title', __( 'Remove this product', 'yith-woocommerce-wishlist' ) ); ?>"></a>
 						</div>
@@ -330,3 +335,7 @@ if ( ! defined( 'YITH_WCWL' ) ) {
 	</tbody>
 
 </table>
+<?php
+if ( $has_quantity_type ) {
+	add_filter( 'woocommerce_loop_add_to_cart_link', 'porto_woocommerce_display_quantity_input_on_shop_page', 10, 2 );
+}

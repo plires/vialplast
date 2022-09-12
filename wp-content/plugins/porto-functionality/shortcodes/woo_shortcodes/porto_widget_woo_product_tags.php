@@ -26,7 +26,7 @@ function porto_load_widget_woo_product_tags_shortcode() {
 			'icon'        => 'fas fa-cart-arrow-down',
 			'category'    => __( 'WooCommerce Widgets', 'porto-functionality' ),
 			'class'       => 'wpb_vc_wp_widget',
-			'description' => __( 'Your most used product tags in cloud format.', 'woocommerce' ),
+			'description' => __( 'Your most used product tags in cloud format.', 'porto-functionality' ),
 			'params'      => array(
 				array(
 					'type'        => 'textfield',

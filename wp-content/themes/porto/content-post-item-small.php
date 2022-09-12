@@ -2,7 +2,7 @@
 global $porto_settings;
 
 $featured_images = porto_get_featured_images();
-$show_date       = in_array( 'date', $porto_settings['post-metas'] );
+$show_date       = isset( $porto_settings['post-metas'] ) && in_array( 'date', $porto_settings['post-metas'] );
 $tag             = isset( $title_tag ) ? $title_tag : 'h5';
 ?>
 <div class="<?php echo isset( $post_item_class ) ? esc_attr( $post_item_class ) : 'post-item-small'; ?>">
@@ -12,7 +12,7 @@ $tag             = isset( $title_tag ) ? $title_tag : 'h5';
 		$attachment_thumb = porto_get_attachment( $attachment_id, isset( $image_size ) ? $image_size : 'widget-thumb-medium' );
 		?>
 		<div class="post-image img-thumbnail">
-			<a href="<?php the_permalink(); ?>">
+			<a href="<?php the_permalink(); ?>" aria-label="post">
 				<img width="<?php echo esc_attr( $attachment_thumb['width'] ); ?>" height="<?php echo esc_attr( $attachment_thumb['height'] ); ?>" src="<?php echo esc_url( $attachment_thumb['src'] ); ?>" alt="<?php echo esc_attr( $attachment_thumb['alt'] ); ?>" />
 			</a>
 		</div>

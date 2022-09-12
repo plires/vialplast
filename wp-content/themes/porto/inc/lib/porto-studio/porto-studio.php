@@ -38,6 +38,19 @@ if ( ! class_exists( 'Porto_Studio' ) ) :
 		private $page_type = 'v';
 
 		/**
+		 * Categories for template builders
+		 *
+		 * @since 2.3.0
+		 */
+		private $builder_categories = array(
+			'header'  => 1,
+			'footer'  => 25,
+			'shop'    => 26,
+			'product' => 27,
+			'type'    => 28,
+		);
+
+		/**
 		 * constructor
 		 */
 		public function __construct() {
@@ -85,10 +98,8 @@ if ( ! class_exists( 'Porto_Studio' ) ) :
 					if ( defined( 'WPB_VC_VERSION' ) ) {
 						add_filter( 'vc_nav_controls', array( $this, 'add_studio_control' ) );
 						add_filter( 'vc_nav_front_controls', array( $this, 'add_studio_control' ) );
-						if ( vc_is_inline() ) {
-							add_filter( 'vc_nav_controls', array( $this, 'add_edit_area_control' ) );
-							add_filter( 'vc_nav_front_controls', array( $this, 'add_edit_area_control' ) );
-						}
+						add_filter( 'vc_nav_controls', array( $this, 'add_edit_area_control' ) );
+						add_filter( 'vc_nav_front_controls', array( $this, 'add_edit_area_control' ) );
 					}
 					add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ), 1001 );
 					add_action( 'admin_footer', array( $this, 'get_page_content' ) );
@@ -97,12 +108,26 @@ if ( ! class_exists( 'Porto_Studio' ) ) :
 		}
 
 		public function add_edit_area_control( $list ) {
-			$list[] = array( 'porto_editor_area', '<li><a href="javascript:;" class="vc_icon-btn porto-editor-area-button" id="porto-editor-area-button" title="' . esc_html__( 'Porto Editor Area', 'porto' ) . '"><i class="vc-composer-icon fas fa-arrows-alt-h"></i></a></li>' );
+			$add_flag = false;
+			if ( doing_filter( 'vc_nav_controls' ) ) {
+				$post_id = get_the_ID();
+				if ( $post_id ) {
+					$builder_type = get_post_meta( $post_id, PortoBuilders::BUILDER_TAXONOMY_SLUG, true );
+					if ( 'single' == $builder_type || 'archive' == $builder_type ) {
+						$add_flag = true;
+					}
+				}
+			} else {
+				$add_flag = true;
+			}
+			if ( $add_flag ) {
+				$list[] = array( 'porto_editor_area', '<li><a href="javascript:;" class="vc_icon-btn porto-editor-area-button" id="porto-editor-area-button" title="' . esc_html__( 'Porto Preview Settings', 'porto' ) . '"><i class="vc-composer-icon fas fa-arrows-alt-h" style="font-weight: 900;"></i></a></li>' );
+			}
 			return $list;
 		}
 
 		public function add_studio_control( $list ) {
-			$list[] = array( 'porto_studio', '<li><a href="javascript:;" class="vc_icon-btn porto-studio-editor-button" id="porto-studio-editor-button" title="Porto Studio">Porto Studio</a></li>' );
+			$list[] = array( 'porto_studio', '<li><a href="javascript:;" class="vc_icon-btn porto-studio-editor-button porto-important-feature" id="porto-studio-editor-button" title="Porto Studio">Porto Studio</a></li>' );
 			return $list;
 		}
 
@@ -150,7 +175,6 @@ if ( ! class_exists( 'Porto_Studio' ) ) :
 				$url  = add_query_arg( array( 'block_id' => ( (int) $_POST['block_id'] ) ), $url );
 
 				$block = $importer_api->get_response( $url );
-
 				if ( is_wp_error( $block ) || ! $block || ! isset( $block['content'] ) ) {
 					if ( $pure_return ) {
 						return false;
@@ -235,12 +259,7 @@ if ( ! class_exists( 'Porto_Studio' ) ) :
 			}
 
 			if ( isset( $_POST['demo_filter'] ) && is_array( $_POST['demo_filter'] ) ) {
-				$blocked_builders = array(
-					'header'  => 1,
-					'footer'  => 25,
-					'shop'    => 26,
-					'product' => 27,
-				);
+				$blocked_builders = $this->builder_categories;
 
 				if ( ! empty( $_REQUEST['post_id'] ) ) {
 					$post_id      = (int) $_REQUEST['post_id'];
@@ -541,10 +560,10 @@ if ( ! class_exists( 'Porto_Studio' ) ) :
 					if ( 'porto_builder' == get_post_type( $post_id ) && $builder_type && 'block' != $builder_type ) {
 						$active_cat = false;
 						foreach ( $block_categories as $index => $c ) {
-							if ( $builder_type == strtolower( $c['title'] ) ) {
+							if ( isset( $this->builder_categories[ $builder_type ] ) && (int) $this->builder_categories[ $builder_type ] === (int) $c['id'] ) {
 								$active_cat = $c;
 								unset( $block_categories[ $index ] );
-							} elseif ( in_array( strtolower( $c['title'] ), array( 'header', 'footer', 'shop', 'product' ) ) ) {
+							} elseif ( in_array( $c['id'], $this->builder_categories ) ) {
 								unset( $block_categories[ $index ] );
 							}
 						}
@@ -554,7 +573,7 @@ if ( ! class_exists( 'Porto_Studio' ) ) :
 						}
 					} else {
 						foreach ( $block_categories as $index => $c ) {
-							if ( in_array( strtolower( $c['title'] ), array( 'header', 'footer', 'shop', 'product' ) ) ) {
+							if ( in_array( $c['id'], $this->builder_categories ) ) {
 								unset( $block_categories[ $index ] );
 							}
 						}

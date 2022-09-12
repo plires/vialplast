@@ -33,7 +33,7 @@ function porto_load_shortcode_product_attribute_filter() {
 			'base'        => 'porto_product_attribute_filter',
 			'icon'        => 'fas fa-cart-arrow-down',
 			'category'    => __( 'WooCommerce', 'porto-functionality' ),
-			'description' => __( 'Display a list of attributes to filter products.', 'woocommerce' ),
+			'description' => __( 'Display a list of attributes to filter products.', 'porto-functionality' ),
 			'params'      => array(
 				array(
 					'type'       => 'dropdown',

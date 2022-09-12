@@ -318,6 +318,9 @@
 	},
 	"footer-ribbon-bg-color":"#0088cc",
 	"footer-ribbon-text-color":"#ffffff",
+	"footer-bottom-bg":{
+		"background-color":"#1c2023"
+	},
 	"footer-bottom-link-color":{
 		"regular":"#ffffff",
 		"hover":"#ffffff"
@@ -532,7 +535,6 @@
 	"faq-archive-layout":"fullwidth",
 	"faq-infinite":true,
 	"error-block":"error-404",
-	"woo-show-rating":true,
 	"product-archive-layout":"left-sidebar",
 	"category-item":"10,25,50",
 	"category-view-mode":"",

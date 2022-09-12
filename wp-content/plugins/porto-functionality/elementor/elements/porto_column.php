@@ -98,7 +98,7 @@ class Porto_Elementor_Column extends Elementor\Element_Column {
 						$settings_min_height = (int) $settings['min_height_mobile']['size'];
 					}
 				}
-				if ( $settings_min_height && is_array( $image_meta ) && is_array( $image_meta['sizes'] ) ) {
+				if ( $settings_min_height && is_array( $image_meta ) && is_array( $image_meta['sizes'] ) && ! empty( $image_meta['width'] ) ) {
 					$ratio = $image_meta['height'] / $image_meta['width'];
 					foreach ( $image_meta['sizes'] as $key => $size ) {
 						if ( $size['width'] * (float) $ratio < $settings_min_height ) {
@@ -219,6 +219,18 @@ function porto_elementor_column_custom_control( $self, $args ) {
 		)
 	);
 
+	$self->add_control(
+		'disable_mouse_drag',
+		array(
+			'type'        => Controls_Manager::SWITCHER,
+			'label'       => esc_html__( 'Disable Mouse Drag', 'porto-functionality' ),
+			'description' => esc_html__( 'This option will disapprove Mouse Drag.', 'porto-functionality' ),
+			'condition'   => array(
+				'as_banner_layer' => 'carousel',
+			),
+		)
+	);
+
 	$self->add_responsive_control(
 		'items',
 		array(
@@ -240,14 +252,19 @@ function porto_elementor_column_custom_control( $self, $args ) {
 	$self->add_control(
 		'item_margin',
 		array(
-			'label'       => esc_html__( 'Item Margin (px)', 'porto-functionality' ),
-			'type'        => Controls_Manager::NUMBER,
-			'default'     => 0,
-			'min'         => '0',
-			'max'         => '100',
-			'step'        => '1',
-			'placeholder' => '0',
-			'condition'   => array(
+			'label'              => esc_html__( 'Item Margin (px)', 'porto-functionality' ),
+			'type'               => Controls_Manager::NUMBER,
+			'default'            => 0,
+			'min'                => '0',
+			'max'                => '100',
+			'step'               => '1',
+			'placeholder'        => '0',
+			'render_type'        => 'template',
+			'frontend_available' => true,
+			'selectors'          => array(
+				'.elementor-element-{{ID}} > .elementor-column-wrap > .porto-carousel, .elementor-element-{{ID}} > .porto-carousel' => '--porto-el-spacing: {{VALUE}}px;',
+			),
+			'condition'          => array(
 				'as_banner_layer' => 'carousel',
 			),
 		)
@@ -307,6 +324,17 @@ function porto_elementor_column_custom_control( $self, $args ) {
 			'condition' => array(
 				'as_banner_layer' => 'carousel',
 				'show_nav'        => 'yes',
+			),
+		)
+	);
+
+	$self->add_control(
+		'set_loop',
+		array(
+			'type'      => Controls_Manager::SWITCHER,
+			'label'     => esc_html__( 'Infinite Loop', 'porto-functionality' ),
+			'condition' => array(
+				'as_banner_layer' => 'carousel',
 			),
 		)
 	);
@@ -430,6 +458,9 @@ function porto_elementor_column_custom_control( $self, $args ) {
 			'condition'   => array(
 				'as_banner_layer' => 'banner',
 			),
+			'dynamic'     => array(
+				'active' => true,
+			),
 		)
 	);
 
@@ -451,7 +482,7 @@ function porto_elementor_column_custom_control( $self, $args ) {
 			'type'      => Controls_Manager::COLOR,
 			'label'     => esc_html__( 'Background Color', 'porto-functionality' ),
 			'selectors' => array(
-				'{{WRAPPER}} > img' => 'background-color: {{VALUE}};',
+				'{{WRAPPER}}' => 'background-color: {{VALUE}};',
 			),
 			'condition' => array(
 				'as_banner_layer' => 'banner',
@@ -861,6 +892,28 @@ function porto_elementor_column_custom_control( $self, $args ) {
 	);
 
 	$self->add_control(
+		'animate_in',
+		array(
+			'label'     => esc_html__( 'Item Animation In', 'porto-functionality' ),
+			'type'      => Controls_Manager::TEXT,
+			'condition' => array(
+				'as_banner_layer' => 'carousel',
+			),
+		)
+	);
+
+	$self->add_control(
+		'animate_out',
+		array(
+			'label'     => esc_html__( 'Item Animation Out', 'porto-functionality' ),
+			'type'      => Controls_Manager::TEXT,
+			'condition' => array(
+				'as_banner_layer' => 'carousel',
+			),
+		)
+	);
+
+	$self->add_control(
 		'porto_el_cls',
 		array(
 			'label'     => esc_html__( 'Extra Class', 'porto-functionality' ),
@@ -978,49 +1031,51 @@ function porto_elementor_print_column_template( $content, $self ) {
 			extra_style = '',
 			extra_class1 = '',
 			extra_attr = '',
+			extra_widget_attr = '',
 			before_html = '';
 		if ( 'yes' == settings.as_banner_layer || 'banner' == settings.as_banner_layer ) {
-			extra_class += ' porto-ibanner-layer';
+			let extra_widget_style = '';
+			extra_class1 += ' porto-ibanner-layer';
 			if (50 == Number(settings.horizontal.size)) {
 				if (50 == Number(settings.vertical.size)) {
-					extra_style += 'left: 50%;top: 50%;transform: translate(-50%, -50%);';
+					extra_widget_style += 'left: 50%;top: 50%;transform: translate(-50%, -50%);';
 				} else {
-					extra_style += 'left: 50%;transform: translateX(-50%);';
+					extra_widget_style += 'left: 50%;transform: translateX(-50%);';
 				}
 			} else if (50 > Number(settings.horizontal.size)) {
-				extra_style += 'left:' + Number(settings.horizontal.size) + '%;';
+				extra_widget_style += 'left:' + Number(settings.horizontal.size) + '%;';
 			} else {
-				extra_style += 'right:' + (100 - Number(settings.horizontal.size)) + '%;';
+				extra_widget_style += 'right:' + (100 - Number(settings.horizontal.size)) + '%;';
 			}
 
 			if (50 == Number(settings.vertical.size)) {
 				if (50 != Number(settings.horizontal.size)) {
-					extra_style += 'top: 50%;transform: translateY(-50%);';
+					extra_widget_style += 'top: 50%;transform: translateY(-50%);';
 				}
 			} else if (50 > Number(settings.vertical.size)) {
-				extra_style += 'top:' + Number(settings.vertical.size) + '%;';
+				extra_widget_style += 'top:' + Number(settings.vertical.size) + '%;';
 			} else {
-				extra_style += 'bottom:' + (100 - Number(settings.vertical.size)) + '%;';
+				extra_widget_style += 'bottom:' + (100 - Number(settings.vertical.size)) + '%;';
 			}
 
-			if (extra_style) {
-				extra_style = ' style="' + extra_style + '"';
+			if (extra_widget_style) {
+				extra_widget_attr += ' style="' + extra_widget_style + '"';
 			}
 
 			if ( settings.css_anim_type ) {
-				extra_style += ' data-appear-animation="' + settings.css_anim_type + '"';
+				extra_widget_attr += ' data-appear-animation="' + settings.css_anim_type + '"';
 				if ( settings.css_anim_type ) {
-					extra_style += ' data-appear-animation-delay="' + Number( settings.css_anim_delay ) + '"';
+					extra_widget_attr += ' data-appear-animation-delay="' + Number( settings.css_anim_delay ) + '"';
 				}
 				if ( settings.css_anim_duration ) {
-					extra_style += ' data-appear-animation-duration="' + Number( settings.css_anim_duration ) + '"';
+					extra_widget_attr += ' data-appear-animation-duration="' + Number( settings.css_anim_duration ) + '"';
 				}
 			}
 
 			if ( 'banner' == settings.as_banner_layer ) {
-				extra_style += ' data-wrap_cls="porto-ibanner' + ( settings.hover_effect ? ' ' + settings.hover_effect : '' ) + '"';
+				extra_widget_attr += ' data-wrap_cls="porto-ibanner' + ( settings.hover_effect ? ' ' + settings.hover_effect : '' ) + '"';
 				if ( 'yes' == settings.add_container ) {
-					extra_style += ' data-add_container="1"';
+					extra_widget_attr += ' data-add_container="1"';
 				}
 
 				var image = {
@@ -1094,6 +1149,10 @@ function porto_elementor_print_column_template( $content, $self ) {
 				}
 			}
 
+			if ( settings.item_margin ) {
+				extra_class1 += ' has-ccols-spacing';
+			}
+
 			if ( Number( settings.items.size ) > 1 ) {
 				extra_class1 += ' ccols-xl-' + Number( settings.items.size );
 			}
@@ -1115,6 +1174,27 @@ function porto_elementor_print_column_template( $content, $self ) {
 			extra_options["responsive"][elementorFrontend.config.breakpoints['xs']] = Math.max(Number( settings.items_mobile.size ), 1);
 			extra_options["responsive"][elementorFrontend.config.breakpoints['sm']] = Math.max(Number( settings.items_tablet.size ) - 1, Number( settings.items_mobile.size ), 1);
 			extra_options["responsive"][elementorFrontend.config.breakpoints['md']] = Math.max(Number( settings.items_tablet.size ), 1);
+			if( settings.set_loop ){
+				if('yes' == settings.set_loop){
+					extra_options["loop"] = true;
+				} else {
+					extra_options["loop"] = false;
+				}
+			}
+
+			if( settings.disable_mouse_drag && 'yes' == settings.disable_mouse_drag){
+				extra_options["mouseDrag"] = false;
+				extra_options["touchDrag"] = false;
+			} else {
+				extra_options["mouseDrag"] = true;
+				extra_options["touchDrag"] = true;
+			}
+			if( settings.animate_out ){
+				extra_options["animateOut"] = settings.animate_out;
+			}
+			if(settings.animate_in ){
+				extra_options["animateIn"] = settings.animate_in;
+			}
 			if (Math.max(Number( settings.items.size ), 1) > Math.max(Number( settings.items_tablet.size ), 1) + 1) {
 				extra_options["responsive"][elementorFrontend.config.breakpoints['lg']] = Math.max(Number( settings.items.size ) - 1, 1);
 				extra_options["responsive"][elementorFrontend.config.breakpoints['xl']] = Math.max(Number( settings.items.size ), 1);
@@ -1166,11 +1246,15 @@ function porto_elementor_print_column_template( $content, $self ) {
 		if (settings.parallax_speed.size) {
 			extra_class += ' porto-parallax';
 			extra_style += ' data-parallax-speed=' + parseFloat(settings.parallax_speed.size);
+
+			if (settings.parallax_horizontal) {
+				extra_style += ' data-parallax-type=' + 'horizontal';
+			}
 		}
 		extra_attr += porto_elementor_add_floating_options( settings );
 
-		if (settings.as_banner_layer && settings.porto_el_cls) {
-			if ('carousel' == settings.as_banner_layer) {
+		if ( settings.as_banner_layer && settings.porto_el_cls ) {
+			if ( 'carousel' == settings.as_banner_layer || 'yes' == settings.as_banner_layer || 'banner' == settings.as_banner_layer ) {
 				extra_class1 += ' ' + settings.porto_el_cls;
 			} else {
 				extra_class += ' ' + settings.porto_el_cls;
@@ -1184,10 +1268,10 @@ function porto_elementor_print_column_template( $content, $self ) {
 	<?php if ( $legacy_enabled ) : ?>
 	<div class="elementor-column-wrap{{ extra_class }}"{{{ extra_style }}}>
 		<div class="elementor-background-overlay"></div>
-		<div class="elementor-widget-wrap{{ extra_class1 }}"{{ extra_attr }}></div>
+		<div class="elementor-widget-wrap{{ extra_class1 }}"{{ extra_attr }}{{{ extra_widget_attr }}}></div>
 	</div>
 	<?php else : ?>
-	<div class="elementor-widget-wrap{{ extra_class }}{{ extra_class1 }}"{{{ extra_style }}}{{ extra_attr }}>
+	<div class="elementor-widget-wrap{{ extra_class }}{{ extra_class1 }}"{{{ extra_style }}}{{ extra_attr }}{{{ extra_widget_attr }}}>
 		{{{ before_html }}}
 	</div>
 		<?php
@@ -1237,7 +1321,7 @@ function porto_elementor_column_add_custom_attrs( $self ) {
 			$extra_class[] = esc_attr( $settings['porto_el_cls'] );
 		}
 
-		$wrapper_name = $legacy_enabled ? '_inner_wrapper' : '_widget_wrapper';
+		$wrapper_name = '_widget_wrapper';
 		$self->add_render_attribute( $wrapper_name, 'class', $extra_class );
 		if ( $extra_style ) {
 			$self->add_render_attribute( $wrapper_name, 'style', $extra_style );
@@ -1284,6 +1368,10 @@ function porto_elementor_column_add_custom_attrs( $self ) {
 			}
 		}
 
+		if ( $settings['item_margin'] ) {
+			$extra_class[] = 'has-ccols-spacing';
+		}
+
 		if ( (int) $items > 1 ) {
 			$extra_class[] = 'ccols-xl-' . intval( $items );
 		}
@@ -1298,11 +1386,30 @@ function porto_elementor_column_add_custom_attrs( $self ) {
 
 		$extra_options                = array();
 		$extra_options['margin']      = '' !== $settings['item_margin'] ? (int) $settings['item_margin'] : 0;
-		$extra_options['items']       = $items;
+		$extra_options['items']       = (int) $items;
 		$extra_options['nav']         = 'yes' == $settings['show_nav'];
 		$extra_options['dots']        = 'yes' == $settings['show_dots'];
 		$extra_options['themeConfig'] = true;
-
+		if ( isset( $settings['set_loop'] ) ) {
+			if('yes' == $settings['set_loop']){
+				$extra_options['loop'] = true;
+			}else{
+				$extra_options['loop'] = false;
+			}
+		}
+		if ( isset( $settings['disable_mouse_drag'] ) && 'yes' == $settings['disable_mouse_drag'] ) {
+			$extra_options['mouseDrag'] = false;
+			$extra_options['touchDrag'] = false;
+		} else {
+			$extra_options['mouseDrag'] = true;
+			$extra_options['touchDrag'] = true;
+		}
+		if ( ! empty( $settings['animate_out'] ) ) {
+			$extra_options['animateOut'] = $settings['animate_out'];
+		}
+		if ( ! empty( $settings['animate_in'] ) ) {
+			$extra_options['animateIn'] = $settings['animate_in'];
+		}
 		$breakpoints = Elementor\Core\Responsive\Responsive::get_breakpoints();
 		if ( 1 !== intval( $items ) ) {
 			$extra_options['responsive'] = array( $breakpoints['xs'] => (int) $items_mobile );
@@ -1410,6 +1517,11 @@ function porto_elementor_column_add_custom_attrs( $self ) {
 		$wrapper_name = $legacy_enabled ? '_inner_wrapper' : '_widget_wrapper';
 		$self->add_render_attribute( $wrapper_name, 'data-plugin-parallax', '' );
 		$self->add_render_attribute( $wrapper_name, 'data-plugin-options', '{"speed": ' . floatval( $settings['parallax_speed']['size'] ) . '}' );
+
+		if ( ! empty( $settings['parallax_horizontal'] ) ) {
+			$self->add_render_attribute( $wrapper_name, 'data-parallax-type', 'horizontal' );
+		}
+
 		wp_enqueue_script( 'skrollr' );
 	}
 

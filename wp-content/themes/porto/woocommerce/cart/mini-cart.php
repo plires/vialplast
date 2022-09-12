@@ -16,16 +16,16 @@ $has_items = ( ! WC()->cart->is_empty() );
 <?php do_action( 'woocommerce_before_mini_cart' ); ?>
 
 <?php
-	if ( empty( $porto_settings['minicart-content'] ) ) {
-		$items = sizeof( WC()->cart->get_cart() );
-		echo '<div class="total-count text-v-dark clearfix">';
-			/* translators: %s: Items count */
-			echo '<span>' . sprintf( esc_html( _n( '%d ITEM', '%d ITEMS', $items, 'porto' ) ), $items ) . '</span>';
-			echo '<a class="text-v-dark pull-right text-uppercase" href="' . esc_url( wc_get_cart_url() ) . '">' . esc_html__( 'View cart', 'woocommerce' ) . '</a>';
-		echo '</div>';
-	} else {
-		echo '<h3>' . esc_html__( 'Shopping Cart', 'porto' ) . '</h3>';
-	}
+if ( empty( $porto_settings['minicart-content'] ) ) {
+	$items = sizeof( WC()->cart->get_cart() );
+	echo '<div class="total-count text-v-dark clearfix">';
+		/* translators: %s: Items count */
+		echo '<span>' . sprintf( esc_html( _n( '%d ITEM', '%d ITEMS', $items, 'porto' ) ), $items ) . '</span>';
+		echo '<a class="text-v-dark pull-right text-uppercase" href="' . esc_url( wc_get_cart_url() ) . '">' . esc_html__( 'View cart', 'woocommerce' ) . '</a>';
+	echo '</div>';
+} else {
+	echo '<h3>' . esc_html__( 'Shopping Cart', 'porto' ) . '</h3>';
+}
 ?>
 
 <ul class="cart_list product_list_widget scrollbar-inner <?php echo esc_attr( $args['list_class'] ); ?>">
@@ -48,7 +48,7 @@ $has_items = ( ! WC()->cart->is_empty() );
 					<?php if ( ! $_product->is_visible() ) : ?>
 							<?php echo str_replace( array( 'http:', 'https:' ), '', $thumbnail ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 						<?php else : ?>
-							<a href="<?php echo esc_url( $product_permalink ); ?>">
+							<a href="<?php echo esc_url( $product_permalink ); ?>" aria-label="product">
 								<?php echo str_replace( array( 'http:', 'https:' ), '', $thumbnail ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</a>
 						<?php endif; ?>

@@ -31,6 +31,7 @@ if ( $bg_color ) {
 if ( 'custom' == $skin && ( $link_color || $link_bg_color || $link_acolor || $link_abg_color ) ) {
 	$sc_class_escaped = 'porto-sticky-nav' . rand();
 	$el_class        .= ' ' . $sc_class_escaped;
+	ob_start();
 	?>
 	<style>
 	<?php
@@ -51,6 +52,7 @@ if ( 'custom' == $skin && ( $link_color || $link_bg_color || $link_acolor || $li
 		.<?php echo $sc_class_escaped; ?> .nav-pills > li.active > a { background-color: <?php echo esc_html( $link_abg_color ); ?> !important; }<?php endif; ?>
 	</style>
 	<?php
+	porto_filter_inline_css( ob_get_clean() );
 }
 
 $options             = array();

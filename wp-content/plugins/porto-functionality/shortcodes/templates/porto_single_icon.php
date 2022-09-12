@@ -4,24 +4,26 @@ $icon_type = $icon_img = $img_width = $icon = $icon_color = $icon_color_bg = $ic
 extract(
 	shortcode_atts(
 		array(
-			'icon_type'           => 'fontawesome',
-			'icon'                => '',
-			'icon_simpleline'     => '',
-			'icon_porto'          => '',
-			'icon_size'           => '',
-			'icon_color'          => '',
-			'icon_style'          => '',
-			'icon_color_bg'       => '',
-			'icon_color_border'   => '',
-			'icon_border_style'   => '',
-			'icon_border_size'    => '',
-			'icon_border_radius'  => '',
-			'icon_border_spacing' => '',
-			'icon_link'           => '',
-			'icon_margin'         => '',
-			'animation_type'      => '',
-			'el_class'            => '',
-			'className'           => '',
+			'icon_type'            => 'fontawesome',
+			'icon'                 => '',
+			'icon_simpleline'      => '',
+			'icon_porto'           => '',
+			'icon_size'            => '',
+			'icon_color'           => '',
+			'icon_style'           => '',
+			'icon_color_bg'        => '',
+			'icon_color_border'    => '',
+			'icon_border_style'    => '',
+			'icon_border_size'     => '',
+			'icon_border_radius'   => '',
+			'icon_border_spacing'  => '',
+			'icon_link'            => '',
+			'icon_margin'          => '',
+			'animation_type'       => '',
+			'link_source'          => '',
+			'link_dynamic_content' => '',
+			'el_class'             => '',
+			'className'            => '',
 		),
 		$atts
 	)
@@ -48,12 +50,32 @@ if ( 'none' !== $animation_type && $animation_type ) {
 	$css_trans = 'data-appear-animation="' . esc_attr( $animation_type ) . '"';
 }
 $output = $style = $link_sufix = $link_prefix = $target = $href = $icon_align_style = '';
+
+if ( 'dynamic' == $link_source && $link_dynamic_content && ! empty( $link_dynamic_content['source'] ) ) {
+	$field_name = '';
+	if ( 'post' == $link_dynamic_content['source'] ) {
+		if ( isset( $link_dynamic_content['post_info'] ) ) {
+			$field_name = $link_dynamic_content['post_info'];
+		}
+	} else {
+		if ( isset( $link_dynamic_content[ $link_dynamic_content['source'] ] ) ) {
+			$field_name = $link_dynamic_content[ $link_dynamic_content['source'] ];
+		}
+	}
+	if ( $field_name ) {
+		$icon_link = apply_filters( 'porto_dynamic_tags_content', '', null, $link_dynamic_content['source'], $field_name );
+	}
+}
+
 if ( $icon_link ) {
 	if ( is_array( $icon_link ) && isset( $icon_link['url'] ) ) {
 		$url          = $icon_link['url'];
 		$target       = isset( $icon_link['is_external'] ) && 'on' == $icon_link['is_external'] ? ' target="_blank"' : '';
 		$rel          = isset( $icon_link['nofollow'] ) && 'on' == $icon_link['nofollow'] ? ' rel="nofollow' . ( $target ? ' noopener noreferrer' : '' ) . '"' : ( $target ? ' rel="noopener noreferrer"' : '' );
 		$link_prefix .= '<a href = "' . esc_url( $url ) . '"' . $target . $rel . '>';
+		$link_sufix  .= '</a>';
+	} elseif ( false === strstr( $icon_link, '|' ) && false === strstr( $icon_link, 'url:' ) ) {
+		$link_prefix .= '<a href="' . esc_url( $icon_link ) . '">';
 		$link_sufix  .= '</a>';
 	} elseif ( function_exists( 'vc_build_link' ) ) {
 		$href         = vc_build_link( $icon_link );
@@ -84,10 +106,14 @@ if ( 'advanced' == $icon_style ) {
 	if ( $icon_border_size ) {
 		$style .= 'border-width:' . esc_attr( $icon_border_size ) . 'px;';
 	}
-	$style .= 'width:' . esc_attr( $icon_border_spacing ) . 'px;';
-	$style .= 'height:' . esc_attr( $icon_border_spacing ) . 'px;';
-	$style .= 'line-height:' . esc_attr( $icon_border_spacing ) . 'px;';
-	$style .= 'border-radius:' . esc_attr( $icon_border_radius ) . 'px;';
+	if ( $icon_border_spacing ) {
+		$style .= 'width:' . esc_attr( $icon_border_spacing ) . 'px;';
+		$style .= 'height:' . esc_attr( $icon_border_spacing ) . 'px;';
+		$style .= 'line-height:' . esc_attr( $icon_border_spacing ) . 'px;';
+	}
+	if ( $icon_border_radius ) {
+		$style .= 'border-radius:' . esc_attr( $icon_border_radius ) . 'px;';
+	}
 }
 if ( $icon_size ) {
 	$style .= 'font-size:' . $icon_size . 'px;';

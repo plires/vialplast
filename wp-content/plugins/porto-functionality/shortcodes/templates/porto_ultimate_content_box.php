@@ -54,7 +54,10 @@ if ( $bg_type ) {
 			if ( $bg_img ) {
 				$img = wp_get_attachment_image_src( $bg_img, 'full' );
 				global $porto_settings_optimize;
-				if ( isset( $porto_settings_optimize['lazyload'] ) && $porto_settings_optimize['lazyload'] ) {
+				if ( class_exists( 'Porto_Critical' ) ) {
+					$preloads = Porto_Critical::get_instance()->get_preloads();
+				}
+				if ( isset( $porto_settings_optimize['lazyload'] ) && $porto_settings_optimize['lazyload'] && ( empty( $preloads ) || ( isset( $preloads ) && is_array( $preloads ) && ! in_array( $img[0], $preloads ) ) ) ) {
 					$data_attr .= ' data-original="' . esc_url( $img[0] ) . '"';
 					$box_class .= ' porto-lazyload';
 				} else {
@@ -94,7 +97,7 @@ if ( $hover_box_shadow ) {
 		}
 		$hover .= '#' . $uid . ':hover{box-shadow:' . esc_attr( $data ) . '}';
 	}
-} else if ( $box_shadow ) {
+} elseif ( $box_shadow ) {
 	$data = porto_get_box_shadow( $box_shadow, 'css' );
 	if ( strpos( $data, 'none' ) !== false || strpos( $data, ':;' ) !== false ) {
 		$style .= 'box-shadow: none;';

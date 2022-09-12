@@ -82,6 +82,12 @@
 .redux-group-tab[data-rel="20"] td { margin-top: -30px; }
 .form-table th { vertical-align: middle;  }
 
+/* Important Note */
+.porto-important-note { padding: 1.6rem; color: #3c763d; background-color: #dff0d8; border-width: 0; border-radius: 4px; }
+.porto-important-note .redux-info-desc { font-size: 14px; }
+.porto-important-note strong { color: rgb(72 106 43); }
+.porto-redux-section span { color: red; }
+
 .rtl .redux-container .button, .rtl .redux-container .button-primary, .rtl .redux-container .button-secondary { margin-right: 0; margin-left: .75rem }
 .rtl .redux-container .porto-theme-options-search,
 .rtl .redux-container #redux-footer .spinner { margin-left: auto; margin-right: 0 }

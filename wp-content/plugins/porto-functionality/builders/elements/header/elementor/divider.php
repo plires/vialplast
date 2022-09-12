@@ -33,7 +33,7 @@ class Porto_Elementor_HB_Divider_Widget extends \Elementor\Widget_Base {
 		return 'Simple-Line-Icons-control-pause';
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$this->start_controls_section(
 			'section_hb_divider',
@@ -100,7 +100,6 @@ class Porto_Elementor_HB_Divider_Widget extends \Elementor\Widget_Base {
 			array(
 				'type'      => Controls_Manager::COLOR,
 				'label'     => __( 'Color', 'porto-functionality' ),
-				'default'   => '',
 				'selectors' => array(
 					'#header .elementor-element-{{ID}} .separator' => 'border-left-color: {{VALUE}};',
 				),

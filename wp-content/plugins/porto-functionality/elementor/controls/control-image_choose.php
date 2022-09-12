@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Porto Image_Choose Control
  *
- * @since 5.2.2
+ * @since 1.5.4
  */
 
 use Elementor\Base_Data_Control;

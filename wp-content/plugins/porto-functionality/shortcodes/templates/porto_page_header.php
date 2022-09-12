@@ -6,6 +6,7 @@ extract(
 			'page_title'               => '',
 			'page_sub_title'           => '',
 			'hide_breadcrumb'          => '',
+			'not_render_home'          => '',
 			'breadcrumbs_text_color'   => '',
 			'breadcrumbs_link_color'   => '',
 			'page_title_font_size'     => '',
@@ -20,6 +21,10 @@ extract(
 		$atts
 	)
 );
+
+if ( $not_render_home && is_front_page() ) {
+	return;
+}
 
 if ( empty( $breadcrumbs_type ) ) {
 	global $porto_settings;
@@ -38,6 +43,7 @@ if ( $animation_type ) {
 	}
 }
 echo '>';
+	ob_start();
 	echo '<style>';
 		echo '.page-top { background: none; border-bottom: none; } .page-top .page-title:not(.b-none):after { display: none; }';
 
@@ -64,7 +70,7 @@ if ( $page_subtitle_color ) {
 	echo '.page-top .page-sub-title { color: ' . esc_html( $page_subtitle_color ) . ' }';
 }
 	echo '</style>';
-
+	porto_filter_inline_css( ob_get_clean() );
 	$args = array();
 if ( $page_title ) {
 	$args['porto_shortcode_title'] = $page_title;

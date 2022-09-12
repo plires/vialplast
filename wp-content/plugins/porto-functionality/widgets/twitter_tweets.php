@@ -34,27 +34,25 @@ function porto_twitter_tweets() {
 			'consumer_secret'     => $consumer_secret,
 			'access_token'        => $access_token,
 			'access_token_secret' => $access_secret,
-			'twitter_screen_name' => $twitter_screen_name,
-			'cache_file'          => dirname( __FILE__ ) . '/tweet-php/cache/twitter.txt', // Where on the server to save the cached formatted tweets
-			'cache_file_raw'      => dirname( __FILE__ ) . '/tweet-php/cache/twitter-array.txt', // Where on the server to save the cached raw tweets
-			'cachetime'           => 60 * 60, // Seconds to cache feed
-			'tweets_to_display'   => $tweets_to_display, // How many tweets to fetch
-			'ignore_replies'      => true, // Ignore @replies
-			'ignore_retweets'     => true, // Ignore retweets
+			'api_endpoint'          => 'statuses/user_timeline',
+			'api_params'            => array(),
+			'enable_cache'          => true,
+			'cache_dir'             => dirname(__FILE__) . '/tweet-php/cache/', // Where on the server to save cached tweets
+			'cachetime'             => 60 * 60, // Seconds to cache feed (1 hour).
+			'tweets_to_retrieve'    => 25, // Specifies the number of tweets to try and fetch, up to a maximum of 200
+			'tweets_to_display'     => $tweets_to_display, // Number of tweets to display
 			'twitter_style_dates' => true, // Use twitter style dates e.g. 2 hours ago
 			'twitter_date_text'   => array( 'seconds', 'minutes', 'about', 'hour', 'ago' ),
 			'date_format'         => '%I:%M %p %b %d%O', // The defult date format e.g. 12:08 PM Jun 12th. See: http://php.net/manual/en/function.strftime.php
 			'date_lang'           => get_locale(), // Language for date e.g. 'fr_FR'. See: http://php.net/manual/en/function.setlocale.php
-			'format'              => 'array', // Can be 'html' or 'array'
-			'twitter_wrap_open'   => '<ul>',
-			'twitter_wrap_close'  => '</ul>',
-			'tweet_wrap_open'     => '<li><span class="status"><i class="fab fa-twitter"></i> ',
-			'meta_wrap_open'      => '</span><span class="meta"> ',
-			'meta_wrap_close'     => '</span>',
-			'tweet_wrap_close'    => '</li>',
-			'error_message'       => __( 'Oops, our twitter feed is unavailable right now.', 'porto-functionality' ),
-			'error_link_text'     => __( 'Follow us on Twitter', 'porto-functionality' ),
+			'twitter_template'      => '<ul>{tweets}</ul>',
+			'tweet_template'        => '<li><span class="status"><i class="fab fa-twitter"></i>{tweet}</span> <span class="meta"><a href="{link}">{date}</a></span></li>',
+			'error_template'        => '<li><span class="status"><i class="fab fa-twitter"></i>' . esc_html__( 'Oops, our twitter feed is unavailable right now.', 'porto-functionality' ) . '</span> <span class="meta"><a href="{link}">' . esc_html__( 'Follow us on Twitter', 'porto-functionality' ) . '</a></span></li>',
+			'nofollow_links'        => false, // Add rel="nofollow" attribute to links
 			'debug'               => false,
+			'twitter_screen_name'   => $twitter_screen_name,
+			'ignore_replies'        => true, // Deprecated. Use api_params.
+			'ignore_retweets'       => true // Deprecated. Use api_params.
 		)
 	);
 
@@ -99,28 +97,38 @@ class Porto_Twitter_Tweets_Widget extends WP_Widget {
 			</div>
 
 			<script>
-				jQuery(function($) {
-					$.post('<?php echo esc_js( admin_url( 'admin-ajax.php' ) ); ?>', {
-							id: '<?php echo str_replace( 'tweets-widget-', '', $widget_id ); ?>',
-							action: 'porto_twitter_tweets',
-							nonce: '<?php echo wp_create_nonce( 'porto-twitter-widget-nonce' ); ?>'
-						},
-						function(data) {
-							if (data) {
-								$('#<?php echo esc_js( $widget_id ); ?> .tweets-box').html(data);
-								$("#<?php echo esc_js( $widget_id ); ?> .twitter-slider").owlCarousel({
-									rtl: <?php echo is_rtl() ? 'true' : 'false'; ?>,
-									dots : false,
-									nav : true,
-									navText: ["", ""],
-									items: 1,
-									autoplay : true,
-									autoplayTimeout: 5000
-								}).addClass('show-nav-title');
-							}
-						}
-					);
-				});
+				( function() {
+					var porto_load_tweets_feeds = function() {
+						( function( $ ) {
+							$.post('<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>', {
+									id: '<?php echo str_replace( 'tweets-widget-', '', $widget_id ); ?>',
+									action: 'porto_twitter_tweets',
+									nonce: '<?php echo wp_create_nonce( 'porto-twitter-widget-nonce' ); ?>'
+								},
+								function(data) {
+									if (data) {
+										$('#<?php echo esc_js( $widget_id ); ?> .tweets-box').html(data);
+										$("#<?php echo esc_js( $widget_id ); ?> .twitter-slider").owlCarousel({
+											rtl: <?php echo is_rtl() ? 'true' : 'false'; ?>,
+											dots : false,
+											nav : true,
+											navText: ["", ""],
+											items: 1,
+											autoplay : true,
+											autoplayTimeout: 5000
+										}).addClass('show-nav-title');
+									}
+								}
+							);
+						} )( window.jQuery );
+					};
+
+					if ( window.jQuery ) {
+						porto_load_tweets_feeds();
+					} else {
+						document.addEventListener( 'DOMContentLoaded', porto_load_tweets_feeds );
+					}
+				} )();
 			</script>
 			<?php
 		} else {

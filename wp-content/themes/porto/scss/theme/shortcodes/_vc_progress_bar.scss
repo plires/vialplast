@@ -5,6 +5,7 @@
     margin-bottom: 15px;
     box-shadow: none;
     overflow: visible;
+    background: var(--porto-gray-3);
     &,
     & .progress-bar {
         border-radius: 20px;
@@ -38,6 +39,9 @@
             line-height: 35px;
         }
     }
+}
+.section-dark .vc_progress_bar .vc_single_bar.progress {
+    background: var(--porto-dark-light-7);
 }
 .vc_progress_bar .vc_single_bar.progress .vc_bar,
 .progress-bar {

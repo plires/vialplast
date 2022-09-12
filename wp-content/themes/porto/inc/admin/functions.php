@@ -6,6 +6,14 @@ function porto_check_theme_options() {
 	include PORTO_ADMIN . '/theme_options/default_options.php';
 	$options                = ob_get_clean();
 	$porto_default_settings = json_decode( $options, true );
+	if ( class_exists( 'Porto_Soft_Mode' ) && ! apply_filters( 'porto_legacy_mode', true ) ) {
+		$should_remove = Porto_Soft_Mode::$should_remove;
+		foreach ( $should_remove as $value ) {
+			if ( isset( $porto_default_settings[ $value ] ) ) {
+				unset( $porto_default_settings[ $value ] );
+			}
+		}
+	}
 	foreach ( $porto_default_settings as $key => $value ) {
 		if ( is_array( $value ) ) {
 			foreach ( $value as $key1 => $value1 ) {

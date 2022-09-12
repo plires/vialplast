@@ -121,6 +121,8 @@ class Porto_Elementor_Compatibility {
 				if ( $default_kit ) {
 					update_option( Elementor\Core\Kits\Manager::OPTION_ACTIVE, $default_kit );
 				}
+			} elseif ( $kit->get_id() ) {
+				$default_kit = $kit->get_id();
 			}
 
 			if ( $default_kit ) {

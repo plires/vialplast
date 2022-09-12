@@ -1,3 +1,9 @@
+.wishlist_table {
+    tr td {
+        background-color: var(--porto-body-bg);
+    }
+}
+
 .shop_table.wishlist_table {
     margin-bottom: 15px;
     tr td {
@@ -55,6 +61,9 @@
     }
     tbody,
     tfoot {
+        td {
+            border-color: var(--porto-gray-5);
+        }
         th,
         td {
             padding: 20px 5px 23px 16px;
@@ -78,6 +87,7 @@
         height: 42px;
         width: auto;
         padding: 0 25px!important;
+        font-family: var(--porto-add-to-cart-ff), var(--porto-body-ff), sans-serif;
         font-size: 13px;
         line-height: 42px;
         text-indent: 0;
@@ -101,11 +111,6 @@
         &::before {
             content: none;
         }
-        &:hover {
-            border-color: #0077b3;
-            background-color: #0077b3;
-            color: #ffffff;
-        }
     }
 
     .yith-wcwl-add-to-wishlist {
@@ -126,8 +131,10 @@ p.wishlist-empty, table.wishlist_table tbody td.wishlist-empty {
 .shop_table.cart-table a.remove.remove-product {
     top: -10px;
     #{$right}: -10px;
+    color: var(--porto-dark-color);
     &:hover {
         background: #fff;
+        color: var(--porto-primary-color);
     }
 }
 
@@ -139,6 +146,7 @@ p.wishlist-empty, table.wishlist_table tbody td.wishlist-empty {
 .sidebar-content #yith-ajaxsearchform .btn {
     color: #fff;
     border-width: 1px;
+    background: var(--porto-primary-color);
 }
 
 .sidebar-content .autocomplete-suggestions {
@@ -188,16 +196,12 @@ p.wishlist-empty, table.wishlist_table tbody td.wishlist-empty {
     #{$right}: -.25rem;
 }
 
-.wishlist_table tr td.product-thumbnail > div,
+.wishlist_table td.product-thumbnail > div,
 .shop_table.cart-table .product-thumbnail > div {
     width: 80px;
     @media #{$screen-medium} {
         margin: 0 auto;
     }
-}
-
-.wishlist_table tr td.product-thumbnail a {
-    max-width: none
 }
 
 .wishlist-popup {
@@ -208,6 +212,7 @@ p.wishlist-empty, table.wishlist_table tbody td.wishlist-empty {
     #{$right}: 0;
     z-index: 1003;
     padding: 1.5rem 1.25rem;
+    background: var(--porto-normal-bg);
     box-shadow: 0 5px 8px rgba(0,0,0,.15);
     font-size: .8125rem;
     text-align: $left;

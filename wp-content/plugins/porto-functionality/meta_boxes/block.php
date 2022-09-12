@@ -11,6 +11,7 @@ function porto_block_meta_fields() {
 		$fields['condition'] = array(
 			'name'  => 'condition',
 			'title' => __( 'Display Condition', 'porto-functionality' ),
+			'desc'  => __( 'Set the conditions that determine where your Template is used throughout your site.', 'porto-functionality' ),
 			'type'  => 'button',
 			'value' => __( 'Set Condition', 'porto-functionality' ),
 		);
@@ -18,6 +19,7 @@ function porto_block_meta_fields() {
 			$fields['header_type'] = array(
 				'name'    => 'header_type',
 				'title'   => __( 'Header Type', 'porto-functionality' ),
+				'desc'    => __( 'After changed, you should save theme options in the redux panel.', 'porto-functionality' ),
 				'type'    => 'select',
 				'default' => '',
 				'options' => array(
@@ -27,9 +29,9 @@ function porto_block_meta_fields() {
 			);
 		} elseif ( 'product' == $builder_type ) {
 			$fields['disable_sticky_sidebar'] = array(
-				'name'    => 'disable_sticky_sidebar',
-				'title'   => __( 'Disable Sticky Sidebar', 'porto-functionality' ),
-				'type'    => 'checkbox',
+				'name'  => 'disable_sticky_sidebar',
+				'title' => __( 'Disable Sticky Sidebar', 'porto-functionality' ),
+				'type'  => 'checkbox',
 			);
 		} elseif ( 'popup' == $builder_type && ( ! defined( 'VCV_VERSION' ) && ! defined( 'ELEMENTOR_VERSION' ) ) ) {
 			$fields['popup_width']     = array(

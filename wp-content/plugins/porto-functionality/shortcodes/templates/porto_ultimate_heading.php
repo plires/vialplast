@@ -10,47 +10,69 @@ if ( ! function_exists( 'porto_ultimate_heading_spacer' ) ) {
 	extract(
 		shortcode_atts(
 			array(
-				'main_heading'                 => '',
-				'main_heading_use_theme_fonts' => '',
-				'main_heading_font'            => '',
-				'main_heading_font_family'     => '',
-				'main_heading_font_size'       => '',
-				'main_heading_font_weight'     => '',
-				'main_heading_text_transform'  => '',
-				'main_heading_line_height'     => '',
-				'main_heading_letter_spacing'  => '',
-				'main_heading_color'           => '',
-				'main_heading_margin_bottom'   => '',
-				'sub_heading_font'             => '',
-				'sub_heading_font_family'      => '',
-				'sub_heading_font_size'        => '',
-				'sub_heading_font_weight'      => '',
-				'sub_heading_line_height'      => '',
-				'sub_heading_letter_spacing'   => '',
-				'sub_heading_color'            => '',
-				'sub_heading_margin_bottom'    => '',
-				'spacer'                       => 'no_spacer',
-				'spacer_position'              => 'top',
-				'line_style'                   => 'solid',
-				'line_width'                   => 'auto',
-				'line_height'                  => '1',
-				'line_color'                   => '#ccc',
-				'alignment'                    => 'center',
-				'spacer_margin_bottom'         => '',
-				'enable_typewriter'            => false,
-				'typewriter_animation'         => 'fadeIn',
-				'typewriter_delay'             => 0,
-				'typewriter_width'             => 0,
-				'heading_tag'                  => '',
-				'animation_type'               => '',
-				'animation_duration'           => '',
-				'animation_delay'              => '',
-				'el_class'                     => '',
-				'className'                    => '',
+				'main_heading'                     => '',
+				'main_heading_use_theme_fonts'     => '',
+				'main_heading_font'                => '',
+				'main_heading_font_family'         => '',
+				'main_heading_font_size'           => '',
+				'main_heading_font_weight'         => '',
+				'main_heading_text_transform'      => '',
+				'main_heading_line_height'         => '',
+				'main_heading_letter_spacing'      => '',
+				'main_heading_color'               => '',
+				'main_heading_margin_bottom'       => '',
+				'sub_heading_font'                 => '',
+				'sub_heading_font_family'          => '',
+				'sub_heading_font_size'            => '',
+				'sub_heading_font_weight'          => '',
+				'sub_heading_line_height'          => '',
+				'sub_heading_letter_spacing'       => '',
+				'sub_heading_color'                => '',
+				'sub_heading_margin_bottom'        => '',
+				'spacer'                           => 'no_spacer',
+				'spacer_position'                  => 'top',
+				'line_style'                       => 'solid',
+				'line_width'                       => 'auto',
+				'line_height'                      => '1',
+				'line_color'                       => '#ccc',
+				'alignment'                        => 'center',
+				'spacer_margin_bottom'             => '',
+				'enable_typewriter'                => false,
+				'typewriter_animation'             => 'fadeIn',
+				'typewriter_delay'                 => 0,
+				'typewriter_width'                 => 0,
+				'heading_tag'                      => '',
+				'animation_type'                   => '',
+				'animation_duration'               => '',
+				'animation_delay'                  => '',
+				'el_class'                         => '',
+				'className'                        => '',
+
+				'enable_field_dynamic'             => false,
+				'field_dynamic_source'             => '',
+				'field_dynamic_content'            => '',
+				'field_dynamic_content_meta_field' => '',
+				'field_dynamic_before'             => '',
+				'field_dynamic_after'              => '',
+				'field_dynamic_fallback'           => '',
 			),
 			$atts
 		)
 	);
+	if ( $enable_field_dynamic ) {
+		if ( ( 'meta_field' == $field_dynamic_source ) && ! empty( $field_dynamic_content_meta_field ) ) {
+			$main_heading = Porto_Func_Dynamic_Tags_Content::get_instance()->dynamic_get_data( $field_dynamic_source, $field_dynamic_content_meta_field, 'field' );
+		}
+		if ( ! empty( $field_dynamic_content ) ) {
+			$main_heading = Porto_Func_Dynamic_Tags_Content::get_instance()->dynamic_get_data( $field_dynamic_source, $field_dynamic_content, 'field' );
+		}
+		if ( empty( $main_heading ) ) {
+			$main_heading = $field_dynamic_fallback;
+		}
+
+		$main_heading = $field_dynamic_before . $main_heading . $field_dynamic_after;
+	}
+
 	$wrapper_class = $spacer;
 
 	if ( $className ) {
@@ -278,3 +300,4 @@ if ( ! function_exists( 'porto_ultimate_heading_spacer' ) ) {
 	$output .= '</div>';
 
 	echo porto_filter_output( $output );
+

@@ -26,7 +26,7 @@ function porto_load_widget_woo_top_rated_products_shortcode() {
 			'icon'        => 'fas fa-cart-arrow-down',
 			'category'    => __( 'WooCommerce Widgets', 'porto-functionality' ),
 			'class'       => 'wpb_vc_wp_widget',
-			'description' => __( 'Display a list of your top rated products on your site.', 'woocommerce' ),
+			'description' => __( 'Display a list of your top rated products on your site.', 'porto-functionality' ),
 			'params'      => array(
 				array(
 					'type'        => 'textfield',

@@ -26,7 +26,7 @@ class Porto_Elementor_SB_Products_Widget extends \Elementor\Widget_Base {
 	}
 
 	public function get_keywords() {
-		return array( 'products', 'shop', 'woocommerce' );
+		return array( 'products', 'shop', 'woocommerce', 'archive' );
 	}
 
 	public function get_icon() {
@@ -41,7 +41,7 @@ class Porto_Elementor_SB_Products_Widget extends \Elementor\Widget_Base {
 		}
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		$order_by_values  = array_slice( porto_vc_woo_order_by(), 1 );
 		$order_way_values = array_slice( porto_vc_woo_order_way(), 1 );
 		$slider_options   = porto_update_vc_options_to_elementor( porto_vc_product_slider_fields() );
@@ -61,7 +61,8 @@ class Porto_Elementor_SB_Products_Widget extends \Elementor\Widget_Base {
 			'notice_skin',
 			array(
 				'type' => Controls_Manager::RAW_HTML,
-				'raw' => __( 'To change the Products Archive’s layout, go to Porto / Theme Options / WooCommerce / Product Archives.', 'porto-functionality' ),
+				/* translators: starting and ending bold tags */
+				'raw'  => sprintf( esc_html__( 'To change the Products Archive’s layout, go to %1$sPorto / Theme Options / WooCommerce / Product Archives%2$s.', 'porto-functionality' ), '<b>', '</b>' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 			)
 		);
@@ -70,7 +71,7 @@ class Porto_Elementor_SB_Products_Widget extends \Elementor\Widget_Base {
 			'notice_wrong_data',
 			array(
 				'type' => Controls_Manager::RAW_HTML,
-				'raw' => __( 'The editor\'s preview might look different from the live site. Please check the frontend.', 'porto-functionality' ),
+				'raw' => sprintf( esc_html__( 'This widget was deprecated in 6.3.0. Please use %1$sType Builder Archives%2$s widget instead.', 'porto-functionality' ), '<b>', '</b>' ),
 				'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
 			)
 		);
@@ -122,6 +123,10 @@ class Porto_Elementor_SB_Products_Widget extends \Elementor\Widget_Base {
 						'min'  => 0,
 						'max'  => 100,
 					),
+				),
+				'frontend_available' => true,
+				'selectors'          => array(
+					'.elementor-element-{{ID}} .porto-products' => '--porto-el-spacing: {{SIZE}}px;',
 				),
 				'condition'   => array(
 					'view' => array( 'grid', 'creative', 'products-slider' ),

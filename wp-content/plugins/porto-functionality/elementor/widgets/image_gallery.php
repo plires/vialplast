@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Porto Image Gallery widget
  *
- * @since 6.2.0
+ * @since 2.2.0
  */
 
 use Elementor\Controls_Manager;
@@ -35,13 +35,16 @@ class Porto_Elementor_Image_Gallery_Widget extends \Elementor\Widget_Base {
 
 	public function get_script_depends() {
 		if ( ( isset( $_REQUEST['action'] ) && 'elementor' == $_REQUEST['action'] ) || isset( $_REQUEST['elementor-preview'] ) ) {
-			return array( 'porto-elementor-widgets-js', 'isotope' );
+			if ( ! wp_style_is( 'jquery-hoverdir', 'registered' ) ) {
+				wp_register_script( 'jquery-hoverdir', PORTO_SHORTCODES_URL . 'assets/js/jquery.hoverdir.min.js', array( 'jquery-core', 'modernizr' ), PORTO_SHORTCODES_VERSION, true );
+			}
+			return array( 'porto-elementor-widgets-js', 'isotope', 'modernizr', 'jquery-hoverdir' );
 		} else {
 			return array();
 		}
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		$slider_options = porto_update_vc_options_to_elementor( porto_vc_product_slider_fields() );
 
@@ -136,19 +139,21 @@ class Porto_Elementor_Image_Gallery_Widget extends \Elementor\Widget_Base {
 		$this->add_control(
 			'spacing',
 			array(
-				'type'      => Controls_Manager::SLIDER,
-				'label'     => __( 'Column Spacing (px)', 'porto-functionality' ),
-				'range'     => array(
+				'type'               => Controls_Manager::SLIDER,
+				'label'              => __( 'Column Spacing (px)', 'porto-functionality' ),
+				'range'              => array(
 					'px' => array(
 						'step' => 1,
 						'min'  => 0,
 						'max'  => 100,
 					),
 				),
-				'default'   => array(
+				'default'            => array(
 					'unit' => 'px',
 				),
-				'selectors' => array(
+				'render_type'        => 'template',
+				'frontend_available' => true,
+				'selectors'          => array(
 					'.elementor-element-{{ID}} .porto-gallery' => '--porto-el-spacing: {{SIZE}}px;',
 				),
 			)
@@ -260,10 +265,166 @@ class Porto_Elementor_Image_Gallery_Widget extends \Elementor\Widget_Base {
 					'effect-2'  => esc_html__( 'Effect 2', 'porto-functionality' ),
 					'effect-3'  => esc_html__( 'Effect 3', 'porto-functionality' ),
 					'effect-4'  => esc_html__( 'Effect 4', 'porto-functionality' ),
+					'hoverdir'  => esc_html__( 'Hoverdir', 'porto-functionality' ),
 				),
 				'default'   => '',
 				'condition' => array(
 					'images!' => '',
+				),
+			)
+		);
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'section_style_options',
+			array(
+				'label' => __( 'Style Options', 'porto-functionality' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			)
+		);
+
+		$this->add_control(
+			'overlay_bgc',
+			array(
+				'label'     => __( 'Overlay Background Color', 'porto-functionality' ),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => array(
+					'images!'      => '',
+					'hover_effect' => array( 'fadein', 'overlay', 'hoverdir' ),
+				),
+				'selectors' => array(
+					'.elementor-element-{{ID}} .porto-ig-fadein figure:before, .elementor-element-{{ID}} .porto-ig-overlay figure:before, .elementor-element-{{ID}} .hover-effect-dir .fill' => 'background-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'icon_cl',
+			array(
+				'type'                   => Controls_Manager::ICONS,
+				'label'                  => __( 'Overlay Icon', 'porto-functionality' ),
+				'fa4compatibility'       => 'icon',
+				'skin'                   => 'inline',
+				'exclude_inline_options' => array( 'svg' ),
+				'condition'              => array(
+					'images!'       => '',
+					'hover_effect'  => array( 'hoverdir' ),
+					'click_action!' => '',
+				),
+			)
+		);
+
+		$this->add_control(
+			'icon_size',
+			array(
+				'type'       => Controls_Manager::SLIDER,
+				'label'      => __( 'Icon Size', 'porto-functionality' ),
+				'range'      => array(
+					'px'  => array(
+						'step' => 1,
+						'min'  => 0,
+						'max'  => 100,
+					),
+					'em'  => array(
+						'step' => 0.1,
+						'min'  => 0,
+						'max'  => 10,
+					),
+					'rem' => array(
+						'step' => 0.1,
+						'min'  => 0,
+						'max'  => 10,
+					),
+				),
+				'default'    => array(
+					'unit' => 'px',
+				),
+				'size_units' => array(
+					'px',
+					'em',
+					'rem',
+				),
+				'condition'  => array(
+					'images!'       => '',
+					'hover_effect'  => array( 'hoverdir' ),
+					'click_action!' => '',
+				),
+				'selectors'  => array(
+					'.elementor-element-{{ID}} .fill .centered-icon' => 'width: {{SIZE}}{{UNIT}}; height: {{SIZE}}{{UNIT}}; line-height: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'icon_fs',
+			array(
+				'type'       => Controls_Manager::SLIDER,
+				'label'      => __( 'Icon Font Size', 'porto-functionality' ),
+				'range'      => array(
+					'px'  => array(
+						'step' => 1,
+						'min'  => 0,
+						'max'  => 50,
+					),
+					'em'  => array(
+						'step' => 0.1,
+						'min'  => 0,
+						'max'  => 5,
+					),
+					'rem' => array(
+						'step' => 0.1,
+						'min'  => 0,
+						'max'  => 5,
+					),
+				),
+				'default'    => array(
+					'unit' => 'px',
+				),
+				'size_units' => array(
+					'px',
+					'em',
+					'rem',
+				),
+				'condition'  => array(
+					'images!'       => '',
+					'hover_effect'  => array( 'hoverdir' ),
+					'click_action!' => '',
+				),
+				'selectors'  => array(
+					'.elementor-element-{{ID}} .fill .centered-icon' => 'font-size: {{SIZE}}{{UNIT}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'icon_bgc',
+			array(
+				'label'     => __( 'Overlay Icon Background Color', 'porto-functionality' ),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => array(
+					'images!'       => '',
+					'hover_effect'  => array( 'hoverdir' ),
+					'click_action!' => '',
+				),
+				'selectors' => array(
+					'.elementor-element-{{ID}} .fill .centered-icon' => 'background-color: {{VALUE}};',
+				),
+			)
+		);
+
+		$this->add_control(
+			'icon_clr',
+			array(
+				'label'     => __( 'Overlay Icon Color', 'porto-functionality' ),
+				'type'      => Controls_Manager::COLOR,
+				'condition' => array(
+					'images!'       => '',
+					'hover_effect'  => array( 'hoverdir' ),
+					'click_action!' => '',
+				),
+				'selectors' => array(
+					'.elementor-element-{{ID}} .fill .centered-icon' => 'color: {{VALUE}};',
 				),
 			)
 		);
@@ -302,6 +463,9 @@ class Porto_Elementor_Image_Gallery_Widget extends \Elementor\Widget_Base {
 			);
 			if ( ! empty( $atts['spacing'] ) ) {
 				$atts['spacing'] = $atts['spacing']['size'];
+			}
+			if ( isset( $atts['icon_cl'] ) && isset( $atts['icon_cl']['value'] ) ) {
+				$atts['icon_cl'] = $atts['icon_cl']['value'];
 			}
 
 			include $template;

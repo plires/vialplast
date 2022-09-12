@@ -5,7 +5,7 @@ $width = $height = $map_type = $lat = $lng = $zoom = $streetviewcontrol = $mapty
 extract(
 	shortcode_atts(
 		array(
-			//"id" => "map",
+			// "id" => "map",
 			'width'               => '100%',
 			'height'              => '300px',
 			'map_type'            => 'ROADMAP',
@@ -65,10 +65,10 @@ if ( 'default' == $marker_icon ) {
 		$icon_url = $attachment[0];
 	}
 }
-$id         = 'map_' . uniqid();
-$wrap_id    = 'wrap_' . $id;
-$map_type   = strtoupper( $map_type );
-$width      = ( substr( $width, -1 ) != '%' && substr( $width, -2 ) != 'px' ? $width . 'px' : $width );
+$id       = 'map_' . uniqid();
+$wrap_id  = 'wrap_' . $id;
+$map_type = strtoupper( $map_type );
+$width    = ( substr( $width, -1 ) != '%' && substr( $width, -2 ) != 'px' ? $width . 'px' : $width );
 if ( $height ) {
 	$map_height = ( substr( $height, -1 ) != '%' && substr( $height, -2 ) != 'px' ? $height . 'px' : $height );
 } else {
@@ -89,9 +89,10 @@ if ( $scrollwheel ) {
 }
 
 $output .= "<script>
+( function() {
+	var porto_init_map = function() {
 (function($) {
 	'use strict';
-	jQuery(document).ready(function($) {
 		if (typeof google == 'undefined') {
 			return;
 		}
@@ -129,7 +130,7 @@ if ( $map_style ) {
 	} else {
 		$map_style_escaped = rawurldecode( $map_style_escaped );
 	}
-	$output   .= 'var styles = ' . $map_style_escaped . ';
+	$output .= 'var styles = ' . $map_style_escaped . ';
 					var styledMap = new google.maps.StyledMapType(styles,
 						{name: "Styled Map"});';
 }
@@ -201,14 +202,15 @@ if ( $marker_lat && $marker_lng ) {
 				marker_$id.setAnimation(google.maps.Animation.BOUNCE);
 			}
 		}
-	});
+		} )( window.jQuery );
+	};
 
-	$(window).on('load', function() {
+	window.addEventListener( 'load', function() {
 		setTimeout(function() {
-			$(window).trigger('resize');
+			porto_init_map();
 		},200);
 	});
-})(jQuery);
+} )();
 </script>";
 
 echo porto_filter_output( $output );

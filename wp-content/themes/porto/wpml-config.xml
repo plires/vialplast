@@ -1,77 +1,150 @@
 <wpml-config>
-    <admin-texts>
-        <key name="porto_settings">
-            <key name="welcome-msg" />
-            <key name="header-copyright" />
-            <key name="header-tooltip" />
-            <key name="menu-sidebar-title" />
-            <key name="menu-title" />
-            <key name="breadcrumbs-prefix"/>
-            <key name="footer-ribbon" />
-            <key name="footer-tooltip" />
-            <key name="hot-label" />
-            <key name="blog-title" />
-            <key name="portfolio-slug-name" />
-            <key name="portfolio-name" />
-            <key name="portfolio-singular-name" />
-            <key name="portfolio-cat-slug-name" />
-            <key name="portfolio-skill-slug-name" />
-            <key name="portfolio-title" />
-            <key name="portfolio-sub-title" />
-            <key name="portfolio-archive-readmore-label" />
-            <key name="member-slug-name" />
-            <key name="member-title" />
-            <key name="member-sub-title" />
-            <key name="member-name" />
-            <key name="member-singular-name" />
-            <key name="member-cat-slug-name" />
-            <key name="member-archive-readmore-label" />
-            <key name="faq-slug-name" />
-            <key name="faq-name" />
-            <key name="faq-singular-name" />
-            <key name="faq-cat-slug-name" />
-            <key name="faq-title" />
-            <key name="faq-sub-title" />
-            <key name="product-tab-title" />
-            <key name="product-quickview-label" />
-            <key name="product-hot-label" />
-            <key name="product-sale-label" />
-            <key name="catalog-readmore-label" />
-            <key name="header-contact-info" />
-            <key name="footer-copyright" />
-            <key name="footer-payments-image-alt" />
-            <key name="menu-block" />
-            <key name="event-slug-name" />
-            <key name="event-name" />
-            <key name="event-singular-name" />
-            <key name="event-title" />
-            <key name="event-sub-title" />
-            <key name="search-placeholder" />
-            <key name="woo-pre-order-label" />
-            <key name="woo-pre-order-msg-date" />
-            <key name="woo-pre-order-msg-nodate" />
-            <key name="minicart-text" />
-            <key name="woo-sales-popup-title" />
-        </key>
-    </admin-texts>
-    <custom-fields>
-        <custom-field action="translate">page_sub_title</custom-field>
-        <custom-field action="translate">member_firstname</custom-field>
-        <custom-field action="translate">member_lastname</custom-field>
-        <custom-field action="translate">member_role</custom-field>
-        <custom-field action="translate">member_overview</custom-field>
-        <custom-field action="translate">portfolio_info</custom-field>
-        <custom-field action="translate">portfolio_link</custom-field>
-        <custom-field action="translate">portfolio_location</custom-field>
-        <custom-field action="translate">portfolio_client</custom-field>
-        <custom-field action="translate">portfolio_client_link</custom-field>
-        <custom-field action="translate">portfolio_author_quote</custom-field>
-        <custom-field action="translate">portfolio_author_name</custom-field>
-        <custom-field action="translate">portfolio_author_image</custom-field>
-        <custom-field action="translate">portfolio_author_role</custom-field>
-        <custom-field action="translate">custom_tab_title1</custom-field>
-        <custom-field action="translate">custom_tab_title2</custom-field>
-        <custom-field action="translate">custom_tab_content1</custom-field>
-        <custom-field action="translate">custom_tab_content2</custom-field>
-    </custom-fields>
+  <custom-types>
+    <custom-type translate="1" display-as-translated="1">product</custom-type>
+    <custom-type translate="1" display-as-translated="1">product_variation</custom-type>
+    <custom-type translate="1" display-as-translated="1">faq</custom-type>
+    <custom-type translate="1" display-as-translated="1">member</custom-type>
+    <custom-type translate="1" display-as-translated="1">portfolio</custom-type>
+    <custom-type translate="1" display-as-translated="1">event</custom-type>
+    <custom-type translate="1" display-as-translated="1">porto_builder</custom-type>
+  </custom-types>
+  <custom-fields>
+    <custom-field action="copy">custom_tab_priority1</custom-field>
+    <custom-field action="copy">custom_tab_priority2</custom-field>
+    <custom-field action="copy">product_image_on_hover</custom-field>
+    <custom-field action="translate">custom_tab_title1</custom-field>
+    <custom-field action="translate">custom_tab_content1</custom-field>
+    <custom-field action="translate">_variation_description</custom-field>
+    <custom-field action="copy">attribute_pa_color</custom-field>
+    <custom-field action="copy">attribute_pa_size</custom-field>
+    <custom-field action="copy">_menu_item_type</custom-field>
+    <custom-field action="copy">_menu_item_menu_item_parent</custom-field>
+    <custom-field action="copy">_menu_item_object_id</custom-field>
+    <custom-field action="copy">_menu_item_object</custom-field>
+    <custom-field action="copy">_menu_item_target</custom-field>
+    <custom-field action="copy">_menu_item_classes</custom-field>
+    <custom-field action="copy">_menu_item_xfn</custom-field>
+    <custom-field action="copy">_menu_item_url</custom-field>
+    <custom-field action="copy">_menu_item_icon</custom-field>
+    <custom-field action="copy">_menu_item_popup_type</custom-field>
+    <custom-field action="copy">_menu_item_popup_cols</custom-field>
+    <custom-field action="copy">_menu_item_popup_max_width</custom-field>
+    <custom-field action="copy">_menu_item_nolink</custom-field>
+    <custom-field action="copy">_menu_item_cols</custom-field>
+    <custom-field action="copy">_menu_item_tip_label</custom-field>
+    <custom-field action="copy">_menu_item_hide</custom-field>
+    <custom-field action="copy">_menu_item_mobile_hide</custom-field>
+    <custom-field action="copy">_menu_item_popup_bg_image</custom-field>
+    <custom-field action="copy">_menu_item_popup_bg_repeat</custom-field>
+    <custom-field action="copy">_menu_item_popup_bg_size</custom-field>
+    <custom-field action="copy">_menu_item_popup_style</custom-field>
+    <custom-field action="copy">_menu_item_popup_bg_pos</custom-field>
+    <custom-field action="copy">_porto_builder_conditions</custom-field>
+    <custom-field action="copy">slider_thumbs_count</custom-field>
+    <custom-field action="copy">portfolio_layout</custom-field>
+    <custom-field action="translate">portfolio_info</custom-field>
+    <custom-field action="copy">portfolio_link</custom-field>
+    <custom-field action="translate">portfolio_location</custom-field>
+    <custom-field action="translate">portfolio_client</custom-field>
+    <custom-field action="copy">portfolio_client_link</custom-field>
+    <custom-field action="translate">portfolio_author_quote</custom-field>
+    <custom-field action="translate">portfolio_author_name</custom-field>
+    <custom-field action="copy">portfolio_author_image</custom-field>
+    <custom-field action="translate">portfolio_author_role</custom-field>
+    <custom-field action="copy">portfolio_archive_image</custom-field>
+    <custom-field action="copy">slider_type</custom-field>
+    <custom-field action="translate">member_firstname</custom-field>
+    <custom-field action="translate">member_lastname</custom-field>
+    <custom-field action="translate">member_role</custom-field>
+    <custom-field action="translate">member_overview</custom-field>
+    <custom-field action="copy">member_portfolios</custom-field>
+    <custom-field action="copy">member_products</custom-field>
+    <custom-field action="copy">member_posts</custom-field>
+    <custom-field action="copy">member_link</custom-field>
+    <custom-field action="copy">member_email</custom-field>
+    <custom-field action="copy">member_phone</custom-field>
+    <custom-field action="copy">member_facebook</custom-field>
+    <custom-field action="copy">member_twitter</custom-field>
+    <custom-field action="copy">member_linkedin</custom-field>
+    <custom-field action="copy">member_googleplus</custom-field>
+    <custom-field action="copy">member_pinterest</custom-field>
+    <custom-field action="copy">member_vk</custom-field>
+    <custom-field action="copy">member_xing</custom-field>
+    <custom-field action="copy">member_tumblr</custom-field>
+    <custom-field action="copy">member_reddit</custom-field>
+    <custom-field action="copy">member_vimeo</custom-field>
+    <custom-field action="copy">member_instagram</custom-field>
+    <custom-field action="copy">member_whatsapp</custom-field>
+    <custom-field action="copy">event_link</custom-field>
+    <custom-field action="copy">event_start_date</custom-field>
+    <custom-field action="copy">event_end_date</custom-field>
+    <custom-field action="copy">event_start_time</custom-field>
+    <custom-field action="copy">event_end_time</custom-field>
+    <custom-field action="translate">event_location</custom-field>
+    <custom-field action="copy">event_time_counter</custom-field>
+    <custom-field action="translate">page_sub_title</custom-field>
+    <custom-field action="copy">product_more_link</custom-field>
+    <custom-field action="translate">custom_tab_title2</custom-field>
+    <custom-field action="translate">custom_tab_content2</custom-field>
+  </custom-fields>
+  <elementor-widgets>
+    <widget name="porto_ultimate_heading">
+      <fields>
+        <field>main_heading</field>
+        <field>content</field>
+      </fields>
+    </widget>
+    <widget name="porto_fancytext">
+      <fields>
+        <field>fancytext_prefix</field>
+        <field>fancytext_strings</field>
+        <field>fancytext_suffix</field>
+      </fields>
+    </widget>
+    <widget name="porto_faqs">
+      <fields>
+        <field>title</field>
+      </fields>
+    </widget>
+    <widget name="porto_info_box">
+      <fields>
+        <field>title</field>
+        <field>subtitle</field>
+        <field>content</field>
+        <field>read_text</field>
+      </fields>
+    </widget>
+    <widget name="porto_button">
+      <fields>
+        <field>title</field>
+        <field editor_type="LINK">link>url</field>
+      </fields>
+    </widget>
+    <widget name="porto_steps">
+      <fields-in-item items_of="step_item_list">
+        <field>heading</field>
+        <field>subtitle</field>
+        <field>content</field>
+      </fields-in-item>
+    </widget>
+  </elementor-widgets>
+  <admin-texts>
+    <key name="widget_contact-info-widget">
+      <key name="2">
+        <key name="title"/>
+        <key name="contact_before"/>
+        <key name="address_label"/>
+        <key name="address"/>
+        <key name="phone_label"/>
+        <key name="phone"/>
+        <key name="email_label"/>
+        <key name="email"/>
+        <key name="working_label"/>
+        <key name="working"/>
+        <key name="contact_after"/>
+        <key name="view"/>
+      </key>
+      <key name="_multiwidget"/>
+    </key>
+  </admin-texts>
 </wpml-config>

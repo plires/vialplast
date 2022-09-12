@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Porto Elementor widget to display portfolios.
  *
- * @since 5.1.0
+ * @since 1.5.0
  */
 
 use Elementor\Controls_Manager;
@@ -37,13 +37,13 @@ class Porto_Elementor_Portfolio_Widget extends \Elementor\Widget_Base {
 
 	public function get_script_depends() {
 		if ( ( isset( $_REQUEST['action'] ) && 'elementor' == $_REQUEST['action'] ) || isset( $_REQUEST['elementor-preview'] ) ) {
-			return array( 'isotope', 'porto-elementor-widgets-js' );
+			return array( 'porto-jquery-infinite-scroll', 'porto-infinite-scroll', 'isotope', 'porto-elementor-widgets-js' );
 		} else {
 			return array();
 		}
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 		$order_by_values  = array_slice( porto_vc_order_by(), 1 );
 		$order_way_values = array_slice( porto_vc_woo_order_way(), 1 );
 

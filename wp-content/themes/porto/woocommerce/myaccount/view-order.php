@@ -37,7 +37,7 @@ if ( version_compare( $porto_woo_version, '2.6', '<' ) ) {
 			<?php esc_html_e( 'Total', 'woocommerce' ); ?>
 			<mark class="font-weight-bold order-total"><?php echo wp_kses_post( $order->get_formatted_order_total() );  // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></mark></div>
 		<div class="order-item">
-			<?php esc_html_e( 'Payment method', 'woocommerce' ); ?>
+			<?php esc_html_e( 'Payment method:', 'woocommerce' ); ?>
 			<mark class="font-weight-bold order-status"><?php echo wp_kses_post( $order->get_order_item_totals()['payment_method']['value'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></mark>
 		</div>
 	</div>

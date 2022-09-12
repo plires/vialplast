@@ -93,9 +93,9 @@ if ( ! empty( $orderby ) && is_array( $orderby ) ) {
 			$value = 'popularity';
 		}
 		if ( 'onsale' == $value ) {
-			$status  = 'on_sale';
-			$value = '';
-			$order   = '';
+			$status = 'on_sale';
+			$value  = '';
+			$order  = '';
 		}
 		if ( 'date' == $value ) {
 			$order = $order_date;
@@ -157,6 +157,10 @@ if ( $className ) {
 	}
 }
 
+if ( ! empty( $shortcode_class ) ) {
+	$el_class .= ' ' . trim( $shortcode_class );
+}
+
 if ( is_array( $count ) && isset( $count['size'] ) ) {
 	$count = $count['size'];
 }
@@ -216,7 +220,7 @@ if ( ! empty( $show_sort ) || $category_filter || $pagination_style ) {
 }
 
 if ( $title ) {
-	$output .= '<h2 class="section-title' . ( $title_align ? ' text-' . esc_attr( $title_align ) : '' ) . ( 'products-slider' == $view ? ' slider-title' : '' ) . '"><span class="inline-title">' . esc_html( $title ) . '</span><span class="line"></span></h2>';
+	$output .= '<h2 class="section-title' . ( $title_align ? ' text-' . esc_attr( $title_align ) : '' ) . ( 'products-slider' == $view ? ' slider-title' : '' ) . ( 'border-middle' == $title_border_style && ( 'show-nav-title' == $nav_pos || 'show-dots-title-right' == $dots_pos ) ? ' border-right-spacing' : '' ) . '">' . esc_html( $title ) . '</h2>';
 }
 
 if ( ! empty( $show_sort ) || $category_filter ) {
@@ -368,8 +372,10 @@ if ( $order && ! is_array( $orderby ) ) {
 }
 
 if ( $pagination_style ) {
-	$extra_atts                        .= ' paginate="true"';
-	$porto_settings_backup              = $porto_settings['product-infinite'];
+	$extra_atts .= ' paginate="true"';
+	if ( isset( $porto_settings['product-infinite'] ) ) {
+		$porto_settings_backup = $porto_settings['product-infinite'];
+	}
 	$porto_settings['product-infinite'] = $pagination_style;
 
 	$shop_action1 = false;
@@ -472,7 +478,6 @@ if ( 'creative' == $view || ( 'grid' == $view && '' !== $spacing ) || ( '0' == $
 	echo '#' . $wrapper_id . ' li.product { padding-left: ' . ( (int) $spacing / 2 ) . 'px; padding-right: ' . ( (int) $spacing / 2 ) . 'px; margin-bottom: ' . ( (int) $spacing ) . 'px; }';
 	echo '</style>';
 }
-
 if ( $count ) {
 	$extra_atts .= ' limit="' . intval( $count ) . '"';
 }

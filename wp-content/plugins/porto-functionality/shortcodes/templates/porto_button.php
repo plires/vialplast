@@ -1,7 +1,7 @@
 <?php
 	$settings = shortcode_atts(
 		array(
-			'title'               => '',
+			'title'               => __( 'Click here', 'porto-functionality' ),
 			'size'                => 'md',
 			'skin'                => 'primary',
 			'layout'              => '',
@@ -13,6 +13,7 @@
 			'icon_pos'            => 'left',
 			'icon_cls'            => '',
 			'hover_effect'        => '',
+			'hover_text_effect'   => '',
 			'align'               => '',
 			'show_arrow'          => '',
 			'floating_start_pos'  => '',
@@ -28,7 +29,10 @@
 		$atts
 	);
 
-	if ( $settings['title'] ) {
+	$icon_cls = is_array( $settings['icon_cls'] ) ? $settings['icon_cls']['value'] : $settings['icon_cls'];
+	$tag      = 'a';
+
+	if ( $settings['title'] || $icon_cls ) {
 		if ( 'dynamic' == $settings['link_source'] && $settings['dynamic_content'] && $settings['dynamic_content']['source'] ) {
 			$field_name = '';
 			if ( 'post' == $settings['dynamic_content']['source'] ) {
@@ -42,6 +46,9 @@
 			}
 			if ( $field_name ) {
 				$settings['link'] = apply_filters( 'porto_dynamic_tags_content', '', null, $settings['dynamic_content']['source'], $field_name );
+			}
+			if ( ( '#' == $settings['link'] || empty( $settings['link'] ) ) && ! empty( $settings['dynamic_content']['fallback'] ) ) {
+				$settings['link'] = $settings['dynamic_content']['fallback'];
 			}
 		}
 
@@ -60,17 +67,32 @@
 		}
 
 		$btn_icon_html_escaped = '';
-		$icon_cls              = is_array( $settings['icon_cls'] ) ? $settings['icon_cls']['value'] : $settings['icon_cls'];
 		if ( ! empty( $icon_cls ) ) {
 			$btn_icon_html_escaped = '<i class="' . esc_attr( trim( $icon_cls ) ) . '"></i>';
 			$btn_classes          .= ' btn-icon';
 			if ( 'right' == $settings['icon_pos'] ) {
 				$btn_classes .= ' btn-icon-right';
 			}
+
+			if ( empty( $settings['title'] ) ) {
+				$btn_classes .= ' btn-icon-only';
+			}
 		}
 
 		if ( ! empty( $settings['hover_effect'] ) ) {
 			$btn_classes .= ' ' . trim( $settings['hover_effect'] );
+		}
+
+		if ( ! empty( $settings['hover_text_effect'] ) && ! empty( $settings['title'] ) ) {
+			if ( empty( $title_attrs_escaped ) || empty( trim( $title_attrs_escaped ) ) ) {
+				$title_attrs_escaped = ' class="btn-text" data-text="' . esc_attr( $settings['title'] ) . '"';
+			} else {
+				$title_attrs_escaped  = str_replace( 'class="', 'class="btn-text ', $title_attrs_escaped );
+				$title_attrs_escaped .= ' data-text="' . esc_attr( $settings['title'] ) . '"';
+			}
+
+			$btn_classes .= ' btn-hover-text-effect';
+			$btn_classes .= ' ' . $settings['hover_text_effect'];
 		}
 
 		if ( $settings['className'] ) {
@@ -92,8 +114,7 @@
 				$attrs .= ' data-appear-animation-duration="' . absint( $settings['animation_duration'] ) . '"';
 			}
 		}
-
-		echo '<a class="' . esc_attr( $btn_classes ) . '" href="' . esc_url( $url ) . '"' . ( isset( $settings['link']['is_external'] ) && $settings['link']['is_external'] ? ' target="_blank"' : '' ) . porto_shortcode_add_floating_options( $settings ) . $attrs . '>';
+		echo '<' . $tag . ' aria-label="button" class="' . esc_attr( apply_filters( 'porto_elements_wrap_css_class', $btn_classes, $atts, 'button' ) ) . '" href="' . esc_url( $url ) . '"' . ( isset( $settings['link']['is_external'] ) && $settings['link']['is_external'] ? ' target="_blank"' : '' ) . porto_shortcode_add_floating_options( $settings ) . $attrs . '>';
 		if ( 'left' == $settings['icon_pos'] ) {
 			echo porto_filter_output( $btn_icon_html_escaped );
 		}
@@ -104,7 +125,7 @@
 		if ( 'right' == $settings['icon_pos'] ) {
 			echo porto_filter_output( $btn_icon_html_escaped );
 		}
-		echo '</a>';
+		echo '</' . $tag . '>';
 		if ( $settings['align'] ) {
 			echo '</div>';
 		}

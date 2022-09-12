@@ -117,7 +117,7 @@ if ( 'transparent' == $view ) {
 			$output .= '<div class="testimonial-arrow-down"></div>';
 		}
 	}
-	$output .= '<div class="testimonial-author clearfix">';
+	$output .= '<div class="testimonial-author">';
 	if ( $photo_url ) {
 		switch ( $style ) {
 			case 'testimonial-style-2':

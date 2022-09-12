@@ -48,9 +48,11 @@
         z-index: 2;
         overflow: hidden;
         font-size: 18px;
+        background: var(--porto-primary-color);
         color: #fff;
 
         i {
+            color: var(--porto-primary-color-inverse);
             img {
                 position: absolute;
                 margin: auto;
@@ -111,6 +113,7 @@
         text-transform: uppercase;
         z-index: 2;
         line-height: 2.3;
+        background: var(--porto-primary-color);
     }
 
     .owl-carousel {
@@ -130,6 +133,7 @@
         border-radius: 100%;
         bottom: 4px;
         cursor: pointer;
+        background: var(--porto-primary-color);
         color: #FFF;
         height: 30px;
         width: 30px;
@@ -305,6 +309,15 @@
                 transform: sacle(1.1);
             }
         }
+
+        &:not(.thumb-info-bottom-info-dark) {
+            .thumb-info-title {
+                background: var(--porto-body-bg);
+            }
+            .thumb-info-inner {
+                color: var(--porto-heading-color);
+            }
+        }
     }
 
     &.thumb-info-bottom-info-dark {
@@ -462,30 +475,6 @@
     }
 }
 
-/* Thumb Info Ribbon */
-.thumb-info-ribbon {
-    background: #999;
-    position: absolute;
-    margin: side-values(-16px 0 0 0);
-    padding: side-values(5px 13px 6px);
-    #{$right}: 15px;
-    z-index: 1;
-    &:before {
-        border-#{$right}: 10px solid #646464;
-        border-top: 16px solid transparent;
-        content: "";
-        display: block;
-        height: 0;
-        #{$left}: -10px;
-        position: absolute;
-        top: 0;
-        width: 7px;
-    }
-    span {
-        font-size: 1.1em;
-    }
-}
-
 /* Thumb Info - Full Width */
 .full-width .thumb-info {
     img {
@@ -521,6 +510,7 @@
 
 /* Thumb Info Side Image  */
 .thumb-info-side-image {
+    border: 1px solid var(--porto-gray-5);
     @include clearfix();
     .thumb-info-side-image-wrapper {
         position: relative;
@@ -569,6 +559,10 @@
         width: 30px;
         vertical-align: bottom;
         overflow: hidden;
+        background-color: var(--porto-primary-color);
+        color: var(--porto-primary-color-inverse);
+        font-size: 0.9em;
+        font-weight: normal;
         &:hover {
             text-decoration: none;
         }
@@ -576,9 +570,6 @@
             display: none;
         }
         i {
-            color: #FFF;
-            font-size: 0.9em;
-            font-weight: normal;
             img {
                 position: absolute;
                 margin: auto;
@@ -770,7 +761,22 @@
     }
 }
 
+.thumb-info-bottom-info .thumb-info-title,
+.thumb-info-bottom-info .thumb-info-title a,
+.thumb-info-bottom-info .thumb-info-title a:hover {
+    color: var(--porto-body-color);
+}
 
+/* theme colors */
+/* secondary, tertiary, quaternary, dark, light */
+@each $state in $color_states_not_primary {
+    .thumb-info .thumb-info-action .thumb-info-action-icon-#{nth($state,1)} {
+        background-color: var(--porto-#{nth($state,1)}-color);
+    }
+    .thumb-info .thumb-info-action-icon-#{nth($state,1)} i {
+        color: var(--porto-#{nth($state,1)}-color-inverse, #{nth($state,3)});
+    }
+}
 
 /* Responsive */
 @media (max-width: 991px) {

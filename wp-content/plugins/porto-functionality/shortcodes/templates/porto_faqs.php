@@ -101,7 +101,7 @@ if ( $filter ) {
 	}
 }
 
-$shortcode_id = md5( json_encode( $atts ) );
+$shortcode_id = porto_generate_rand( 4 );
 
 if ( $posts->have_posts() ) {
 	$el_class = porto_shortcode_extract_class( $el_class );
@@ -132,15 +132,19 @@ if ( $posts->have_posts() ) {
 		$wrap_cls .= ' m-t-lg';
 	}
 
+	if ( ! empty( $shortcode_class ) ) {
+		$wrap_cls .= $shortcode_class;
+	}
+
 	if ( $pagination ) {
 		$wrap_cls   .= ' porto-ajax-load';
 		$wrap_attrs .= ' data-post_type="faq"';
 		if ( 'infinite' == $pagination ) {
 			$wrap_cls .= ' load-infinite';
-			wp_enqueue_script( 'jquery-infinite-scroll' );
+			wp_enqueue_script( 'porto-jquery-infinite-scroll' );
 		} elseif ( 'load_more' == $pagination ) {
 			$wrap_cls .= ' load-more';
-			wp_enqueue_script( 'jquery-infinite-scroll' );
+			wp_enqueue_script( 'porto-jquery-infinite-scroll' );
 		} else {
 			$wrap_cls .= ' load-ajax';
 		}

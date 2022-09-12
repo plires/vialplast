@@ -26,7 +26,7 @@ if ( ( ! empty( $porto_settings['product-sale'] ) || ( ! empty( $porto_settings[
 		$percentage = - round( ( ( $reg_p - $product->get_sale_price() ) / $reg_p ) * 100 );
 	}
 	if ( $porto_settings['product-sale-percent'] && $percentage ) {
-		$labels .= '<div class="onsale">' . $percentage . '%</div>';
+		$labels .= apply_filters( 'woocommerce_sale_flash', '<div class="onsale">' . $percentage . '%</div>', $post, $product );
 	} else {
 		$labels .= apply_filters( 'woocommerce_sale_flash', '<span class="onsale">' . ( ( isset( $porto_settings['product-sale-label'] ) && $porto_settings['product-sale-label'] ) ? esc_html( $porto_settings['product-sale-label'] ) : esc_html__( 'Sale', 'porto' ) ) . '</span>', $post, $product );
 	}

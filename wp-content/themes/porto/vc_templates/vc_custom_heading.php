@@ -55,20 +55,67 @@ $show_border = $border_color = $border_type = $border_size = $enable_typewriter 
 extract(
 	shortcode_atts(
 		array(
-			'skin'                 => 'custom',
-			'show_border'          => false,
-			'border_skin'          => 'custom',
-			'border_color'         => '',
-			'border_type'          => 'bottom-border',
-			'border_size'          => '',
-			'enable_typewriter'    => false,
-			'typewriter_animation' => 'fadeIn',
-			'typewriter_delay'     => 0,
-			'typewriter_width'     => 0,
+			'skin'                             => 'custom',
+			'show_border'                      => false,
+			'border_skin'                      => 'custom',
+			'border_color'                     => '',
+			'border_type'                      => 'bottom-border',
+			'border_size'                      => '',
+			'enable_typewriter'                => false,
+			'typewriter_animation'             => 'fadeIn',
+			'typewriter_delay'                 => 0,
+			'typewriter_width'                 => 0,
+
+			// dynamic field
+			'enable_field_dynamic'             => false,
+			'field_dynamic_source'             => '',
+			'field_dynamic_content'            => '',
+			'field_dynamic_content_meta_field' => '',
+			'field_dynamic_before'             => '',
+			'field_dynamic_after'              => '',
+			'field_dynamic_fallback'           => '',
+
+			// dynamic link
+			'enable_link_dynamic'              => false,
+			'link_dynamic_source'              => '',
+			'link_dynamic_content'             => '',
+			'link_dynamic_content_meta_link'   => '',
+			'link_dynamic_fallback'            => '',
 		),
 		$atts
 	)
 );
+
+//dynamic text
+if ( $enable_field_dynamic ) {
+	if ( ( 'meta_field' == $field_dynamic_source ) && ! empty( $field_dynamic_content_meta_field ) ) {
+		$text = Porto_Func_Dynamic_Tags_Content::get_instance()->dynamic_get_data( $field_dynamic_source, $field_dynamic_content_meta_field, 'field' );
+	}
+	if ( ! empty( $field_dynamic_content ) ) {
+		$text = Porto_Func_Dynamic_Tags_Content::get_instance()->dynamic_get_data( $field_dynamic_source, $field_dynamic_content, 'field' );
+	}
+	if ( empty( $text ) ) {
+		$text = $field_dynamic_fallback;
+	}
+
+	$text = $field_dynamic_before . $text . $field_dynamic_after;
+}
+
+// dynamic link
+$dynamic_link = false;
+if ( $enable_link_dynamic ) {
+	if ( ( 'meta_field' == $link_dynamic_source ) && ! empty( $link_dynamic_content_meta_link ) ) {
+		$link = Porto_Func_Dynamic_Tags_Content::get_instance()->dynamic_get_data( $link_dynamic_source, $link_dynamic_content_meta_link, 'link' );
+	}
+	if ( ! empty( $link_dynamic_content ) ) {
+		$link = Porto_Func_Dynamic_Tags_Content::get_instance()->dynamic_get_data( $link_dynamic_source, $link_dynamic_content, 'link' );
+	}
+	if ( empty( $link ) ) {
+		$link = $link_dynamic_fallback;
+	}
+
+	$dynamic_link = true;
+}
 
 $settings = get_option( 'wpb_js_google_fonts_subsets' );
 if ( is_array( $settings ) && ! empty( $settings ) ) {
@@ -174,7 +221,16 @@ if ( 'post_title' === $source ) {
 }
 
 if ( ! empty( $link ) ) {
-	$link = vc_build_link( $link );
+
+	if ( $dynamic_link ) {
+		$link = array(
+			'url'    => $link,
+			'target' => '',
+			'title'  => '',
+		);
+	} elseif ( function_exists( 'vc_build_link' ) ) {
+		$link = vc_build_link( $link );
+	}
 	$text = '<a href="' . esc_url( $link['url'] ) . '"' . ( $link['target'] ? ' target="' . esc_attr( $link['target'] ) . '"' : '' ) . ( $link['title'] ? ' title="' . esc_attr( $link['title'] ) . '"' : '' ) . '>' . wp_specialchars_decode( $text ) . '</a>';
 }
 
@@ -197,6 +253,7 @@ if ( apply_filters( 'vc_custom_heading_template_use_wrapper', false ) || $show_b
 		}
 		if ( $border_color ) {
 			$css_class .= ' ' . $wrap_class;
+			ob_start();
 			?>
 			<style>
 				<?php
@@ -209,6 +266,7 @@ if ( apply_filters( 'vc_custom_heading_template_use_wrapper', false ) || $show_b
 					.<?php echo esc_html( $wrap_class ); ?> .heading-tag:before, .<?php echo esc_html( $wrap_class ); ?> .heading-tag:after { border-top-color: <?php echo esc_html( $border_color ); ?> !important }<?php endif; ?>
 			</style>
 			<?php
+			porto_filter_inline_css( ob_get_clean() );
 		}
 	}
 	$output       .= '<div class="' . esc_attr( $css_class ) . '">';

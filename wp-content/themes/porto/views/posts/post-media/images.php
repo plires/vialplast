@@ -26,11 +26,11 @@ $carousel_options['nav'] = true;
 				<?php if ( is_single() ) : ?>
 				<div>
 			<?php else : ?>
-				<a href="<?php echo esc_url( apply_filters( 'the_permalink', get_permalink() ) ); ?>">
+				<a href="<?php echo esc_url( apply_filters( 'the_permalink', get_permalink() ) ); ?>" aria-label="post image">
 			<?php endif; ?>
 					<div class="img-thumbnail">
 						<?php echo wp_get_attachment_image( $featured_image['attachment_id'], ( isset( $image_size ) ? $image_size : 'blog-large' ), false, array( 'class' => 'owl-lazy img-responsive' ) ); ?>
-						<?php if ( $porto_settings['post-zoom'] ) { ?>
+						<?php if ( ! empty( $porto_settings['post-zoom'] ) ) { ?>
 							<span class="zoom" data-src="<?php echo esc_url( $attachment['src'] ); ?>" data-title="<?php echo esc_attr( $attachment_large['caption'] ); ?>"><i class="fas fa-search"></i></span>
 						<?php } ?>
 					</div>
@@ -41,12 +41,12 @@ $carousel_options['nav'] = true;
 			<?php endif; ?>
 			<?php } ?>
 		</div>
-		<?php if ( is_single() && 'advance' === $porto_settings['post-share-position'] ) : ?>
+		<?php if ( is_single() && isset( $porto_settings['post-share-position'] ) && 'advance' === $porto_settings['post-share-position'] ) : ?>
 			<?php get_template_part( 'views/posts/single/share' ); ?>
-		<?php elseif ( ! is_single() && 'advance' === $porto_settings['blog-post-share-position'] ) : ?>
+		<?php elseif ( ! is_single() && isset( $porto_settings['blog-post-share-position'] ) && 'advance' === $porto_settings['blog-post-share-position'] ) : ?>
 			<div class="post-block post-share post-share-advance">
 				<div class="post-share-advance-bg">
-					<?php get_template_part( 'share' ) ?>
+					<?php get_template_part( 'share' ); ?>
 					<i class="fa fa-share-alt"></i>
 				</div>
 			</div>

@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Register elementor custom addons for elements and widgets.
  *
- * @since 6.2.0
+ * @since 2.2.0
  */
 
 use Elementor\Controls_Manager;
@@ -66,5 +66,124 @@ if ( ! function_exists( 'porto_elementor_mpx_controls' ) ) :
 			);
 
 		$self->end_controls_section();
+
+		if ( class_exists( 'Porto_Elementor_Section' ) && $self instanceof Porto_Elementor_Section ) {
+			//$self->get_data( 'isInner' )
+			$self->start_controls_section(
+				'_porto_section_scroll_parallax_effect',
+				array(
+					'label' => __( 'Scroll Parallax', 'porto-functionality' ),
+					'tab'   => Porto_Elementor_Editor_Custom_Tabs::TAB_CUSTOM,
+				)
+			);
+
+			$self->add_control(
+				'scroll_parallax',
+				array(
+					'label'       => esc_html__( 'Scroll Parallax?', 'porto-functionality' ),
+					'type'        => Controls_Manager::SWITCHER,
+					'description' => esc_html__( 'Section\'s width changes when scrolling page.', 'porto-functionality' ),
+				)
+			);
+
+			$self->add_control(
+				'scroll_unit',
+				array(
+					'label'     => __( 'CSS Unit', 'porto-functionality' ),
+					'type'      => Controls_Manager::SELECT,
+					'options'   => array(
+						'vw' => 'vw',
+						'%'  => '%',
+					),
+					'default'   => 'vw',
+					'condition' => array(
+						'scroll_parallax' => 'yes',
+					),
+				)
+			);
+
+			$self->add_control(
+				'scroll_parallax_width',
+				array(
+					'label'     => esc_html__( 'Start Width', 'porto-functionality' ),
+					'type'      => Controls_Manager::SLIDER,
+					'default'   => array(
+						'unit' => '',
+						'size' => 40,
+					),
+					'range'     => array(
+						'' => array(
+							'step' => 1,
+							'min'  => 20,
+							'max'  => 90,
+						),
+					),
+					'condition' => array(
+						'scroll_parallax' => 'yes',
+					),
+				)
+			);
+
+			$self->end_controls_section();
+
+			$self->start_controls_section(
+				'_porto_section_particles_effect',
+				array(
+					'label' => __( 'Particles Effect', 'porto-functionality' ),
+					'tab'   => Porto_Elementor_Editor_Custom_Tabs::TAB_CUSTOM,
+				)
+			);
+
+			$self->add_control(
+				'particles_img',
+				array(
+					'type'    => Controls_Manager::MEDIA,
+					'label'   => __( 'Particles Image', 'porto-functionality' ),
+					'dynamic' => array(
+						'active' => true,
+					),
+				)
+			);
+
+			$self->add_control(
+				'particles_hover_effect',
+				array(
+					'label'     => __( 'Hover Effect', 'porto-functionality' ),
+					'type'      => Controls_Manager::SELECT,
+					'options'   => array(
+						''        => __( 'None', 'porto' ),
+						'grab'    => __( 'Grab', 'porto' ),
+						'bubble'  => __( 'Bubble', 'porto' ),
+						'repulse' => __( 'Repulse', 'porto' ),
+					),
+					'default'   => '',
+					'condition' => array(
+						'particles_img[id]!' => '',
+					),
+				)
+			);
+
+			$self->add_control(
+				'particles_click_effect',
+				array(
+					'label'     => __( 'Click Effect', 'porto-functionality' ),
+					'type'      => Controls_Manager::SELECT,
+					'options'   => array(
+						''        => __( 'None', 'porto' ),
+						'grab'    => __( 'Grab', 'porto' ),
+						'bubble'  => __( 'Bubble', 'porto' ),
+						'repulse' => __( 'Repulse', 'porto' ),
+						'push'    => __( 'Push', 'porto' ),
+						'remove'  => __( 'Remove', 'porto' ),
+					),
+					'default'   => '',
+					'condition' => array(
+						'particles_img[id]!' => '',
+					),
+				)
+			);
+
+			$self->end_controls_section();
+		}
 	}
 endif;

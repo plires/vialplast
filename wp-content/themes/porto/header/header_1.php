@@ -2,7 +2,7 @@
 global $porto_settings, $porto_layout;
 ?>
 <header id="header" class="header-separate header-1 sticky-menu-header<?php echo ! $porto_settings['logo-overlay'] || ! $porto_settings['logo-overlay']['url'] ? '' : ' logo-overlay-header'; ?>">
-	<?php if ( $porto_settings['show-header-top'] ) : ?>
+	<?php if ( ! empty( $porto_settings['show-header-top'] ) ) : ?>
 	<div class="header-top">
 		<div class="container">
 			<div class="header-left">
@@ -60,7 +60,7 @@ global $porto_settings, $porto_layout;
 	<div class="header-main">
 		<div class="container header-row">
 			<div class="header-left">
-				<a class="mobile-toggle" href="#"><i class="fas fa-bars"></i></a>
+				<a class="mobile-toggle" href="#" aria-label="Mobile Menu"><i class="fas fa-bars"></i></a>
 				<?php
 				// show logo
 				echo porto_logo();
@@ -76,7 +76,7 @@ global $porto_settings, $porto_layout;
 				<div class="header-minicart">
 					<?php
 					// show contact info and mini cart
-					$contact_info = $porto_settings['header-contact-info'];
+					$contact_info = isset( $porto_settings['header-contact-info'] ) ? $porto_settings['header-contact-info'] : '';
 
 					if ( $contact_info ) {
 						echo '<div class="header-contact">' . do_shortcode( $contact_info ) . '</div>';

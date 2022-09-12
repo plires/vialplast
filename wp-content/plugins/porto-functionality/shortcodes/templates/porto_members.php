@@ -17,6 +17,7 @@ $default_atts = array(
 	'view_more'          => false,
 	'view_more_class'    => '',
 	'filter'             => false,
+	'filter_style'       => '',
 	'filter_type'        => '',
 	'pagination'         => false,
 	'ajax_load'          => false,
@@ -113,7 +114,7 @@ if ( $filter ) {
 	}
 }
 
-$shortcode_id = md5( json_encode( $atts ) );
+$shortcode_id = porto_generate_rand( 4 );
 
 if ( $posts->have_posts() ) {
 	$el_class = porto_shortcode_extract_class( $el_class );
@@ -157,13 +158,13 @@ if ( $posts->have_posts() ) {
 
 	if ( $pagination ) {
 		$wrap_cls   .= ' porto-ajax-load';
-		$wrap_attrs .= ' data-post_type="member"';
+		$wrap_attrs .= ' data-post_type="member" data-post_layout="' . esc_attr( $style ? $style : $view ) . '"';
 		if ( 'infinite' == $pagination ) {
 			$wrap_cls .= ' load-infinite';
-			wp_enqueue_script( 'jquery-infinite-scroll' );
+			wp_enqueue_script( 'porto-jquery-infinite-scroll' );
 		} elseif ( 'load_more' == $pagination ) {
 			$wrap_cls .= ' load-more';
-			wp_enqueue_script( 'jquery-infinite-scroll' );
+			wp_enqueue_script( 'porto-jquery-infinite-scroll' );
 		} else {
 			$wrap_cls .= ' load-ajax';
 		}
@@ -203,7 +204,7 @@ if ( $posts->have_posts() ) {
 		<?php
 		if ( is_array( $member_taxs ) && ! empty( $member_taxs ) ) :
 			?>
-			<ul class="member-filter nav nav-pills sort-source<?php echo 'ajax' == $filter_type ? ' porto-ajax-filter' : ''; ?>">
+			<ul class="member-filter nav sort-source <?php echo ! empty( $filter_style ) ? 'sort-source-' . esc_attr( $filter_style ) : 'nav-pills', 'ajax' == $filter_type ? ' porto-ajax-filter' : ''; ?>">
 				<li class="active" data-filter="*"><a><?php esc_html_e( 'Show All', 'porto-functionality' ); ?></a></li>
 				<?php foreach ( $member_taxs as $member_tax_slug => $member_tax_name ) : ?>
 					<li data-filter="<?php echo esc_attr( $member_tax_slug ); ?>"><a><?php echo esc_html( $member_tax_name ); ?></a></li>

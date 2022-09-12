@@ -1009,6 +1009,19 @@ if ( class_exists( 'WP_Importer' ) ) {
 					$postdata = apply_filters( 'wp_import_post_data_processed', $postdata, $post );
 					$postdata = wp_slash( $postdata );
 
+					/**
+					 * reset page template to fix wp_update_post is failed due to page template
+					 *
+					 * @since 6.3.0
+					 */
+					$old_page_template = get_post_meta( $post_id, '_wp_page_template', 'default' );
+					if ( $old_page_template && 'default' !== $old_page_template ) {
+						$page_templates = wp_get_theme()->get_page_templates( get_post( $post_id ) );
+						if ( ! isset( $page_templates[ $old_page_template ] ) ) {
+							update_post_meta( $post_id, '_wp_page_template', 'default' );
+						}
+					}
+
 					$comment_post_ID = $post_id = wp_update_post( $postdata, true );
 
 					if ( is_wp_error( $post_id ) ) {

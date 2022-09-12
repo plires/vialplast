@@ -1,7 +1,7 @@
 <?php
 
 if ( ! empty( $settings['textAlign'] ) || ! empty( $settings['fontFamily'] ) || ! empty( $settings['fontSize'] ) || ! empty( $settings['fontWeight'] ) || ! empty( $settings['textTransform'] ) || ! empty( $settings['lineHeight'] ) || ! empty( $settings['letterSpacing'] ) || ! empty( $settings['color'] ) ) {
-	echo porto_filter_output( $settings['selector'] ) . '{';
+	echo ( empty( $settings['color'] ) ? '' : '.page-wrapper ' ) . porto_filter_output( $settings['selector'] ) . '{';
 	if ( ! empty( $settings['fontFamily'] ) ) {
 		echo 'font-family:' . esc_html( $settings['fontFamily'] ) . ';';
 	}

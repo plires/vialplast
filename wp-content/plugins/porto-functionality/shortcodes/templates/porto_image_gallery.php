@@ -27,11 +27,24 @@ extract(
 			'animation_type'     => '',
 			'animation_duration' => 1000,
 			'animation_delay'    => 0,
+			'icon_cl'            => '',
+			'icon_type'          => 'fontawesome',
+			'icon_simpleline'    => '',
+			'icon_porto'         => '',
 			'el_class'           => '',
 		),
 		$atts
 	)
 );
+
+switch ( $icon_type ) {
+	case 'simpleline':
+		$icon_cl = $icon_simpleline;
+		break;
+	case 'porto':
+		$icon_cl = $icon_porto;
+		break;
+}
 
 if ( ! is_array( $images ) ) {
 	$images = explode( ',', $images );
@@ -51,6 +64,9 @@ if ( ! empty( $columns ) ) {
 	$columns_md = empty( $columns_arr['md'] ) ? min( 3, $columns_lg ) : (int) $columns_arr['md'];
 	$columns_sm = empty( $columns_arr['sm'] ) ? min( 2, $columns_md ) : (int) $columns_arr['sm'];
 	$columns_xs = empty( $columns_arr['xs'] ) ? min( 1, $columns_sm ) : (int) $columns_arr['xs'];
+	if ( isset( $columns_arr['min'] ) ) {
+		$columns_xs = empty( $columns_arr['min'] ) ? min( 1, $columns_sm ) : (int) $columns_arr['min'];
+	}
 } else {
 	$columns    = 1;
 	$columns_lg = 1;
@@ -62,7 +78,7 @@ if ( ! empty( $columns ) ) {
 $wrapper_cls   = 'porto-gallery has-ccols ccols-' . $columns_xs;
 $wrapper_attrs = '';
 
-if ( ! empty( $spacing ) && 'slider' != $view ) {
+if ( ! empty( $spacing ) ) {
 	$wrapper_cls .= ' has-ccols-spacing';
 }
 
@@ -198,8 +214,15 @@ if ( 'lightbox' == $click_action ) {
 	) . '"';
 }
 
+$item_cls = '';
 if ( $hover_effect ) {
-	$wrapper_cls .= ' porto-ig-' . $hover_effect;
+	if ( 'hoverdir' == $hover_effect ) {
+		wp_enqueue_script( 'modernizr' );
+		wp_enqueue_script( 'jquery-hoverdir', PORTO_SHORTCODES_URL . 'assets/js/jquery.hoverdir.min.js', array( 'jquery-core', 'modernizr' ), PORTO_SHORTCODES_VERSION, true );
+		$item_cls .= ' hover-effect-dir';
+	} else {
+		$wrapper_cls .= ' porto-ig-' . $hover_effect;
+	}
 }
 
 if ( $el_class ) {
@@ -207,7 +230,7 @@ if ( $el_class ) {
 }
 echo '<div class="' . esc_attr( $wrapper_cls ) . '"' . $wrapper_attrs . '>';
 foreach ( $images as $index => $img_id ) {
-	$col_cls = '';
+	$col_cls = trim( $item_cls );
 	if ( 'creative' == $view && ! empty( $porto_grid_layout[ $index ] ) && isset( $porto_grid_layout[ $index % count( $porto_grid_layout ) ] ) ) {
 		$grid_layout = $porto_grid_layout[ $index % count( $porto_grid_layout ) ];
 		$col_cls    .= ' grid-col-' . $grid_layout['width'] . ' grid-col-md-' . $grid_layout['width_md'] . ( isset( $grid_layout['width_lg'] ) ? ' grid-col-lg-' . $grid_layout['width_lg'] : '' ) . ' grid-height-' . $grid_layout['height'];
@@ -224,6 +247,13 @@ foreach ( $images as $index => $img_id ) {
 	}
 	echo '<figure' . ( $col_cls && ! $click_action ? ' class="' . esc_attr( $col_cls ) . '"' : '' ) . '>';
 	echo wp_get_attachment_image( $img_id['id'], $image_size ? $image_size : 'full' );
+	if ( 'hoverdir' == $hover_effect ) {
+		echo '<div class="fill">';
+		if ( ! empty( $click_action ) ) {
+			echo '<i class="centered-icon ' . ( $icon_cl ? esc_attr( $icon_cl ) : 'fa fa-plus' ) . '"></i>';
+		}
+		echo '</div>';
+	}
 	echo '</figure>';
 	if ( ! empty( $click_action ) ) {
 		echo '</a>';

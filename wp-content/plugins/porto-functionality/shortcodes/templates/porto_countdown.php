@@ -7,34 +7,45 @@ $string_days2   = $string_weeks2 = $string_months2 = $string_yers2 = $string_hou
 extract(
 	shortcode_atts(
 		array(
-			'count_style'          => 'porto-cd-s1',
-			'datetime'             => '',
-			'porto_tz'             => 'porto-wptz',
-			'countdown_opts'       => '',
-			'tick_col'             => '',
-			'tick_size'            => '',
-			'tick_line_height'     => '',
-			'tick_style'           => '',
-			'tick_sep_col'         => '',
-			'tick_sep_size'        => '',
-			'tick_sep_line_height' => '',
-			'tick_sep_style'       => '',
-			'el_class'             => '',
-			'string_days'          => 'Day',
-			'string_days2'         => 'Days',
-			'string_weeks'         => 'Week',
-			'string_weeks2'        => 'Weeks',
-			'string_months'        => 'Month',
-			'string_months2'       => 'Months',
-			'string_years'         => 'Year',
-			'string_years2'        => 'Years',
-			'string_hours'         => 'Hour',
-			'string_hours2'        => 'Hours',
-			'string_minutes'       => 'Minute',
-			'string_minutes2'      => 'Minutes',
-			'string_seconds'       => 'Second',
-			'string_seconds2'      => 'Seconds',
-			'css_countdown'        => '',
+			'count_style'                      => 'porto-cd-s1',
+			'enable_dynamic_date'              => '',
+			'dynamic_datetime'                 => '',
+			'datetime'                         => '',
+			'porto_tz'                         => 'porto-wptz',
+			'countdown_opts'                   => '',
+			'tick_col'                         => '',
+			'tick_size'                        => '',
+			'tick_line_height'                 => '',
+			'tick_style'                       => '',
+			'tick_sep_col'                     => '',
+			'tick_sep_size'                    => '',
+			'tick_sep_line_height'             => '',
+			'tick_sep_style'                   => '',
+			'el_class'                         => '',
+			'string_days'                      => 'Day',
+			'string_days2'                     => 'Days',
+			'string_weeks'                     => 'Week',
+			'string_weeks2'                    => 'Weeks',
+			'string_months'                    => 'Month',
+			'string_months2'                   => 'Months',
+			'string_years'                     => 'Year',
+			'string_years2'                    => 'Years',
+			'string_hours'                     => 'Hour',
+			'string_hours2'                    => 'Hours',
+			'string_minutes'                   => 'Minute',
+			'string_minutes2'                  => 'Minutes',
+			'string_seconds'                   => 'Second',
+			'string_seconds2'                  => 'Seconds',
+			'css_countdown'                    => '',
+
+			// dynamic field
+			'enable_field_dynamic'             => false,
+			'field_dynamic_source'             => '',
+			'field_dynamic_content'            => '',
+			'field_dynamic_content_meta_field' => '',
+			'field_dynamic_before'             => '',
+			'field_dynamic_after'              => '',
+			'field_dynamic_fallback'           => '',
 		),
 		$atts
 	)
@@ -42,6 +53,21 @@ extract(
 
 wp_enqueue_script( 'countdown' );
 wp_enqueue_script( 'porto_shortcodes_countdown_loader_js' );
+
+//dynamic WPB Field
+if ( $enable_field_dynamic ) {
+	if ( ( 'meta_field' == $field_dynamic_source ) && ! empty( $field_dynamic_content_meta_field ) ) {
+		$dynamic_datetime = Porto_Func_Dynamic_Tags_Content::get_instance()->dynamic_get_data( $field_dynamic_source, $field_dynamic_content_meta_field, 'field' );
+	}
+	if ( ! empty( $field_dynamic_content ) ) {
+		$dynamic_datetime = Porto_Func_Dynamic_Tags_Content::get_instance()->dynamic_get_data( $field_dynamic_source, $field_dynamic_content, 'field' );
+	}
+	if ( empty( $dynamic_datetime ) ) {
+		$dynamic_datetime = $field_dynamic_fallback;
+	}
+
+	$dynamic_datetime = $field_dynamic_before . $dynamic_datetime . $field_dynamic_after;
+}
 if ( ! empty( $shortcode_class ) ) {
 	if ( empty( $el_class ) ) {
 		$el_class = $shortcode_class;
@@ -50,9 +76,15 @@ if ( ! empty( $shortcode_class ) ) {
 	}
 }
 
-$count_frmt    = $labels = $countdown_design_style = '';
-$labels        = $string_years2 . ',' . $string_months2 . ',' . $string_weeks2 . ',' . $string_days2 . ',' . $string_hours2 . ',' . $string_minutes2 . ',' . $string_seconds2;
-$labels2       = $string_years . ',' . $string_months . ',' . $string_weeks . ',' . $string_days . ',' . $string_hours . ',' . $string_minutes . ',' . $string_seconds;
+if ( 'yes' == $enable_dynamic_date || $enable_field_dynamic ) {
+	$datetime = str_replace( '-', '/', $dynamic_datetime );
+}
+if ( ! strtotime( $datetime ) ) {
+	return;
+}
+$count_frmt = $labels = $countdown_design_style = '';
+$labels     = $string_years2 . ',' . $string_months2 . ',' . $string_weeks2 . ',' . $string_days2 . ',' . $string_hours2 . ',' . $string_minutes2 . ',' . $string_seconds2;
+$labels2    = $string_years . ',' . $string_months . ',' . $string_weeks . ',' . $string_days . ',' . $string_hours . ',' . $string_minutes . ',' . $string_seconds;
 if ( $countdown_opts && ! is_array( $countdown_opts ) ) {
 	$countdown_opt = explode( ',', $countdown_opts );
 } else {
@@ -187,9 +219,9 @@ if ( $datetime ) {
 			}
 			if ( in_array( 'shr', $countdown_opt ) ) {
 				if ( in_array( 'smin', $countdown_opt ) || in_array( 'ssec', $countdown_opt ) ) {
-					$hours   = floor( ( $inttime - $now ) / 3600 );
+					$hours = floor( ( $inttime - $now ) / 3600 );
 				} else {
-					$hours   = round( ( $inttime - $now ) / 3600 );
+					$hours = round( ( $inttime - $now ) / 3600 );
 				}
 				$inttime = $now + $difftime % 3600;
 				if ( $hours < 10 ) {
@@ -247,22 +279,33 @@ if ( ! isset( $porto_shortcode_countdown_use ) || ! $porto_shortcode_countdown_u
 		$porto_shortcode_countdown_use = true;
 		?>
 <script>
-	jQuery(document).ready(function ($) {
-		'use strict';
-		if (!$.fn.porto_countdown) {
-			var js_src = "<?php echo wp_scripts()->registered['countdown']->src; ?>";
-			if (!$('script[src="' + js_src + '"]').length) {
-				var js = document.createElement('script');
-				$(js).appendTo('body').on('load', function() {
-					var c = document.createElement("script");
-					c.src = "<?php echo wp_scripts()->registered['porto_shortcodes_countdown_loader_js']->src; ?>";
-					if (!$('script[src="' + c.src + '"]').length) {
-						document.getElementsByTagName("body")[0].appendChild(c);
+	(function(){
+		var porto_inc_countdown_js = function() {
+			(function($) {
+				'use strict';
+
+				if (!$.fn.porto_countdown) {
+					var js_src = "<?php echo wp_scripts()->registered['countdown']->src; ?>";
+					if (!$('script[src="' + js_src + '"]').length) {
+						var js = document.createElement('script');
+						$(js).appendTo('body').on('load', function() {
+							var c = document.createElement("script");
+							c.src = "<?php echo wp_scripts()->registered['porto_shortcodes_countdown_loader_js']->src; ?>";
+							if (!$('script[src="' + c.src + '"]').length) {
+								document.getElementsByTagName("body")[0].appendChild(c);
+							}
+						}).attr('src', js_src);
 					}
-				}).attr('src', js_src);
-			}
+				}
+			})(jQuery);
+		};
+
+		if ( window.theme && theme.isLoaded ) {
+			porto_inc_countdown_js();
+		} else {
+			window.addEventListener( 'load', porto_inc_countdown_js );
 		}
-	});
+	})();
 </script>
 	<?php endif; ?>
 <?php endif; ?>

@@ -15,7 +15,11 @@
     }
 
     &.porto-gallery-grid {
-        flex-wrap: wrap
+        flex-wrap: wrap;
+        &.has-ccols-spacing>* {
+            padding-top: calc(var(--porto-el-spacing, var(--porto-grid-gutter-width)) / 2);
+            padding-bottom: calc(var(--porto-el-spacing, var(--porto-grid-gutter-width)) / 2);
+        }
     }
 
     &.porto-preset-layout {

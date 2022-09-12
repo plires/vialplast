@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Porto\n"
 "POT-Creation-Date: 2022-01-07 16:20+0800\n"
-"PO-Revision-Date: 2022-03-23 14:20+0000\n"
+"PO-Revision-Date: 2022-09-12 19:22+0000\n"
 "Last-Translator: \n"
 "Language-Team: Español\n"
 "Language: es_ES\n"
@@ -94,7 +94,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-64: woocommerce/single-product/add-to-cart\n"
 "X-Poedit-SearchPathExcluded-65: woocommerce/single-product/tabs\n"
 "Report-Msgid-Bugs-To: \n"
-"X-Loco-Version: 2.6.1; wp-5.9.2"
+"X-Loco-Version: 2.6.2; wp-6.0.2"
 
 #: 404.php:12 inc/functions/layout/breadcrumbs.php:273
 msgid "404"
@@ -8519,7 +8519,7 @@ msgstr ""
 
 #: inc/functions/woocommerce.php:2472
 msgid "Out of stock"
-msgstr ""
+msgstr "Consultar"
 
 #: inc/functions/woocommerce.php:2472
 msgid "In stock"

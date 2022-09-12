@@ -20,31 +20,31 @@
 
   add_action( 'wp_print_scripts', 'porto_WI_dequeue_script', 100 );
 
-  /* Cambiar precio por leyenda */
-  add_filter( 'woocommerce_get_price_html', 'cssigniter_change_variable_price_display' );
-  function cssigniter_change_variable_price_display( $price ) {
+  // Devuelve el precio o leyenda segun el stock del producto
+  add_filter( 'woocommerce_get_price_html', 'vialplast_woocommerce_get_price_html', 100, 2 );
+  function vialplast_woocommerce_get_price_html( $price, $product ) {
+
+    if ( $product->is_in_stock() ) {
+      return $price;
+    } else {
+      $price = '<span class="leyenda_precio">consultar precio por cantidad</span>';
+      return $price;
+    }
+
+  }
+
+  // Modifica el texto del boton "agregar al carrito" si no tiene stock el producto
+  add_filter( 'woocommerce_product_add_to_cart_text', function( $text ) {
+
     global $product;
 
-    $product_data = accessProtected($product, 'data');
-
-    if ( $product_data['price'] == 0 ) {
-      $price = '<span class="woocommerce-Price-amount amount leyenda_precio"><bdi><span class="woocommerce-Price-currencySymbol"></span>Consultar Telefónicamente</bdi></span>';
-      return $price;
+    if ( !$product->is_in_stock() ) {
+      $text = __( 'CONSULTAR', 'woocommerce' );
+      return $text;
     } 
 
-    return $price;
-    
-  }
+    return $text;
 
-  /* Funcion para poder acceder a propiedades protegidas de objetos
-  // - Recibe el objeto y la propiedad
-  // - Devuelve la propiedad en un array
-  */
-  function accessProtected($obj, $prop) {
-    $reflection = new ReflectionClass($obj);
-    $property = $reflection->getProperty($prop);
-    $property->setAccessible(true);
-    return $property->getValue($obj);
-  }
+  } );
 
 ?>

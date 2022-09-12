@@ -7,7 +7,8 @@
 /* Nombre Producto end */
 
 /* Precio Producto */
-.single-product .price {
+.single-product .price,
+.single-product .leyenda {
 	color: var(--primary-color);
 	border-top: 1px solid #dadada;
 	border-bottom: 1px solid #dadada;
@@ -18,9 +19,14 @@
 	align-items: center;
 }
 
+.single-product .leyenda {
+	font-size: 1.5rem;
+	text-transform: uppercase;
+}
+
 .single-product .price .leyenda_precio {
 	text-transform: uppercase;
-	font-size: 1.75rem;
+	font-size: 1.5rem;
 	font-weight: 300;
 }
 /* Precio Producto end */
@@ -36,6 +42,13 @@ ul.products li.product-col .price .leyenda_precio {
 /* Botones agregar al carrito */
 .single-product form.cart:not(.variations_form) {
 	justify-content:  center;
+}
+
+.product-summary-wrap {
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 /* Precio Producto end */
 

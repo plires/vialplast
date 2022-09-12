@@ -310,6 +310,20 @@ textarea.invalid {
 /* Placeholders end */
 }
 
+/* Loop */
+.archive .leyenda_precio {
+	font-size: 0.85rem!important;
+	font-weight: 600!important;
+}
+
+.archive .price {
+	min-height: 44px!important;
+	display: flex!important;
+	justify-content: center!important;
+	align-items: center!important;
+}
+/* Loop end */
+
 
 /* MEDIA QUERIES */
 @media (min-width: 576px) {

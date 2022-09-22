@@ -506,17 +506,17 @@
           <tr align="center" style="background-color: #000000;">
               <td align="center"  style="background-color: #000000;padding: 10px;">
                 
-                <a target="_blank" rel="noopener noreferrer" href="{facebook}">
+                <!-- <a target="_blank" rel="noopener noreferrer" href="{facebook}">
                   <img src="https://librecomunicacion.net/clientes/vialplast/email/facebook.png" style="margin:0; margin-right: 20px; padding:0; border:none; display:inline-block; width: 30px; height: auto;" border="0" alt="facebook" />
-                </a>
+                </a> -->
 
                 <a target="_blank" rel="noopener noreferrer" href="{instagram}">
                   <img src="https://librecomunicacion.net/clientes/vialplast/email/instagram.png" style="margin:0; margin-right: 20px; padding:0; border:none; display:inline-block; width: 30px; height: auto;" border="0" alt="instagram" />
                 </a>
 
-                <a target="_blank" rel="noopener noreferrer" href="{linkedin}">
+                <!-- <a target="_blank" rel="noopener noreferrer" href="{linkedin}">
                   <img src="https://librecomunicacion.net/clientes/vialplast/email/linkedin.png" style="margin:0; padding:0; border:none; display:inline-block; width: 30px; height: auto;" border="0" alt="linkedin" />
-                </a>
+                </a> -->
                   
               </td>
           </tr>

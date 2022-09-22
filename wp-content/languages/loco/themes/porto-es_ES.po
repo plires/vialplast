@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Porto\n"
 "POT-Creation-Date: 2022-01-07 16:20+0800\n"
-"PO-Revision-Date: 2022-09-12 19:22+0000\n"
+"PO-Revision-Date: 2022-09-22 14:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: Español\n"
 "Language: es_ES\n"
@@ -329,7 +329,7 @@ msgstr ""
 #: content-post-item.php:249 content-post-woocommerce.php:89
 #: views/posts/single/meta.php:52
 msgid "0 Comments"
-msgstr ""
+msgstr "0 Comentarios"
 
 #: content-blog-full.php:28 content-blog-grid.php:77
 #: content-blog-large-alt.php:38 content-blog-large.php:28

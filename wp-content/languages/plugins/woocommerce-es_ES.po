@@ -24405,7 +24405,7 @@ msgstr "Detalles de la cuenta"
 #: includes/gateways/bacs/class-wc-gateway-bacs.php:290
 #: packages/woocommerce-admin/dist/chunks/homescreen.js:1
 msgid "Sort code"
-msgstr "Código de clasificación"
+msgstr "CBU"
 
 #: includes/gateways/bacs/class-wc-gateway-bacs.php:104
 #: includes/gateways/cheque/class-wc-gateway-cheque.php:80

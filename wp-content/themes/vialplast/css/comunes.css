@@ -44,6 +44,10 @@ a {
 	color: white;
 }
 
+#nav-panel .accordion-menu li.menu-item > a, #nav-panel .accordion-menu > li.menu-item > a, #nav-panel .accordion-menu .arrow, #nav-panel .menu-custom-block a, #nav-panel .accordion-menu > li.menu-item > .arrow {
+	color: #d7c7c7;
+}
+
 #nav-panel .accordion-menu li.menu-item.active > a {
 	background: transparent;
 }
@@ -335,7 +339,6 @@ textarea.invalid {
 
 	.caracteristicas h4:first-child {
 		font-size: 1rem;
-		font-weight: 400;
 		margin: 0;
 	}
 

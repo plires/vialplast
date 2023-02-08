@@ -160,6 +160,15 @@ a {
 .nuestras_marcas .content_marcas:last-child {
 	margin-bottom: 0;
 }
+
+.nuestras_marcas .content_marcas img {
+	transition: all ease-in-out .3s;	
+}
+
+.nuestras_marcas .content_marcas img:hover {
+	filter: invert(100%);
+	-webkit-filter: invert(100%);
+}
 /* Nuestras Marcas end */
 
 /* Listado de destacados */

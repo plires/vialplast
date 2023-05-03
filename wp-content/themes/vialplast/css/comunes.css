@@ -67,6 +67,28 @@ a {
 }
 /* Header Sticky end */
 
+/* PROMO MAYO */
+.promo_mayo {
+  background: var(--primary-color);
+  color: black;
+  padding: 3px;
+  font-size: 0.65rem;
+  margin-top: -20px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+.promo_mayo_ind {
+  background: var(--primary-color);
+  color: black;
+  padding: 5px;
+  font-size: 1rem;
+  margin-top: -20px;
+	margin-bottom: 5px;
+	text-align: center;
+}
+/* PROMO MAYO END */
+
 /* Nav Mobile */
 #nav-panel .mobile-nav-wrap {
 	background: transparent;
@@ -398,6 +420,12 @@ textarea.invalid {
 }
 
 @media (min-width: 1200px) {
+
+	/* PROMO MAYO */
+	.promo_mayo {
+	  font-size: 0.85rem;
+	}
+	/* PROMO MAYO END */
 
 	/* Caracteristicas */
 	.caracteristicas h4:first-child {

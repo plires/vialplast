@@ -28,30 +28,30 @@ global $product;
 
 <?php
 
-  $sku = $product->get_sku();
+  // $sku = $product->get_sku();
 
-  if ($sku === 'CC-PV70') {
-    echo "<div class='promo_mayo'>VALOR <strong>$15.040</strong> DESDE 10 U.</br>OFERTA HASTA EL 17-5</div>";
-  }
+  // if ($sku === 'CC-PV70') {
+  //   echo "<div class='promo_mayo'>VALOR <strong>$15.040</strong> DESDE 10 U.</br>OFERTA HASTA EL 17-5</div>";
+  // }
 
-  if ($sku === 'CC-A70') {
-    echo "<div class='promo_mayo'>VALOR <strong>$9.365</strong> DESDE 10 U.</br>OFERTA HASTA EL 17-5</div>";
-  }
+  // if ($sku === 'CC-A70') {
+  //   echo "<div class='promo_mayo'>VALOR <strong>$9.365</strong> DESDE 10 U.</br>OFERTA HASTA EL 17-5</div>";
+  // }
 
-  if ($sku === 'CC-PV90') {
-    echo "<div class='promo_mayo'>VALOR <strong>$18.912</strong> DESDE 5 U.</br>OFERTA HASTA EL 17-5</div>";
-  }
+  // if ($sku === 'CC-PV90') {
+  //   echo "<div class='promo_mayo'>VALOR <strong>$18.912</strong> DESDE 5 U.</br>OFERTA HASTA EL 17-5</div>";
+  // }
 
-  if ($sku === 'DM-80') {
-    echo "<div class='promo_mayo'>VALOR <strong>$22.748</strong> DESDE 10 U.</br>OFERTA HASTA EL 17-5</div>";
-  }
+  // if ($sku === 'DM-80') {
+  //   echo "<div class='promo_mayo'>VALOR <strong>$22.748</strong> DESDE 10 U.</br>OFERTA HASTA EL 17-5</div>";
+  // }
 
-  if ($sku === 'VC2019/1') {
-    echo "<div class='promo_mayo'>VALOR <strong>$40.317</strong> DESDE 5 U.</br>OFERTA HASTA EL 17-5</div>";
-  }
+  // if ($sku === 'VC2019/1') {
+  //   echo "<div class='promo_mayo'>VALOR <strong>$40.317</strong> DESDE 5 U.</br>OFERTA HASTA EL 17-5</div>";
+  // }
 
-  if ($sku === 'RDM200') {
-    echo "<div class='promo_mayo'>VALOR <strong>$3.896</strong> DESDE 20 U.</br>OFERTA HASTA EL 17-5</div>";
-  }
+  // if ($sku === 'RDM200') {
+  //   echo "<div class='promo_mayo'>VALOR <strong>$3.896</strong> DESDE 20 U.</br>OFERTA HASTA EL 17-5</div>";
+  // }
 
 ?>

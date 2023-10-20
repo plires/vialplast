@@ -4,6 +4,7 @@
 /vendor
 vendor
 wp-config.php
+/wp-content/themes/vialplast/inc/config.php
 /wp-content/themes/vialplast/img
 /wp-content/themes/vialplast/vendor
 /wp-content/themes/vialplast/inc/config.php

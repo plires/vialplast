@@ -4,15 +4,15 @@
 /vendor
 vendor
 
-/wp-includes
-/wp-admin
+/wp-includes/
+/wp-admin/
+/wp-content/themes/twentytwentytwo/
+/wp-content/themes/porto/
+/wp-content/uploads/
+/wp-content/plugins/
+/wp-content/upgrade/
+/wp-content/languages/
 /wp-content/themes/index.php
-/wp-content/themes/twentytwentytwo
-/wp-content/themes/porto
-/wp-content/uploads
-/wp-content/plugins
-/wp-content/upgrade
-/wp-content/languages
 /wp-content/db.php
 /wp-content/index.php
 sitemap.xml

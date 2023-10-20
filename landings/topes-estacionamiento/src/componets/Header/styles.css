@@ -1,0 +1,36 @@
+header {
+  background: black;
+  text-align: center;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+header img {
+  max-width: 65%!important;
+}
+
+
+/* MEDIA QUERIES */
+@media (min-width: 576px) {
+
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
+}
+
+@media (min-width: 1400px) {
+
+}
+
+@media (min-width: 1600px) {
+
+}

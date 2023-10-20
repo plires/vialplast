@@ -1,0 +1,255 @@
+.productos .titulos {
+  text-align: center;
+  padding: 0;
+}
+
+.productos h2 {
+  font-weight: 700;
+}
+
+.productos .titulos p {
+  margin-bottom: 30px;
+}
+
+.productos .modelos {
+  margin-bottom: 60px;
+}
+
+.productos .col_izq,
+.productos .col_der {
+  background: var(--secondary-color);
+  padding: calc(var(--bs-gutter-x) * 0.5);
+  margin-bottom: calc(var(--bs-gutter-x) * 0.5);
+}
+
+.productos .content_all {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.productos .col_izq h3,
+.productos .col_der h3 {
+  font-weight: 700;
+}
+
+.productos .col_izq p,
+.productos .col_der p {
+  margin-bottom: 0;
+  font-size: 0.85rem;
+  font-weight: 300;
+}
+
+.productos .col_izq .content {
+  text-align: right;
+}
+
+.productos .caracteristicas {
+  text-align: center;
+}
+
+.productos .iconos {
+  margin-bottom: 60px;
+}
+
+.productos .caracteristicas .content {
+  margin-bottom: 30px;
+}
+
+.productos .caracteristicas .col-md-4:last-child .content {
+  margin-bottom: 0;
+}
+
+.productos .caracteristicas h2 {
+  margin-bottom: 25px;
+}
+
+.productos .iconos img {
+  margin-bottom: 10px;
+  max-width: 25%;
+}
+
+.productos .caracteristicas h4 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.productos .cuadros {
+  margin-bottom: 60px;
+}
+
+.productos .cuadros .content {
+  border: solid 1px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.productos .cuadros .content.last {
+  margin-bottom: 0;
+}
+
+.productos .cuadros .col-md-4:last-child .content {
+  margin-bottom: 0;
+}
+
+.productos .cuadros .content h3 {
+  font-weight: 700;
+}
+
+.productos .cuadros .content p {
+  margin-bottom: 0;
+  font-weight: 300;
+  font-size: 0.85rem;
+}
+
+.productos .frase {
+  padding-top: 35px;
+  padding-bottom: 45px;
+  border-bottom: 1px solid var(--primary-color);
+}
+
+.productos .frase p {
+  margin-bottom: 0;
+  max-width: 480px;
+}
+
+.productos .frase p span {
+  font-weight: 700;
+}
+
+
+
+
+/* MEDIA QUERIES */
+@media (min-width: 576px) {
+
+  .productos .content_all {
+    justify-content: space-around;
+  }
+
+}
+
+@media (min-width: 768px) {
+
+  .productos .col_izq,
+  .productos .col_der {
+    background: transparent;
+  }
+
+  .productos .col_izq {
+    padding-left: 0;
+  }
+
+  .productos .col_der {
+    padding-right: 0;
+  }
+
+  .productos .content_all {
+    background: var(--secondary-color);
+    min-height: 360px;
+  }
+
+  .productos .col_izq:first-child,
+  .productos .col_der:last-child,
+  .productos .col_izq,
+  .productos .col_der {
+    padding-top: 0;
+    padding-bottom: calc(var(--bs-gutter-x) * 1);
+    margin-bottom: 0;
+  }
+
+  .productos .iconos img {
+    max-width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .productos .iconos h4 {
+    font-size: 1.25rem;
+  }
+  
+  .productos .caracteristicas .content {
+    margin-bottom: 0;
+  }
+
+  .productos .caracteristicas h2 {
+    margin-bottom: 30px;
+  }
+
+  .productos .cuadros .content {
+    min-height: 165px;
+    justify-content: space-around;
+  }
+
+  .productos .frase {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .productos .frase p {
+    text-align: left;
+    margin-left: 20px;
+    font-size: 1.25rem;
+    
+  }
+
+}
+
+@media (min-width: 992px) {
+
+  .productos .col_izq p,
+  .productos .col_der p {
+    font-size: 1rem;
+  }
+
+  .productos .cuadros .content p {
+    font-size: 1rem;
+  }
+
+}
+
+@media (min-width: 1200px) {
+
+  .productos .titulos p {
+    margin-bottom: 40px;
+    font-size: 1.15rem;
+  }
+
+  .productos .content_all {
+    justify-content: center;
+  }
+  
+  .productos .col_izq .content_all img {
+    margin-left: 60px;
+  }
+
+  .productos .col_der .content_all img {
+    margin-right: 60px;
+  }
+
+  .productos .col_izq p, 
+  .productos .col_der p {
+    max-width: 220px;
+    width: 220px;
+  }
+
+  .productos .cuadros .content p {
+    max-width: 300px;
+    font-size: 1.25rem;
+    font-weight: 400;
+  }
+
+}
+
+@media (min-width: 1400px) {
+
+}
+
+@media (min-width: 1600px) {
+
+}

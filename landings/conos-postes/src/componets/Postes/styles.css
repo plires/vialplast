@@ -1,0 +1,52 @@
+.postes .cuadros .content {
+  display: flex;
+}
+
+.postes .cuadros .content h3 {
+  margin-bottom: 0;
+}
+
+.postes .cuadros .content svg {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+
+
+
+/* MEDIA QUERIES */
+@media (min-width: 576px) {
+
+}
+
+@media (min-width: 768px) {
+
+  .postes .content_all {
+    min-height: 330px;
+  }
+
+  .postes .cuadros .content svg {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 0;
+  }
+
+}
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
+}
+
+@media (min-width: 1400px) {
+
+}
+
+@media (min-width: 1600px) {
+
+}

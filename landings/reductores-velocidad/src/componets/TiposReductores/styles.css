@@ -1,0 +1,104 @@
+.tipos_reductores {
+  margin-bottom: 60px;
+}
+
+.tipos_reductores .intro {
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 300;
+}
+
+.tipos_reductores .content {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.tipos_reductores .content:last-child {
+  margin-bottom: 0;
+}
+
+.tipos_reductores .content .small {
+  max-width: 75%;
+}
+
+.tipos_reductores .content img {
+  margin-bottom: 10px;
+}
+
+.tipos_reductores .content h3 {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+
+
+/* MEDIA QUERIES */
+@media (min-width: 576px) {
+
+  .tipos_reductores .intro {
+    margin-bottom: 60px;
+  }
+
+  .tipos_reductores .content {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .tipos_reductores .content img {
+    margin-bottom: 15px;
+  }
+
+  .tipos_reductores .content .small {
+    max-width: 90%;
+  }
+
+  .tipos_reductores .content h3 {
+    margin-bottom: 0;
+    min-height: 45px;
+    font-size: 1rem;
+  }
+
+}
+
+@media (min-width: 768px) {
+
+  .tipos_reductores .content .small {
+    max-width: 100%;
+  }
+
+}
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
+  .tipos_reductores {
+    margin-bottom: 80px;
+  }
+
+  .tipos_reductores .intro {
+    font-size: 1.25rem;
+  }
+
+  .tipos_reductores .content h3 {
+    font-size: 1.125rem;
+  }
+
+  .tipos_reductores .content h3 br {
+    display: inline-block;
+  }
+
+}
+
+@media (min-width: 1400px) {
+
+}
+
+@media (min-width: 1600px) {
+
+}

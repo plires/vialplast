@@ -23,6 +23,30 @@ npm-debug.log
 yarn-error.log
 .swp
 
+/landings/vendor
+/landings/node_modules
+/landings/img
+/landings/ventas.inc.php
+/landings/.env
+
+/landings/reductores-velocidad/public/favicons
+/landings/reductores-velocidad/src/img
+/landings/reductores-velocidad/src/node_modules
+/landings/reductores-velocidad/src/vendor
+/landings/reductores-velocidad/.env
+
+/landings/topes-estacionamiento/public/favicons
+/landings/topes-estacionamiento/src/img
+/landings/topes-estacionamiento/src/node_modules
+/landings/topes-estacionamiento/src/vendor
+/landings/topes-estacionamiento/.env
+
+/landings/conos-postes/public/favicons
+/landings/conos-postes/src/img
+/landings/conos-postes/src/node_modules
+/landings/conos-postes/src/vendor
+/landings/conos-postes/.env
+
 #text editors
 *.esproj
 *.sublime-workspace

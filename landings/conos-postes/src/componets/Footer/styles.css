@@ -1,0 +1,63 @@
+footer {
+  background: black;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+footer a,
+footer p,
+footer svg {
+  color: white;
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
+footer a:hover {
+  color: var(--primary-color);
+}
+
+footer svg {
+  margin-right: 10px;
+}
+
+footer .content_mail {
+  margin-bottom: 10px;
+}
+
+
+
+
+/* MEDIA QUERIES */
+@media (min-width: 576px) {
+
+}
+
+@media (min-width: 768px) {
+
+}
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
+  footer {
+    padding-top: 45px;
+    padding-bottom: 45px;
+  }
+
+  footer .content_mail {
+    margin-bottom: 20px;
+  }
+
+}
+
+@media (min-width: 1400px) {
+
+}
+
+@media (min-width: 1600px) {
+
+}

@@ -1,0 +1,85 @@
+.caracteristicas_reductores {
+  text-align: center;
+}
+
+.iconos {
+  margin-bottom: 60px;
+}
+
+.caracteristicas_reductores .content {
+  margin-bottom: 30px;
+}
+
+.caracteristicas_reductores .col-md-4:last-child .content {
+  margin-bottom: 0;
+}
+
+.caracteristicas_reductores h2 {
+  margin-bottom: 25px;
+}
+
+.caracteristicas_reductores h4 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.cuadros .content {
+  display: flex;
+}
+
+.cuadros .content h3 {
+  margin-bottom: 0;
+}
+
+.cuadros .content svg {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+
+
+/* MEDIA QUERIES */
+@media (min-width: 576px) {
+
+}
+
+@media (min-width: 768px) {
+
+  .caracteristicas_reductores .content {
+    margin-bottom: 0;
+  }
+
+  .caracteristicas_reductores h2 {
+    margin-bottom: 30px;
+  }
+
+  .content_all {
+    min-height: 330px;
+  }
+
+  .cuadros .content svg {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 0;
+  }
+  
+
+}
+
+@media (min-width: 992px) {
+
+}
+
+@media (min-width: 1200px) {
+
+}
+
+@media (min-width: 1400px) {
+
+}
+
+@media (min-width: 1600px) {
+
+}

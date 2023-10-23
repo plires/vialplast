@@ -67,6 +67,12 @@ a {
 }
 /* Header Sticky end */
 
+/* Leyenda "Agotado" en listado de productos */
+.product-image .stock {
+	opacity: 0.8;
+}
+/* Leyenda "Agotado" en listado de productos end */
+
 /* PROMO MAYO */
 .promo_mayo {
   background: var(--primary-color);

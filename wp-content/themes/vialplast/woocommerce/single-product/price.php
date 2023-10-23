@@ -22,34 +22,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $product;
 
 ?>
-<p class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>"><?php echo $product->get_price_html(); ?></p>
-
-<?php
-
-  // $sku = $product->get_sku();
-
-  // if ($sku === 'CC-PV70') {
-  //   echo "<div class='promo_mayo_ind'>VALOR <strong>$15.040</strong> DESDE 10 U.</br>OFERTA HASTA EL 17 DE MAYO</div>";
-  // }
-
-  // if ($sku === 'CC-A70') {
-  //   echo "<div class='promo_mayo_ind'>VALOR <strong>$9.365</strong> DESDE 10 U.</br>OFERTA HASTA EL 17 DE MAYO</div>";
-  // }
-
-  // if ($sku === 'CC-PV90') {
-  //   echo "<div class='promo_mayo_ind'>VALOR <strong>$18.912</strong> DESDE 5 U.</br>OFERTA HASTA EL 17 DE MAYO</div>";
-  // }
-
-  // if ($sku === 'DM-80') {
-  //   echo "<div class='promo_mayo_ind'>VALOR <strong>$22.748</strong> DESDE 10 U.</br>OFERTA HASTA EL 17 DE MAYO</div>";
-  // }
-
-  // if ($sku === 'VC2019/1') {
-  //   echo "<div class='promo_mayo_ind'>VALOR <strong>$40.317</strong> DESDE 5 U.</br>OFERTA HASTA EL 17 DE MAYO</div>";
-  // }
-
-  // if ($sku === 'RDM200') {
-  //   echo "<div class='promo_mayo_ind'>VALOR <strong>$3.896</strong> DESDE 20 U.</br>OFERTA HASTA EL 17 DE MAYO</div>";
-  // }
-
-?>
+<p class="<?php echo esc_attr( apply_filters( 'woocommerce_product_price_class', 'price' ) ); ?>">
+  <?php echo $product->get_price_html(); ?></p>

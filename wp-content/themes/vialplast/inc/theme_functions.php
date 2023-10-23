@@ -47,4 +47,27 @@
 
   } );
 
+  // Al borrar un producto de woocommerce, elimina las imagenes asociadas a ese producto de manera automatica
+  add_action('before_delete_post', 'dcms_delete_product_images', 10, 1);
+
+  function dcms_delete_product_images($post_id)
+  {
+    $product = wc_get_product($post_id);
+
+    if ( ! $product) return;
+
+    $featured_image_id = $product->get_image_id();
+    $image_galleries_id = $product->get_gallery_image_ids();
+
+    if (!empty($featured_image_id)) {
+      wp_delete_post($featured_image_id);
+    }
+
+    if (!empty($image_galleries_id)) {
+      foreach ($image_galleries_id as $single_image_id) {
+        wp_delete_post($single_image_id);
+      }
+    }
+  }
+
 ?>

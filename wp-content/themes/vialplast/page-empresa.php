@@ -13,7 +13,10 @@
           Desarrollamos y comercializamos <span>productos de alta calidad para contribuir a la seguridad vial.</span>
           <span>Vialplast</span> es una unidad de negocio perteneciente a <span>Summit-Group</span>, ubicados en el
           partido de San Martín,
-          Provincia de Buenos Aires, Argentina. <span>La planta industrial, administración y ventas ocupan 7000 m2 y un
+          Provincia de Buenos Aires, Argentina.
+        </p>
+        <p>
+          <span>La planta industrial, administración y ventas ocupan 7000 m2 y un
             equipo de trabajo de 50 personas.</span>
         </p>
         <p>

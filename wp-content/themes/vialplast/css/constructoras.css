@@ -1,22 +1,57 @@
+/* Commons */
+.vialplast_constructoras p span {
+  font-weight: 700;
+}
+/* Commons end */
+
 /* Información y formulario */
-	.vialplast_constructoras .informacion {
-		margin-bottom: 30px;
-	}
-	/* Información y formulario end */
+.vialplast_constructoras .informacion {
+  margin-bottom: 30px;
+}
+
+.vialplast_constructoras .content_img_slide img {
+  margin-bottom: 30px;
+}
+
+.vialplast_constructoras .formulario h2 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.vialplast_constructoras .formulario h4 {
+  font-weight: 400;
+  font-size: 1.125rem;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.vialplast_constructoras .formulario .form-control {
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+}
+/* Información y formulario end */
 
 /* Galeria */
 .vialplast_constructoras .galeria_encabezado h3 {
-	margin-bottom: 0;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .vialplast_constructoras .galeria {
-	padding-top: 20px;
-	padding-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .vialplast_constructoras .galeria .item_galeria {
-	margin-left: 5px!important;
-	margin-right: 5px!important;
+  margin-left: 5px !important;
+  margin-right: 5px !important;
 }
 
 .vialplast_constructoras .slick-track {
@@ -28,58 +63,105 @@
 }
 /* Galeria end */
 
+/* Ultimos Productos */
+.vialplast_constructoras .ultimos_productos h2 {
+  text-align: center !important;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+/* Ultimos Productos end */
+
 /* MEDIA QUERIES */
 @media (min-width: 576px) {
-
 }
 
 @media (min-width: 768px) {
+  /* Información y formulario */
+  .vialplast_constructoras .informacion {
+    margin-bottom: 30px;
+  }
 
-	/* Información y formulario */
-	.vialplast_constructoras .informacion {
-		margin-bottom: 15px;
-	}
+  .vialplast_constructoras .content_img_slide img {
+    margin-bottom: 0;
+    height: 605px;
+    object-fit: cover;
+  }
 
-	.vialplast_constructoras .informacion .datos {
-		padding-top: 55px;
-	}
-	/* Información y formulario end */
-	
+  .vialplast_constructoras .informacion .datos {
+    justify-content: flex-start !important;
+    justify-content: space-between !important;
+    padding-top: 0 !important;
+  }
+
+  .vialplast_constructoras .informacion .datos .formulario,
+  .vialplast_constructoras .informacion .datos div {
+    margin: 0;
+  }
+
+  .vialplast_constructoras .informacion .btn-out-black {
+    margin-bottom: 0 !important;
+  }
+
+  .vialplast_constructoras .formulario h2 {
+    font-size: 1.25rem;
+    text-align: left;
+  }
+
+  .vialplast_constructoras .formulario h4 {
+    font-size: 1rem;
+    text-align: left;
+  }
+  /* Información y formulario end */
+
+  /* Galeria */
+  .vialplast_constructoras .galeria_encabezado {
+    margin-top: 80px;
+  }
+  /* Galeria end */
 }
 
 @media (min-width: 992px) {
-
 }
 
 @media (min-width: 1200px) {
+  /* Información y formulario */
+  .vialplast_constructoras .informacion .datos {
+    padding-top: 20px;
+  }
+  /* Información y formulario end */
 
-	/* Información y formulario */
-	.vialplast_constructoras .informacion .datos {
-		padding-top: 20px;
-	}
-	/* Información y formulario end */
+  /* Galeria */
+  .vialplast_constructoras .galeria {
+    margin-bottom: 30px;
+  }
 
+  .vialplast_constructoras .galeria_encabezado h3 {
+    font-size: 2rem;
+  }
+  /* Galeria end */
+
+  /* Ultimos Productos */
+  .vialplast_constructoras .ultimos_productos {
+    margin-bottom: 30px;
+  }
+
+  .vialplast_constructoras .ultimos_productos h2 {
+    font-size: 2rem;
+  }
+  /* Ultimos Productos end */
 }
 
 @media (min-width: 1400px) {
-
-	/* Información y formulario */
-	.vialplast_constructoras .informacion .datos {
-		padding-top: 75px;
-	}
-	/* Información y formulario end */
-
+  /* Información y formulario */
+  .vialplast_constructoras .informacion .datos {
+    padding-top: 75px;
+  }
+  /* Información y formulario end */
 }
 
 @media (min-width: 1600px) {
-
 }
 
 @media (min-width: 1800px) {
-
 }
-
-
-
-
-

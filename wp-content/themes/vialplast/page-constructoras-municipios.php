@@ -5,146 +5,128 @@
 <!-- Constructoras -->
 <section class="vialplast_contacto vialplast_distribuidores vialplast_constructoras">
 
-	<section class="container">
+  <section class="container">
 
-		<!-- Informacion y Formulario -->
-		<div class="row informacion">
+    <!-- Informacion y Formulario -->
+    <div class="row informacion">
 
-			<div class="col-md-6 datos">
-				
-				<div>
-					<a class="transition" href="tel:1147527297">Tel. (+54) 11 4752  7297</a><br>
-					<a class="transition" href="mailto:info@vialplast.com.ar">info@vialplast.com.ar</a>
-					<p>
-						Calle 56 N° 4575 San Martín.</br>
-						Buenos Aires. Argentina.
-					</p>
-				</div>
+      <div class="col-md-6 datos">
 
-				<p>
-					Contamos con personal abocado a la atención a empresas constructoras y municipios con el fin de brindar el mejor 
-					asesoramiento.
-				</p>
+        <p>
+          <span>En VIALPAST te asesoramos y cubrimos tus necesidades.</span>
+        </p>
+        <p>
+          - Colaboramos y asesoramos a los municipios en el armado
+          de pliegos.
+        </p>
+        <p>
+          - Guiamos y orientamos a las constructoras con los productos
+          adecuados en función de la necesidad a cubrir.
+        </p>
 
-				<p>
-					A lo largo de nuestra historia hemos ganado vasta experiencia en licitaciones y ventas a grandes proyectos del tipo público y privado.
-				</p>
+        <div class="formulario">
 
-				<p class="last">
-					Contactate con nuestro equipo completando el formulario y responderemos a la brevedad cualquier inquietud.
-				</p>
+          <h2>FORMULARIO DE CONTACTO</h2>
+          <h4>Te contactaremos a la brevedad.</h4>
 
-			</div>
+          <!-- Notifications -->
+          <?php include('inc/notifications.php'); ?>
 
-			<div class="col-md-6 formulario">
+          <form id="form_contructoras" method="post"
+            action="<?= esc_url( get_stylesheet_directory_uri() ) . '/php/validate-form-contacto.php'; ?>">
 
-				<!-- Notifications -->
-				<?php include('inc/notifications.php'); ?>
+            <input type="hidden" name="origin" value="Formulario de Constructoras y Municipios">
+            <input type="hidden" name="section" value="constructoras-municipios">
 
-				<form 
-					id="form_contructoras" 
-					method="post" 
-					action="<?= esc_url( get_stylesheet_directory_uri() ) . '/php/validate-form-contacto.php'; ?>">
+            <!-- Name -->
+            <div class="mb-3">
+              <input oninput="this.className = 'form-control'" type="text" class="form-control transition"
+                value="<?= $name ?>" name="name" placeholder="Nombre:">
+            </div>
+            <!-- Name end -->
 
-	        <input type="hidden" name="origin" value="Formulario de Constructoras y Municipios">
-	        <input type="hidden" name="section" value="constructoras-municipios">
+            <!-- Email -->
+            <div class="mb-3">
+              <input oninput="this.className = 'form-control'" type="email" class="form-control transition"
+                value="<?= $email ?>" name="email" placeholder="Email:">
+            </div>
+            <!-- Email end -->
 
-          <!-- Name -->
-					<div class="mb-3">
-					  <label for="name" class="form-label">Nombre *</label>
-					  <input 
-					  	oninput="this.className = 'form-control'" 
-					  	type="text" 
-					  	class="form-control transition" 
-					  	value="<?= $name ?>" 
-					  	name="name" 
-					  	placeholder="Juan Perez">
-					</div>
-					<!-- Name end -->
+            <!-- Teléfono -->
+            <div class="mb-3">
+              <input oninput="this.className = 'form-control'" type="text" class="form-control transition"
+                value="<?= $phone ?>" name="phone" placeholder="Telefono:">
+            </div>
+            <!-- Teléfono end -->
 
-					<!-- Email -->
-					<div class="mb-3">
-					  <label for="email" class="form-label">Email *</label>
-					  <input 
-					  	oninput="this.className = 'form-control'" 
-					  	type="email" 
-					  	class="form-control transition" 
-					  	value="<?= $email ?>" 
-					  	name="email" 
-					  	placeholder="alguien@gmail.com">
-					</div>
-					<!-- Email end -->
+            <!-- Comments -->
+            <div class="mb-3">
+              <textarea oninput="this.className = 'form-control'" class="form-control transition" name="comments"
+                rows="3" placeholder="Mensaje"><?= $comments ?></textarea>
+            </div>
+            <!-- Comments end -->
 
-					<!-- Teléfono -->
-					<div class="mb-3">
-					  <label for="phone" class="form-label">Teléfono *</label>
-					  <input 
-					  	oninput="this.className = 'form-control'" 
-					  	type="text" 
-					  	class="form-control transition" 
-					  	value="<?= $phone ?>" 
-					  	name="phone" 
-					  	placeholder="115 047 2459">
-					</div>
-					<!-- Teléfono end -->
+            <!-- Enviar -->
+            <div class="mb-3 text-right">
+              <button id="send" class="btn btn-primary btn-out-black mb-3" type="button"
+                onclick="submitFormContacto('form_contructoras')">Enviar
+                <div id="sending_form" class="transition">
+                  <div class="ml-1 spinner-border spinner-border-sm text-warning" role="status">
+                  </div>
+                </div>
+              </button>
+            </div>
+            <!-- Enviar end -->
 
-					<!-- Comments -->
-					<div class="mb-3">
-					  <label for="comments" class="form-label">Comentarios *</label>
-					  <textarea 
-					  	oninput="this.className = 'form-control'" 
-					  	class="form-control transition" 
-					  	name="comments" 
-					  	rows="3" 
-					  	placeholder="Tu consulta..."><?= $comments ?></textarea>
-					</div>
-					<!-- Comments end -->
+          </form>
+        </div>
 
-					<!-- Enviar -->
-					<div class="mb-3 text-right">
-					  <button 
-	        		id="send" 
-	        		class="btn btn-primary btn-out-black mb-3" 
-	        		type="button" 
-	        		onclick="submitFormContacto('form_contructoras')">Enviar
-	        		<div id="sending_form" class="transition">
-		            <div class="ml-1 spinner-border spinner-border-sm text-warning" role="status">
-		            </div>
-		          </div>
-	        	</button>
-					</div>
-					<!-- Enviar end -->
+      </div>
 
-				</form>
-			</div>
+      <div class="col-md-6 content_img_slide">
 
-		</div>
-		<!-- Informacion y Formulario end -->
+        <div id="carouselDistribuidores" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/distribuidores-constructoras/slide-constructora-a.jpg'; ?>"
+                class="d-block w-100" alt="slide constructora a">
+            </div>
+            <div class="carousel-item">
+              <img
+                src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/distribuidores-constructoras/slide-constructora-b.jpg'; ?>"
+                class="d-block w-100" alt="slide constructora b">
+            </div>
+            <div class="carousel-item">
+              <img
+                src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/distribuidores-constructoras/slide-constructora-c.jpg'; ?>"
+                class="d-block w-100" alt="slide constructora c">
+            </div>
+          </div>
+        </div>
+      </div>
 
-		<!-- Imagen -->
-		<div class="row imagen">
-			
-			<div class="col-md-12">
-				<img 
-					class="img_section img-fluid" 
-					src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/distribuidores-constructoras/constructoras.jpg'; ?>" 
-					alt="constructoras imagen">
-			</div>
+    </div>
+    <!-- Informacion y Formulario end -->
 
-		</div>
-		<!-- Imagen end -->
+  </section>
 
-	</section>
+  <!-- Galeria Logos -->
+  <?php include('inc/galeria-logos.php'); ?>
 
-	<!-- Galeria Logos -->
-	<?php include('inc/galeria-logos.php'); ?>
+  <!-- Ultimos Productos -->
+  <?php include('inc/last-products.php'); ?>
 
-	<!-- Ultimos Productos -->
-	<?php include('inc/last-products.php'); ?>
+  <!-- Valores -->
+  <div class="container">
+    <?php include('inc/valores.php'); ?>
+  </div>
 
 </section>
 <!-- Constructoras end -->
 
+<script src="<?= esc_url( get_stylesheet_directory_uri() ) . '/js/countUp.min.js'; ?>"></script>
+<script src="<?= esc_url( get_stylesheet_directory_uri() ) . '/js/numbers.js'; ?>"></script>
 <script src="https://www.google.com/recaptcha/api.js?render=<?= RECAPTCHA_KEY_SITE ?>"></script>
 
 <?php 

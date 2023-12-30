@@ -63,15 +63,6 @@
 }
 /* Galeria end */
 
-/* Ultimos Productos */
-.vialplast_constructoras .ultimos_productos h2 {
-  text-align: center !important;
-  text-transform: uppercase;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-/* Ultimos Productos end */
-
 /* MEDIA QUERIES */
 @media (min-width: 576px) {
 }
@@ -140,16 +131,6 @@
     font-size: 2rem;
   }
   /* Galeria end */
-
-  /* Ultimos Productos */
-  .vialplast_constructoras .ultimos_productos {
-    margin-bottom: 30px;
-  }
-
-  .vialplast_constructoras .ultimos_productos h2 {
-    font-size: 2rem;
-  }
-  /* Ultimos Productos end */
 }
 
 @media (min-width: 1400px) {

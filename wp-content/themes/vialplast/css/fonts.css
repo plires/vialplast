@@ -1,41 +1,61 @@
 /* WorkSans-Regular - latin */
 @font-face {
-  font-family: 'WorkSans';
+  font-family: "WorkSans";
   font-style: normal;
   font-weight: 400;
-  src: url('../fonts/WorkSans-Regular.eot'); /* IE9 Compat Modes */
-  src: local(''),
-       url('../fonts/WorkSans-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../fonts/WorkSans-Regular.woff2') format('woff2'), /* Super Modern Browsers */
-       url('../fonts/WorkSans-Regular.woff') format('woff'), /* Modern Browsers */
-       url('../fonts/WorkSans-Regular.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('../fonts/WorkSans-Regular.svg#WorkSans-Regular') format('svg'); /* Legacy iOS */
+  src: url("../fonts/WorkSans-Regular.eot"); /* IE9 Compat Modes */
+  src: local(""),
+    url("../fonts/WorkSans-Regular.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("../fonts/WorkSans-Regular.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("../fonts/WorkSans-Regular.woff")
+      format("woff"),
+    /* Modern Browsers */ url("../fonts/WorkSans-Regular.ttf")
+      format("truetype"),
+    /* Safari, Android, iOS */
+      url("../fonts/WorkSans-Regular.svg#WorkSans-Regular") format("svg"); /* Legacy iOS */
 }
 
 /* WorkSans-Bold - latin */
 @font-face {
-  font-family: 'WorkSans';
+  font-family: "WorkSans";
   font-style: lighter;
   font-weight: 700;
-  src: url('../fonts/WorkSans-Bold.eot'); /* IE9 Compat Modes */
-  src: local(''),
-       url('../fonts/WorkSans-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../fonts/WorkSans-Bold.woff2') format('woff2'), /* Super Modern Browsers */
-       url('../fonts/WorkSans-Bold.woff') format('woff'), /* Modern Browsers */
-       url('../fonts/WorkSans-Bold.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('../fonts/WorkSans-Bold.svg#WorkSans-Bold') format('svg'); /* Legacy iOS */
+  src: url("../fonts/WorkSans-Bold.eot"); /* IE9 Compat Modes */
+  src: local(""),
+    url("../fonts/WorkSans-Bold.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("../fonts/WorkSans-Bold.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("../fonts/WorkSans-Bold.woff")
+      format("woff"),
+    /* Modern Browsers */ url("../fonts/WorkSans-Bold.ttf") format("truetype"),
+    /* Safari, Android, iOS */ url("../fonts/WorkSans-Bold.svg#WorkSans-Bold")
+      format("svg"); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: "Work Sans";
+  src: url("../fonts/WorkSans-Black.eot");
+  src: url("../fonts/WorkSans-Black.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/WorkSans-Black.woff2") format("woff2"),
+    url("../fonts/WorkSans-Black.woff") format("woff"),
+    url("../fonts/WorkSans-Black.ttf") format("truetype"),
+    url("../fonts/WorkSans-Black.svg#WorkSans-Black") format("svg");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* WorkSans-Light - latin */
 @font-face {
-  font-family: 'WorkSans';
+  font-family: "WorkSans";
   font-style: lighter;
   font-weight: 300;
-  src: url('../fonts/WorkSans-Light.eot'); /* IE9 Compat Modes */
-  src: local(''),
-       url('../fonts/WorkSans-Light.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../fonts/WorkSans-Light.woff2') format('woff2'), /* Super Modern Browsers */
-       url('../fonts/WorkSans-Light.woff') format('woff'), /* Modern Browsers */
-       url('../fonts/WorkSans-Light.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('../fonts/WorkSans-Light.svg#WorkSans-Light') format('svg'); /* Legacy iOS */
+  src: url("../fonts/WorkSans-Light.eot"); /* IE9 Compat Modes */
+  src: local(""),
+    url("../fonts/WorkSans-Light.eot?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("../fonts/WorkSans-Light.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("../fonts/WorkSans-Light.woff")
+      format("woff"),
+    /* Modern Browsers */ url("../fonts/WorkSans-Light.ttf") format("truetype"),
+    /* Safari, Android, iOS */ url("../fonts/WorkSans-Light.svg#WorkSans-Light")
+      format("svg"); /* Legacy iOS */
 }

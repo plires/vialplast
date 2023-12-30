@@ -82,11 +82,11 @@
                     </article>
                   </a>
 
-                  <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_REDUCTORES_VELOCIDAD ) ); ?>">
+                  <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_TACHAS_DEMARCATORIAS ) ); ?>">
                     <article data-aos="fade-up" class="width_30 tachas_demarcatorias">
                       <img class="transition"
                         src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/tachas-demarcatorias.jpg'; ?>"
-                        alt="TACHAS DEMARCA TORIAS">
+                        alt="TACHAS DEMARCATORIAS">
                       <h2 class="transition small">TACHAS <br>DEMARCA <br>TORIAS</h2>
                       <h3>TACHAS DEMARCATORIAS</h3>
                     </article>
@@ -96,7 +96,7 @@
 
                 <div class="content">
 
-                  <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_REDUCTORES_VELOCIDAD ) ); ?>">
+                  <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_TACHAS_REDUCTORAS ) ); ?>">
                     <article data-aos="fade-up" class="width_40 tachas">
                       <img class="transition"
                         src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/tachas-reductoras.jpg'; ?>"
@@ -130,7 +130,7 @@
                     </article>
                   </a>
 
-                  <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_REDUCTORES_VELOCIDAD ) ); ?>">
+                  <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_BOLARDOS ) ); ?>">
                     <article data-aos="fade-up" class="width_40 bolardos">
                       <img class="transition"
                         src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/bolardos-urbanos.jpg'; ?>"

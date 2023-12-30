@@ -10,7 +10,7 @@
     <!-- Informacion y Formulario -->
     <div class="row informacion">
 
-      <div class="col-md-6 datos">
+      <div data-aos="fade-up" class="col-md-6 datos">
 
         <p>
           <span>En VIALPAST te asesoramos y cubrimos tus necesidades.</span>
@@ -83,7 +83,7 @@
 
       </div>
 
-      <div class="col-md-6 content_img_slide">
+      <div data-aos="fade-up" class="col-md-6 content_img_slide">
 
         <div id="carouselDistribuidores" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
@@ -137,5 +137,6 @@
 	";
 ?>
 
+<script src="<?= esc_url( get_stylesheet_directory_uri() ) . '/js/init-aos.js'; ?>"></script>
 
 <?php get_footer(); ?>

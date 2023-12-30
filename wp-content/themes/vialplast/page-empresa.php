@@ -7,7 +7,7 @@
   <section class="container-fluid informacion">
     <div class="row">
 
-      <div class="data">
+      <div data-aos="fade-up" class="data">
         <h2>Sobre <br>Nosotros</h2>
         <p>
           Desarrollamos y comercializamos <span>productos de alta calidad para contribuir a la seguridad vial.</span>
@@ -26,7 +26,7 @@
         </p>
       </div>
 
-      <div class="images">
+      <div data-aos="fade-up" class="images">
         <img class="img-fluid img_empresa"
           src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/empresa/header.jpg'; ?>"
           alt="empresa productos vialplast">
@@ -47,5 +47,7 @@
 
 </section>
 <!-- Empresa end -->
+
+<script src="<?= esc_url( get_stylesheet_directory_uri() ) . '/js/init-aos.js'; ?>"></script>
 
 <?php get_footer(); ?>

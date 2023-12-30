@@ -7,10 +7,14 @@
 		// porto child theme styles
 		wp_deregister_style( 'styles-child' );
 		wp_register_style( 'styles-child', esc_url( get_stylesheet_directory_uri() ) . '/style.css' );
+		wp_register_style( 'aos-css', esc_url( get_stylesheet_directory_uri() ) . '/node_modules/aos/dist/aos.css' );
 		wp_enqueue_style( 'styles-child' );
+		wp_enqueue_style( 'aos-css' );
 
 		// Jquery Easing
 		wp_enqueue_script( 'easing', get_stylesheet_directory_uri() . '/node_modules/jquery.easing/jquery.easing.min.js' );
+
+		wp_enqueue_script( 'aos', get_stylesheet_directory_uri() . '/node_modules/aos/dist/aos.js' );
 
 		if ( is_page('empresa') || is_page('constructoras-municipios') || is_page('distribuidores') ) {
 			// slick-carousel JS
@@ -38,4 +42,4 @@
 		}
 	}
 
-	?>
+?>

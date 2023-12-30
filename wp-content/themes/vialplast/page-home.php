@@ -15,7 +15,7 @@
                 <div class="content">
 
                   <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_CONOS ) ); ?>">
-                    <article class="width_40 conos">
+                    <article data-aos="fade-up" class="width_40 conos">
                       <img class="transition"
                         src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/conos-viales.jpg'; ?>"
                         alt="conos viales">
@@ -25,7 +25,7 @@
                   </a>
 
                   <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_DELINEADORES ) ); ?>">
-                    <article class="width_60 delineadores">
+                    <article data-aos="fade-up" class="width_60 delineadores">
                       <img class="transition"
                         src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/delineadores-rebatibles.jpg'; ?>"
                         alt="DELINEADORES REBATIBLES">
@@ -39,7 +39,7 @@
                 <div class="content">
 
                   <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_TOPES_ESTACIONAMIENTO ) ); ?>">
-                    <article class="width_60 topes">
+                    <article data-aos="fade-up" class="width_60 topes">
                       <img class="transition"
                         src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/topes-divisores.jpg'; ?>"
                         alt="TOPES Y DIVISORES">
@@ -49,7 +49,7 @@
                   </a>
 
                   <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_VALLAS ) ); ?>">
-                    <article class="width_40 vallas">
+                    <article data-aos="fade-up" class="width_40 vallas">
                       <img class="transition"
                         src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/vallas-seguridad.jpg'; ?>"
                         alt="VALLAS DE SEGURIDAD">
@@ -63,7 +63,7 @@
                 <div class="content">
 
                   <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_DEMARCACION ) ); ?>">
-                    <article class="width_30 demarcacion">
+                    <article data-aos="fade-up" class="width_30 demarcacion">
                       <img class="transition"
                         src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/demarcacion-grafismo.jpg'; ?>"
                         alt="DEMARCACIÓN Y GRAFISMO">
@@ -73,7 +73,7 @@
                   </a>
 
                   <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_METROBUS ) ); ?>">
-                    <article class="width_40 metrobus">
+                    <article data-aos="fade-up" class="width_40 metrobus">
                       <img class="transition"
                         src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/metrobus.jpg'; ?>"
                         alt="METROBUS">
@@ -83,7 +83,7 @@
                   </a>
 
                   <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_REDUCTORES_VELOCIDAD ) ); ?>">
-                    <article class="width_30 tachas_demarcatorias">
+                    <article data-aos="fade-up" class="width_30 tachas_demarcatorias">
                       <img class="transition"
                         src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/tachas-demarcatorias.jpg'; ?>"
                         alt="TACHAS DEMARCA TORIAS">
@@ -97,7 +97,7 @@
                 <div class="content">
 
                   <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_REDUCTORES_VELOCIDAD ) ); ?>">
-                    <article class="width_40 tachas">
+                    <article data-aos="fade-up" class="width_40 tachas">
                       <img class="transition"
                         src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/tachas-reductoras.jpg'; ?>"
                         alt="TACHAS REDUCTORAS">
@@ -107,7 +107,7 @@
                   </a>
 
                   <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_REDUCTORES_VELOCIDAD ) ); ?>">
-                    <article class="width_60 reductores">
+                    <article data-aos="fade-up" class="width_60 reductores">
                       <img class="transition"
                         src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/reductores-velocidad.jpg'; ?>"
                         alt="REDUCTORES DE VELOCIDAD">
@@ -121,7 +121,7 @@
                 <div class="content">
 
                   <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_ESQUINEROS ) ); ?>">
-                    <article class="width_60 esquineros">
+                    <article data-aos="fade-up" class="width_60 esquineros">
                       <img class="transition"
                         src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/esquineros-guardas.jpg'; ?>"
                         alt="ESQUINEROS Y GUARDAS DE SEGURIDAD">
@@ -131,7 +131,7 @@
                   </a>
 
                   <a href="<?php echo esc_url( get_category_link( ID_CATEGORY_REDUCTORES_VELOCIDAD ) ); ?>">
-                    <article class="width_40 bolardos">
+                    <article data-aos="fade-up" class="width_40 bolardos">
                       <img class="transition"
                         src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/bolardos-urbanos.jpg'; ?>"
                         alt="BOLARDOS URBANOS">
@@ -153,7 +153,7 @@
   <!-- Categorias end -->
 
   <!-- Header -->
-  <section class="row content_header">
+  <section data-aos="fade-up" class="row content_header">
     <div class="col-md-12 p-0">
       <div class="container h-100">
         <div class="row h-100">
@@ -168,7 +168,7 @@
   <?php include('inc/last-products.php'); ?>
 
   <!-- Faja Jordan plas -->
-  <section class="jordan">
+  <section data-aos="fade-up" class="jordan">
     <div class="content">
       <img class="img-fluid logo_jordan"
         src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/logo-jordan-plas.png'; ?>"
@@ -186,7 +186,7 @@
   <!-- Faja Jordan plas end -->
 
   <!-- Buscas Otro Producto -->
-  <section class="buscar_otro_producto container-fluid">
+  <section data-aos="fade-up" class="buscar_otro_producto container-fluid">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -201,7 +201,7 @@
   <!-- Buscas Otro Producto end -->
 
   <!-- Constructoras y Municipios -->
-  <section class="constructoras_municipios container">
+  <section data-aos="fade-up" class="constructoras_municipios container">
     <div class="row">
       <div class="col-md-8 offset-md-2 text-center">
         <h3>Ya son varias empresas constructoras y
@@ -227,4 +227,5 @@
 </section>
 <!-- Home end -->
 
+<script src="<?= esc_url( get_stylesheet_directory_uri() ) . '/js/init-aos.js'; ?>"></script>
 <?php get_footer(); ?>

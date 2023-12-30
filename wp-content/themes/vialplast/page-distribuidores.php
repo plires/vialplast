@@ -10,7 +10,7 @@
     <!-- Informacion y Formulario -->
     <div class="row informacion">
 
-      <div class="col-md-6 datos">
+      <div data-aos="fade-up" class="col-md-6 datos">
         <div>
           <a class="transition" href="tel:1147527297">Tel. (+54) 11 4752 7297</a><br>
           <a class="transition" href="mailto:info@vialplast.com.ar">info@vialplast.com.ar</a>
@@ -37,7 +37,7 @@
 
       </div>
 
-      <div class="col-md-6 formulario">
+      <div data-aos="fade-up" class="col-md-6 formulario">
 
         <!-- Notifications -->
         <?php include('inc/notifications.php'); ?>
@@ -99,7 +99,7 @@
     <!-- Informacion y Formulario end -->
 
     <!-- Imagen -->
-    <div class="row imagen">
+    <div data-aos="fade-up" class="row imagen">
 
       <div class="col-md-12">
         <img class="img_section img-fluid"
@@ -132,5 +132,7 @@
 	</script>
 	";
 ?>
+
+<script src="<?= esc_url( get_stylesheet_directory_uri() ) . '/js/init-aos.js'; ?>"></script>
 
 <?php get_footer(); ?>

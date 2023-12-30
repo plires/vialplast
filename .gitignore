@@ -3,6 +3,11 @@
 .phpintel
 /vendor
 vendor
+**/fonts
+**/img
+**/favicons
+**/node_modules
+**/vendor
 
 /wp-includes/
 /wp-admin/

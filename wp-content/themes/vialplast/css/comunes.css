@@ -174,10 +174,6 @@ header .compare-count,
   margin-bottom: 15px;
 }
 
-.nuestras_marcas .content_marcas:last-child {
-  margin-bottom: 0;
-}
-
 .nuestras_marcas .content_marcas img {
   transition: all ease-in-out 0.3s;
 }
@@ -512,9 +508,13 @@ textarea.invalid {
 
   /* Nuestras Marcas */
   .nuestras_marcas .content_marcas {
-    max-width: 20%;
-    width: 20%;
+    max-width: 15%;
+    width: 15%;
     margin-bottom: 0;
+  }
+
+  .nuestras_marcas h3 {
+    margin-bottom: 30px;
   }
   /* Nuestras Marcas end */
 

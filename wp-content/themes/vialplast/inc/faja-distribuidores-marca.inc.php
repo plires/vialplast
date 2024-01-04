@@ -29,30 +29,38 @@
           </div>
 
           <div class="content_marcas">
-            <a href="http://cantofil.com.ar/" rel="noopener" target="_blank">
+            <a href="https://cantofil.com.ar/" rel="noopener" target="_blank">
               <img class="marca img-fluid"
                 src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/cantofil.png'; ?>" alt="logo cantofil">
             </a>
           </div>
 
           <div class="content_marcas">
-            <a href="http://superfil.com.ar/" rel="noopener" target="_blank">
+            <a href="https://superfil.com.ar/" rel="noopener" target="_blank">
               <img class="marca img-fluid"
                 src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/superfil.png'; ?>" alt="logo superfil">
             </a>
           </div>
 
           <div class="content_marcas">
-            <a href="http://summit-plastic.net/" rel="noopener" target="_blank">
+            <a href="https://summit-plastic.net/" rel="noopener" target="_blank">
               <img class="marca img-fluid"
                 src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/summit.png'; ?>" alt="logo summit">
             </a>
           </div>
 
           <div class="content_marcas">
-            <a href="http://nordeco.com.ar/" rel="noopener" target="_blank">
+            <a href="https://nordeco.com.ar/" rel="noopener" target="_blank">
               <img class="marca img-fluid"
                 src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/nordeco.png'; ?>" alt="logo nordeco">
+            </a>
+          </div>
+
+          <div class="content_marcas">
+            <a href="https://tetovinilico.com.ar/" rel="noopener" target="_blank">
+              <img class="marca img-fluid"
+                src="<?= esc_url( get_stylesheet_directory_uri() ) . '/img/home/logo-teto.png'; ?>"
+                alt="logo tetovinilico">
             </a>
           </div>
         </div>

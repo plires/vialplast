@@ -496,6 +496,16 @@ textarea.invalid {
 }
 
 @media (min-width: 992px) {
+  /* Listado de Productos */
+  .sidebar {
+    position: relative;
+  }
+
+  .sidebar .sidebar-content {
+    position: sticky;
+    top: 80px;
+  }
+  /* Listado de Productos end */
 }
 
 @media (min-width: 1200px) {

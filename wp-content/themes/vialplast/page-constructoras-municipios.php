@@ -13,7 +13,7 @@
       <div data-aos="fade-up" class="col-md-6 datos">
 
         <p>
-          <span>En VIALPAST te asesoramos y cubrimos tus necesidades.</span>
+          <span>En VIALPLAST te asesoramos y cubrimos tus necesidades.</span>
         </p>
         <p>
           - Colaboramos y asesoramos a los municipios en el armado

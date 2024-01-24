@@ -70,4 +70,43 @@
     }
   }
 
+  function accessProtected($obj, $prop) {
+    $reflection = new ReflectionClass($obj);
+    $property = $reflection->getProperty($prop);
+    $property->setAccessible(true);
+    return $property->getValue($obj);
+  }
+
+  // Filtro para agregar contenido al final de las descripciones de la pagina ds producto.
+  // Si el producto en cuestion tiene habilitado un minimo de ventas en unidades (mayor a 1) (esto 
+  // se hace desde el plugin "WC Min Max Quantities")
+  // Se visualizara un mensaje con esa informacion al final de la descripcion.
+  // Si el producto no tiene habilitada esta funcion en dicho plugin, si ignora simplemente
+  add_filter( 'the_content', 'customizing_woocommerce_description' );
+  function customizing_woocommerce_description( $content ) {
+
+    if ( is_product() ) {
+
+      global $product;
+      $observation = '';
+
+      $minimum_sales = accessProtected($product->get_meta_data()[0], 'data');
+      $enabled = accessProtected($product->get_meta_data()[4], 'data');
+
+      $observation = 'venta mínima de ' . $minimum_sales['value'] . ' unidades' ;
+
+      if( (int)$minimum_sales['value'] > 1 && $enabled['value'] === 'yes'  ) {
+
+        // El contenido personalizado
+        $custom_content = '<p class="observation">' . __($observation, "woocommerce").'</p>';
+  
+        // Insertar el contenido personalizado al final.
+        $content .= $custom_content;
+      }
+
+    }
+
+      return $content;
+  }
+
 ?>

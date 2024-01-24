@@ -1,99 +1,91 @@
 /* Nombre Producto */
 .single-product .product_title {
-	width: 100%;
-	margin: 30px 0 15px 0;
-	text-align: center;
+  width: 100%;
+  margin: 30px 0 15px 0;
+  text-align: center;
 }
 /* Nombre Producto end */
 
 /* Precio Producto */
 .single-product .price,
 .single-product .leyenda {
-	color: var(--primary-color);
-	border-top: 1px solid #dadada;
-	border-bottom: 1px solid #dadada;
-	padding: 10px 0;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  color: var(--primary-color);
+  border-top: 1px solid #dadada;
+  border-bottom: 1px solid #dadada;
+  padding: 10px 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .single-product .leyenda {
-	font-size: 1.5rem;
-	text-transform: uppercase;
+  font-size: 1.5rem;
+  text-transform: uppercase;
 }
 
 .single-product .price .leyenda_precio {
-	text-transform: uppercase;
-	font-size: 1.5rem;
-	font-weight: 300;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 300;
 }
 /* Precio Producto end */
 
+/* Observaciones del Producto */
+.single-product .observation {
+  text-align: center;
+  color: var(--primary-color);
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+/* Observaciones del Producto end */
+
 /* Precio Listado de Producto */
 ul.products li.product-col .price .leyenda_precio {
-	font-size: 1.125rem;
-	text-transform: uppercase;
-	font-weight: 400;
+  font-size: 1.125rem;
+  text-transform: uppercase;
+  font-weight: 400;
 }
 /* Precio Listado de Producto end */
 
 /* Botones agregar al carrito */
 .single-product form.cart:not(.variations_form) {
-	justify-content:  center;
+  justify-content: center;
 }
 
 .product-summary-wrap {
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /* Precio Producto end */
 
 /* Seccion Tab adicional */
 .single-product .woocommerce-tabs {
-	margin-top: 30px;
-	margin-bottom: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 /* Seccion Tab adicional end */
 
-
-
-
-
-
 /* MEDIA QUERIES */
 @media (min-width: 576px) {
-
 }
 
 @media (min-width: 768px) {
-	
 }
 
 @media (min-width: 992px) {
-
 }
 
 @media (min-width: 1200px) {
-
 }
 
 @media (min-width: 1400px) {
-
 }
 
 @media (min-width: 1600px) {
-
 }
 
 @media (min-width: 1800px) {
-
 }
-
-
-
-
-

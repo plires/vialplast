@@ -89,13 +89,25 @@
 
       global $product;
       $observation = '';
+      
+      foreach ($product->get_meta_data() as $object) {
+        $enabled = true;
+        
+        $data = accessProtected($object, 'data');
 
-      $minimum_sales = accessProtected($product->get_meta_data()[0], 'data');
-      $enabled = accessProtected($product->get_meta_data()[4], 'data');
+        if( $data['key'] === '_wcmmq_enable' && $data['value'] === 'no' ) {
+          $enabled = false;
+          break;
+        }
 
-      $observation = 'venta mínima de ' . $minimum_sales['value'] . ' unidades' ;
+        if( $data['key'] === '_wcmmq_min_qty') {
+          $minimum_sales = (int)$data['value'];
+        }
+      }
 
-      if( (int)$minimum_sales['value'] > 1 && $enabled['value'] === 'yes'  ) {
+      if( $enabled && $minimum_sales > 1 ) {
+
+        $observation = 'venta mínima de ' . $minimum_sales . ' unidades' ;
 
         // El contenido personalizado
         $custom_content = '<p class="observation">' . __($observation, "woocommerce").'</p>';
@@ -106,7 +118,8 @@
 
     }
 
-      return $content;
+    return $content;
+
   }
 
 ?>

@@ -12,6 +12,8 @@ vendor
 /wp-includes/
 /wp-admin/
 /wp-content/themes/twentytwentytwo/
+/wp-content/themes/twentytwentythree/
+/wp-content/themes/twentytwentyfour/
 /wp-content/themes/porto/
 /wp-content/uploads/
 /wp-content/plugins/
@@ -55,6 +57,7 @@ wp-content/themes/vialplast/inc/config.php
 /wp-content/uploads/wc-logs/
 /wp-content/debug.log
 /backup-bdd/
+license.txt
 npm-debug.log
 yarn-error.log
 .swp

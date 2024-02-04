@@ -129,3 +129,12 @@ function validateEmail(email) {
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 }
+
+// Ocultar el precio original cuando se necesita exhibir por otra unidad de medida
+jQuery(document).ready(function ($) {
+  var items = $(".regular_price_product");
+
+  for (const [key, value] of Object.entries(items)) {
+    $(value.firstChild).hide();
+  }
+});

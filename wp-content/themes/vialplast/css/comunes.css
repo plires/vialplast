@@ -67,6 +67,12 @@ header .compare-count,
 }
 /* Header end */
 
+/* Buscador */
+.searchform .search-price .regular_price_product {
+  display: none;
+}
+/* Buscador end */
+
 /* Header Sticky */
 #header.sticky-header .header-main.sticky {
   background: black;

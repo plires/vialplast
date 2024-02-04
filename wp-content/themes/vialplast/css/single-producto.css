@@ -29,6 +29,31 @@
   font-size: 1.5rem;
   font-weight: 300;
 }
+
+.single-product .regular_price_product bdi {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.single-product .regular_price_product bdi .medida {
+  font-size: 1.5rem;
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+
+.single-product .price_vialplast {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.single-product .price_vialplast .custom_price_product {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
 /* Precio Producto end */
 
 /* Observaciones del Producto */

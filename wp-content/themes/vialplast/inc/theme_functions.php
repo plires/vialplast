@@ -122,4 +122,41 @@
 
   }
 
+  // Definir función para calcular precio por metro lineal
+  function calculate_price_according_to_product( $price_html, $product ) {
+
+    // Obtener longitud del rollo en metros (suponiendo 10 metros)
+    $roll_length = (float) $product->get_length() / 100;
+    
+    $unit_sales = $product->get_attribute( 'unidad_precio_de_venta' );
+    $unit_show = $product->get_attribute( 'unidad_precio_a_mostrar' );
+
+    // Verificar si el producto tiene el atributo "unidad de venta" con valor "Rollo" y que su longitud sea diferente a 0
+    if ( $unit_sales === 'Rollo' && $roll_length != 0 ) {
+        
+      // Obtener el precio del producto del HTML
+      preg_match( '/<bdi><span class="woocommerce-Price-currencySymbol">&#36;<\/span>(.*)<\/bdi>/', $price_html, $matches );
+
+      if ( isset( $matches[1] ) ) {
+        // Extraer el precio como float
+        $total_price = (float) str_replace( array( ',', '.' ), '', $matches[1] ); // Eliminar comas y puntos si las hubiera
+        
+        // Calcular precio por metro lineal
+        $price_per_meter = $total_price / $roll_length;
+
+        // Redondear el precio por metro lineal
+        $price_per_meter = round( $price_per_meter, 2 );
+
+        // Formatear el precio por metro lineal con el símbolo de moneda y retornarlo
+        return '<span class="regular_price_product woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>' . $matches[1] . ' <span class="medida">'. $unit_sales .'</span></bdi></span>
+        <span class="custom_price_product woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>' . number_format( $price_per_meter, 0, "," ,".") . ' <span class="medida">'. $unit_show .'</span></bdi></span>';
+      }
+    }
+
+    // Si no es un producto que se vende por rollo, retornar el precio HTML original
+    return $price_html;
+  }
+  
+  add_filter( 'woocommerce_get_price_html', 'calculate_price_according_to_product', 10, 2 );
+
 ?>

@@ -56,6 +56,12 @@
 }
 /* Precio Producto end */
 
+/* Carrusel Productos Relacionados */
+.single-product .owl-item .regular_price_product bdi {
+  display: none !important;
+}
+/* Carrusel Productos Relacionados end */
+
 /* Observaciones del Producto */
 .single-product .observation {
   text-align: center;

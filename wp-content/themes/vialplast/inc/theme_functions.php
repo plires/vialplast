@@ -89,6 +89,7 @@
 
       global $product;
       $observation = '';
+      $stock_quantity = ($product->get_stock_quantity());
       
       foreach ($product->get_meta_data() as $object) {
         $enabled = true;
@@ -105,7 +106,7 @@
         }
       }
 
-      if( $enabled && $minimum_sales > 1 ) {
+      if( $enabled && $minimum_sales > 1 && $stock_quantity > 0 ) {
 
         $observation = 'venta mínima de ' . $minimum_sales . ' unidades' ;
 

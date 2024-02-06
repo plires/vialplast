@@ -132,8 +132,8 @@
     $unit_sales = $product->get_attribute( 'unidad_precio_de_venta' );
     $unit_show = $product->get_attribute( 'unidad_precio_a_mostrar' );
 
-    // Verificar si el producto tiene el atributo "unidad de venta" con valor "Rollo" y que su longitud sea diferente a 0
-    if ( $unit_sales === 'Rollo' && $roll_length != 0 ) {
+    // Verificar si el producto tiene el atributo "unidad de venta" con valor "Rollo" o "Tira" y que su longitud sea diferente a 0
+    if ( $unit_sales === 'Rollo' || $unit_sales === 'Tira' && $roll_length != 0 ) {
         
       // Obtener el precio del producto del HTML
       preg_match( '/<bdi><span class="woocommerce-Price-currencySymbol">&#36;<\/span>(.*)<\/bdi>/', $price_html, $matches );

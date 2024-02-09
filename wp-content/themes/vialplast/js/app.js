@@ -131,10 +131,10 @@ function validateEmail(email) {
 }
 
 // Ocultar el precio original cuando se necesita exhibir por otra unidad de medida
-jQuery(document).ready(function ($) {
-  var items = $(".regular_price_product");
+window.onload = function () {
+  var items = jQuery(".regular_price_product");
 
   for (const [key, value] of Object.entries(items)) {
-    $(value.firstChild).hide();
+    jQuery(value.firstChild).hide();
   }
-});
+};

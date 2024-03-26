@@ -71,30 +71,19 @@ class RepositorioContactsSQL extends repositorioContacts
   {
 
     switch ($rubro) {
+      case 'Conos':
+        return EMAIL_VENTAS_CONOS;
+        break;
+      case 'Topes':
+        return EMAIL_VENTAS_TOPES;
+        break;
+      case 'Reductores':
+        return EMAIL_VENTAS_REDUCTORES;
+        break;
 
-      case 'Cielorrasos de PVC':
-        $emails = EMAIL_VENTAS_CIELORRASOS;
-        break;
-      case 'Productos Viales':
-        $emails = EMAIL_VENTAS_VIALES;
-        break;
-      case 'Juntas Waterstop':
-        $emails = EMAIL_VENTAS_JUNTAS;
-        break;
-      case 'Pallets':
-        $emails = EMAIL_VENTAS_PALLETS;
-        break;
-      case 'Tubos de PVC':
-        $emails = EMAIL_VENTAS_TUBOS;
-        break;
-      case 'Baños Quimicos':
-        $emails = EMAIL_VENTAS_BANOS;
-        break;
-      
       default:
-        $emails = EMAIL_DEFAULT;
+        return EMAIL_VENTAS_VIALES;
         break;
-
     }
 
     return $emails;

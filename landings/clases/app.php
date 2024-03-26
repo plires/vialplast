@@ -74,6 +74,13 @@ use PHPMailer\PHPMailer\Exception;
     }
     }
 
+    public function whatsappEnabled() 
+    {
+
+      return date('l') != 'Sunday' && date('l') != 'Saturday' && intval(date('H')) > 8 && intval(date('H')) < 19;
+
+    }
+
     public function verifyRecaptcha($token)
     {
 

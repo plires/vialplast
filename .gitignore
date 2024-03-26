@@ -8,6 +8,7 @@ vendor
 **/favicons
 **/node_modules
 **/vendor
+**/build/
 
 /wp-includes/
 /wp-admin/
@@ -67,6 +68,7 @@ yarn-error.log
 /landings/img
 /landings/ventas.inc.php
 /landings/.env
+/landings/build/
 
 /landings/reductores-velocidad/public/favicons
 /landings/reductores-velocidad/src/img

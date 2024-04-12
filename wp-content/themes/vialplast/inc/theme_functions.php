@@ -123,38 +123,74 @@
 
   }
 
+  function getFormatPrice($price_product, $unit_sales, $price_per_meter, $unit_show ) {
+    return '<span class="regular_price_product woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>' . $price_product . ' <span class="medida">'. $unit_sales .'</span></bdi></span>
+        <span class="custom_price_product woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>' . number_format( $price_per_meter, 0, "," ,".") . ' <span class="medida">'. $unit_show .'</span></bdi></span>';
+  }
+
   // Definir función para calcular precio por metro lineal
   function calculate_price_according_to_product( $price_html, $product ) {
 
     // Obtener longitud del rollo en metros (suponiendo 10 metros)
     $roll_length = (float) $product->get_length() / 100;
     
-    $unit_sales = $product->get_attribute( 'unidad_precio_de_venta' );
-    $unit_show = $product->get_attribute( 'unidad_precio_a_mostrar' );
+    $unit_sales = $product->get_attribute( 'unidad_precio_de_venta' ); // Obtener la unidad de venta
+    $unit_show = $product->get_attribute( 'unidad_precio_a_mostrar' ); // Obtener la unidad de precio a mostrar
+    $pieces_per_package = (float) $product->get_attribute( 'piezas-por-paquete' ); // Obtener las piezas por paquete (si existe)
+
+    // Obtener el precio del producto del HTML
+    preg_match( '/<bdi><span class="woocommerce-Price-currencySymbol">&#36;<\/span>(.*)<\/bdi>/', $price_html, $matches );
+
+    $price_product = $matches[1];
+    
+    // Extraer el precio como float
+    $total_price = (float) str_replace( array( ',', '.' ), '', $price_product ); // Eliminar comas y puntos si las hubiera
+
+    // Verificar si el producto tiene el atributo "unidad de venta" con valor "Kit" o "Unidad"
+    if ( $unit_sales === 'Kit' || $unit_sales === 'Unidad' ) {
+
+      if ( isset( $price_product ) ) {
+        return '<span class="price_kit woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>' . $price_product . ' <span class="medida">'. $unit_sales .'</span></bdi></span>';
+        
+      }
+      
+    }
 
     // Verificar si el producto tiene el atributo "unidad de venta" con valor "Rollo" o "Tira" y que su longitud sea diferente a 0
     if ( $unit_sales === 'Rollo' || $unit_sales === 'Tira' && $roll_length != 0 ) {
-        
-      // Obtener el precio del producto del HTML
-      preg_match( '/<bdi><span class="woocommerce-Price-currencySymbol">&#36;<\/span>(.*)<\/bdi>/', $price_html, $matches );
 
-      if ( isset( $matches[1] ) ) {
-        // Extraer el precio como float
-        $total_price = (float) str_replace( array( ',', '.' ), '', $matches[1] ); // Eliminar comas y puntos si las hubiera
-        
+      if ( isset( $price_product ) ) {
         // Calcular precio por metro lineal
         $price_per_meter = $total_price / $roll_length;
 
         // Redondear el precio por metro lineal
-        $price_per_meter = round( $price_per_meter, 2 );
+        $price_per_meter = round( $price_per_meter );
 
-        // Formatear el precio por metro lineal con el símbolo de moneda y retornarlo
-        return '<span class="regular_price_product woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>' . $matches[1] . ' <span class="medida">'. $unit_sales .'</span></bdi></span>
-        <span class="custom_price_product woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>' . number_format( $price_per_meter, 0, "," ,".") . ' <span class="medida">'. $unit_show .'</span></bdi></span>';
+        // Formatear el precio por ML y con el símbolo de moneda y retornarlo
+        return getFormatPrice($price_product, $unit_sales, $price_per_meter, $unit_show );
+
       }
+      
     }
 
-    // Si no es un producto que se vende por rollo, retornar el precio HTML original
+    // Verificar si el producto tiene el atributo "unidad de venta" con valor "Paquete" y que su Cantidad de piezas por paquete sea mayor a 1
+    if ( $unit_sales === 'Paquete' && $pieces_per_package > 1 ) {
+
+      if ( isset( $price_product ) ) {
+        // Calcular precio por pieza
+        $price_per_piece = $total_price / $pieces_per_package;
+        
+        // Redondear el precio  por metro pieza
+        $price_per_piece = round( $price_per_piece );
+        
+        // Formatear el precio por pieza y con el símbolo de moneda y retornarlo
+        return getFormatPrice( $price_product, $unit_sales, $price_per_piece, $unit_show );
+        
+      }
+      
+    }
+
+    // Si no es un producto que se vende por rollo, tira o paquete retornar el precio HTML original
     return $price_html;
   }
   

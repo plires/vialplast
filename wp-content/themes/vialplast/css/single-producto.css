@@ -30,17 +30,23 @@
   font-weight: 300;
 }
 
-.single-product .regular_price_product bdi {
+.single-product .regular_price_product bdi,
+.single-product .price_kit bdi {
   display: flex !important;
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
 }
 
-.single-product .regular_price_product bdi .medida {
+.single-product .regular_price_product bdi .medida,
+.single-product .price_kit bdi .medida {
   font-size: 1.5rem;
   margin-left: 10px;
   text-transform: uppercase;
+}
+
+.single-product .products-slider .price_kit bdi .medida {
+  font-size: 1.125rem;
 }
 
 .single-product .price_vialplast {

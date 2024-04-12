@@ -198,6 +198,12 @@ header .compare-count,
 }
 /* Listado de destacados end */
 
+/* Listados en seccion TIENDA */
+.post-type-archive .regular_price_product {
+  display: none;
+}
+/* Listados en seccion TIENDA end */
+
 /* Footer */
 #footer {
   margin-bottom: 0;

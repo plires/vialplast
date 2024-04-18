@@ -147,7 +147,7 @@
     $total_price = (float) str_replace( array( ',', '.' ), '', $price_product ); // Eliminar comas y puntos si las hubiera
 
     // Verificar si el producto tiene el atributo "unidad de venta" con valor "Kit" o "Unidad"
-    if ( $unit_sales === 'Kit' || $unit_sales === 'Unidad' ) {
+    if ( $unit_sales === 'Kit' || $unit_sales === 'Pack' || $unit_sales === 'Unidad' ) {
 
       if ( isset( $price_product ) ) {
         return '<span class="price_kit woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">$</span>' . $price_product . ' <span class="medida">'. $unit_sales .'</span></bdi></span>';

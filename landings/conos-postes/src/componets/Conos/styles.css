@@ -26,6 +26,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .productos .col_izq h3,
@@ -43,6 +44,37 @@
 .productos .col_izq .content {
   text-align: right;
 }
+
+/* Promocion 8-11-2024 */
+.oferta_left,
+.oferta_right {
+  margin: 0;
+  position: absolute;
+  right: 0;
+  top: 0px;
+  max-width: 60px;
+}
+
+.oferta_right {
+  right: initial;
+  left: 0;
+}
+
+.promo_precios {
+  margin-top: 10px;
+}
+
+.promo_precios .tachado {
+  text-decoration: line-through;
+  color: red;
+}
+
+.promo_precios .ahora {
+  color: green;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+/* Promocion 8-11-2024 end */
 
 .productos .caracteristicas {
   text-align: center;
@@ -120,20 +152,21 @@
   font-weight: 700;
 }
 
-
-
-
 /* MEDIA QUERIES */
 @media (min-width: 576px) {
-
   .productos .content_all {
     justify-content: space-around;
   }
 
+  /* Promocion 8-11-2024 */
+  .oferta_left,
+  .oferta_right {
+    max-width: 90px;
+  }
+  /* Promocion 8-11-2024 end */
 }
 
 @media (min-width: 768px) {
-
   .productos .col_izq,
   .productos .col_der {
     background: transparent;
@@ -161,6 +194,21 @@
     margin-bottom: 0;
   }
 
+  /* Promocion 8-11-2024 */
+  .oferta_right {
+    left: initial;
+    right: initial;
+    top: 10px;
+    right: 10px;
+  }
+
+  .oferta_left {
+    left: initial;
+    left: 10px;
+    top: 10px;
+  }
+  /* Promocion 8-11-2024 end */
+
   .productos .iconos img {
     max-width: 100%;
     margin-bottom: 15px;
@@ -169,7 +217,7 @@
   .productos .iconos h4 {
     font-size: 1.25rem;
   }
-  
+
   .productos .caracteristicas .content {
     margin-bottom: 0;
   }
@@ -195,13 +243,10 @@
     text-align: left;
     margin-left: 20px;
     font-size: 1.25rem;
-    
   }
-
 }
 
 @media (min-width: 992px) {
-
   .productos .col_izq p,
   .productos .col_der p {
     font-size: 1rem;
@@ -210,11 +255,9 @@
   .productos .cuadros .content p {
     font-size: 1rem;
   }
-
 }
 
 @media (min-width: 1200px) {
-
   .productos .titulos p {
     margin-bottom: 40px;
     font-size: 1.15rem;
@@ -223,7 +266,7 @@
   .productos .content_all {
     justify-content: center;
   }
-  
+
   .productos .col_izq .content_all img {
     margin-left: 60px;
   }
@@ -232,7 +275,7 @@
     margin-right: 60px;
   }
 
-  .productos .col_izq p, 
+  .productos .col_izq p,
   .productos .col_der p {
     max-width: 220px;
     width: 220px;
@@ -244,12 +287,51 @@
     font-weight: 400;
   }
 
+  /* Promocion 8-11-2024 */
+  .promo_precios .tachado {
+    font-size: 1.125rem;
+  }
+
+  .promo_precios .ahora {
+    font-size: 1.25rem;
+  }
+  /* Promocion 8-11-2024 end */
 }
 
 @media (min-width: 1400px) {
+  /* Promocion 8-11-2024 */
+  .oferta_right {
+    right: initial !important;
+    left: 10px !important;
+    margin: 0 !important;
+    max-width: 115px;
+  }
 
+  .oferta_left {
+    left: initial !important;
+    margin: 0 !important;
+    right: 10px !important;
+    max-width: 115px;
+  }
+  /* Promocion 8-11-2024 end */
 }
 
 @media (min-width: 1600px) {
+  /* Promocion 8-11-2024 */
+  .oferta_right {
+    left: 30px !important;
+    max-width: 130px;
+    top: 30px;
+  }
 
+  .oferta_left {
+    right: 30px !important;
+    max-width: 130px;
+    top: 30px;
+  }
+
+  .promo_precios .ahora {
+    font-size: 1.5rem;
+  }
+  /* Promocion 8-11-2024 end */
 }

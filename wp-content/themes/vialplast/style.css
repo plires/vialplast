@@ -13,12 +13,13 @@ Tags: woocommerce, corporate, ecommerce, responsive, blue, black, green, white, 
 
 /*************** ADD YOUR CUSTOM CSS HERE  ***************/
 
-@import url('css/fonts.css');
-@import url('css/comunes.css');
-@import url('css/home.css');
-@import url('css/empresa.css');
-@import url('css/formularios.css');
-@import url('css/distribuidores.css');
-@import url('css/constructoras.css');
-@import url('css/single-producto.css');
-@import url('css/footer.css');
+@import url("css/fonts.css");
+@import url("css/comunes.css");
+@import url("css/home.css");
+@import url("css/empresa.css");
+@import url("css/formularios.css");
+@import url("css/distribuidores.css");
+@import url("css/constructoras.css");
+@import url("css/single-producto.css");
+@import url("css/footer.css");
+@import url("css/promos.css");

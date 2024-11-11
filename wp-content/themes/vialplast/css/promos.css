@@ -1,0 +1,33 @@
+.promo {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  max-width: 150px;
+}
+
+.promo_list {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  max-width: 75px;
+  z-index: 1;
+}
+
+/* MEDIA QUERIES */
+@media (min-width: 576px) {
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+}
+
+@media (min-width: 1200px) {
+}
+
+@media (min-width: 1400px) {
+}
+
+@media (min-width: 1600px) {
+}

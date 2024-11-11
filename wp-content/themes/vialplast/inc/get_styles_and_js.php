@@ -6,7 +6,7 @@
 	function porto_child_css() {
 		// porto child theme styles
 		wp_deregister_style( 'styles-child' );
-		wp_register_style( 'styles-child', esc_url( get_stylesheet_directory_uri() ) . '/style.css' );
+		wp_register_style( 'styles-child', esc_url( get_stylesheet_directory_uri() ) . '/style_11_11_2024.css' );
 		wp_register_style( 'aos-css', esc_url( get_stylesheet_directory_uri() ) . '/node_modules/aos/dist/aos.css' );
 		wp_enqueue_style( 'styles-child' );
 		wp_enqueue_style( 'aos-css' );

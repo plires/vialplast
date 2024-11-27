@@ -101,13 +101,13 @@ export default function Conos() {
             </div>
             <img
               className="img-fluid"
-              src={require("./../../img/cc-f02.png")}
+              src={require("./../../img/cc-pv90.png")}
               alt="cono vial cc-f02"
             />
             <img
               className="img-fluid oferta_left"
               src={require("./../../img/logo-ofertas.png")}
-              alt="oferta cono vial cc-f02"
+              alt="oferta cono vial cc-pv90"
             />
           </div>
         </div>
@@ -116,8 +116,8 @@ export default function Conos() {
           <div className="content_all">
             <img
               className="img-fluid"
-              src={require("./../../img/cc-pv90.png")}
-              alt="cono vial cc-pv90"
+              src={require("./../../img/cc-f02.png")}
+              alt="cono vial cc-f02"
             />
             <div className="content">
               <h3>CC-PV90</h3>

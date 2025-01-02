@@ -34,21 +34,11 @@ export default function Conos() {
                 intensidad: 10 cm.x2 u. <br />
                 Material: PVC
               </p>
-              <div className="promo_precios">
-                <span className="tachado">$22.006 + IVA</span> <br />
-                <span className="ahora">$17.859 + IVA</span>
-              </div>
             </div>
             <img
               className="img-fluid"
               src={require("./../../img/cc-a70.png")}
               alt="cono vial cc-a70"
-            />
-
-            <img
-              className="img-fluid oferta_left"
-              src={require("./../../img/logo-ofertas.png")}
-              alt="oferta cono vial cc-a70"
             />
           </div>
         </div>
@@ -70,16 +60,7 @@ export default function Conos() {
                 intensidad: 10 cm.+10 cm. <br />
                 Material: PVC
               </p>
-              <div className="promo_precios">
-                <span className="tachado">$32.483 + IVA</span> <br />
-                <span className="ahora">$21.562 + IVA</span>
-              </div>
             </div>
-            <img
-              className="img-fluid oferta_right"
-              src={require("./../../img/logo-ofertas.png")}
-              alt="oferta cono vial cc-pv70"
-            />
           </div>
         </div>
 
@@ -94,20 +75,11 @@ export default function Conos() {
                 intensidad: 10 cm.x2 u. <br />
                 Material: PVC <br />2 Piezas cono + base
               </p>
-              <div className="promo_precios">
-                <span className="tachado">$115.830 + IVA</span> <br />
-                <span className="ahora">$40.656 + IVA</span>
-              </div>
             </div>
             <img
               className="img-fluid"
               src={require("./../../img/cc-pv90.png")}
               alt="cono vial cc-f02"
-            />
-            <img
-              className="img-fluid oferta_left"
-              src={require("./../../img/logo-ofertas.png")}
-              alt="oferta cono vial cc-pv90"
             />
           </div>
         </div>
@@ -129,16 +101,7 @@ export default function Conos() {
                 intensidad: 10 cm.+10 cm. <br />
                 Material: PVC
               </p>
-              <div className="promo_precios">
-                <span className="tachado">$41.740 + IVA</span> <br />
-                <span className="ahora">$24.200 + IVA</span>
-              </div>
             </div>
-            <img
-              className="img-fluid oferta_right"
-              src={require("./../../img/logo-ofertas.png")}
-              alt="oferta CC-PV90"
-            />
           </div>
         </div>
       </div>

@@ -48,6 +48,7 @@ do_action('woocommerce_before_main_content');
 
 <!-- Agregado -->
 <?php
+/*
 $current_tag = get_queried_object(); // Obtener el objeto de la etiqueta (tag) actual
 
 if ($current_tag && !is_wp_error($current_tag) && $current_tag->taxonomy === 'product_tag'): ?>
@@ -61,7 +62,7 @@ if ($current_tag && !is_wp_error($current_tag) && $current_tag->taxonomy === 'pr
 		<img class="header_promo_living img-fluid mb-5"
 			src="<?= esc_url(get_stylesheet_directory_uri()) . '/images/promos/dual/dual-banner.jpg'; ?>" alt="header promo dual">
 	<?php endif; ?>
-<?php endif; ?>
+<?php endif; */ ?>
 <!-- Agregado end -->
 
 <?php

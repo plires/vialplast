@@ -81,6 +81,7 @@ if (isset($porto_settings['catalog-enable']) && $porto_settings['catalog-enable'
 
 			<!-- Agregado Promo -->
 			<?php
+			/*
 			// get an array of the WP_Term objects for a defined product ID (get_the_id() will return the product id of the current object)
 			$terms = wp_get_post_terms(get_the_id(), 'product_tag');
 			// Loop through each product tag for the current product
@@ -93,6 +94,7 @@ if (isset($porto_settings['catalog-enable']) && $porto_settings['catalog-enable'
 					}
 				}
 			}
+			*/
 
 			?>
 			<!-- Agregado Promo end -->

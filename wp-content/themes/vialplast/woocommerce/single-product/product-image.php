@@ -18,6 +18,7 @@ $product_image_classes  = 'img-thumbnail';
 $product_images_attrs   = '';
 
 // Agregado Promo 
+/*
 $terms = wp_get_post_terms(get_the_id(), 'product_tag');
 // Loop through each product tag for the current product
 if (count($terms) > 0) {
@@ -32,6 +33,7 @@ if (count($terms) > 0) {
 		}
 	}
 }
+*/
 // Agregado Promo end
 
 if ('extended' === $porto_product_layout) {

@@ -62,6 +62,29 @@
 }
 /* Precio Producto end */
 
+/* Descarga de PDF en archivos con descargas */
+.single-product .product-summary-wrap {
+  flex-direction: column;
+}
+
+.single-product .product-summary-wrap .btn-pdf {
+  display: inline-block;
+  width: 100%;
+  border-top: 1px solid #dadada;
+  border-bottom: 1px solid #dadada;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: grey !important;
+  justify-self: flex-end;
+  align-self: flex-end;
+  font-size: 14px;
+}
+
+.single-product .product-summary-wrap .btn-pdf:hover {
+  opacity: 0.6;
+}
+/* Descarga de PDF en archivos con descargas end */
+
 /* Carrusel Productos Relacionados */
 .single-product .owl-item .regular_price_product bdi {
   display: none !important;

@@ -17,7 +17,7 @@
                   <a href="<?php echo esc_url(get_category_link(ID_CATEGORY_KIT_INSTALACION)); ?>">
                     <article data-aos="fade-up" class="width_100 kit">
                       <img class="transition img-fluid"
-                        src="<?= esc_url(get_stylesheet_directory_uri()) . '/img/home/kit-instalacion.jpg'; ?>"
+                        src="#"
                         alt="kit de instalacion">
                       <h2 class="transition">KIT DE <br>INSTALACIÓN</h2>
                       <h3>KIT DE INSTALACIÓN</h3>

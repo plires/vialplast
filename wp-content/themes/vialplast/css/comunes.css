@@ -202,6 +202,15 @@ header .compare-count,
 .post-type-archive .regular_price_product {
   display: none;
 }
+
+ul.products .woocommerce-loop-product__title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limita a 2 líneas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: initial;
+}
 /* Listados en seccion TIENDA end */
 
 /* Footer */
